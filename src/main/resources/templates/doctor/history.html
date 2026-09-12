@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue History - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/doctor/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/doctor/dashboard}">Dashboard</a>
+            <a th:href="@{/doctor/queue}">My Queue</a>
+            <a th:href="@{/doctor/history}">History</a>
+            <a th:href="@{/doctor/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">history</span> Queue History</h1>
+    </div>
+
+    <div class="card">
+        <div th:if="${history == null or history.isEmpty()}">
+            <p class="text-muted">No history yet.</p>
+        </div>
+        <table class="table" th:if="${history != null and !history.isEmpty()}">
+            <thead>
+            <tr><th>Queue No.</th><th>Patient</th><th>Status</th><th>Changed At</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="h : ${history}">
+                <td th:text="${h.queueNumber}"></td>
+                <td th:text="${h.patientId}"></td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${h.status == 'COMPLETED' ? 'badge-completed' : (h.status == 'SERVING' ? 'badge-serving' : (h.status == 'CANCELLED' ? 'badge-cancelled' : 'badge-expired'))}"
+                          th:text="${h.status}"></span>
+                </td>
+                <td th:text="${h.createdAt}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

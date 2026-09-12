@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+
+start
+:Patient Registration / Login;
+if (New or existing?) then (new)
+  :Online Self-Registration;
+else (existing)
+  :Login phone + password;
+endif
+:Patient Dashboard;
+if (Appointment today?) then (yes)
+  :Check-in -> APPOINTMENT priority;
+else (no)
+  :New Visit - symptom entry;
+  :AI Department Recommendation;
+  :Department Validation;
+endif
+:Doctor Selection (available + shortest wait);
+:Queue number generation + dynamic waiting time;
+if (Rules: one active queue / working hours / capacity not full) then (ok)
+  :Add to WAITING queue;
+  if (Is emergency?) then (yes)
+    :Staff confirmation;
+    :Confirmed -> moved to front;
+  endif
+  :Position + wait tracking;
+  if (Missed / expired? - scheduler) then (yes)
+    :EXPIRED + notify patient;
+  else (no)
+    :Doctor: Call Next (WAITING -> CALLED);
+    :Start Consultation (CALLED -> SERVING);
+    :Pause <-> Resume;
+    :Complete (SERVING -> COMPLETED);
+  endif
+else (fail)
+  :Reject / show error;
+endif
+stop
+
+@enduml

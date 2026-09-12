@@ -1,0 +1,29 @@
+flowchart TD
+    A([START]) --> B[Patient Registration / Login]
+    B --> C[Online Self-Registration]
+    B --> D[Login phone + password]
+    C --> E[Patient Dashboard]
+    D --> E
+    E --> F[New Visit - symptom entry]
+    E --> G[Appointment today?]
+    G -- yes --> H[Check-in - APPOINTMENT priority]
+    F --> I[AI Department Recommendation]
+    I --> J[Department Validation]
+    J --> K[Doctor Selection<br/>available + shortest wait]
+    H --> K
+    K --> L[Queue number generation<br/>dynamic waiting time]
+    L --> M{Rules checked?<br/>one active queue<br/>working hours<br/>capacity not full}
+    M -- fail --> N[Reject / show error]
+    M -- ok --> O[Add to WAITING queue]
+    O --> P{Is emergency?}
+    P -- yes --> Q[Staff confirmation]
+    Q --> R[Confirmed - moved to front]
+    P -- no --> S[Position + wait tracking]
+    R --> T{Missed / expired?<br/>scheduler every 1 min}
+    S --> T
+    T -- yes --> U[EXPIRED + notify patient]
+    T -- no --> V[Doctor: Call Next<br/>WAITING to CALLED]
+    V --> W[Start Consultation<br/>CALLED to SERVING]
+    W --> X[Pause <-> Resume]
+    X --> Y[Complete<br/>SERVING to COMPLETED]
+    Y --> Z([END])

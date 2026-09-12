@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-container": "#663500",
+        "secondary-fixed": "#ffdcc3",
+        "on-tertiary-container": "#66daa8",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-primary": "#ffffff",
+        "surface-container-highest": "#e5e2d7",
+        "surface-dim": "#dddacf",
+        "on-secondary-fixed": "#2f1500",
+        "tertiary": "#00442d",
+        "on-tertiary-fixed": "#002114",
+        "surface-tint": "#216962",
+        "on-secondary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "background": "#fdf9ee",
+        "primary-fixed": "#abefe7",
+        "on-background": "#1c1c15",
+        "tertiary-fixed": "#85f8c4",
+        "inverse-primary": "#8fd3cb",
+        "primary": "#00433e",
+        "surface-container-low": "#f7f4e8",
+        "secondary-fixed-dim": "#ffb77d",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-container": "#005e40",
+        "primary-container": "#0d5c56",
+        "surface-variant": "#e5e2d7",
+        "on-tertiary-fixed-variant": "#005137",
+        "inverse-surface": "#313129",
+        "outline-variant": "#bec9c6",
+        "on-error-container": "#93000a",
+        "on-secondary-fixed-variant": "#6e3900",
+        "outline": "#6f7977",
+        "on-primary-container": "#8ed2ca",
+        "surface-container": "#f1eee3",
+        "on-error": "#ffffff",
+        "on-surface": "#1c1c15",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary": "#ffffff",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-primary-fixed": "#00201d",
+        "error-container": "#ffdad6",
+        "inverse-on-surface": "#f4f1e5",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary": "#904d00",
+        "error": "#ba1a1a",
+        "secondary-container": "#fe932c",
+        "surface": "#fdf9ee"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "margin-desktop": "3rem",
+        "space-3xl": "3.5rem",
+        "space-lg": "1.5rem",
+        "space-xs": "0.5rem",
+        "space-3xs": "0.125rem",
+        "space-xl": "2rem",
+        "gutter-desktop": "1.5rem",
+        "space-2xs": "0.25rem",
+        "margin-mobile": "1.25rem",
+        "space-4xl": "5rem",
+        "space-sm": "0.75rem",
+        "space-2xl": "2.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem",
+        "margin-tablet": "2rem"
+      },
+      "fontFamily": {
+        "body-sm": [
+          "inter"
+        ],
+        "caption-caps": [
+          "inter"
+        ],
+        "label-sm": [
+          "inter"
+        ],
+        "label-md": [
+          "inter"
+        ],
+        "body-lg": [
+          "inter"
+        ],
+        "display-hero-mobile": [
+          "plusJakartaSans"
+        ],
+        "headline-md": [
+          "plusJakartaSans"
+        ],
+        "headline-lg": [
+          "plusJakartaSans"
+        ],
+        "headline-lg-mobile": [
+          "plusJakartaSans"
+        ],
+        "headline-sm": [
+          "plusJakartaSans"
+        ],
+        "title-token": [
+          "plusJakartaSans"
+        ],
+        "display-hero": [
+          "plusJakartaSans"
+        ],
+        "body-md": [
+          "inter"
+        ]
+      },
+      "fontSize": {
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "20px",
+            "fontWeight": "400"
+          }
+        ],
+        "caption-caps": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.06em",
+            "fontWeight": "700"
+          }
+        ],
+        "label-sm": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "label-md": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.005em",
+            "fontWeight": "500"
+          }
+        ],
+        "body-lg": [
+          "18px",
+          {
+            "lineHeight": "28px",
+            "fontWeight": "400"
+          }
+        ],
+        "display-hero-mobile": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-md": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-lg": [
+          "32px",
+          {
+            "lineHeight": "40px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-lg-mobile": [
+          "26px",
+          {
+            "lineHeight": "34px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-sm": [
+          "20px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.005em",
+            "fontWeight": "600"
+          }
+        ],
+        "title-token": [
+          "40px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "0.04em",
+            "fontWeight": "800"
+          }
+        ],
+        "display-hero": [
+          "56px",
+          {
+            "lineHeight": "64px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-md": [
+          "15px",
+          {
+            "lineHeight": "24px",
+            "fontWeight": "400"
+          }
+        ]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="Modern minimalist healthcare emblem for CareFlow Myanmar hospital queue system. An elegant geometric fusion of a caring cross, smooth organic flow lines symbolizing seamless patient journey, and a subtle heartbeat curve, in deep aegean teal (#0D5C56) and warm amber (#D97706), vector style, pristine clean background.. Design context: - Primary color: #0d5c56
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Landing Hub</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl transition-all bg-primary-container text-on-primary font-bold" data-path="patient-portal" href="#"><span class="material-symbols-outlined text-[20px]">medical_services</span><span>Patient Portal</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#"><span class="material-symbols-outlined text-[20px]">health_and_safety</span><span>Doctor Portal</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff Operations</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#"><span class="material-symbols-outlined text-[20px]">shield</span><span>Admin Central</span></a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Clinical Counter</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">Station A-02</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Online • Triage Active</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-md z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="Modern minimalist healthcare emblem for CareFlow Myanmar hospital queue system. An elegant geometric fusion of a caring cross, smooth organic flow lines symbolizing seamless patient journey, and a subtle heartbeat curve, in deep aegean teal (#0D5C56) and warm amber (#D97706), vector style, pristine clean background.. Design context: - Primary color: #0d5c56
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital</span><span class="font-body-sm text-body-sm text-outline">— Main Campus</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full gap-space-lg max-w-[1440px] mx-auto">
+<!-- Secondary Sub-Navigation Pill Bar -->
+<div class="flex items-center justify-between overflow-x-auto py-space-xs px-space-xs bg-surface-container rounded-full shadow-sm">
+<div class="flex items-center gap-space-2xs min-w-max">
+<a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-2xs" href="#">
+<span class="material-symbols-outlined text-[18px]">space_dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-primary text-on-primary font-semibold shadow-sm flex items-center gap-space-2xs" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">neurology</span>
+<span>AI Symptom Checker</span>
+</a>
+<a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-2xs" href="#">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>My Queue</span>
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+</a>
+<a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-2xs" href="#">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+<span>My Appointments</span>
+</a>
+<a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-2xs" href="#">
+<span class="material-symbols-outlined text-[18px]">person</span>
+<span>My Profile</span>
+</a>
+<a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-2xs" href="#">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span>Notifications</span>
+</a>
+<a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-2xs" href="#">
+<span class="material-symbols-outlined text-[18px]">help_center</span>
+<span>Help &amp; FAQ</span>
+</a>
+</div>
+<!-- Active Profile Snapshot Badge -->
+<div class="hidden lg:flex items-center gap-space-sm pl-space-md pr-space-sm py-space-3xs border-l border-outline-variant/30">
+<div class="text-right">
+<div class="font-label-md text-label-md text-on-surface font-semibold">Daw Thida Win</div>
+<div class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">HN-2024-88419 • Age 54</div>
+</div>
+<div class="w-9 h-9 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-sm">
+        TW
+      </div>
+</div>
+</div>
+<!-- Wizard Stepper -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_10px_rgba(22,42,39,0.03)] flex flex-col md:flex-row items-center justify-between gap-space-sm">
+<!-- Step 1 (Active) -->
+<div class="flex items-center gap-space-sm bg-primary-container/10 px-space-md py-space-xs rounded-xl w-full md:w-auto">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md font-bold shadow-sm">
+        1
+      </div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-primary font-bold tracking-wider">Step 01 • Active</span>
+<span class="font-label-md text-label-md font-bold text-primary">AI Symptom Checker</span>
+</div>
+</div>
+<div class="hidden md:block h-px w-12 bg-outline-variant/40"></div>
+<!-- Step 2 -->
+<div class="flex items-center gap-space-sm px-space-sm py-space-xs opacity-65 w-full md:w-auto">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-md text-label-md font-semibold">
+        2
+      </div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Step 02</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface-variant">Department Match</span>
+</div>
+</div>
+<div class="hidden md:block h-px w-12 bg-outline-variant/40"></div>
+<!-- Step 3 -->
+<div class="flex items-center gap-space-sm px-space-sm py-space-xs opacity-65 w-full md:w-auto">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-md text-label-md font-semibold">
+        3
+      </div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Step 03</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface-variant">Doctor &amp; Time Slot</span>
+</div>
+</div>
+<div class="hidden md:block h-px w-12 bg-outline-variant/40"></div>
+<!-- Step 4 -->
+<div class="flex items-center gap-space-sm px-space-sm py-space-xs opacity-65 w-full md:w-auto">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-md text-label-md font-semibold">
+        4
+      </div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Step 04</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface-variant">Confirm &amp; Token Pass</span>
+</div>
+</div>
+</div>
+<!-- Main Interactive Triage Workspace Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT: AI Copilot & Symptom Formulation (7 Cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<!-- Top Workspace Mode Switcher Card -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_8px_rgba(22,42,39,0.03)] flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">vital_signs</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">CareFlow Clinical Copilot</span>
+</div>
+<!-- Mode Toggle Tabs -->
+<div class="inline-flex p-1 bg-surface-container rounded-full text-label-sm font-label-sm">
+<button class="px-space-md py-space-2xs rounded-full bg-surface-container-lowest text-primary font-bold shadow-sm flex items-center gap-space-3xs" type="button">
+<span class="material-symbols-outlined text-[16px]">forum</span>
+<span>Multi-Turn AI Conversational</span>
+</button>
+<button class="px-space-md py-space-2xs rounded-full text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-space-3xs" type="button">
+<span class="material-symbols-outlined text-[16px]">checklist</span>
+<span>Quick 1-Click Checklist</span>
+</button>
+</div>
+</div>
+<!-- Conversational Clinical Assistant Box -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_rgba(22,42,39,0.04)] flex flex-col gap-space-md relative overflow-hidden">
+<!-- Ambient Medical Watermark Accent -->
+<div class="absolute right-0 top-0 translate-x-8 -translate-y-8 pointer-events-none opacity-5">
+<svg fill="none" height="240" viewbox="0 0 100 100" width="240">
+<circle class="text-primary" cx="50" cy="50" r="45" stroke="currentColor" stroke-width="8"></circle>
+<path class="text-primary" d="M50 20 V80 M20 50 H80" stroke="currentColor" stroke-linecap="round" stroke-width="8"></path>
+</svg>
+</div>
+<!-- Copilot Dialogue Row 1 -->
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-sm mt-space-3xs">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div class="bg-surface-container-low rounded-2xl rounded-tl-sm p-space-md max-w-2xl shadow-sm text-on-surface">
+<div class="flex items-center justify-between mb-space-2xs">
+<span class="font-label-sm text-label-sm font-bold text-primary">CareFlow Clinical Bot (v4.2 MM)</span>
+<span class="font-caption-caps text-caption-caps text-outline">Just now • Secured Medical Triage</span>
+</div>
+<p class="font-body-md text-body-md leading-relaxed text-on-surface">
+              Mingalarbar Daw Thida Win. Please describe what discomfort or symptoms you are experiencing today in English or Myanmar (e.g., chest tightness, fever, shortness of breath).
+            </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+              မင်္ဂလာပါ ဒေါ်သီတာဝင်းရှင်။ ယနေ့ ခံစားနေရသော ရောဂါလက္ခဏာများကို အောက်တွင် မြန်မာလို (သို့မဟုတ်) အင်္ဂလိပ်လို အသေးစိတ် ရေးသားပြောပြပေးပါ။
+            </p>
+</div>
+</div>
+<!-- Copilot Dialogue Row 2 (Patient Context Auto-Refinement) -->
+<div class="flex items-start gap-space-sm self-end max-w-xl flex-row-reverse">
+<div class="w-9 h-9 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center shrink-0 shadow-sm mt-space-3xs font-bold text-label-sm font-label-sm">
+            TW
+          </div>
+<div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm p-space-md shadow-sm">
+<p class="font-body-md text-body-md">
+              I felt heavy tightness in my central chest since 9:30 AM, coupled with slight breathlessness when climbing the clinic stairs.
+            </p>
+<span class="font-caption-caps text-caption-caps text-primary-fixed-dim block text-right mt-space-3xs">10:14 AM • Delivered</span>
+</div>
+</div>
+<!-- Common Clinical Symptom Chip Selector -->
+<div class="flex flex-col gap-space-2xs pt-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider font-bold">Quick Select Co-occurring Symptoms (Click to toggle)</label>
+<span class="font-caption-caps text-caption-caps text-primary font-bold">2 Active Selections</span>
+</div>
+<div class="flex flex-wrap gap-space-xs" id="symptom-chips">
+<!-- Active 1 -->
+<button class="symptom-tag bg-primary text-on-primary px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-semibold flex items-center gap-space-2xs shadow-sm transition-all" data-active="true" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Chest tightness / ရင်ဘတ်အောင့်ခြင်း</span>
+</button>
+<!-- Active 2 -->
+<button class="symptom-tag bg-primary text-on-primary px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-semibold flex items-center gap-space-2xs shadow-sm transition-all" data-active="true" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Shortness of breath / အသက်ရှူမဝခြင်း</span>
+</button>
+<!-- Neutral Chips -->
+<button class="symptom-tag bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-medium flex items-center gap-space-2xs transition-all" data-active="false" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">add_circle</span>
+<span>Palpitations / နှလုံးတုန်ခြင်း</span>
+</button>
+<button class="symptom-tag bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-medium flex items-center gap-space-2xs transition-all" data-active="false" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">add_circle</span>
+<span>High fever / အဖျားကြီးခြင်း</span>
+</button>
+<button class="symptom-tag bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-medium flex items-center gap-space-2xs transition-all" data-active="false" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">add_circle</span>
+<span>Dizziness / ခေါင်းမူးခြင်း</span>
+</button>
+<button class="symptom-tag bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-medium flex items-center gap-space-2xs transition-all" data-active="false" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">add_circle</span>
+<span>Persistent cough / ချောင်းဆိုးခြင်း</span>
+</button>
+<button class="symptom-tag bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-medium flex items-center gap-space-2xs transition-all" data-active="false" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">add_circle</span>
+<span>Joint pain / အဆစ်အမြစ်ကိုက်ခဲခြင်း</span>
+</button>
+</div>
+</div>
+<!-- Rich Input Bar with Voice Triage -->
+<div class="relative flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-xl">
+<div class="relative">
+<textarea class="w-full bg-surface-container-lowest text-on-surface p-space-sm rounded-lg font-body-md text-body-md outline-none placeholder:text-outline/70 focus:shadow-[0_0_0_2px_#0D5C56] transition-all resize-none" id="symptom-input" placeholder="Describe your symptoms in detail... / ရောဂါလက္ခဏာများကို အသေးစိတ် ရေးသားပါ..." rows="3"></textarea>
+</div>
+<div class="flex items-center justify-between pt-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<!-- Mic Button with Recording Ripple Indicator -->
+<button class="h-10 px-space-sm rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-all flex items-center gap-space-2xs font-label-sm text-label-sm font-semibold" id="voice-record-btn" type="button">
+<span class="material-symbols-outlined text-error text-[20px] animate-pulse">mic</span>
+<span>Voice Intake (Burmese / English)</span>
+</button>
+<button class="h-10 w-10 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center justify-center" title="Attach previous lab slip or photo" type="button">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+</div>
+<!-- Submit Dialogue Query -->
+<button class="h-10 px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm flex items-center gap-space-2xs transition-all" type="button">
+<span>Refine Triage</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+<!-- Medical Disclaimer Footnote -->
+<div class="flex items-center gap-space-2xs font-caption-caps text-caption-caps text-outline">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span>AI Clinical decision support complies with MOHS Myanmar Clinical Guideline v2.4. Data is HIPAA/NDPR encrypted.</span>
+</div>
+</div>
+<!-- Historical Patient Vitals Context Snippet -->
+<div class="grid grid-cols-3 gap-space-sm bg-surface-container-low p-space-sm rounded-xl">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col shadow-sm">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Last Recorded BP</span>
+<div class="flex items-baseline gap-space-3xs mt-space-3xs">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">138/88</span>
+<span class="font-body-sm text-body-sm text-outline">mmHg</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-secondary font-semibold">Elevated (Pre-hypertensive)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col shadow-sm">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Resting Pulse</span>
+<div class="flex items-baseline gap-space-3xs mt-space-3xs">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">92</span>
+<span class="font-body-sm text-body-sm text-outline">bpm</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-tertiary font-semibold">Normal Sinus</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col shadow-sm">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">SpO2 Oxygen</span>
+<div class="flex items-baseline gap-space-3xs mt-space-3xs">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">98</span>
+<span class="font-body-sm text-body-sm text-outline">%</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-tertiary font-semibold">Optimal Range</span>
+</div>
+</div>
+</div>
+<!-- RIGHT: Real-time AI Department & Severity Match Preview Card (5 Cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<!-- Primary Match Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_8px_24px_rgba(22,42,39,0.06)] flex flex-col gap-space-md">
+<!-- Header & Match Confidence Gauge -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-caption-caps text-caption-caps uppercase font-bold text-tertiary tracking-wider">Automated Diagnostic Routing</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface mt-space-3xs">Cardiology Clinic</h3>
+<span class="font-body-sm text-body-sm text-outline">Main Specialty Complex • 2nd Floor, Rm 204</span>
+</div>
+<!-- Circular SVG Match Meter -->
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-high stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3.5"></path>
+<path class="text-primary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="96, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute flex flex-col items-center leading-none">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">96%</span>
+<span class="font-caption-caps text-caption-caps text-outline text-[9px]">MATCH</span>
+</div>
+</div>
+</div>
+<!-- Clinical Triage Priority Badge -->
+<div class="bg-secondary-fixed/50 p-space-sm rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-4 h-4 rounded-full bg-secondary-container flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-on-secondary-container"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-on-secondary-fixed font-bold">Assigned Triage Tier</span>
+<span class="font-label-md text-label-md font-bold text-on-secondary-fixed">Level 2 Urgent Priority (Yellow/Amber)</span>
+</div>
+</div>
+<span class="font-caption-caps text-caption-caps bg-surface-container-lowest text-secondary px-space-xs py-space-3xs rounded-md font-bold">
+            Target &lt; 20 min
+          </span>
+</div>
+<!-- Emergency Resus Callout (High Contrast Alert Box) -->
+<div class="bg-error-container/40 p-space-md rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-error text-[24px] shrink-0 mt-space-3xs">warning</span>
+<div class="flex flex-col gap-space-3xs">
+<span class="font-label-sm text-label-sm font-bold text-error">Emergency Red-Flag Warning</span>
+<p class="font-body-sm text-body-sm text-on-error-container leading-relaxed">
+              Notice: If you experience radiating arm pain, cold sweats, or severe loss of consciousness, please proceed immediately to the Emergency Room (Resus Bay) or dial <strong>199</strong>.
+            </p>
+</div>
+</div>
+<!-- Matched On-Duty Physicians Preview -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase text-outline font-bold tracking-wider">Available On-Duty Cardiologists</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-semibold flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> 2 Doctors Ready
+            </span>
+</div>
+<!-- Doctor Card 1 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-space-sm">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm group-hover:scale-105 transition-all" data-alt="A portrait of a distinguished male Burmese senior cardiologist wearing a clean white clinical coat with stethoscope, in a bright, modern hospital consultation setting with soft warm lighting and serene decor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEGrOHg_h2S125x7uaajPjvn_gtoFiZBsefk7wYI1AJpIoH6g9PkOkn4xNxCKgjquXiN8I5JOQinLy9Wm4zgfPy2Lj1k61c6WpRlsRr0MKMsVji7RkG7uoFTx7Kbcd8NgkmFHP1A4w7SHIqx4GhE3Z2TO7ICLBDL_kmLu3E9ONPt2iHVu1cYHr369_nPewQo_19cakVDQ9V3rSfGeJw-TsWZCfYyDU12QHdhtA6VdopMKpyeZRNN3b"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Dr. Kyaw Zayar Min</span>
+<span class="font-body-sm text-body-sm text-outline">Senior Fellow • Adult Cardiology</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Room 204-A</span>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-caption-caps text-caption-caps font-bold">
+                3 in queue
+              </span>
+<span class="font-caption-caps text-caption-caps text-outline mt-space-3xs">~18m est. wait</span>
+</div>
+</div>
+<!-- Doctor Card 2 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-space-sm">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm group-hover:scale-105 transition-all" data-alt="A portrait of an empathetic female Burmese physician in a teal clinical uniform and stethoscope, welcoming smile, well-lit modern hospital office backdrop with calm therapeutic ambience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWdRCW_j7O7gaA91GomOi-O5amhFxNsFD5sjvvhJTq6nJJjE3TKD90ZSM3utz6vooTDxIs7D0dhYXAl3neMe1F5HQMXBux7H7930_nczxdDAH66yg_xa4X_v7mnWUlz80k6Erwg69IEXkb5HwwszPKXXOpGfUuADhsjn5WN3xipMOP-to05IhVYc1KD5A7ypqsOxArJ6tiy0esVyat3_tNM74-0Ll1WT7IX5jMtIKAUfS97MvGyMYy"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Dr. May Sandi</span>
+<span class="font-body-sm text-body-sm text-outline">Cardiology Specialist Fellow</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Room 204-B</span>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-tertiary-fixed-dim text-on-tertiary font-caption-caps text-caption-caps font-bold">
+                1 in queue
+              </span>
+<span class="font-caption-caps text-caption-caps text-outline mt-space-3xs">~8m est. wait</span>
+</div>
+</div>
+</div>
+<!-- Collapsible Preview of Step 4: Final Token Pass -->
+<div class="pt-space-xs border-t border-outline-variant/30">
+<button class="w-full py-space-xs flex items-center justify-between text-on-surface hover:text-primary transition-all" id="toggle-token-preview" type="button">
+<span class="font-label-sm text-label-sm font-bold flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[18px]">confirmation_number</span>
+<span>Preview Step 4 Generated Ticket Pass</span>
+</span>
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200" id="preview-chevron">expand_more</span>
+</button>
+<!-- Ticket Mock Preview (Collapsible) -->
+<div class="hidden mt-space-xs" id="token-preview-content">
+<div class="bg-surface-container p-space-md rounded-xl relative overflow-hidden shadow-inner flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Predicted Pass</span>
+<div class="font-title-token text-title-token font-extrabold text-primary leading-none mt-space-3xs">A-108</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cardiology Triage Station</span>
+</div>
+<div class="w-16 h-16 bg-surface-container-lowest p-1 rounded-lg shadow-sm flex items-center justify-center">
+<!-- QR Code Graphic Placeholder -->
+<svg class="w-full h-full text-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h3v3h-3v-3zm0 5h5v3h-5v-3zm3-2h2v2h-2v-2zm-3-3h2v2h-2v-2zm-2 2h2v2h-2v-2z"></path>
+</svg>
+</div>
+</div>
+<!-- Ticket Perforation Motif -->
+<div class="relative py-space-2xs flex items-center justify-between">
+<div class="w-3 h-6 bg-surface-container-lowest rounded-r-full -ml-space-md"></div>
+<div class="w-full border-b border-dashed border-outline-variant/60 mx-space-xs"></div>
+<div class="w-3 h-6 bg-surface-container-lowest rounded-l-full -mr-space-md"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div>
+<span class="text-outline block text-[11px]">Est. Call Window</span>
+<strong class="text-on-surface">10:35 AM – 10:45 AM</strong>
+</div>
+<div class="text-right">
+<span class="text-outline block text-[11px]">Assigned Counter</span>
+<strong class="text-primary font-bold">Counter 4 (OPD)</strong>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Triage Facility Facilities Card -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">map</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Direct Escort &amp; Wheelchair Support</span>
+<span class="font-body-sm text-body-sm text-outline">Stationed near Ground Gate 1. Need transit assistance?</span>
+</div>
+<button class="ml-auto px-space-sm py-space-2xs bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold rounded-lg transition-all" type="button">
+          Request
+        </button>
+</div>
+</div>
+</div>
+<!-- Persistent Bottom Action Bar (Fixed / Sticky Footer Flow) -->
+<div class="sticky bottom-4 z-30 bg-surface-container-lowest/95 backdrop-blur-md p-space-md rounded-2xl shadow-[0_12px_32px_rgba(22,42,39,0.08)] flex flex-col sm:flex-row items-center justify-between gap-space-md mt-space-md">
+<div class="flex items-center gap-space-md w-full sm:w-auto">
+<button class="px-space-lg py-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-all flex items-center gap-space-2xs" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to Portal Home</span>
+</button>
+<div class="hidden md:flex items-center gap-space-2xs font-body-sm text-body-sm text-outline">
+<span class="material-symbols-outlined text-tertiary text-[18px]">lock</span>
+<span>Self-check intake autosaved</span>
+</div>
+</div>
+<!-- Primary Progression CTA -->
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<span class="hidden lg:block text-right font-caption-caps text-caption-caps text-outline uppercase tracking-wider">
+        Proceeding to Step 2 of 4
+      </span>
+<button class="w-full sm:w-auto px-space-2xl py-space-sm rounded-xl bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-sm" type="button">
+<span>Continue to Department &amp; Doctor Match</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Client Logic -->
+<script>
+  // Dynamic symptom chip multi-select toggle
+  const chips = document.querySelectorAll('.symptom-tag');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const isActive = chip.getAttribute('data-active') === 'true';
+      if (isActive) {
+        chip.setAttribute('data-active', 'false');
+        chip.className = 'symptom-tag bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-medium flex items-center gap-space-2xs transition-all';
+        chip.querySelector('.material-symbols-outlined').textContent = 'add_circle';
+        chip.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[16px] text-outline';
+      } else {
+        chip.setAttribute('data-active', 'true');
+        chip.className = 'symptom-tag bg-primary text-on-primary px-space-md py-space-xs rounded-full font-label-sm text-label-sm font-semibold flex items-center gap-space-2xs shadow-sm transition-all';
+        chip.querySelector('.material-symbols-outlined').textContent = 'check_circle';
+        chip.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[16px]';
+      }
+    });
+  });
+
+  // Collapsible Ticket Preview toggle
+  const toggleBtn = document.getElementById('toggle-token-preview');
+  const previewContent = document.getElementById('token-preview-content');
+  const chevron = document.getElementById('preview-chevron');
+
+  if (toggleBtn && previewContent) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = previewContent.classList.contains('hidden');
+      if (isHidden) {
+        previewContent.classList.remove('hidden');
+        chevron.style.transform = 'rotate(180deg)';
+      } else {
+        previewContent.classList.add('hidden');
+        chevron.style.transform = 'rotate(0deg)';
+      }
+    });
+  }
+
+  // Voice recording pulse micro-feedback
+  const micBtn = document.getElementById('voice-record-btn');
+  let recording = false;
+  if (micBtn) {
+    micBtn.addEventListener('click', () => {
+      recording = !recording;
+      if (recording) {
+        micBtn.classList.add('bg-error-container', 'text-error');
+        micBtn.querySelector('span:last-child').textContent = 'Listening (Say symptoms)...';
+      } else {
+        micBtn.classList.remove('bg-error-container', 'text-error');
+        micBtn.querySelector('span:last-child').textContent = 'Voice Intake (Burmese / English)';
+      }
+    });
+  }
+</script></div></main></div></body></html>

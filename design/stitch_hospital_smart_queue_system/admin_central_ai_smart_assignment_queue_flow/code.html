@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-fixed": "#2f1500",
+        "on-primary": "#ffffff",
+        "tertiary-container": "#005e40",
+        "inverse-surface": "#313129",
+        "secondary-container": "#fe932c",
+        "on-secondary": "#ffffff",
+        "inverse-on-surface": "#f4f1e5",
+        "on-error": "#ffffff",
+        "primary": "#00433e",
+        "outline-variant": "#bec9c6",
+        "surface-variant": "#e5e2d7",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary-container": "#66daa8",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed": "#002114",
+        "surface-container": "#f1eee3",
+        "on-secondary-fixed-variant": "#6e3900",
+        "background": "#fdf9ee",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary-fixed-dim": "#ffb77d",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-tertiary-fixed-variant": "#005137",
+        "primary-container": "#0d5c56",
+        "error": "#ba1a1a",
+        "inverse-primary": "#8fd3cb",
+        "primary-fixed": "#abefe7",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-surface": "#1c1c15",
+        "surface-dim": "#dddacf",
+        "on-background": "#1c1c15",
+        "secondary": "#904d00",
+        "tertiary": "#00442d",
+        "surface": "#fdf9ee",
+        "outline": "#6f7977",
+        "surface-container-highest": "#e5e2d7",
+        "on-secondary-container": "#663500",
+        "on-error-container": "#93000a",
+        "surface-tint": "#216962",
+        "secondary-fixed": "#ffdcc3",
+        "surface-container-low": "#f7f4e8",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-fixed": "#85f8c4",
+        "on-primary-fixed": "#00201d",
+        "on-primary-container": "#8ed2ca"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "space-xl": "2rem",
+        "margin-desktop": "3rem",
+        "space-2xs": "0.25rem",
+        "space-4xl": "5rem",
+        "space-lg": "1.5rem",
+        "space-2xl": "2.5rem",
+        "margin-tablet": "2rem",
+        "gutter-desktop": "1.5rem",
+        "margin-mobile": "1.25rem",
+        "space-3xl": "3.5rem",
+        "space-3xs": "0.125rem",
+        "space-xs": "0.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem"
+      },
+      "fontFamily": {
+        "body-md": ["inter"],
+        "headline-md": ["plusJakartaSans"],
+        "body-lg": ["inter"],
+        "display-hero": ["plusJakartaSans"],
+        "label-md": ["inter"],
+        "display-hero-mobile": ["plusJakartaSans"],
+        "body-sm": ["inter"],
+        "headline-lg": ["plusJakartaSans"],
+        "label-sm": ["inter"],
+        "caption-caps": ["inter"],
+        "headline-lg-mobile": ["plusJakartaSans"],
+        "headline-sm": ["plusJakartaSans"],
+        "title-token": ["plusJakartaSans"]
+      },
+      "fontSize": {
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+        "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="CareFlow Myanmar Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#">Landing Hub</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#">Patient Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#">Doctor Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#">Staff Operations</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md bg-primary-container text-on-primary font-bold hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#">Admin Central</a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Administrative Hub</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">HQ Central Operations</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Online • Admin Mode</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-28 bg-surface/95 backdrop-blur-md z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="CareFlow" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital — Main Campus Administrative Terminal</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full"><div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">TW</div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-none">Dr. Thurein Win</span><span class="font-caption-caps text-caption-caps text-outline leading-none mt-space-3xs">System Admin</span></div></div></div></div><div class="h-12 px-space-xl bg-surface-container-low flex items-center overflow-x-auto border-t border-outline-variant/30"><nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="admin-dashboard" href="#">Admin Dashboard</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="doctor-management" href="#">Doctor Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="department-management" href="#">Department Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="queue-settings" href="#">Queue Settings</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="user-management" href="#">User Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="ai-duration-smart-routing" href="#">AI Duration &amp; Smart Routing</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="system-settings-audit" href="#">System Settings &amp; Audit</a></nav></div></header><main class="w-full pt-28 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Command & Status Bar -->
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md mb-space-xl">
+<div>
+<div class="flex items-center gap-space-xs mb-space-3xs">
+<span class="inline-flex items-center gap-space-3xs bg-primary-container/10 text-primary px-space-xs py-space-3xs rounded-full font-caption-caps text-caption-caps tracking-widest uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
+          ORCHESTRATOR ENGINE 4.2
+        </span>
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Yangon Central Core</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+        AI Smart Doctor Assignment &amp; Real-Time Flow Orchestrator
+      </h1>
+<p class="font-label-md text-label-md text-on-surface-variant max-w-4xl mt-space-3xs">
+        Fine-tune automated patient-to-physician matching algorithms, multi-objective optimization weights, and monitor real-time queue congestion forecasts. (AI ဉာဏ်ရည်တု လူနာခွဲဝေမှုနှင့် တန်းစီစီးဆင်းမှု စနစ်)
+      </p>
+</div>
+<!-- Action Toolbar -->
+<div class="flex flex-wrap items-center gap-space-xs self-stretch lg:self-auto">
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-space-xs rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-tertiary">tune</span>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-outline uppercase leading-none">Rule Engine</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold leading-none mt-space-3xs">Active: Balanced V4</span>
+</div>
+</div>
+<button class="flex items-center gap-space-xs bg-surface-container-low hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-xl font-label-md text-label-md shadow-sm transition-all active:scale-95" id="btnSimulate">
+<span class="material-symbols-outlined text-[18px]">neurology</span>
+        Simulate Dispatch
+      </button>
+<button class="flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-md py-space-xs rounded-xl font-label-md text-label-md shadow-md transition-all active:scale-95" id="btnApply">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+        Apply Rule Configuration
+      </button>
+</div>
+</div>
+<!-- Metric Summary Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md mb-space-xl">
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Assignment Accuracy</span>
+<div class="font-headline-lg text-headline-lg text-primary font-bold mt-space-3xs">98.4%</div>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +2.1% vs Manual Triage
+        </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">psychology</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Mean Wait Reduction</span>
+<div class="font-headline-lg text-headline-lg text-primary font-bold mt-space-3xs">-14.2<span class="font-headline-sm text-headline-sm font-normal">m</span></div>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">timer</span> 18.6m Current Campus Avg
+        </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">hourglass_top</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Bottlenecks Predicted (1h)</span>
+<div class="font-headline-lg text-headline-lg text-secondary-container font-bold mt-space-3xs">1 Area</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">warning</span> General OPD Rm 105
+        </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed/40 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">fmd_bad</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Active Routing Decisions</span>
+<div class="font-headline-lg text-headline-lg text-primary font-bold mt-space-3xs">128<span class="font-headline-sm text-headline-sm font-normal">/hr</span></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">sync</span> Dynamic Re-route ON
+        </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">alt_route</span>
+</div>
+</div>
+</div>
+<!-- Main Split: Top Weights & Presets -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Left 7 cols: AI Parameter Tuning Deck -->
+<div class="xl:col-span-8 p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm mb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Multi-Objective Optimization Weights</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-3xs">Dynamic balance between clinical rigor, operational ergonomics, and patient experience.</p>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-sm py-space-3xs rounded-full">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Sum:</span>
+<span class="font-label-md text-label-md font-bold text-primary" id="weightSum">100%</span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</div>
+</div>
+<!-- Presets Ribbon -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-xs mb-space-lg">
+<button class="preset-pill flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full font-label-sm text-label-sm bg-primary text-on-primary font-semibold shadow-sm whitespace-nowrap" data-preset="balanced">
+<span class="material-symbols-outlined text-[16px]">balance</span> Balanced Standard (Active)
+          </button>
+<button class="preset-pill flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-container text-on-surface font-medium whitespace-nowrap" data-preset="rush">
+<span class="material-symbols-outlined text-[16px]">speed</span> Rush Peak Hours
+          </button>
+<button class="preset-pill flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-container text-on-surface font-medium whitespace-nowrap" data-preset="strict">
+<span class="material-symbols-outlined text-[16px]">verified_user</span> Strict Specialty Match
+          </button>
+<button class="preset-pill flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-container text-on-surface font-medium whitespace-nowrap" data-preset="emergency">
+<span class="material-symbols-outlined text-[16px]">emergency_heat</span> Emergency Load-Shedding
+          </button>
+</div>
+<!-- Weight Sliders List -->
+<div class="space-y-space-md">
+<!-- Slider 1 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center justify-between mb-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">1</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Specialization &amp; Sub-Specialty Match</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Prioritize matching chief complaint to sub-fellowship (e.g., Interventional Cardiology vs General).</p>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold" id="valSpecialty">40%</span>
+</div>
+<div class="pt-space-xs">
+<input class="w-full h-2 rounded-lg bg-surface-variant accent-primary cursor-pointer" id="sliderSpecialty" max="100" min="0" type="range" value="40"/>
+</div>
+</div>
+<!-- Slider 2 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center justify-between mb-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">2</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Doctor Workload Balancing</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Equally distribute queue tokens across on-duty consulting rooms to prevent physician cognitive burnout.</p>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold" id="valWorkload">30%</span>
+</div>
+<div class="pt-space-xs">
+<input class="w-full h-2 rounded-lg bg-surface-variant accent-primary cursor-pointer" id="sliderWorkload" max="100" min="0" type="range" value="30"/>
+</div>
+</div>
+<!-- Slider 3 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center justify-between mb-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">3</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Patient Wait-Time Minimization</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Route patient to earliest available chamber regardless of nominal queue length or nominal specialty hierarchy.</p>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold" id="valWait">20%</span>
+</div>
+<div class="pt-space-xs">
+<input class="w-full h-2 rounded-lg bg-surface-variant accent-primary cursor-pointer" id="sliderWait" max="100" min="0" type="range" value="20"/>
+</div>
+</div>
+<!-- Slider 4 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center justify-between mb-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">4</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Continuity of Care Preference</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Prefer doctors previously consulted by patient within the last 180 days for longitudinal monitoring.</p>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold" id="valContinuity">10%</span>
+</div>
+<div class="pt-space-xs">
+<input class="w-full h-2 rounded-lg bg-surface-variant accent-primary cursor-pointer" id="sliderContinuity" max="100" min="0" type="range" value="10"/>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-outline">
+<span class="font-body-sm text-body-sm flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+          Auto-rebalances minor drift using Monte Carlo Markov Chain (MCMC) simulations.
+        </span>
+<button class="font-label-sm text-label-sm text-secondary hover:text-primary font-semibold underline cursor-pointer" id="btnResetDefault">
+          Reset to Baseline
+        </button>
+</div>
+</div>
+<!-- Right 4 cols: Visual Weight Donut & AI Agent Status -->
+<div class="xl:col-span-4 flex flex-col gap-space-md">
+<!-- Donut Visual -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Weight Allocation Matrix</h3>
+<span class="font-caption-caps text-caption-caps bg-surface-container px-space-xs py-space-3xs rounded text-outline uppercase">Active Model</span>
+</div>
+<div class="flex items-center justify-center py-space-md relative">
+<!-- Inline SVG Donut Chart representing 40%, 30%, 20%, 10% -->
+<svg class="w-44 h-44 -rotate-90" viewbox="0 0 100 100">
+<!-- Background circle -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#e5e2d7" stroke-width="12"></circle>
+<!-- Segment 1: Specialty 40% (stroke-dasharray 95.5 238.76) -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#00433e" stroke-dasharray="95.5 238.76" stroke-dashoffset="0" stroke-width="12"></circle>
+<!-- Segment 2: Workload 30% (stroke-dasharray 71.6 238.76) offset -95.5 -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#005e40" stroke-dasharray="71.6 238.76" stroke-dashoffset="-95.5" stroke-width="12"></circle>
+<!-- Segment 3: Wait time 20% (stroke-dasharray 47.7 238.76) offset -167.1 -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#fe932c" stroke-dasharray="47.7 238.76" stroke-dashoffset="-167.1" stroke-width="12"></circle>
+<!-- Segment 4: Continuity 10% (stroke-dasharray 23.9 238.76) offset -214.8 -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#8fd3cb" stroke-dasharray="23.9 238.76" stroke-dashoffset="-214.8" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">PRIMARY GOAL</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">Accuracy</span>
+<span class="font-label-sm text-label-sm text-tertiary">Clinical Match</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="flex items-center gap-space-2xs">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Specialty (40%)</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="w-3 h-3 rounded-full bg-tertiary-container"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Load Bal (30%)</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Min Wait (20%)</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="w-3 h-3 rounded-full bg-primary-fixed-dim"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Continuity (10%)</span>
+</div>
+</div>
+</div>
+<!-- Live Engine Telemetry Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-2xs">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Inference Engine Latency</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-bold">42ms SLA Met</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">Triage Classification Pipeline</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Myanmar NLP Tokenizer + SNOMED-CT</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[28px]">speed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottleneck Warning Banner -->
+<div class="p-space-md rounded-xl bg-secondary-fixed/40 text-on-secondary-fixed shadow-sm mb-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-secondary">PREDICTED BOTTLENECK ALERT</span>
+<span class="font-caption-caps text-caption-caps bg-surface-container-lowest/80 text-secondary px-space-2xs py-space-3xs rounded font-semibold">T + 30 MIN FORECAST</span>
+</div>
+<p class="font-body-md text-body-md text-on-secondary-fixed mt-space-3xs font-medium">
+          General OPD Room 105 congestion predicted to exceed <span class="font-bold underline">45 mins at 11:30</span>. Auto-Assignment recommends diverting 5 mild hypertension patients to Room 208 (Dr. Aung Myint Thu).
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs self-end md:self-auto flex-shrink-0">
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md font-semibold hover:bg-surface-container-high transition-colors shadow-sm">
+        Review Candidates
+      </button>
+<button class="px-space-md py-space-xs rounded-lg bg-secondary text-on-secondary font-label-md text-label-md font-semibold hover:bg-on-secondary-fixed transition-colors shadow-sm">
+        Execute Auto-Divert
+      </button>
+</div>
+</div>
+<!-- Live vs Predicted Wait-Time Velocity & Departments Flow -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm mb-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm mb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">stacked_bar_chart</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Department Queue Velocity: Live vs. +30m Predicted Wait Times</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-3xs">Hospital-wide telemetry comparing current patient dwell durations against simulated peak load.</p>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-3xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-3 h-3 rounded bg-primary"></span> Live Actual
+        </div>
+<div class="flex items-center gap-space-3xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-3 h-3 rounded bg-secondary-container"></span> +30m Predicted Peak
+        </div>
+</div>
+</div>
+<!-- Department Matrix -->
+<div class="space-y-space-md">
+<!-- Dept 1: Adult Cardiology -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="w-full lg:w-1/4">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">cardiology</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Adult Cardiology</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase mt-space-3xs block">Bldg A • 4 Doctors Active</span>
+</div>
+<div class="w-full lg:w-2/4 flex flex-col gap-space-2xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-primary font-semibold">Live: 14 mins</span>
+<span class="text-secondary font-semibold">Predicted: 19 mins</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-variant relative overflow-hidden flex">
+<!-- Current bar -->
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 28%;"></div>
+<!-- Delta predicted bar -->
+<div class="h-full bg-secondary-container/70 rounded-r-full transition-all duration-500" style="width: 10%;"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline">Threshold Ceiling: 35 mins</span>
+</div>
+<div class="w-full lg:w-1/4 flex lg:justify-end items-center gap-space-sm">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full font-label-sm text-label-sm bg-tertiary-fixed/40 text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Optimal Flow
+          </span>
+<button class="p-space-xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Dept 2: General OPD (Bottleneck) -->
+<div class="p-space-md rounded-xl bg-secondary-fixed/20 flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="w-full lg:w-1/4">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">local_hospital</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">General OPD</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-secondary font-bold uppercase mt-space-3xs block">Bldg B • 6 Rooms Active</span>
+</div>
+<div class="w-full lg:w-2/4 flex flex-col gap-space-2xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-secondary font-bold">Live: 38 mins</span>
+<span class="text-error font-bold">Predicted Peak: 45 mins</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-variant relative overflow-hidden flex">
+<!-- Current bar -->
+<div class="h-full bg-secondary-container rounded-l-full transition-all duration-500" style="width: 68%;"></div>
+<!-- Delta predicted bar -->
+<div class="h-full bg-error rounded-r-full transition-all duration-500" style="width: 22%;"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-error font-semibold">Over Target SLA by +15 mins</span>
+</div>
+<div class="w-full lg:w-1/4 flex lg:justify-end items-center gap-space-sm">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full font-label-sm text-label-sm bg-error-container/50 text-error font-bold animate-pulse">
+<span class="w-2 h-2 rounded-full bg-error"></span> Bottleneck Warning
+          </span>
+<button class="px-space-sm py-space-xs rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-high transition-colors">
+            Intervene
+          </button>
+</div>
+</div>
+<!-- Dept 3: Pediatrics -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="w-full lg:w-1/4">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">child_care</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Pediatrics</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase mt-space-3xs block">Bldg C • 3 Doctors Active</span>
+</div>
+<div class="w-full lg:w-2/4 flex flex-col gap-space-2xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-primary font-semibold">Live: 12 mins</span>
+<span class="text-on-surface-variant font-semibold">Predicted: 14 mins</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-variant relative overflow-hidden flex">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 24%;"></div>
+<div class="h-full bg-secondary-container/40 rounded-r-full transition-all duration-500" style="width: 4%;"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline">Target SLA: 20 mins</span>
+</div>
+<div class="w-full lg:w-1/4 flex lg:justify-end items-center gap-space-sm">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Normal Flow
+          </span>
+<button class="p-space-xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Dept 4: Orthopedics -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="w-full lg:w-1/4">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">orthopedics</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Orthopedics</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase mt-space-3xs block">Bldg B • 2 Doctors Active</span>
+</div>
+<div class="w-full lg:w-2/4 flex flex-col gap-space-2xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-primary font-semibold">Live: 15 mins</span>
+<span class="text-on-surface-variant font-semibold">Predicted: 16 mins</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-variant relative overflow-hidden flex">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 30%;"></div>
+<div class="h-full bg-secondary-container/40 rounded-r-full transition-all duration-500" style="width: 2%;"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline">Target SLA: 25 mins</span>
+</div>
+<div class="w-full lg:w-1/4 flex lg:justify-end items-center gap-space-sm">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Optimal Flow
+          </span>
+<button class="p-space-xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Dept 5: Internal Medicine -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="w-full lg:w-1/4">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">stethoscope</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Internal Medicine</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase mt-space-3xs block">Bldg A • 3 Doctors Active</span>
+</div>
+<div class="w-full lg:w-2/4 flex flex-col gap-space-2xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-primary font-semibold">Live: 11 mins</span>
+<span class="text-on-surface-variant font-semibold">Predicted: 13 mins</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-variant relative overflow-hidden flex">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 22%;"></div>
+<div class="h-full bg-secondary-container/40 rounded-r-full transition-all duration-500" style="width: 4%;"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline">Target SLA: 20 mins</span>
+</div>
+<div class="w-full lg:w-1/4 flex lg:justify-end items-center gap-space-sm">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Optimal Flow
+          </span>
+<button class="p-space-xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-Time Auto-Assignment Preview & Follow-Up Module Split -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Left 8 cols: Live Dispatch Suggestions Table -->
+<div class="xl:col-span-8 p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm mb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">smart_toy</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Auto-Assignment Decision Stream</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-3xs">Triage intake events awaiting supervisory commit or auto-dispatch.</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-space-xs rounded-lg bg-surface-container font-label-sm text-label-sm text-on-surface font-semibold hover:bg-surface-container-high transition-colors">
+              Filter: Pending (4)
+            </button>
+<button class="px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors">
+              Batch Approve All
+            </button>
+</div>
+</div>
+<!-- Decision Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container text-outline uppercase font-caption-caps text-caption-caps tracking-wider h-11">
+<th class="px-space-md py-space-xs rounded-l-lg">Token / Patient</th>
+<th class="px-space-md py-space-xs">Triage &amp; Complaint</th>
+<th class="px-space-md py-space-xs">AI Suggested Room</th>
+<th class="px-space-md py-space-xs">Rationale &amp; Confidence</th>
+<th class="px-space-md py-space-xs text-right rounded-r-lg">Supervisory Action</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 space-y-space-xs">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="px-space-xs py-space-3xs rounded bg-surface-container-high font-title-token text-[18px] text-primary font-extrabold tracking-normal">
+                      G-096
+                    </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Daw Ni Ni</div>
+<span class="font-caption-caps text-caption-caps text-outline">HN: 849281 • F/58</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Chest Tightness / Dyspnea</span>
+<span class="inline-flex items-center gap-space-3xs font-label-sm text-label-sm text-secondary font-semibold mt-space-3xs">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> Tier 2 Amber
+                    </span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Dr. Kyaw Zayar Min</span>
+<span class="font-caption-caps text-caption-caps text-outline">Room 204 • Interventional</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="px-space-xs py-space-3xs rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-bold">96% Match</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant mt-space-3xs">Sub-specialty Match (96%) + Wait delta acceptable (+4m)</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="px-space-xs py-space-2xs rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-all">
+                      Approve
+                    </button>
+<button class="px-space-xs py-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all" title="Manual Override">
+                      Override
+                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="px-space-xs py-space-3xs rounded bg-surface-container-high font-title-token text-[18px] text-primary font-extrabold tracking-normal">
+                      P-044
+                    </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Mg Myo Min Tun</div>
+<span class="font-caption-caps text-caption-caps text-outline">HN: 991042 • M/8</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Acute Wheezing &amp; Rash</span>
+<span class="inline-flex items-center gap-space-3xs font-label-sm text-label-sm text-secondary font-semibold mt-space-3xs">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> Tier 2 Amber
+                    </span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Dr. May Hnin Aye</span>
+<span class="font-caption-caps text-caption-caps text-outline">Room 112 • Pediatric Pulmonology</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="px-space-xs py-space-3xs rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-bold">94% Match</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant mt-space-3xs">Prior Consult 45d ago + Sub-specialist on chamber</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="px-space-xs py-space-2xs rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-all">
+                      Approve
+                    </button>
+<button class="px-space-xs py-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all" title="Manual Override">
+                      Override
+                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="px-space-xs py-space-3xs rounded bg-surface-container-high font-title-token text-[18px] text-primary font-extrabold tracking-normal">
+                      O-182
+                    </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">U Win Maung</div>
+<span class="font-caption-caps text-caption-caps text-outline">HN: 114093 • M/64</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Left Knee Arthroplasty Follow-up</span>
+<span class="inline-flex items-center gap-space-3xs font-label-sm text-label-sm text-tertiary font-semibold mt-space-3xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Tier 3 Green
+                    </span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Dr. Zaw Htet Aung</span>
+<span class="font-caption-caps text-caption-caps text-outline">Room 305 • Ortho Joint</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="px-space-xs py-space-3xs rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-bold">99% Match</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant mt-space-3xs">Primary Operating Surgeon match (Continuity of care)</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="px-space-xs py-space-2xs rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-all">
+                      Approve
+                    </button>
+<button class="px-space-xs py-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all" title="Manual Override">
+                      Override
+                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 4 (Rerouted Divert) -->
+<tr class="hover:bg-surface-container-low transition-colors group bg-secondary-fixed/10">
+<td class="px-space-md py-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="px-space-xs py-space-3xs rounded bg-surface-container-high font-title-token text-[18px] text-secondary font-extrabold tracking-normal">
+                      A-201
+                    </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Daw Khin San</div>
+<span class="font-caption-caps text-caption-caps text-outline">HN: 772091 • F/49</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Mild Essential Hypertension</span>
+<span class="inline-flex items-center gap-space-3xs font-label-sm text-label-sm text-tertiary font-semibold mt-space-3xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Tier 3 Green
+                    </span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-secondary font-bold">Dr. Aung Myint Thu (Diverted)</span>
+<span class="font-caption-caps text-caption-caps text-outline">Room 208 • Fast Track Relief</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="px-space-xs py-space-3xs rounded-full bg-secondary-fixed text-secondary font-label-sm text-label-sm font-bold">89% Balance Redirect</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant mt-space-3xs">Diverted from Rm 105 to relieve predicted bottleneck (-26m wait)</span>
+</div>
+</td>
+<td class="px-space-md py-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="px-space-xs py-space-2xs rounded-lg bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold hover:bg-on-secondary-fixed transition-all">
+                      Confirm Divert
+                    </button>
+<button class="px-space-xs py-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all" title="Hold in Default">
+                      Hold
+                    </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="pt-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs text-outline">
+<span class="font-body-sm text-body-sm">Showing 4 high-priority automated assignment recommendations</span>
+<div class="flex items-center gap-space-xs">
+<button class="font-label-sm text-label-sm text-primary font-semibold hover:underline">View Full Ingestion Stream (28)</button>
+</div>
+</div>
+</div>
+<!-- Right 4 cols: AI Follow-Up Suggestion Engine -->
+<div class="xl:col-span-4 p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">event_repeat</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Smart Follow-Up Engine</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Predicted re-check booking candidates</p>
+</div>
+</div>
+<span class="font-caption-caps text-caption-caps bg-surface-container px-space-xs py-space-3xs rounded text-outline uppercase">14-Day Cycle</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Candidate 1 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-label-sm text-label-sm font-bold text-primary">
+                  TT
+                </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Thant Zin Oo</div>
+<span class="font-caption-caps text-caption-caps text-outline">Post-Stent Care • Dr. Kyaw Zayar Min</span>
+</div>
+</div>
+<span class="font-caption-caps text-caption-caps bg-tertiary-fixed/40 text-tertiary font-bold px-space-2xs py-space-3xs rounded">Due in 2d</span>
+</div>
+<div class="flex items-center justify-between mt-space-xs pt-space-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Recommended: Holter + Echo</span>
+<button class="flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">sms</span> Dispatch SMS
+              </button>
+</div>
+</div>
+<!-- Candidate 2 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-label-sm text-label-sm font-bold text-primary">
+                  SN
+                </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Su Nandar Htet</div>
+<span class="font-caption-caps text-caption-caps text-outline">Pediatric Asthma • Dr. May Hnin Aye</span>
+</div>
+</div>
+<span class="font-caption-caps text-caption-caps bg-tertiary-fixed/40 text-tertiary font-bold px-space-2xs py-space-3xs rounded">Due in 5d</span>
+</div>
+<div class="flex items-center justify-between mt-space-xs pt-space-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Peak Flow review booking</span>
+<button class="flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">sms</span> Dispatch SMS
+              </button>
+</div>
+</div>
+<!-- Candidate 3 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-label-sm text-label-sm font-bold text-primary">
+                  MK
+                </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Myint Kyi</div>
+<span class="font-caption-caps text-caption-caps text-outline">Type-2 Diabetes • Dr. Thein Zaw</span>
+</div>
+</div>
+<span class="font-caption-caps text-caption-caps bg-surface-container text-outline font-bold px-space-2xs py-space-3xs rounded">Due in 7d</span>
+</div>
+<div class="flex items-center justify-between mt-space-xs pt-space-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">HbA1c Lab + Endocrinologist</span>
+<button class="flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">sms</span> Dispatch SMS
+              </button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm">
+<button class="w-full py-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">send_time_extension</span>
+          Auto-Notify All 14 Eligible Patients
+        </button>
+</div>
+</div>
+</div>
+<!-- Toast Feedback Area (Hidden by default, triggered via JS) -->
+<div class="fixed bottom-space-lg right-space-xl bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-xl shadow-xl flex items-center gap-space-sm transition-all transform translate-y-24 opacity-0 pointer-events-none z-50" id="actionToast">
+<span class="material-symbols-outlined text-tertiary-fixed text-[22px]">check_circle</span>
+<span class="font-label-md text-label-md font-medium" id="toastMessage">AI Rule Weights successfully updated across all active kiosks.</span>
+</div>
+<script>
+    (function() {
+      // Sliders & Value handles
+      const sliderSpecialty = document.getElementById('sliderSpecialty');
+      const sliderWorkload = document.getElementById('sliderWorkload');
+      const sliderWait = document.getElementById('sliderWait');
+      const sliderContinuity = document.getElementById('sliderContinuity');
+
+      const valSpecialty = document.getElementById('valSpecialty');
+      const valWorkload = document.getElementById('valWorkload');
+      const valWait = document.getElementById('valWait');
+      const valContinuity = document.getElementById('valContinuity');
+      const weightSum = document.getElementById('weightSum');
+
+      function updateSum() {
+        const s = parseInt(sliderSpecialty.value, 10);
+        const w = parseInt(sliderWorkload.value, 10);
+        const wt = parseInt(sliderWait.value, 10);
+        const c = parseInt(sliderContinuity.value, 10);
+
+        valSpecialty.textContent = s + '%';
+        valWorkload.textContent = w + '%';
+        valWait.textContent = wt + '%';
+        valContinuity.textContent = c + '%';
+
+        const total = s + w + wt + c;
+        weightSum.textContent = total + '%';
+
+        if (total === 100) {
+          weightSum.className = "font-label-md text-label-md font-bold text-primary";
+        } else {
+          weightSum.className = "font-label-md text-label-md font-bold text-error";
+        }
+      }
+
+      [sliderSpecialty, sliderWorkload, sliderWait, sliderContinuity].forEach(sl => {
+        sl.addEventListener('input', updateSum);
+      });
+
+      // Preset configurations
+      const presets = {
+        balanced: { specialty: 40, workload: 30, wait: 20, continuity: 10 },
+        rush: { specialty: 20, workload: 30, wait: 45, continuity: 5 },
+        strict: { specialty: 60, workload: 15, wait: 10, continuity: 15 },
+        emergency: { specialty: 15, workload: 40, wait: 40, continuity: 5 }
+      };
+
+      document.querySelectorAll('.preset-pill').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const type = this.getAttribute('data-preset');
+          const config = presets[type];
+          if (!config) return;
+
+          sliderSpecialty.value = config.specialty;
+          sliderWorkload.value = config.workload;
+          sliderWait.value = config.wait;
+          sliderContinuity.value = config.continuity;
+          updateSum();
+
+          // Highlight button
+          document.querySelectorAll('.preset-pill').forEach(b => {
+            b.className = "preset-pill flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-container text-on-surface font-medium whitespace-nowrap";
+          });
+          this.className = "preset-pill flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full font-label-sm text-label-sm bg-primary text-on-primary font-semibold shadow-sm whitespace-nowrap";
+        });
+      });
+
+      // Reset to baseline
+      const btnResetDefault = document.getElementById('btnResetDefault');
+      if (btnResetDefault) {
+        btnResetDefault.addEventListener('click', function() {
+          sliderSpecialty.value = 40;
+          sliderWorkload.value = 30;
+          sliderWait.value = 20;
+          sliderContinuity.value = 10;
+          updateSum();
+        });
+      }
+
+      // Toast notification helper
+      const toast = document.getElementById('actionToast');
+      const toastMsg = document.getElementById('toastMessage');
+
+      function showToast(text) {
+        if (!toast) return;
+        toastMsg.textContent = text;
+        toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+        }, 3200);
+      }
+
+      const btnApply = document.getElementById('btnApply');
+      if (btnApply) {
+        btnApply.addEventListener('click', function() {
+          showToast('Rule weights applied. Live queue routing recalculation initiated.');
+        });
+      }
+
+      const btnSimulate = document.getElementById('btnSimulate');
+      if (btnSimulate) {
+        btnSimulate.addEventListener('click', function() {
+          showToast('Running Monte Carlo simulation across 240 simulated patients...');
+        });
+      }
+    })();
+  </script>
+</div></div></main></div></body></html>

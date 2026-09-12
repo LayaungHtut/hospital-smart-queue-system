@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-container": "#663500",
+        "secondary-fixed": "#ffdcc3",
+        "on-tertiary-container": "#66daa8",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-primary": "#ffffff",
+        "surface-container-highest": "#e5e2d7",
+        "surface-dim": "#dddacf",
+        "on-secondary-fixed": "#2f1500",
+        "tertiary": "#00442d",
+        "on-tertiary-fixed": "#002114",
+        "surface-tint": "#216962",
+        "on-secondary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "background": "#fdf9ee",
+        "primary-fixed": "#abefe7",
+        "on-background": "#1c1c15",
+        "tertiary-fixed": "#85f8c4",
+        "inverse-primary": "#8fd3cb",
+        "primary": "#00433e",
+        "surface-container-low": "#f7f4e8",
+        "secondary-fixed-dim": "#ffb77d",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-container": "#005e40",
+        "primary-container": "#0d5c56",
+        "surface-variant": "#e5e2d7",
+        "on-tertiary-fixed-variant": "#005137",
+        "inverse-surface": "#313129",
+        "outline-variant": "#bec9c6",
+        "on-error-container": "#93000a",
+        "on-secondary-fixed-variant": "#6e3900",
+        "outline": "#6f7977",
+        "on-primary-container": "#8ed2ca",
+        "surface-container": "#f1eee3",
+        "on-error": "#ffffff",
+        "on-surface": "#1c1c15",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary": "#ffffff",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-primary-fixed": "#00201d",
+        "error-container": "#ffdad6",
+        "inverse-on-surface": "#f4f1e5",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary": "#904d00",
+        "error": "#ba1a1a",
+        "secondary-container": "#fe932c",
+        "surface": "#fdf9ee"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "margin-desktop": "3rem",
+        "space-3xl": "3.5rem",
+        "space-lg": "1.5rem",
+        "space-xs": "0.5rem",
+        "space-3xs": "0.125rem",
+        "space-xl": "2rem",
+        "gutter-desktop": "1.5rem",
+        "space-2xs": "0.25rem",
+        "margin-mobile": "1.25rem",
+        "space-4xl": "5rem",
+        "space-sm": "0.75rem",
+        "space-2xl": "2.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem",
+        "margin-tablet": "2rem"
+      },
+      "fontFamily": {
+        "body-sm": [
+          "inter"
+        ],
+        "caption-caps": [
+          "inter"
+        ],
+        "label-sm": [
+          "inter"
+        ],
+        "label-md": [
+          "inter"
+        ],
+        "body-lg": [
+          "inter"
+        ],
+        "display-hero-mobile": [
+          "plusJakartaSans"
+        ],
+        "headline-md": [
+          "plusJakartaSans"
+        ],
+        "headline-lg": [
+          "plusJakartaSans"
+        ],
+        "headline-lg-mobile": [
+          "plusJakartaSans"
+        ],
+        "headline-sm": [
+          "plusJakartaSans"
+        ],
+        "title-token": [
+          "plusJakartaSans"
+        ],
+        "display-hero": [
+          "plusJakartaSans"
+        ],
+        "body-md": [
+          "inter"
+        ]
+      },
+      "fontSize": {
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "20px",
+            "fontWeight": "400"
+          }
+        ],
+        "caption-caps": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.06em",
+            "fontWeight": "700"
+          }
+        ],
+        "label-sm": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "label-md": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.005em",
+            "fontWeight": "500"
+          }
+        ],
+        "body-lg": [
+          "18px",
+          {
+            "lineHeight": "28px",
+            "fontWeight": "400"
+          }
+        ],
+        "display-hero-mobile": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-md": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-lg": [
+          "32px",
+          {
+            "lineHeight": "40px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-lg-mobile": [
+          "26px",
+          {
+            "lineHeight": "34px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-sm": [
+          "20px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.005em",
+            "fontWeight": "600"
+          }
+        ],
+        "title-token": [
+          "40px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "0.04em",
+            "fontWeight": "800"
+          }
+        ],
+        "display-hero": [
+          "56px",
+          {
+            "lineHeight": "64px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-md": [
+          "15px",
+          {
+            "lineHeight": "24px",
+            "fontWeight": "400"
+          }
+        ]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="Modern minimalist healthcare emblem for CareFlow Myanmar hospital queue system. An elegant geometric fusion of a caring cross, smooth organic flow lines symbolizing seamless patient journey, and a subtle heartbeat curve, in deep aegean teal (#0D5C56) and warm amber (#D97706), vector style, pristine clean background.. Design context: - Primary color: #0d5c56
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Landing Hub</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#"><span class="material-symbols-outlined text-[20px]">medical_services</span><span>Patient Portal</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl transition-all bg-primary-container text-on-primary font-bold" data-path="doctor-portal" href="#"><span class="material-symbols-outlined text-[20px]">health_and_safety</span><span>Doctor Portal</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span>Staff Operations</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#"><span class="material-symbols-outlined text-[20px]">shield</span><span>Admin Central</span></a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Clinical Counter</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">Station A-02</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Online • Triage Active</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-md z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="Modern minimalist healthcare emblem for CareFlow Myanmar hospital queue system. An elegant geometric fusion of a caring cross, smooth organic flow lines symbolizing seamless patient journey, and a subtle heartbeat curve, in deep aegean teal (#0D5C56) and warm amber (#D97706), vector style, pristine clean background.. Design context: - Primary color: #0d5c56
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital</span><span class="font-body-sm text-body-sm text-outline">— Main Campus</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full">
+<!-- Sub-Navigation Pill Rail -->
+<div class="w-full flex items-center justify-between pb-space-md border-b-0 overflow-x-auto no-scrollbar">
+<div class="flex items-center gap-space-2xs bg-surface-container-low p-space-3xs rounded-full shadow-sm">
+<button class="px-space-sm py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Staff Dashboard</button>
+<button class="px-space-sm py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Live Queue Monitor</button>
+<button class="px-space-sm py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Emergency &amp; Fast-Track Hub</button>
+<button class="px-space-md py-space-xs rounded-full font-label-sm text-label-sm bg-primary text-on-primary font-semibold shadow-sm flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+<span>Appointments &amp; Check-in</span>
+</button>
+<button class="px-space-sm py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Patient Reassignment</button>
+<button class="px-space-sm py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Daily Summary &amp; Reports</button>
+<button class="px-space-sm py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Staff Notifications</button>
+<button class="px-space-sm py-space-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Staff Profile</button>
+</div>
+<div class="hidden 2xl:flex items-center gap-space-xs text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">schedule</span>
+<span>Clinic Day: <strong class="text-on-surface">Thu, 24 Oct</strong> (OPD Wave 2)</span>
+</div>
+</div>
+<!-- Header & Barcode Check-In Scanner Module -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-stretch mt-space-md">
+<!-- Title & Mission Context -->
+<div class="lg:col-span-6 flex flex-col justify-center">
+<div class="flex items-center gap-space-xs text-primary font-caption-caps text-caption-caps uppercase tracking-wider">
+<span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+        Counter A-02 Front Desk Control
+      </div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight mt-space-3xs">
+        Pre-Booked Appointments &amp; Reception Check-in Desk
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-3xs">
+        Verify scheduled appointments, scan physical barcode/NRC cards, and issue prioritized live OPD queue tokens in real-time.
+      </p>
+</div>
+<!-- Live Scanner Action Box -->
+<div class="lg:col-span-6 bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_4px_12px_rgba(22,42,39,0.04)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-space-2xs rounded-lg bg-primary-fixed text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
+</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Instant Check-in Optical Scanner</span>
+</div>
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 accent-primary rounded cursor-pointer" type="checkbox"/>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Auto-print thermal ticket</span>
+</label>
+</div>
+<div class="mt-space-sm flex flex-col sm:flex-row gap-space-xs">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline text-[20px]">barcode_reader</span>
+<input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Scan QR Pass or Enter Appt ID / NRC / Phone..." type="text" value="YGN-849201-APP"/>
+<span class="absolute right-2.5 top-2 px-space-xs py-space-3xs rounded bg-surface-container-high text-outline font-caption-caps text-caption-caps">
+            Enter ↵
+          </span>
+</div>
+<button class="h-11 px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs shadow-sm transition-all transform active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">confirmation_number</span>
+<span>Verify &amp; Print Live Token</span>
+</button>
+</div>
+</div>
+</div>
+<!-- KPI Tactical Stats Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md mt-space-lg">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_2px_6px_rgba(22,42,39,0.03)] flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">Booked Today</span>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold mt-space-3xs">142</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Scheduled Sessions</span>
+</div>
+<div class="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">calendar_month</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_2px_6px_rgba(22,42,39,0.03)] flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">Checked-in &amp; Issued</span>
+<div class="font-headline-lg text-headline-lg text-tertiary font-bold mt-space-3xs">98 <span class="font-label-sm text-label-sm font-semibold text-tertiary bg-tertiary-fixed/60 px-space-2xs py-0.5 rounded-full">69%</span></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">In Clinical Flow</span>
+</div>
+<div class="w-11 h-11 rounded-full bg-tertiary-fixed/40 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[24px]">task_alt</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_2px_6px_rgba(22,42,39,0.03)] flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">Pending Arrival</span>
+<div class="font-headline-lg text-headline-lg text-secondary font-bold mt-space-3xs">38</div>
+<span class="font-body-sm text-body-sm text-secondary-container text-on-secondary-container">En-route to Clinic</span>
+</div>
+<div class="w-11 h-11 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">hourglass_top</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_2px_6px_rgba(22,42,39,0.03)] flex items-center justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">No-Shows / Postponed</span>
+<div class="font-headline-lg text-headline-lg text-error font-bold mt-space-3xs">6</div>
+<span class="font-body-sm text-body-sm text-error/80">Slot Reallocated</span>
+</div>
+<div class="w-11 h-11 rounded-full bg-error-container/60 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[24px]">event_busy</span>
+</div>
+</div>
+</div>
+<!-- Main Split Console: 8-Column Roster + 4-Column Verification Card -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mt-space-lg items-start">
+<!-- Left Column: Appointment Schedule Roster (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_2px_6px_rgba(22,42,39,0.03)]">
+<!-- Filter Controls Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-md">
+<div class="flex items-center gap-space-2xs overflow-x-auto">
+<button class="px-space-sm py-space-2xs rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">
+              All Day (142)
+            </button>
+<button class="px-space-sm py-space-2xs rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-medium">
+              Morning (08:00 - 12:00)
+            </button>
+<button class="px-space-sm py-space-2xs rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-medium">
+              Afternoon (12:00 - 16:30)
+            </button>
+<button class="px-space-sm py-space-2xs rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-medium">
+              Late Clinic
+            </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="relative">
+<select class="appearance-none bg-surface-container-low pl-space-sm pr-space-xl py-space-2xs rounded-lg font-label-sm text-label-sm text-on-surface focus:outline-none cursor-pointer">
+<option>All Speciality Depts</option>
+<option selected="">Cardiology Suite</option>
+<option>Neurology OPD</option>
+<option>Orthopedics &amp; Trauma</option>
+<option>Pediatrics Wellness</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline text-[18px] pointer-events-none">expand_more</span>
+</div>
+<button class="p-space-2xs rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Appointment Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-outline font-caption-caps text-caption-caps uppercase tracking-wider">
+<th class="py-space-sm px-space-md rounded-l-lg">Time Slot</th>
+<th class="py-space-sm px-space-sm">Patient &amp; Demographics</th>
+<th class="py-space-sm px-space-sm">Assigned Specialist</th>
+<th class="py-space-sm px-space-sm">Type</th>
+<th class="py-space-sm px-space-sm">Arrival Status</th>
+<th class="py-space-sm px-space-sm text-center">Token</th>
+<th class="py-space-sm px-space-md rounded-r-lg text-right">Counter Action</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-sm text-body-sm">
+<!-- Row 1: Active In-Lobby Checked In (Daw Thida Win) -->
+<tr class="bg-primary/5 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="font-label-md text-label-md font-bold text-primary">10:30 AM</div>
+<span class="font-caption-caps text-caption-caps text-outline">Ref: CF-9921</span>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-semibold text-[13px]">
+                      TW
+                    </div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Daw Thida Win</div>
+<div class="font-caption-caps text-caption-caps text-on-surface-variant">58y • F • NRC 12/LAMATA(N)041920</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="font-label-sm text-label-sm font-semibold">Dr. Kyaw Zayar Min</div>
+<div class="font-caption-caps text-caption-caps text-outline">Cardiology • Rm 204</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+                    Follow-up
+                  </span>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-3xs rounded-full bg-tertiary-fixed/60 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Checked In
+                  </span>
+</td>
+<td class="py-space-md px-space-sm text-center">
+<span class="inline-block px-space-sm py-0.5 rounded font-label-md text-label-md font-bold bg-primary-container text-on-primary">
+                    A-108
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<button class="p-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Reprint</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Checked In (U Tin Maung) -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-md px-space-md">
+<div class="font-label-md text-label-md font-bold text-on-surface">10:45 AM</div>
+<span class="font-caption-caps text-caption-caps text-outline">Ref: CF-9924</span>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-semibold text-[13px]">
+                      TM
+                    </div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">U Tin Maung</div>
+<div class="font-caption-caps text-caption-caps text-on-surface-variant">64y • M • NRC 12/BAHANA(N)102911</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="font-label-sm text-label-sm font-semibold">Dr. Kyaw Zayar Min</div>
+<div class="font-caption-caps text-caption-caps text-outline">Cardiology • Rm 204</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+                    ECG Review
+                  </span>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-3xs rounded-full bg-tertiary-fixed/60 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Checked In
+                  </span>
+</td>
+<td class="py-space-md px-space-sm text-center">
+<span class="inline-block px-space-sm py-0.5 rounded font-label-md text-label-md font-bold bg-surface-container-highest text-on-surface">
+                    A-109
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<button class="p-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Reprint</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Arrived in Lobby Pending Token (Daw Khin Mar) -->
+<tr class="hover:bg-surface-container-low transition-colors bg-secondary-fixed/10">
+<td class="py-space-md px-space-md">
+<div class="font-label-md text-label-md font-bold text-on-surface">11:00 AM</div>
+<span class="font-caption-caps text-caption-caps text-secondary font-semibold">Arrived 10:42</span>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-semibold text-[13px]">
+                      KM
+                    </div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Daw Khin Mar</div>
+<div class="font-caption-caps text-caption-caps text-on-surface-variant">52y • F • NRC 12/DAGAMA(N)031122</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="font-label-sm text-label-sm font-semibold">Dr. Kyaw Zayar Min</div>
+<div class="font-caption-caps text-caption-caps text-outline">Cardiology • Rm 204</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+                    Pre-Op Consult
+                  </span>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-3xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+                    At Front Desk
+                  </span>
+</td>
+<td class="py-space-md px-space-sm text-center text-outline">
+                  —
+                </td>
+<td class="py-space-md px-space-md text-right">
+<button class="px-space-sm py-space-2xs rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold inline-flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+<span>Issue Token</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Scheduled / Expected (U San Lwin) -->
+<tr class="hover:bg-surface-container-low transition-colors opacity-90">
+<td class="py-space-md px-space-md">
+<div class="font-label-md text-label-md font-bold text-on-surface">11:15 AM</div>
+<span class="font-caption-caps text-caption-caps text-outline">Ref: CF-9930</span>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-semibold text-[13px]">
+                      SL
+                    </div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">U San Lwin</div>
+<div class="font-caption-caps text-caption-caps text-on-surface-variant">71y • M • NRC 14/YAKANA(N)088129</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="font-label-sm text-label-sm font-semibold">Dr. Khin Sandar Aung</div>
+<div class="font-caption-caps text-caption-caps text-outline">Neurology • Rm 302</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+                    Routine Follow-up
+                  </span>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-3xs rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                    Scheduled (In-Transit)
+                  </span>
+</td>
+<td class="py-space-md px-space-sm text-center text-outline">
+                  —
+                </td>
+<td class="py-space-md px-space-md text-right">
+<button class="px-space-sm py-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">edit_calendar</span>
+<span>Manage</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Late Alert (Mg Wai Yan) -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-md px-space-md">
+<div class="font-label-md text-label-md font-bold text-error">10:15 AM</div>
+<span class="font-caption-caps text-caption-caps text-error font-semibold">+25m Overdue</span>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-error-container text-error flex items-center justify-center font-semibold text-[13px]">
+                      WY
+                    </div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Mg Wai Yan</div>
+<div class="font-caption-caps text-caption-caps text-on-surface-variant">24y • M • NRC 12/KAMAYA(N)190283</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<div class="font-label-sm text-label-sm font-semibold">Dr. Khin Sandar Aung</div>
+<div class="font-caption-caps text-caption-caps text-outline">Neurology • Rm 302</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+                    Initial Consult
+                  </span>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-3xs rounded-full bg-error-container/70 text-error font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    Late (+25m)
+                  </span>
+</td>
+<td class="py-space-md px-space-sm text-center text-outline">
+                  —
+                </td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant" title="Call Patient">
+<span class="material-symbols-outlined text-[16px]">call</span>
+</button>
+<button class="px-space-xs py-space-2xs rounded-lg bg-surface-container hover:bg-surface-container-high text-error font-label-sm text-label-sm font-semibold">
+                      Hold Slot
+                    </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Capacity Metre -->
+<div class="mt-space-md pt-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm text-outline font-caption-caps text-caption-caps uppercase">
+<div class="flex items-center gap-space-xs">
+<span>Showing 5 of 142 appointments</span>
+<span>•</span>
+<span class="text-tertiary font-bold">Auto-sync: Live (WebSocket Connected)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="p-space-2xs rounded bg-surface-container text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<span class="text-on-surface font-semibold">Page 1 of 8</span>
+<button class="p-space-2xs rounded bg-surface-container text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Desk Check-in Verification Card & Fast Triage (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Patient Verification Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_4px_16px_rgba(22,42,39,0.06)] relative overflow-hidden">
+<!-- Top Banner Header -->
+<div class="flex items-center justify-between pb-space-sm border-b-0">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-primary font-bold">
+              Active Counter Session • Station A-02
+            </span>
+</div>
+<span class="px-space-xs py-space-3xs rounded-full bg-primary-fixed text-primary font-caption-caps text-caption-caps font-bold">
+            VERIFIED PATIENT
+          </span>
+</div>
+<!-- Patient Demographics Profile -->
+<div class="mt-space-sm flex items-start gap-space-md">
+<div class="w-16 h-16 rounded-xl bg-primary/10 overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Gentle portrait of a 58-year-old Myanmar woman Daw Thida Win in traditional soft cream patterned blouse, warm hospital lighting, empathetic and dignified expression, authentic Yangon medical reception backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3XpM3AuxE0eBHZNFCaEqwIKJ8dpF25pGDwiiAnXQGUmb-rZMLT8d7h_M7x2T5KY3vpTyFK8jKqCKfhmy3W-rK6nGbKY4RkhrUsLkVReqTieHK54nuQ-KWRGpaYdrNICZf4bgNahfvN7EGT3clRLUJC9jaq-dexpZ3cSwLZhkqntNp1W8QsqUuANyHRexqJ5sVxlKgkVoTSMtJ6k1gxSG7uDTgP2F8U9BIJNPqfyPciEEZmbs0WkgL"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Daw Thida Win</h3>
+<span class="font-body-sm text-body-sm text-primary font-medium">ဒေါ်သီတာဝင်း</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">HN: <strong class="text-on-surface">YGN-849201</strong> • Age: 58y (Female)</p>
+<div class="mt-space-2xs flex flex-wrap gap-1">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-caption-caps text-caption-caps text-outline">
+                NRC: 12/LAMATA(N)041920
+              </span>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-fixed/60 font-caption-caps text-caption-caps text-tertiary font-bold">
+                MOH Coverage: Active
+              </span>
+</div>
+</div>
+</div>
+<!-- Appointment Consultation Route Details -->
+<div class="mt-space-md p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline font-caption-caps text-caption-caps uppercase">
+<span>Specialist Assignment</span>
+<span class="text-tertiary font-bold">In-Consultation Today</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-label-md text-label-md font-bold text-on-surface">Dr. Kyaw Zayar Min</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Senior Cardiologist • Room Suite 204</div>
+</div>
+<span class="px-space-xs py-1 rounded-lg bg-surface-container font-label-sm text-label-sm font-semibold text-primary">
+              Floor 2-B
+            </span>
+</div>
+</div>
+<!-- Issued Live Token Ticket Component -->
+<div class="mt-space-md rounded-xl bg-surface-container p-space-md shadow-inner relative overflow-hidden">
+<!-- Ticket Perforation Edge Visual Motif -->
+<div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-surface-container-lowest"></div>
+<div class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-surface-container-lowest"></div>
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">Queue Identifier</span>
+<div class="font-title-token text-title-token text-primary font-extrabold tracking-tight leading-none mt-1">
+                A-108
+              </div>
+<div class="font-body-sm text-body-sm text-on-surface font-semibold mt-space-2xs">
+                Cardiology Outpatient Clinic
+              </div>
+</div>
+<!-- Real SVG QR Code Stamp -->
+<div class="p-space-xs bg-surface-container-lowest rounded-lg shadow-sm flex flex-col items-center">
+<svg class="w-16 h-16 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect fill="currentColor" fill-opacity="0.1" height="8" rx="1" width="8" x="2" y="2"></rect>
+<rect fill="currentColor" height="4" width="4" x="4" y="4"></rect>
+<rect fill="currentColor" fill-opacity="0.1" height="8" rx="1" width="8" x="14" y="2"></rect>
+<rect fill="currentColor" height="4" width="4" x="16" y="4"></rect>
+<rect fill="currentColor" fill-opacity="0.1" height="8" rx="1" width="8" x="2" y="14"></rect>
+<rect fill="currentColor" height="4" width="4" x="4" y="16"></rect>
+<path d="M14 14h2v2h-2zM18 14h4v2h-4zM14 18h4v4h-4zM20 20h2v2h-2z" fill="currentColor"></path>
+</svg>
+<span class="font-caption-caps text-caption-caps text-outline text-[9px] mt-1">SCAN-ID</span>
+</div>
+</div>
+<!-- Ticket Micro-Dashed Divider -->
+<div class="w-full my-space-sm border-b border-dashed border-outline-variant"></div>
+<!-- Estimated Wait & Route -->
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-caption-caps text-caption-caps text-outline uppercase block">Station</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Suite 204</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-caption-caps text-caption-caps text-outline uppercase block">Est. Wait</span>
+<span class="font-label-md text-label-md font-bold text-secondary">~18 mins</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-caption-caps text-caption-caps text-outline uppercase block">Ahead</span>
+<span class="font-label-md text-label-md font-bold text-primary">2 Patients</span>
+</div>
+</div>
+</div>
+<!-- Quick Reception Actions -->
+<div class="mt-space-md flex flex-col gap-space-xs">
+<button class="w-full h-11 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Print Physical Slip (Counter A-02)</span>
+</button>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-tertiary">send_to_mobile</span>
+<span>Send Viber Pass</span>
+</button>
+<button class="h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">accessible</span>
+<span>Wheelchair Flag</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Fast-Track Walk-in Mini Panel -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0px_2px_6px_rgba(22,42,39,0.03)]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-space-2xs rounded bg-secondary-fixed text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Unscheduled Walk-in Triage</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Fast Counter</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+          Patient has no booking today? Direct to General OPD intake or Emergency Fast-Track without displacing pre-booked slots.
+        </p>
+<div class="mt-space-sm grid grid-cols-2 gap-space-xs">
+<button class="py-space-xs px-space-sm rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm font-medium text-left flex flex-col">
+<span class="font-bold text-primary">OPD General</span>
+<span class="text-outline font-caption-caps text-caption-caps">Avg Wait 35m</span>
+</button>
+<button class="py-space-xs px-space-sm rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-sm text-label-sm font-medium text-left flex flex-col">
+<span class="font-bold">Urgent Triage</span>
+<span class="text-error/80 font-caption-caps text-caption-caps">Immediate Nurse Review</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Realtime Desk Activity Logs Footer Strip -->
+<div class="mt-space-lg bg-surface-container-low rounded-xl p-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">sensors</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Thermal Slip Printer:</span>
+<span class="font-body-sm text-body-sm text-tertiary font-medium">Epson TM-T88VI (Ready • Paper 92%)</span>
+</div>
+<div class="hidden md:flex items-center gap-space-xs text-outline font-body-sm text-body-sm">
+<span>•</span>
+<span>Operator: <strong>Daw May Thu Kyaw (RN-Staff #4102)</strong></span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[16px]">help_center</span>
+<span>Reception SOP Protocol</span>
+</button>
+<span class="text-outline-variant">|</span>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+<span>Re-sync Server</span>
+</button>
+</div>
+</div>
+</div></div></main></div></body></html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-fixed": "#2f1500",
+        "on-primary": "#ffffff",
+        "tertiary-container": "#005e40",
+        "inverse-surface": "#313129",
+        "secondary-container": "#fe932c",
+        "on-secondary": "#ffffff",
+        "inverse-on-surface": "#f4f1e5",
+        "on-error": "#ffffff",
+        "primary": "#00433e",
+        "outline-variant": "#bec9c6",
+        "surface-variant": "#e5e2d7",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary-container": "#66daa8",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed": "#002114",
+        "surface-container": "#f1eee3",
+        "on-secondary-fixed-variant": "#6e3900",
+        "background": "#fdf9ee",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary-fixed-dim": "#ffb77d",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-tertiary-fixed-variant": "#005137",
+        "primary-container": "#0d5c56",
+        "error": "#ba1a1a",
+        "inverse-primary": "#8fd3cb",
+        "primary-fixed": "#abefe7",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-surface": "#1c1c15",
+        "surface-dim": "#dddacf",
+        "on-background": "#1c1c15",
+        "secondary": "#904d00",
+        "tertiary": "#00442d",
+        "surface": "#fdf9ee",
+        "outline": "#6f7977",
+        "surface-container-highest": "#e5e2d7",
+        "on-secondary-container": "#663500",
+        "on-error-container": "#93000a",
+        "surface-tint": "#216962",
+        "secondary-fixed": "#ffdcc3",
+        "surface-container-low": "#f7f4e8",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-fixed": "#85f8c4",
+        "on-primary-fixed": "#00201d",
+        "on-primary-container": "#8ed2ca"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "space-xl": "2rem",
+        "margin-desktop": "3rem",
+        "space-2xs": "0.25rem",
+        "space-4xl": "5rem",
+        "space-lg": "1.5rem",
+        "space-2xl": "2.5rem",
+        "margin-tablet": "2rem",
+        "gutter-desktop": "1.5rem",
+        "margin-mobile": "1.25rem",
+        "space-3xl": "3.5rem",
+        "space-3xs": "0.125rem",
+        "space-xs": "0.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem"
+      },
+      "fontFamily": {
+        "body-md": ["inter"],
+        "headline-md": ["plusJakartaSans"],
+        "body-lg": ["inter"],
+        "display-hero": ["plusJakartaSans"],
+        "label-md": ["inter"],
+        "display-hero-mobile": ["plusJakartaSans"],
+        "body-sm": ["inter"],
+        "headline-lg": ["plusJakartaSans"],
+        "label-sm": ["inter"],
+        "caption-caps": ["inter"],
+        "headline-lg-mobile": ["plusJakartaSans"],
+        "headline-sm": ["plusJakartaSans"],
+        "title-token": ["plusJakartaSans"]
+      },
+      "fontSize": {
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+        "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="CareFlow Myanmar Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#">Landing Hub</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#">Patient Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#">Doctor Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#">Staff Operations</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md bg-primary-container text-on-primary font-bold hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#">Admin Central</a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Administrative Hub</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">HQ Central Operations</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Online • Admin Mode</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-28 bg-surface/95 backdrop-blur-md z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="CareFlow" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital — Main Campus Administrative Terminal</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full"><div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">TW</div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-none">Dr. Thurein Win</span><span class="font-caption-caps text-caption-caps text-outline leading-none mt-space-3xs">System Admin</span></div></div></div></div><div class="h-12 px-space-xl bg-surface-container-low flex items-center overflow-x-auto border-t border-outline-variant/30"><nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="admin-dashboard" href="#">Admin Dashboard</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="doctor-management" href="#">Doctor Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="department-management" href="#">Department Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="queue-settings" href="#">Queue Settings</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="user-management" href="#">User Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="ai-duration-smart-routing" href="#">AI Duration &amp; Smart Routing</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="system-settings-audit" href="#">System Settings &amp; Audit</a></nav></div></header><main class="w-full pt-28 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full">
+<!-- Dynamic Notification / Status Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-primary-container text-on-primary px-space-lg py-space-md rounded-xl shadow-xl" id="toastNotification">
+<span class="material-symbols-outlined text-primary-fixed">verified</span>
+<span class="font-label-md text-label-md" id="toastMsg">Configuration successfully deployed.</span>
+</div>
+<!-- Hero / Administrative Mission Header -->
+<div class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-xl shadow-sm mb-space-xl">
+<div class="absolute -right-16 -bottom-16 w-80 h-80 bg-primary-container/5 rounded-full pointer-events-none blur-3xl"></div>
+<div class="absolute right-48 -top-12 w-64 h-64 bg-secondary-container/10 rounded-full pointer-events-none blur-2xl"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col max-w-3xl">
+<div class="flex flex-wrap items-center gap-space-xs mb-space-xs">
+<span class="px-space-xs py-space-3xs bg-primary-container/10 text-primary rounded-full font-caption-caps text-caption-caps uppercase tracking-wider flex items-center gap-space-3xs">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            Algorithmic Pacing
+          </span>
+<span class="px-space-xs py-space-3xs bg-tertiary-container/15 text-tertiary rounded-full font-caption-caps text-caption-caps uppercase tracking-wider">
+            MediFlow ML Engine v2.4
+          </span>
+<span class="font-label-sm text-label-sm text-outline">Active Sync • Yangon Central Campus</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+          AI Consultation Duration &amp; Pacing Engine
+          <span class="block font-headline-md text-headline-md text-outline font-normal mt-space-3xs">
+            (AI တိုင်ပင်ဆွေးနွေးမှုကြာချိန် မော်ဒယ် ချိန်ညှိချက်)
+          </span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs leading-relaxed">
+          Configure and calibrate machine learning consultation duration prediction algorithms, dynamic outpatient slot buffers, and real-time clinical drift mitigations across all 18 clinical departments.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm self-start lg:self-center">
+<button class="flex items-center gap-space-xs px-space-md py-space-sm bg-surface-container-low hover:bg-surface-container-high text-on-surface rounded-xl font-label-md text-label-md shadow-sm transition-all" id="retrainBtn">
+<span class="material-symbols-outlined text-[18px]">autorenew</span>
+<span>Retrain Model (Past 90 Days)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm bg-primary-container hover:bg-primary text-on-primary rounded-xl font-label-md text-label-md shadow-md transition-all" id="saveBtn">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Save Pacing Overrides</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Telemetry Metrics Strip (4 Tactical Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-lg mb-space-xl">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Global Model Accuracy</span>
+<div class="font-headline-lg text-headline-lg text-primary mt-space-2xs">94.2%</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-primary-fixed/30 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs border-t-0">
+<span class="material-symbols-outlined text-tertiary text-[18px]">trending_up</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">+2.1%</span>
+<span class="font-body-sm text-body-sm text-outline">after Bayesian calibration</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Mean Clinical Drift</span>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-space-2xs">±1.8 <span class="font-body-md text-body-md text-outline font-normal">mins</span></div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">timelapse</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs border-t-0">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Deviation from scheduled slot</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Outpatient Bottlenecks Prevented</span>
+<div class="font-headline-lg text-headline-lg text-tertiary mt-space-2xs">142 Cases</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed/30 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">format_image_left</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs border-t-0">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Today</span>
+<span class="font-body-sm text-body-sm text-outline">Dynamic buffer expansion</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Total Consultations Analyzed</span>
+<div class="font-headline-lg text-headline-lg text-primary mt-space-2xs">18,420</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">dataset</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs border-t-0">
+<span class="material-symbols-outlined text-outline text-[16px]">database</span>
+<span class="font-body-sm text-body-sm text-outline">90-day training dataset size</span>
+</div>
+</div>
+</div>
+<!-- Analytical Grid: Dual Column Layout (Comparison Chart & Algorithmic Controls) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Comparison Chart (8 Columns) -->
+<div class="xl:col-span-8 bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Predicted vs. Actual Consultation Duration</h2>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-space-3xs">
+              Departmental variance analysis showing machine learning predictions compared to observed electronic medical record timestamps.
+            </p>
+</div>
+<div class="flex items-center gap-space-md bg-surface-container-low px-space-sm py-space-xs rounded-xl">
+<div class="flex items-center gap-space-2xs">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface">AI Predicted</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Actual Observed</span>
+</div>
+</div>
+</div>
+<!-- Chart Items Matrix -->
+<div class="space-y-space-md mt-space-lg">
+<!-- Row 1: Adult Cardiology -->
+<div class="flex flex-col gap-space-2xs bg-surface-container-low/50 p-space-sm rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">cardiology</span>
+<span class="font-semibold text-on-surface">Adult Cardiology (အရွယ်ရောက်နှလုံးရောဂါကုသဌာန)</span>
+</div>
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm">
+<span class="text-primary font-medium">Pred: 14.5m</span>
+<span class="text-outline">|</span>
+<span class="text-secondary font-medium">Actual: 15.2m</span>
+<span class="px-space-xs py-space-3xs rounded-full bg-surface-container font-label-sm text-label-sm text-primary font-bold">+0.7m (95% Conf.)</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-space-xs items-center">
+<div class="col-span-12 flex flex-col gap-space-3xs">
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 72.5%;"></div>
+<div class="bg-surface-variant h-full" style="width: 27.5%;"></div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-secondary-container h-full rounded-l-full" style="width: 76%;"></div>
+<div class="bg-surface-variant h-full" style="width: 24%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Pediatrics & Neonatal -->
+<div class="flex flex-col gap-space-2xs bg-surface-container-low/50 p-space-sm rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">child_care</span>
+<span class="font-semibold text-on-surface">Pediatrics &amp; Neonatal (ကလေးရောဂါကုသဌာန)</span>
+</div>
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm">
+<span class="text-primary font-medium">Pred: 10.0m</span>
+<span class="text-outline">|</span>
+<span class="text-secondary font-medium">Actual: 10.8m</span>
+<span class="px-space-xs py-space-3xs rounded-full bg-surface-container font-label-sm text-label-sm text-primary font-bold">+0.8m (92% Conf.)</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-space-xs items-center">
+<div class="col-span-12 flex flex-col gap-space-3xs">
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 50%;"></div>
+<div class="bg-surface-variant h-full" style="width: 50%;"></div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-secondary-container h-full rounded-l-full" style="width: 54%;"></div>
+<div class="bg-surface-variant h-full" style="width: 46%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 3: General OPD (High Variance Alert) -->
+<div class="flex flex-col gap-space-2xs bg-error-container/20 p-space-sm rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[18px]">emergency_home</span>
+<span class="font-semibold text-error">General OPD (ပြင်ပလူနာ အထွေထွေဌာန)</span>
+<span class="px-space-xs py-space-3xs bg-error text-on-error rounded-full font-caption-caps text-caption-caps uppercase">Drift Alert</span>
+</div>
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm">
+<span class="text-primary font-medium">Pred: 8.0m</span>
+<span class="text-outline">|</span>
+<span class="text-error font-medium">Actual: 11.2m</span>
+<span class="px-space-xs py-space-3xs rounded-full bg-error text-on-error font-label-sm text-label-sm font-bold">+3.2m Variance</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-space-xs items-center">
+<div class="col-span-12 flex flex-col gap-space-3xs">
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 40%;"></div>
+<div class="bg-surface-variant h-full" style="width: 60%;"></div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-error h-full rounded-l-full" style="width: 56%;"></div>
+<div class="bg-surface-variant h-full" style="width: 44%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 4: Orthopedics & Trauma -->
+<div class="flex flex-col gap-space-2xs bg-surface-container-low/50 p-space-sm rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">orthopedics</span>
+<span class="font-semibold text-on-surface">Orthopedics &amp; Trauma (အရိုးအကြောနှင့် ထိခိုက်ဒဏ်ရာ)</span>
+</div>
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm">
+<span class="text-primary font-medium">Pred: 16.0m</span>
+<span class="text-outline">|</span>
+<span class="text-secondary font-medium">Actual: 15.0m</span>
+<span class="px-space-xs py-space-3xs rounded-full bg-surface-container font-label-sm text-label-sm text-tertiary font-bold">-1.0m (Fast)</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-space-xs items-center">
+<div class="col-span-12 flex flex-col gap-space-3xs">
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 80%;"></div>
+<div class="bg-surface-variant h-full" style="width: 20%;"></div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-secondary-container h-full rounded-l-full" style="width: 75%;"></div>
+<div class="bg-surface-variant h-full" style="width: 25%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 5: Internal Medicine -->
+<div class="flex flex-col gap-space-2xs bg-surface-container-low/50 p-space-sm rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">stethoscope</span>
+<span class="font-semibold text-on-surface">Internal Medicine (အတွင်းလူနာ ဆေးပညာဌာန)</span>
+</div>
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm">
+<span class="text-primary font-medium">Pred: 12.0m</span>
+<span class="text-outline">|</span>
+<span class="text-secondary font-medium">Actual: 11.2m</span>
+<span class="px-space-xs py-space-3xs rounded-full bg-surface-container font-label-sm text-label-sm text-tertiary font-bold">-0.8m Variance</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-space-xs items-center">
+<div class="col-span-12 flex flex-col gap-space-3xs">
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 60%;"></div>
+<div class="bg-surface-variant h-full" style="width: 40%;"></div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-secondary-container h-full rounded-l-full" style="width: 56%;"></div>
+<div class="bg-surface-variant h-full" style="width: 44%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 6: Ophthalmology & ENT -->
+<div class="flex flex-col gap-space-2xs bg-surface-container-low/50 p-space-sm rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">visibility</span>
+<span class="font-semibold text-on-surface">Ophthalmology &amp; ENT (မျက်စိ၊ နှာခေါင်း၊ လည်ချောင်း)</span>
+</div>
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm">
+<span class="text-primary font-medium">Pred: 9.5m</span>
+<span class="text-outline">|</span>
+<span class="text-secondary font-medium">Actual: 9.6m</span>
+<span class="px-space-xs py-space-3xs rounded-full bg-tertiary-container/10 font-label-sm text-label-sm text-tertiary font-bold">+0.1m Parity</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-space-xs items-center">
+<div class="col-span-12 flex flex-col gap-space-3xs">
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 47.5%;"></div>
+<div class="bg-surface-variant h-full" style="width: 52.5%;"></div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 flex overflow-hidden">
+<div class="bg-secondary-container h-full rounded-l-full" style="width: 48%;"></div>
+<div class="bg-surface-variant h-full" style="width: 52%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Drift Guidance Banner -->
+<div class="mt-space-lg bg-surface-container p-space-md rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary-container text-[24px]">lightbulb</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Algorithmic Recommendation: Pacing Window Calibration</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-3xs">
+            General OPD duration exceeds forecast by <strong class="text-error font-semibold">+3.2 mins</strong>. Machine learning advises automatically expanding next-ticket arrival gap by <strong>4 minutes</strong> between 10:00 - 12:00 peak rush to avoid waiting room overcrowding.
+          </p>
+<div class="flex items-center gap-space-sm mt-space-xs">
+<button class="px-space-sm py-space-3xs bg-primary text-on-primary rounded-lg font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-all">
+              Accept Buffer Expansion
+            </button>
+<button class="px-space-sm py-space-3xs bg-surface-container-high text-on-surface rounded-lg font-label-sm text-label-sm font-semibold hover:bg-surface-dim transition-all">
+              Dismiss Warning
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Hyperparameter & Tuning Controls (4 Columns) -->
+<div class="xl:col-span-4 bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Dynamic Tuning Factors</h2>
+</div>
+<span class="px-space-xs py-space-3xs bg-surface-container text-outline rounded-full font-caption-caps text-caption-caps uppercase">Auto-Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-space-lg">
+          Fine-tune global modifier coefficients that adjust patient consultation intervals before schedule injection.
+        </p>
+<!-- Slider 1: Geriatric Multiplier -->
+<div class="space-y-space-md">
+<div class="p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between mb-space-2xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Geriatric Factor (Age 70+)</span>
+<span class="font-label-sm text-label-sm font-bold text-primary bg-primary-fixed/40 px-space-xs py-space-3xs rounded-md" id="geriatricVal">+15% Buffer</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-space-sm">Compensates for mobility assistance, vital signs repetition, and physical transfer times.</p>
+<input class="w-full accent-primary cursor-pointer" id="geriatricSlider" max="30" min="0" type="range" value="15"/>
+<div class="flex justify-between font-caption-caps text-caption-caps text-outline mt-space-3xs">
+<span>Standard (0%)</span>
+<span>Default (+15%)</span>
+<span>Extended (+30%)</span>
+</div>
+</div>
+<!-- Slider 2: First-time Patient Buffer -->
+<div class="p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between mb-space-2xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">New Registration Intake</span>
+<span class="font-label-sm text-label-sm font-bold text-primary bg-primary-fixed/40 px-space-xs py-space-3xs rounded-md" id="newPatientVal">+5.0 Mins</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-space-sm">Accounts for physical record opening, comprehensive anamnesis, and baseline ECG / vitals.</p>
+<input class="w-full accent-primary cursor-pointer" id="newPatientSlider" max="12" min="2" type="range" value="5"/>
+<div class="flex justify-between font-caption-caps text-caption-caps text-outline mt-space-3xs">
+<span>+2 mins</span>
+<span>+5 mins</span>
+<span>+12 mins</span>
+</div>
+</div>
+<!-- Slider 3: Language & Burmese Translation Audio Buffer -->
+<div class="p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between mb-space-2xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Language &amp; Dialect Concierge</span>
+<span class="font-label-sm text-label-sm font-bold text-primary bg-primary-fixed/40 px-space-xs py-space-3xs rounded-md" id="dialectVal">+2.0 Mins</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-space-sm">Adds conversational slack when Shan, Kachin, or Karen interpretive support is flagged at triage.</p>
+<input class="w-full accent-primary cursor-pointer" id="dialectSlider" max="6" min="0" type="range" value="2"/>
+<div class="flex justify-between font-caption-caps text-caption-caps text-outline mt-space-3xs">
+<span>Off (0m)</span>
+<span>Recommended (+2m)</span>
+<span>Extensive (+6m)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Safety Toggles -->
+<div class="mt-space-lg pt-space-md border-t-0 space-y-space-xs">
+<label class="flex items-center justify-between p-space-sm bg-surface-container rounded-xl cursor-pointer">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Doctor Burnout Rest Breaks</span>
+<span class="font-body-sm text-body-sm text-outline">Inject 10m pauses after 12 consecutive patients</span>
+</div>
+<input checked="" class="w-5 h-5 accent-primary rounded cursor-pointer" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-space-sm bg-surface-container rounded-xl cursor-pointer">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Rainy Monsoon Transit Delay Sync</span>
+<span class="font-body-sm text-body-sm text-outline">Adjust queue start slots by +15m during heavy Yangon rains</span>
+</div>
+<input checked="" class="w-5 h-5 accent-primary rounded cursor-pointer" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Department-Level Average Duration Settings & Overrides (Editable Interactive Table) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">schema</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Departmental Pacing &amp; Production Overrides</h2>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-space-3xs">
+          Manage slot duration allocations per clinical department. Direct adjustments immediately propagate to ticket kiosks, digital signage, and doctor terminals.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-outline">search</span>
+<input class="pl-9 pr-space-md py-space-2xs bg-surface-container-low text-on-surface rounded-xl font-label-md text-label-md border-0 focus:bg-surface-container transition-all" placeholder="Filter clinical department..." type="text"/>
+</div>
+<button class="px-space-md py-space-2xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded-xl font-label-sm text-label-sm font-semibold transition-all" id="bulkResetBtn">
+          Reset All to ML Baseline
+        </button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-caption-caps text-caption-caps uppercase tracking-wider">
+<th class="py-space-sm px-space-md rounded-l-xl">Department Unit (ဌာနအမည်)</th>
+<th class="py-space-sm px-space-md">Historical Baseline</th>
+<th class="py-space-sm px-space-md">AI Model Window</th>
+<th class="py-space-sm px-space-md">Production Allocation</th>
+<th class="py-space-sm px-space-md">Emergency Multiplier</th>
+<th class="py-space-sm px-space-md">Senior Consultant Override</th>
+<th class="py-space-sm px-space-md rounded-r-xl text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 space-y-space-2xs">
+<!-- Row 1: Adult Cardiology -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">cardiology</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Adult Cardiology</div>
+<div class="font-body-sm text-body-sm text-outline">Room 201 - 206 • Wing B</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md font-body-md text-body-md text-on-surface">
+              15.2 mins
+            </td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-primary-fixed/30 text-primary rounded-md font-label-sm text-label-sm font-bold">14 - 18 mins</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center bg-surface-container rounded-lg p-1 gap-space-xs">
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="decrementSlot('dept-1')">-</button>
+<span class="font-headline-sm text-headline-sm text-primary px-space-xs min-w-[3ch] text-center" id="dept-1">15</span>
+<span class="font-caption-caps text-caption-caps text-outline mr-space-2xs">MIN</span>
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="incrementSlot('dept-1')">+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-sm text-label-sm font-semibold">1.5× (+7.5m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-2 font-label-sm text-label-sm text-on-surface">Permitted</span>
+</label>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs text-outline hover:text-primary rounded-lg hover:bg-surface-container transition-all" onclick="resetSingle('dept-1', 15)" title="Reset to AI Optimal">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-low hover:bg-surface-container text-primary rounded-lg font-label-sm text-label-sm font-semibold transition-all" onclick="calibrateDepartment('Adult Cardiology')">
+                  Calibrate
+                </button>
+</div>
+</td>
+</tr>
+<!-- Row 2: General OPD -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-error-container/40 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">emergency_home</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">General OPD (ပြင်ပလူနာ)</div>
+<div class="font-body-sm text-body-sm text-outline">Ground Floor • Triage Zone A</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md font-body-md text-body-md text-on-surface">
+              11.2 mins
+            </td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-primary-fixed/30 text-primary rounded-md font-label-sm text-label-sm font-bold">8 - 12 mins</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center bg-surface-container rounded-lg p-1 gap-space-xs">
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="decrementSlot('dept-2')">-</button>
+<span class="font-headline-sm text-headline-sm text-primary px-space-xs min-w-[3ch] text-center" id="dept-2">10</span>
+<span class="font-caption-caps text-caption-caps text-outline mr-space-2xs">MIN</span>
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="incrementSlot('dept-2')">+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-error-container text-error rounded-full font-label-sm text-label-sm font-semibold">2.0× (+10m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-2 font-label-sm text-label-sm text-outline">Restricted</span>
+</label>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs text-outline hover:text-primary rounded-lg hover:bg-surface-container transition-all" onclick="resetSingle('dept-2', 10)" title="Reset to AI Optimal">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-low hover:bg-surface-container text-primary rounded-lg font-label-sm text-label-sm font-semibold transition-all" onclick="calibrateDepartment('General OPD')">
+                  Calibrate
+                </button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Pediatrics & Neonatal -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-tertiary-fixed/30 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">child_care</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Pediatrics &amp; Neonatal</div>
+<div class="font-body-sm text-body-sm text-outline">Level 3 • Maternal &amp; Child Pavillion</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md font-body-md text-body-md text-on-surface">
+              10.8 mins
+            </td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-primary-fixed/30 text-primary rounded-md font-label-sm text-label-sm font-bold">10 - 15 mins</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center bg-surface-container rounded-lg p-1 gap-space-xs">
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="decrementSlot('dept-3')">-</button>
+<span class="font-headline-sm text-headline-sm text-primary px-space-xs min-w-[3ch] text-center" id="dept-3">12</span>
+<span class="font-caption-caps text-caption-caps text-outline mr-space-2xs">MIN</span>
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="incrementSlot('dept-3')">+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-sm text-label-sm font-semibold">1.5× (+6m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-2 font-label-sm text-label-sm text-on-surface">Permitted</span>
+</label>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs text-outline hover:text-primary rounded-lg hover:bg-surface-container transition-all" onclick="resetSingle('dept-3', 12)" title="Reset to AI Optimal">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-low hover:bg-surface-container text-primary rounded-lg font-label-sm text-label-sm font-semibold transition-all" onclick="calibrateDepartment('Pediatrics')">
+                  Calibrate
+                </button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Orthopedics & Trauma -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed/40 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">orthopedics</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Orthopedics &amp; Trauma</div>
+<div class="font-body-sm text-body-sm text-outline">Level 1 • Surgical Wing East</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md font-body-md text-body-md text-on-surface">
+              15.0 mins
+            </td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-primary-fixed/30 text-primary rounded-md font-label-sm text-label-sm font-bold">14 - 20 mins</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center bg-surface-container rounded-lg p-1 gap-space-xs">
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="decrementSlot('dept-4')">-</button>
+<span class="font-headline-sm text-headline-sm text-primary px-space-xs min-w-[3ch] text-center" id="dept-4">16</span>
+<span class="font-caption-caps text-caption-caps text-outline mr-space-2xs">MIN</span>
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="incrementSlot('dept-4')">+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-sm text-label-sm font-semibold">1.8× (+12m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-2 font-label-sm text-label-sm text-on-surface">Permitted</span>
+</label>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs text-outline hover:text-primary rounded-lg hover:bg-surface-container transition-all" onclick="resetSingle('dept-4', 16)" title="Reset to AI Optimal">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-low hover:bg-surface-container text-primary rounded-lg font-label-sm text-label-sm font-semibold transition-all" onclick="calibrateDepartment('Orthopedics')">
+                  Calibrate
+                </button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Internal Medicine -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">stethoscope</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Internal Medicine</div>
+<div class="font-body-sm text-body-sm text-outline">Level 2 • Suites 210 - 215</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md font-body-md text-body-md text-on-surface">
+              11.2 mins
+            </td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-primary-fixed/30 text-primary rounded-md font-label-sm text-label-sm font-bold">10 - 14 mins</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center bg-surface-container rounded-lg p-1 gap-space-xs">
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="decrementSlot('dept-5')">-</button>
+<span class="font-headline-sm text-headline-sm text-primary px-space-xs min-w-[3ch] text-center" id="dept-5">12</span>
+<span class="font-caption-caps text-caption-caps text-outline mr-space-2xs">MIN</span>
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="incrementSlot('dept-5')">+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-sm text-label-sm font-semibold">1.4× (+5m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-2 font-label-sm text-label-sm text-on-surface">Permitted</span>
+</label>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs text-outline hover:text-primary rounded-lg hover:bg-surface-container transition-all" onclick="resetSingle('dept-5', 12)" title="Reset to AI Optimal">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-low hover:bg-surface-container text-primary rounded-lg font-label-sm text-label-sm font-semibold transition-all" onclick="calibrateDepartment('Internal Medicine')">
+                  Calibrate
+                </button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Ophthalmology & ENT -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-tertiary-fixed/30 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Ophthalmology &amp; ENT</div>
+<div class="font-body-sm text-body-sm text-outline">Level 2 • Eye Clinic Zone D</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md font-body-md text-body-md text-on-surface">
+              9.6 mins
+            </td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-primary-fixed/30 text-primary rounded-md font-label-sm text-label-sm font-bold">8 - 12 mins</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center bg-surface-container rounded-lg p-1 gap-space-xs">
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="decrementSlot('dept-6')">-</button>
+<span class="font-headline-sm text-headline-sm text-primary px-space-xs min-w-[3ch] text-center" id="dept-6">9</span>
+<span class="font-caption-caps text-caption-caps text-outline mr-space-2xs">MIN</span>
+<button class="w-7 h-7 rounded bg-surface-container-lowest hover:bg-surface text-on-surface flex items-center justify-center font-bold text-label-md transition-all shadow-sm" onclick="incrementSlot('dept-6')">+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-3xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-sm text-label-sm font-semibold">1.2× (+2m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-2 font-label-sm text-label-sm text-on-surface">Permitted</span>
+</label>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs text-outline hover:text-primary rounded-lg hover:bg-surface-container transition-all" onclick="resetSingle('dept-6', 9)" title="Reset to AI Optimal">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-low hover:bg-surface-container text-primary rounded-lg font-label-sm text-label-sm font-semibold transition-all" onclick="calibrateDepartment('Ophthalmology &amp; ENT')">
+                  Calibrate
+                </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Live Telemetry Sync Status Bar -->
+<div class="mt-space-lg pt-space-md flex flex-col sm:flex-row items-center justify-between text-outline font-label-sm text-label-sm gap-space-sm border-t-0">
+<div class="flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-ping"></span>
+<span>Telemetry Stream: 24 active consultation terminals transmitting pacing telemetry</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span>Last Bayesian calibration: 14 minutes ago</span>
+<a class="text-primary font-semibold hover:underline" href="#">Download Audit Log (CSV)</a>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Stepper Controllers for Production Slot Minutes
+  function incrementSlot(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let current = parseInt(el.textContent, 10) || 10;
+    if (current < 60) {
+      el.textContent = current + 1;
+      showToast('Pacing slot duration updated to ' + (current + 1) + ' minutes.');
+    }
+  }
+
+  function decrementSlot(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let current = parseInt(el.textContent, 10) || 10;
+    if (current > 5) {
+      el.textContent = current - 1;
+      showToast('Pacing slot duration updated to ' + (current - 1) + ' minutes.');
+    }
+  }
+
+  function resetSingle(id, val) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = val;
+      showToast('Restored to AI algorithmic optimal (' + val + ' mins).');
+    }
+  }
+
+  function calibrateDepartment(deptName) {
+    showToast('Running Monte Carlo calibration for ' + deptName + '...');
+    setTimeout(() => {
+      showToast('Calibration complete: Drift bounds narrowed to ±0.4m.');
+    }, 1200);
+  }
+
+  // Sliders dynamic value display
+  const geriatricSlider = document.getElementById('geriatricSlider');
+  const geriatricVal = document.getElementById('geriatricVal');
+  if (geriatricSlider && geriatricVal) {
+    geriatricSlider.addEventListener('input', (e) => {
+      geriatricVal.textContent = '+' + e.target.value + '% Buffer';
+    });
+  }
+
+  const newPatientSlider = document.getElementById('newPatientSlider');
+  const newPatientVal = document.getElementById('newPatientVal');
+  if (newPatientSlider && newPatientVal) {
+    newPatientSlider.addEventListener('input', (e) => {
+      newPatientVal.textContent = '+' + Number(e.target.value).toFixed(1) + ' Mins';
+    });
+  }
+
+  const dialectSlider = document.getElementById('dialectSlider');
+  const dialectVal = document.getElementById('dialectVal');
+  if (dialectSlider && dialectVal) {
+    dialectSlider.addEventListener('input', (e) => {
+      dialectVal.textContent = '+' + Number(e.target.value).toFixed(1) + ' Mins';
+    });
+  }
+
+  // Toast Notification System
+  function showToast(message) {
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMsg');
+    if (!toast || !toastMsg) return;
+    toastMsg.textContent = message;
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => {
+      toast.classList.add('translate-y-20', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3200);
+  }
+
+  // Global Actions
+  const retrainBtn = document.getElementById('retrainBtn');
+  if (retrainBtn) {
+    retrainBtn.addEventListener('click', () => {
+      retrainBtn.classList.add('opacity-75', 'cursor-wait');
+      showToast('Initiating ML retrain job across 18,420 historical consult records...');
+      setTimeout(() => {
+        retrainBtn.classList.remove('opacity-75', 'cursor-wait');
+        showToast('Engine v2.4 retraining complete. Prediction accuracy updated to 94.7%.');
+      }, 2000);
+    });
+  }
+
+  const saveBtn = document.getElementById('saveBtn');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+      showToast('Pacing configurations and department overrides saved to live production.');
+    });
+  }
+
+  const bulkResetBtn = document.getElementById('bulkResetBtn');
+  if (bulkResetBtn) {
+    bulkResetBtn.addEventListener('click', () => {
+      document.getElementById('dept-1').textContent = '15';
+      document.getElementById('dept-2').textContent = '10';
+      document.getElementById('dept-3').textContent = '12';
+      document.getElementById('dept-4').textContent = '16';
+      document.getElementById('dept-5').textContent = '12';
+      document.getElementById('dept-6').textContent = '9';
+      showToast('All department durations reset to ML algorithmic defaults.');
+    });
+  }
+</script></div></main></div></body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/admin/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/doctors}">Doctors</a>
+            <a th:href="@{/admin/departments}">Departments</a>
+            <a th:href="@{/admin/patients}">Patients</a>
+            <a th:href="@{/admin/reports}">Reports</a>
+            <a th:href="@{/admin/settings}">Settings</a>
+            <a th:href="@{/admin/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">settings</span> System Settings</h1>
+    </div>
+
+    <div class="alert alert-success" th:if="${message}"><span th:text="${message}"></span></div>
+
+    <div class="card" style="max-width:640px">
+        <form method="post" th:action="@{/admin/settings/save}">
+            <div th:each="entry : ${settings}">
+                <div class="form-group">
+                    <label th:text="${entry.key}"></label>
+                    <input type="text" th:name="'setting_' + ${entry.key}" th:value="${entry.value}">
+                </div>
+            </div>
+            <button class="btn" type="submit">
+                <span class="material-symbols-outlined" style="font-size:18px">save</span> Save Settings
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"primary-fixed":"#abefe7","on-primary":"#ffffff","inverse-on-surface":"#f4f1e5","tertiary":"#00442d","on-error-container":"#93000a","on-primary-fixed-variant":"#00504a","surface-container-low":"#f7f4e8","secondary":"#904d00","on-background":"#1c1c15","surface-bright":"#fdf9ee","surface-container-high":"#ebe8dd","primary":"#00433e","surface-container":"#f1eee3","inverse-surface":"#313129","on-secondary":"#ffffff","on-secondary-fixed-variant":"#6e3900","on-tertiary":"#ffffff","surface-tint":"#216962","secondary-container":"#fe932c","on-secondary-container":"#663500","on-tertiary-fixed-variant":"#005137","on-tertiary-container":"#66daa8","on-surface":"#1c1c15","tertiary-fixed-dim":"#68dba9","primary-container":"#0d5c56","inverse-primary":"#8fd3cb","on-error":"#ffffff","primary-fixed-dim":"#8fd3cb","on-surface-variant":"#3f4947","on-tertiary-fixed":"#002114","on-primary-fixed":"#00201d","outline-variant":"#bec9c6","surface-dim":"#dddacf","surface-container-lowest":"#ffffff","error-container":"#ffdad6","tertiary-container":"#005e40","secondary-fixed-dim":"#ffb77d","on-secondary-fixed":"#2f1500","on-primary-container":"#8ed2ca","surface-container-highest":"#e5e2d7","surface":"#fdf9ee","tertiary-fixed":"#85f8c4","error":"#ba1a1a","secondary-fixed":"#ffdcc3","background":"#fdf9ee","surface-variant":"#e5e2d7","outline":"#6f7977"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1.25rem","space-xs":"0.5rem","space-2xl":"2.5rem","margin-desktop":"3rem","gutter-desktop":"1.5rem","space-md":"1rem","gutter-mobile":"1rem","space-xl":"2rem","space-sm":"0.75rem","margin-tablet":"2rem","space-4xl":"5rem","space-3xl":"3.5rem","space-2xs":"0.25rem","space-lg":"1.5rem","space-3xs":"0.125rem"},"fontFamily":{"title-token":["plusJakartaSans"],"label-md":["inter"],"label-sm":["inter"],"headline-sm":["plusJakartaSans"],"body-sm":["inter"],"headline-md":["plusJakartaSans"],"headline-lg":["plusJakartaSans"],"headline-lg-mobile":["plusJakartaSans"],"display-hero-mobile":["plusJakartaSans"],"body-lg":["inter"],"caption-caps":["inter"],"body-md":["inter"],"display-hero":["plusJakartaSans"]},"fontSize":{"title-token":["40px",{"lineHeight":"44px","letterSpacing":"0.04em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.005em","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"caption-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"700"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between py-space-lg shadow-[0_1px_8px_rgba(22,42,39,0.04)]"><div class="flex flex-col"><div class="px-space-md mb-space-xl flex items-center gap-space-sm"><img alt="Modern minimalist healthcare emblem for CareFlow Myanmar hospital queue system. An elegant geometric fusion of a caring cross, smooth organic flow lines symbolizing seamless patient journey, and a subtle heartbeat curve, in deep aegean teal (#0D5C56) and warm amber (#D97706), vector style, pristine clean background.. Design context: - Primary color: #0d5c56
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-md mb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Queue Modules</span></div><nav class="px-space-xs flex flex-col gap-space-3xs" data-active-classes="bg-primary-container text-on-primary font-bold shadow-[0_2px_6px_rgba(22,42,39,0.06)]"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#"><span class="material-symbols-outlined text-[20px]">hub</span><span>Landing Hub</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#"><span class="material-symbols-outlined text-[20px]">personal_injury</span><span>Patient Portal</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#"><span class="material-symbols-outlined text-[20px]">stethoscope</span><span>Doctor Portal</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#"><span class="material-symbols-outlined text-[20px]">desk</span><span>Staff Operations</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">admin_panel_settings</span><span>Admin Central</span></a></nav></div><div class="px-space-md pt-space-md"><div class="p-space-sm bg-surface-container rounded-xl flex items-center gap-space-xs"><div class="w-2 h-2 rounded-full bg-tertiary-container animate-ping"></div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface">CareFlow v2.4</span><span class="font-caption-caps text-caption-caps text-on-surface-variant">HealthNet Integrated</span></div></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 z-40 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(22,42,39,0.04)]"><div class="h-16 w-full px-space-xl flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><img alt="CareFlow Emblem" class="h-8 w-auto object-contain hidden lg:block" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate">Yangon Central Specialty Hospital</span><span class="font-caption-caps text-caption-caps text-on-surface-variant">Main Campus Administrative Terminal</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-high px-space-sm py-space-2xs rounded-full ml-space-sm"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-caption-caps text-caption-caps text-tertiary font-bold tracking-tight">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-sm"><div class="hidden md:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded-full"><span class="material-symbols-outlined text-secondary text-[16px]">call</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center bg-surface-container-high rounded-full p-space-3xs"><button class="px-space-xs py-space-3xs font-label-sm text-label-sm font-semibold rounded-full bg-surface text-primary shadow-[0_1px_4px_rgba(22,42,39,0.06)]" type="button">EN</button><button class="px-space-xs py-space-3xs font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface" type="button">MM မြန်မာ</button></div><div class="flex items-center gap-space-xs pl-space-xs"><div class="flex flex-col items-end"><span class="font-label-sm text-label-sm text-on-surface font-semibold">Dr. Thurein Win</span><span class="font-caption-caps text-caption-caps text-primary bg-primary-fixed px-space-2xs rounded">System Admin</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div><div class="h-12 w-full px-space-xl bg-surface-container-low flex items-center overflow-x-auto"><nav class="flex items-center gap-space-xs whitespace-nowrap" data-active-classes="bg-primary text-on-primary font-semibold shadow-[0_1px_4px_rgba(22,42,39,0.08)]"><a class="px-space-sm py-space-2xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="admin-dashboard" href="#">Admin Dashboard</a><a class="px-space-sm py-space-2xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="doctor-management" href="#">Doctor Management</a><a aria-current="page" class="px-space-sm py-space-2xs rounded-full transition-colors bg-primary text-on-primary font-semibold shadow-[0_1px_4px_rgba(22,42,39,0.08)]" data-path="department-management" href="#">Department Management</a><a class="px-space-sm py-space-2xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="schedule-management" href="#">Schedule Management</a><a class="px-space-sm py-space-2xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="queue-settings" href="#">Queue Settings</a><a class="px-space-sm py-space-2xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="user-management" href="#">User Management</a><a class="px-space-sm py-space-2xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reports-and-analytics" href="#">Reports &amp; Analytics</a><a class="px-space-sm py-space-2xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="audit-logs" href="#">Audit Logs</a></nav></div></header><main class="relative pt-28 bg-surface min-h-screen w-full px-space-xl py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Context Title Banner -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col max-w-2xl">
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-caption-caps font-caption-caps bg-primary-fixed text-on-primary-fixed uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          Hospital Administration
+        </span>
+<span class="text-caption-caps font-caption-caps text-on-surface-variant font-mono">CAMPUS-ID: YGN-CENTRAL-01</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Clinical Department &amp; Ward Configuration</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+        Configure hospital outpatient departments, consultation suites, queue routing algorithms, and physical campus location waypoints.
+      </p>
+</div>
+<!-- Actions & Add Trigger -->
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="inline-flex items-center gap-2 px-space-md py-2.5 rounded-xl font-label-md text-label-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+        Export Topology
+      </button>
+<button class="inline-flex items-center gap-2 px-space-lg py-2.5 rounded-xl font-label-md text-label-md bg-primary text-on-primary shadow-sm hover:bg-primary-container transition-all hover:scale-[1.01]" id="openAddModalBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>+ Add Department <span class="font-normal opacity-90 text-[12px]">(ဌာနအသစ်ထည့်ရန်)</span></span>
+</button>
+</div>
+</div>
+<!-- Department Metrics Strip (4 stat mini-cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-xl">
+<!-- Stat 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between min-h-[110px]">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline">Total Active Departments</span>
+<div class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">14</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary-fixed text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">domain</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-2 font-label-sm text-label-sm text-tertiary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>14 Specialty Clinics Operational</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between min-h-[110px]">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline">Operational Suites</span>
+<div class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">36</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">meeting_room</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>34 In-service / 2 Sanitizing</span>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between min-h-[110px]">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline">Total Queue Stations</span>
+<div class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">12</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">confirmation_number</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">touch_app</span>
+<span>Reception &amp; Kiosk Desks Active</span>
+</div>
+</div>
+<!-- Stat 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between min-h-[110px]">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline">Campus Wait Time Average</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight">15.2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">mins</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">timer</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-2 font-label-sm text-label-sm text-tertiary font-medium">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span>-3.4 mins vs Yesterday Peak</span>
+</div>
+</div>
+</div>
+<!-- Search & Wing/Floor Navigation Strip -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm mb-space-lg flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Bar -->
+<div class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-surface rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="deptSearchInput" placeholder="Search clinic name, code (e.g. CARD, OPD), room number or floor..." type="text"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded bg-surface-container text-caption-caps font-caption-caps text-on-surface-variant">⌘K</span>
+</div>
+<!-- Wing & Floor Horizontal Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none">
+<button class="filter-btn active px-3.5 py-2 rounded-xl font-label-sm text-label-sm bg-primary text-on-primary whitespace-nowrap shadow-sm transition-all" data-floor="all" type="button">
+        All Floors (6)
+      </button>
+<button class="filter-btn px-3.5 py-2 rounded-xl font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:bg-surface-container-high whitespace-nowrap transition-all" data-floor="ground" type="button">
+        Ground Floor (Main)
+      </button>
+<button class="filter-btn px-3.5 py-2 rounded-xl font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:bg-surface-container-high whitespace-nowrap transition-all" data-floor="1st" type="button">
+        1st Floor (Pediatrics)
+      </button>
+<button class="filter-btn px-3.5 py-2 rounded-xl font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:bg-surface-container-high whitespace-nowrap transition-all" data-floor="2nd" type="button">
+        2nd Floor (Surgical &amp; Med)
+      </button>
+<button class="filter-btn px-3.5 py-2 rounded-xl font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:bg-surface-container-high whitespace-nowrap transition-all" data-floor="3rd" type="button">
+        3rd Floor (Specialty)
+      </button>
+<button class="filter-btn px-3.5 py-2 rounded-xl font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:bg-surface-container-high whitespace-nowrap transition-all" data-floor="diag" type="button">
+        Diagnostic Wing
+      </button>
+</div>
+</div>
+<!-- Departments Interactive Grid / Card Hybrid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-lg mb-space-2xl" id="departmentsContainer">
+<!-- Card 1: Adult Cardiology -->
+<div class="dept-card bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-dept-code="CARD" data-floor="2nd" data-name="Adult Cardiology အရွယ်ရောက်နှလုံးအထူးကု">
+<div>
+<!-- Card Top Bar with Token Designator -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary flex flex-col items-center justify-center shadow-sm">
+<span class="font-caption-caps text-caption-caps text-on-primary-container tracking-wider uppercase">Prefix</span>
+<span class="font-headline-sm text-headline-sm font-bold leading-none">A-</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">Adult Cardiology</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container font-caption-caps text-caption-caps text-on-surface-variant font-mono">CARD</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">အရွယ်ရောက်နှလုံးအထူးကုဌာန</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+            Active
+          </span>
+</div>
+<!-- Waypoint Badge & Physical Location -->
+<div class="bg-surface-container-low rounded-xl p-space-sm mb-space-md flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">near_me</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold">2nd Floor, Wing A (Suites 201-206)</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Waypoint: Elevator B • Follow Green Floor Line</span>
+</div>
+</div>
+<span class="px-2 py-1 rounded-md bg-surface text-caption-caps font-caption-caps text-outline font-semibold">6 Rooms</span>
+</div>
+<!-- Clinical Capacity & Live Queue Metrics -->
+<div class="grid grid-cols-3 gap-2 p-space-sm bg-surface rounded-xl mb-space-md text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Physicians</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">4</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-medium">On Duty</span>
+</div>
+<div class="flex flex-col items-center border-x border-surface-container-high/60">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">In Queue</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold mt-0.5">18</span>
+<span class="font-caption-caps text-caption-caps text-secondary-container font-semibold">Waiting</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Avg Pace</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-0.5">12.4<span class="text-caption-caps text-outline font-normal">m</span></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">per patient</span>
+</div>
+</div>
+<!-- Head Doctor & Red-Flag Protocol Indicator -->
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-space-md px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">stethoscope</span>
+<span>HOD: <strong class="text-on-surface font-medium">Dr. Kyaw Zayar Min</strong></span>
+</div>
+<span class="inline-flex items-center gap-1 text-caption-caps font-caption-caps text-error bg-error-container/30 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[13px] text-error">notification_important</span>
+            Chest Pain Fast-track
+          </span>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="pt-space-sm bg-surface-container-lowest flex items-center justify-between gap-1">
+<button class="btn-edit-dept flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+          Edit
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">door_sliding</span>
+          Rooms (6)
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+          Triage
+        </button>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-error-container/40 text-on-surface-variant hover:text-error transition-colors" title="Pause Patient Intake" type="button">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Pediatrics & Neonatal Care -->
+<div class="dept-card bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-dept-code="PED" data-floor="1st" data-name="Pediatrics &amp; Neonatal Care ကလေးနှင့် မွေးကင်းစ ကလေးအထူးကု">
+<div>
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container text-on-tertiary flex flex-col items-center justify-center shadow-sm">
+<span class="font-caption-caps text-caption-caps text-tertiary-fixed-dim tracking-wider uppercase">Prefix</span>
+<span class="font-headline-sm text-headline-sm font-bold leading-none">P-</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">Pediatrics &amp; Neonatal</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container font-caption-caps text-caption-caps text-on-surface-variant font-mono">PED</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ကလေးနှင့် မွေးကင်းစ အထူးကုဌာန</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+            Active
+          </span>
+</div>
+<!-- Waypoint Badge -->
+<div class="bg-surface-container-low rounded-xl p-space-sm mb-space-md flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">near_me</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold">1st Floor, Children Pavilion (110-114)</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Waypoint: Main Stairs East • Follow Yellow Kangaroo Path</span>
+</div>
+</div>
+<span class="px-2 py-1 rounded-md bg-surface text-caption-caps font-caption-caps text-outline font-semibold">5 Rooms</span>
+</div>
+<!-- Capacity & Metrics -->
+<div class="grid grid-cols-3 gap-2 p-space-sm bg-surface rounded-xl mb-space-md text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Physicians</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">3</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-medium">On Duty</span>
+</div>
+<div class="flex flex-col items-center border-x border-surface-container-high/60">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">In Queue</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold mt-0.5">14</span>
+<span class="font-caption-caps text-caption-caps text-secondary-container font-semibold">Waiting</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Avg Pace</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-0.5">10.8<span class="text-caption-caps text-outline font-normal">m</span></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">per child</span>
+</div>
+</div>
+<!-- Head Doctor -->
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-space-md px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">stethoscope</span>
+<span>HOD: <strong class="text-on-surface font-medium">Dr. Nilar Thein</strong></span>
+</div>
+<span class="inline-flex items-center gap-1 text-caption-caps font-caption-caps text-secondary bg-secondary-fixed/40 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[13px]">child_care</span>
+            Play Zone Integrated
+          </span>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="pt-space-sm bg-surface-container-lowest flex items-center justify-between gap-1">
+<button class="btn-edit-dept flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+          Edit
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">door_sliding</span>
+          Rooms (5)
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+          Triage
+        </button>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-error-container/40 text-on-surface-variant hover:text-error transition-colors" title="Pause Patient Intake" type="button">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+</button>
+</div>
+</div>
+<!-- Card 3: General Outpatient Department (OPD) -->
+<div class="dept-card bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-dept-code="OPD" data-floor="ground" data-name="General Outpatient Department အထွေထွေပြင်ပလူနာဌာန">
+<div>
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-secondary text-on-secondary flex flex-col items-center justify-center shadow-sm">
+<span class="font-caption-caps text-caption-caps text-secondary-fixed-dim tracking-wider uppercase">Prefix</span>
+<span class="font-headline-sm text-headline-sm font-bold leading-none">G-</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">General OPD</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container font-caption-caps text-caption-caps text-on-surface-variant font-mono">OPD</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">အထွေထွေပြင်ပလူနာဌာန</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-secondary-fixed text-on-secondary-fixed">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+            High Traffic
+          </span>
+</div>
+<!-- Waypoint Badge -->
+<div class="bg-surface-container-low rounded-xl p-space-sm mb-space-md flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">near_me</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold">Ground Floor, Main Central Atrium</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Waypoint: Directly Facing Gate 1 Reception Desk</span>
+</div>
+</div>
+<span class="px-2 py-1 rounded-md bg-surface text-caption-caps font-caption-caps text-outline font-semibold">8 Rooms</span>
+</div>
+<!-- Capacity & Metrics -->
+<div class="grid grid-cols-3 gap-2 p-space-sm bg-surface rounded-xl mb-space-md text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Physicians</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">5</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-medium">On Duty</span>
+</div>
+<div class="flex flex-col items-center border-x border-surface-container-high/60">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">In Queue</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold mt-0.5">32</span>
+<span class="font-caption-caps text-caption-caps text-error font-semibold">High Load</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Avg Pace</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-0.5">18.5<span class="text-caption-caps text-outline font-normal">m</span></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">per patient</span>
+</div>
+</div>
+<!-- Head Doctor -->
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-space-md px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">stethoscope</span>
+<span>HOD: <strong class="text-on-surface font-medium">Dr. Zaw Min Oo</strong></span>
+</div>
+<span class="inline-flex items-center gap-1 text-caption-caps font-caption-caps text-tertiary bg-tertiary-fixed/40 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[13px]">badge</span>
+            3 Triage Nurses
+          </span>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="pt-space-sm bg-surface-container-lowest flex items-center justify-between gap-1">
+<button class="btn-edit-dept flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+          Edit
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">door_sliding</span>
+          Rooms (8)
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+          Triage
+        </button>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-error-container/40 text-on-surface-variant hover:text-error transition-colors" title="Pause Patient Intake" type="button">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+</button>
+</div>
+</div>
+<!-- Card 4: Orthopedics & Musculoskeletal -->
+<div class="dept-card bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-dept-code="ORTHO" data-floor="2nd" data-name="Orthopedics &amp; Musculoskeletal အရိုးအကြောနှင့် အဆစ်အထူးကု">
+<div>
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex flex-col items-center justify-center shadow-sm">
+<span class="font-caption-caps text-caption-caps text-outline tracking-wider uppercase">Prefix</span>
+<span class="font-headline-sm text-headline-sm font-bold leading-none">O-</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">Orthopedics</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container font-caption-caps text-caption-caps text-on-surface-variant font-mono">ORTHO</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">အရိုးအကြောနှင့် အဆစ်အထူးကု</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+            Active
+          </span>
+</div>
+<!-- Waypoint Badge -->
+<div class="bg-surface-container-low rounded-xl p-space-sm mb-space-md flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">near_me</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold">2nd Floor, Wing B (Suites 220-223)</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Waypoint: Near X-Ray Annex &amp; Plaster Room</span>
+</div>
+</div>
+<span class="px-2 py-1 rounded-md bg-surface text-caption-caps font-caption-caps text-outline font-semibold">4 Rooms</span>
+</div>
+<!-- Capacity & Metrics -->
+<div class="grid grid-cols-3 gap-2 p-space-sm bg-surface rounded-xl mb-space-md text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Physicians</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">3</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-medium">On Duty</span>
+</div>
+<div class="flex flex-col items-center border-x border-surface-container-high/60">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">In Queue</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">8</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-semibold">Normal</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Avg Pace</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-0.5">15.0<span class="text-caption-caps text-outline font-normal">m</span></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">per patient</span>
+</div>
+</div>
+<!-- Head Doctor -->
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-space-md px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">stethoscope</span>
+<span>HOD: <strong class="text-on-surface font-medium">Dr. Tin Maung Aye</strong></span>
+</div>
+<span class="inline-flex items-center gap-1 text-caption-caps font-caption-caps text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[13px]">accessible</span>
+            Wheelchair Ramp Direct
+          </span>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="pt-space-sm bg-surface-container-lowest flex items-center justify-between gap-1">
+<button class="btn-edit-dept flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+          Edit
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">door_sliding</span>
+          Rooms (4)
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+          Triage
+        </button>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-error-container/40 text-on-surface-variant hover:text-error transition-colors" title="Pause Patient Intake" type="button">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+</button>
+</div>
+</div>
+<!-- Card 5: Internal Medicine & Diabetes -->
+<div class="dept-card bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-dept-code="MED" data-floor="2nd" data-name="Internal Medicine &amp; Diabetes ဆေးပညာနှင့် ဆီးချိုအထူးကု">
+<div>
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary flex flex-col items-center justify-center shadow-sm">
+<span class="font-caption-caps text-caption-caps text-on-primary-container tracking-wider uppercase">Prefix</span>
+<span class="font-headline-sm text-headline-sm font-bold leading-none">M-</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">Internal Medicine</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container font-caption-caps text-caption-caps text-on-surface-variant font-mono">MED</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ဆေးပညာနှင့် ဆီးချိုရောဂါကုသမှု</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+            Active
+          </span>
+</div>
+<!-- Waypoint Badge -->
+<div class="bg-surface-container-low rounded-xl p-space-sm mb-space-md flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">near_me</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold">2nd Floor, Wing A (Suites 210-214)</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Waypoint: Opposite Clinical Laboratory B</span>
+</div>
+</div>
+<span class="px-2 py-1 rounded-md bg-surface text-caption-caps font-caption-caps text-outline font-semibold">5 Rooms</span>
+</div>
+<!-- Capacity & Metrics -->
+<div class="grid grid-cols-3 gap-2 p-space-sm bg-surface rounded-xl mb-space-md text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Physicians</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">4</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-medium">On Duty</span>
+</div>
+<div class="flex flex-col items-center border-x border-surface-container-high/60">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">In Queue</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold mt-0.5">11</span>
+<span class="font-caption-caps text-caption-caps text-secondary-container font-semibold">Waiting</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Avg Pace</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-0.5">11.2<span class="text-caption-caps text-outline font-normal">m</span></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">per patient</span>
+</div>
+</div>
+<!-- Head Doctor -->
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-space-md px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">stethoscope</span>
+<span>HOD: <strong class="text-on-surface font-medium">Dr. Moe Moe Aung</strong></span>
+</div>
+<span class="inline-flex items-center gap-1 text-caption-caps font-caption-caps text-tertiary bg-tertiary-fixed/40 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[13px]">monitor_weight</span>
+            Vitals Station 4
+          </span>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="pt-space-sm bg-surface-container-lowest flex items-center justify-between gap-1">
+<button class="btn-edit-dept flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+          Edit
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">door_sliding</span>
+          Rooms (5)
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+          Triage
+        </button>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-error-container/40 text-on-surface-variant hover:text-error transition-colors" title="Pause Patient Intake" type="button">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+</button>
+</div>
+</div>
+<!-- Card 6: Ophthalmology & ENT Center -->
+<div class="dept-card bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-dept-code="OPHTH" data-floor="3rd" data-name="Ophthalmology &amp; ENT Center မျက်စိ၊ နှာခေါင်း၊ လည်ချောင်း အထူးကု">
+<div>
+<!-- Card Top Bar -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex flex-col items-center justify-center shadow-sm">
+<span class="font-caption-caps text-caption-caps text-outline tracking-wider uppercase">Prefix</span>
+<span class="font-headline-sm text-headline-sm font-bold leading-none">E-</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">Ophthalmology &amp; ENT</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container font-caption-caps text-caption-caps text-on-surface-variant font-mono">OPHTH</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">မျက်စိ၊ နှာခေါင်း၊ လည်ချောင်းဌာန</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+            Active
+          </span>
+</div>
+<!-- Waypoint Badge -->
+<div class="bg-surface-container-low rounded-xl p-space-sm mb-space-md flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">near_me</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold">3rd Floor, Specialty Suite (301-304)</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Waypoint: Elevator C • Audiology Booth Adjacent</span>
+</div>
+</div>
+<span class="px-2 py-1 rounded-md bg-surface text-caption-caps font-caption-caps text-outline font-semibold">4 Rooms</span>
+</div>
+<!-- Capacity & Metrics -->
+<div class="grid grid-cols-3 gap-2 p-space-sm bg-surface rounded-xl mb-space-md text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Physicians</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">2</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-medium">On Duty</span>
+</div>
+<div class="flex flex-col items-center border-x border-surface-container-high/60">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">In Queue</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">6</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-semibold">Smooth</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Avg Pace</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-0.5">9.6<span class="text-caption-caps text-outline font-normal">m</span></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">per patient</span>
+</div>
+</div>
+<!-- Head Doctor -->
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-space-md px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">stethoscope</span>
+<span>HOD: <strong class="text-on-surface font-medium">Dr. Khin Myo Hlaing</strong></span>
+</div>
+<span class="inline-flex items-center gap-1 text-caption-caps font-caption-caps text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[13px]">visibility</span>
+            Dark Room Ready
+          </span>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="pt-space-sm bg-surface-container-lowest flex items-center justify-between gap-1">
+<button class="btn-edit-dept flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+          Edit
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">door_sliding</span>
+          Rooms (4)
+        </button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+          Triage
+        </button>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-error-container/40 text-on-surface-variant hover:text-error transition-colors" title="Pause Patient Intake" type="button">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Live Queue Routing & Campus Waypoint Insights Section -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-xl shadow-sm mb-space-2xl">
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<span class="font-caption-caps text-caption-caps text-primary uppercase tracking-wider font-semibold">Triage Algorithm &amp; Telemetry</span>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mt-0.5">Physical Campus Waypoint Synchronizer</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Real-time status of physical ticket printers, overhead digital queue boards, and digital floor lines.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container text-on-surface">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+          Kiosk Mesh: 100% Online (12/12)
+        </span>
+<button class="px-3 py-1.5 rounded-xl font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-container-highest text-primary transition-all" type="button">
+          Calibrate Sensors
+        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-3">
+<div class="p-2.5 rounded-lg bg-primary-fixed text-primary">
+<span class="material-symbols-outlined text-[24px]">alt_route</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Automated Surge Spillover</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">When OPD wait time exceeds 25m, patients automatically route to Internal Medicine Suite 214 overflow desk.</p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-3">
+<div class="p-2.5 rounded-lg bg-secondary-fixed text-secondary">
+<span class="material-symbols-outlined text-[24px]">notifications_active</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Emergency Fast-Track Link</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Direct bypass enabled from Adult Cardiology to Cardiac Catheterization Lab with audio-visual chime alerts.</p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-3">
+<div class="p-2.5 rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">translate</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Bilingual Ticket Audio</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Queue chimes emit synthesized Burmese and English voice announcements across all waiting zones simultaneously.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Modal Dialog: Add / Edit Department -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-space-md bg-inverse-surface/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" id="deptModal">
+<div class="bg-surface-container-lowest rounded-2xl w-full max-w-2xl shadow-xl overflow-hidden transform scale-95 transition-transform duration-200" id="modalCard">
+<!-- Modal Header -->
+<div class="px-space-xl pt-space-lg pb-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[22px]">domain_add</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface" id="modalTitle">Configure Clinical Department</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Update clinic settings, prefix token sequence, and physical waypoint mapping.</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" id="closeModalBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body (Form) -->
+<form class="p-space-xl flex flex-col gap-space-md" id="deptForm">
+<!-- Row 1: Dual Names (EN & MM) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Department Name (English) *</label>
+<input class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputDeptNameEn" placeholder="e.g. Adult Cardiology" required="" type="text" value="Adult Cardiology"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Department Name (Myanmar) *</label>
+<input class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputDeptNameMm" placeholder="e.g. အရွယ်ရောက်နှလုံးအထူးကု" required="" type="text" value="အရွယ်ရောက်နှလုံးအထူးကုဌာန"/>
+</div>
+</div>
+<!-- Row 2: Code, Prefix, Rooms -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Department Code *</label>
+<input class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface uppercase focus:outline-none focus:ring-2 focus:ring-primary/20 font-mono" id="inputDeptCode" placeholder="e.g. CARD" required="" type="text" value="CARD"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Queue Prefix *</label>
+<input class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface uppercase font-bold focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputQueuePrefix" maxlength="2" placeholder="e.g. A" required="" type="text" value="A"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Active Suites (Rooms)</label>
+<input class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputRoomsCount" max="24" min="1" type="number" value="6"/>
+</div>
+</div>
+<!-- Row 3: Campus Location & Floor -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Campus Floor / Wing *</label>
+<select class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputFloorSelect">
+<option value="ground">Ground Floor - Main Central Atrium</option>
+<option value="1st">1st Floor - Children &amp; Maternal Wing</option>
+<option selected="" value="2nd">2nd Floor - Surgical &amp; Specialized Care</option>
+<option value="3rd">3rd Floor - Specialty Suites</option>
+<option value="diag">Diagnostic Wing - Imaging &amp; Laboratory</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Assigned Head of Dept (HOD)</label>
+<select class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputHodSelect">
+<option selected="" value="Dr. Kyaw Zayar Min">Dr. Kyaw Zayar Min (Cardiologist)</option>
+<option value="Dr. Nilar Thein">Dr. Nilar Thein (Senior Pediatrician)</option>
+<option value="Dr. Zaw Min Oo">Dr. Zaw Min Oo (Chief General Physician)</option>
+<option value="Dr. Tin Maung Aye">Dr. Tin Maung Aye (Orthopedic Surgeon)</option>
+<option value="Dr. Moe Moe Aung">Dr. Moe Moe Aung (Endocrinologist)</option>
+</select>
+</div>
+</div>
+<!-- Row 4: Waypoint Guidance & Hours -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Physical Waypoint Note</label>
+<input class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputWaypoint" placeholder="e.g. Elevator B • Follow Green Floor Line" type="text" value="Elevator B • Follow Green Floor Line"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Operating Consultation Hours</label>
+<input class="h-11 px-3.5 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20" id="inputHours" placeholder="e.g. 07:30 - 16:30 MMT" type="text" value="07:30 - 16:30 MMT"/>
+</div>
+</div>
+<!-- Protocol Toggle Box -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">e911_emergency</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Emergency Red-Flag Bypass Protocol</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Allow front-desk triage nurses to interrupt active consults for code-red vitals.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Dialog Footer Actions -->
+<div class="pt-space-sm flex items-center justify-end gap-space-sm">
+<button class="px-space-lg py-2.5 rounded-xl font-label-md text-label-md bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" id="cancelModalBtn" type="button">
+            Cancel
+          </button>
+<button class="px-space-xl py-2.5 rounded-xl font-label-md text-label-md bg-primary text-on-primary hover:bg-primary-container shadow-sm transition-all" type="submit">
+            Save Configuration
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Notification Toast Notification for CRUD feedback -->
+<div class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-space-md py-3 rounded-xl bg-primary text-on-primary shadow-xl translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="toastNotification">
+<span class="material-symbols-outlined text-[22px] text-tertiary-fixed">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold" id="toastMessageTitle">Department Updated</span>
+<span class="font-caption-caps text-caption-caps text-on-primary/80" id="toastMessageDesc">Changes synced across 12 triage counters.</span>
+</div>
+</div>
+</div>
+<!-- Inline Javascript for Interactive Behavior -->
+<script>
+  (function() {
+    // DOM Elements
+    const openAddBtn = document.getElementById('openAddModalBtn');
+    const deptModal = document.getElementById('deptModal');
+    const modalCard = document.getElementById('modalCard');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelModalBtn = document.getElementById('cancelModalBtn');
+    const deptForm = document.getElementById('deptForm');
+    const modalTitle = document.getElementById('modalTitle');
+    const toast = document.getElementById('toastNotification');
+    const toastTitle = document.getElementById('toastMessageTitle');
+    const searchInput = document.getElementById('deptSearchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.dept-card');
+    const editButtons = document.querySelectorAll('.btn-edit-dept');
+
+    // Open Modal
+    function showModal(isEdit = false, deptData = null) {
+      if (isEdit && deptData) {
+        modalTitle.textContent = "Edit Clinical Department (" + deptData.code + ")";
+        document.getElementById('inputDeptNameEn').value = deptData.nameEn || "Adult Cardiology";
+        document.getElementById('inputDeptCode').value = deptData.code || "CARD";
+      } else {
+        modalTitle.textContent = "Configure New Clinical Department";
+        deptForm.reset();
+        document.getElementById('inputDeptCode').value = "";
+        document.getElementById('inputQueuePrefix').value = "";
+      }
+
+      deptModal.classList.remove('hidden');
+      setTimeout(() => {
+        deptModal.classList.remove('opacity-0');
+        modalCard.classList.remove('scale-95');
+        modalCard.classList.add('scale-100');
+      }, 10);
+    }
+
+    // Close Modal
+    function hideModal() {
+      deptModal.classList.add('opacity-0');
+      modalCard.classList.remove('scale-100');
+      modalCard.classList.add('scale-95');
+      setTimeout(() => {
+        deptModal.classList.add('hidden');
+      }, 200);
+    }
+
+    // Show Toast
+    function triggerToast(title, msg) {
+      toastTitle.textContent = title;
+      document.getElementById('toastMessageDesc').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3200);
+    }
+
+    // Event Listeners for Modal
+    if (openAddBtn) {
+      openAddBtn.addEventListener('click', () => showModal(false));
+    }
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', hideModal);
+    }
+    if (cancelModalBtn) {
+      cancelModalBtn.addEventListener('click', hideModal);
+    }
+
+    // Close on outer click
+    deptModal.addEventListener('click', (e) => {
+      if (e.target === deptModal) hideModal();
+    });
+
+    // Form Submit
+    deptForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = document.getElementById('inputDeptCode').value.toUpperCase();
+      hideModal();
+      triggerToast('Department Saved', 'Department ' + code + ' successfully registered into queue topology.');
+    });
+
+    // Edit button clicks
+    editButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.dept-card');
+        const code = card.getAttribute('data-dept-code');
+        const name = card.getAttribute('data-name');
+        showModal(true, { code, nameEn: name.split(' ')[0] + ' ' + (name.split(' ')[1] || '') });
+      });
+    });
+
+    // Floor Filtering logic
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        btn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
+        btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+        const floor = btn.getAttribute('data-floor');
+        cards.forEach(card => {
+          if (floor === 'all' || card.getAttribute('data-floor') === floor) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Search Filter Logic
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        cards.forEach(card => {
+          const content = (card.getAttribute('data-name') + ' ' + card.getAttribute('data-dept-code')).toLowerCase();
+          if (content.includes(query)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    }
+
+    // Keyboard shortcut (CMD/CTRL + K to focus search)
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+      }
+      if (e.key === 'Escape' && !deptModal.classList.contains('hidden')) {
+        hideModal();
+      }
+    });
+
+  })();
+</script></main></div></body></html>

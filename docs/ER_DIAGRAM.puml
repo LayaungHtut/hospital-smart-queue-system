@@ -1,0 +1,423 @@
+@startuml Core Queue Flow
+' ============================================================
+' Diagram 1 — Core Queue Flow
+' Verified against V1__create_schema.sql, V2__seed_data.sql,
+' V3__functions.sql, V4__queue_called_flow.sql
+' ============================================================
+skinparam linetype ortho
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam Entity {
+  BackgroundColor #F0F8FF
+  BorderColor #4A6FA5
+  AttributeFontSize 10
+}
+
+title Hospital Smart Queue System — Core Queue Flow\n(Verified against actual database schema)
+
+entity "DEPARTMENT" as DEPT {
+  * **department_id** : SERIAL <<PK>>
+  --
+  * department_code : VARCHAR(10) <<UK>>
+  * department_name : VARCHAR(100)
+  * is_active       : BOOLEAN <<DEFAULT TRUE>>
+  * created_at      : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+entity "DOCTOR" as DOC {
+  * **doctor_id** : VARCHAR(20) <<PK>>
+  --
+  * doctor_code     : VARCHAR(10) <<UK>>
+  * name            : VARCHAR(100)
+  * department_id   : INT <<FK NOT NULL>>
+  * specialization  : VARCHAR(100)
+  phone             : VARCHAR(20)
+  email             : VARCHAR(100)
+  password_hash     : VARCHAR(255)
+  * max_queue_size  : INT <<DEFAULT 20>>
+  * queue_open_time : TIME <<DEFAULT 07:00>>
+  * queue_close_time : TIME <<DEFAULT 22:00>>
+  * average_consultation_minutes : INT <<DEFAULT 15>>
+  * is_available    : BOOLEAN <<DEFAULT TRUE>>
+  * is_active       : BOOLEAN <<DEFAULT TRUE>>
+  * created_at      : TIMESTAMP <<DEFAULT NOW()>>
+  * updated_at      : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+entity "PATIENT" as PAT {
+  * **patient_id** : VARCHAR(20) <<PK>>
+  --
+  * name            : VARCHAR(100)
+  * phone           : VARCHAR(20) <<UK NOT NULL>>
+  * password_hash   : VARCHAR(255)
+  email             : VARCHAR(100)
+  address           : VARCHAR(255)
+  date_of_birth     : DATE
+  gender            : VARCHAR(10)
+  * is_new_patient  : BOOLEAN <<DEFAULT TRUE>>
+  * registered_at   : TIMESTAMP <<DEFAULT NOW()>>
+  * updated_at      : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+entity "PRIORITY" as PRI {
+  * **priority_id** : SERIAL <<PK>>
+  --
+  * priority_code : VARCHAR(20) <<UK>>
+  * priority_name : VARCHAR(50)
+  * sort_order    : INT <<DEFAULT 99>>
+  * weight        : NUMERIC(5,2) <<DEFAULT 1.00>>
+  * is_active     : BOOLEAN <<DEFAULT TRUE>>
+  --
+  NOTE: Standalone lookup table.\nqueue.priority stores string directly.\nNo FK constraint enforced.
+}
+
+entity "QUEUE" as Q {
+  * **queue_id** : BIGSERIAL <<PK>>
+  --
+  * queue_number       : VARCHAR(30)
+  * patient_id         : VARCHAR(20) <<FK NOT NULL>>
+  * doctor_id          : VARCHAR(20) <<FK NOT NULL>>
+  * department_id      : INT <<FK NOT NULL>>
+  * priority           : VARCHAR(20) <<DEFAULT 'NORMAL'>>\n  (string, not FK to priority table)
+  * status             : VARCHAR(20) <<DEFAULT 'WAITING'>>
+  * position           : INT
+  * estimated_waiting_time : BIGINT <<DEFAULT 0>>
+  * source             : VARCHAR(20) <<DEFAULT 'ONLINE'>>
+  * is_emergency       : BOOLEAN <<DEFAULT FALSE>>
+  * emergency_confirmed : BOOLEAN <<DEFAULT FALSE>>
+  called_at            : TIMESTAMP
+  started_at           : TIMESTAMP
+  paused_at            : TIMESTAMP
+  completed_at         : TIMESTAMP
+  cancelled_at         : TIMESTAMP
+  cancel_reason        : TEXT
+  * created_at         : TIMESTAMP <<DEFAULT NOW()>>
+  checked_in_at        : TIMESTAMP
+}
+
+entity "QUEUE_HISTORY" as QH {
+  * **history_id** : BIGSERIAL <<PK>>
+  --
+  queue_id        : BIGINT\n  (logical FK, no DB constraint)
+  queue_number    : VARCHAR(30)
+  patient_id      : VARCHAR(20)
+  doctor_id       : VARCHAR(20)
+  status          : VARCHAR(20)
+  change_reason   : TEXT
+  * created_at    : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+entity "APPOINTMENT" as APT {
+  * **appointment_id** : BIGSERIAL <<PK>>
+  --
+  * patient_id       : VARCHAR(20) <<FK NOT NULL>>
+  * doctor_id        : VARCHAR(20) <<FK NOT NULL>>
+  * department_id    : INT <<FK NOT NULL>>
+  * appointment_date : DATE
+  appointment_time   : TIME
+  * status           : VARCHAR(20) <<DEFAULT 'SCHEDULED'>>
+  queue_id           : BIGINT\n  (logical FK, no DB constraint)\n  set when patient checks in
+  notes              : TEXT
+  * created_at       : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+entity "NOTIFICATION" as NOTIF {
+  * **notification_id** : BIGSERIAL <<PK>>
+  --
+  * patient_id : VARCHAR(20) <<FK NOT NULL>>
+  * message    : VARCHAR(1000)
+  * is_read    : BOOLEAN <<DEFAULT FALSE>>
+  * created_at : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+' ── Relationships (verified against V1 SQL FK constraints) ───
+DEPT ||--o{ DOC       : "employs"
+DEPT ||--o{ Q         : "contains"
+DEPT ||--o{ APT       : "has"
+
+PAT ||--o{ Q          : "joins"
+PAT ||--o{ APT        : "books"
+PAT ||--o{ NOTIF      : "receives"
+
+DOC ||--o{ Q          : "attends"
+DOC ||--o{ APT        : "holds"
+
+' queue_history.queue_id has no REFERENCES constraint (V1:120)
+' but logically references queue. Shown as dashed.
+Q |..o{ QH            : "logged by"
+
+' appointment.queue_id is nullable FK — walk-ins have NULL
+' Only set when patient checks in for an appointment
+APT }o--o| Q           : "linked to (optional)"
+
+@enduml
+
+
+@startuml AI and ML Features
+' ============================================================
+' Diagram 2 — AI & ML Features
+' Verified against V6__ai_ml_features.sql
+' ============================================================
+skinparam linetype ortho
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam Entity {
+  BackgroundColor #FFF8F0
+  BorderColor #C07030
+  AttributeFontSize 10
+}
+
+title Hospital Smart Queue System — AI & ML Features\n(Verified against actual database schema)
+
+entity "QUEUE" as Q {
+  * **queue_id** : BIGSERIAL <<PK>>
+  --
+  patient_id     : VARCHAR(20) <<FK>>
+  doctor_id      : VARCHAR(20) <<FK>>
+  department_id  : INT <<FK>>
+}
+
+entity "PATIENT" as PAT {
+  * **patient_id** : VARCHAR(20) <<PK>>
+}
+
+entity "DOCTOR" as DOC {
+  * **doctor_id** : VARCHAR(20) <<PK>>
+}
+
+entity "DEPARTMENT" as DEPT {
+  * **department_id** : SERIAL <<PK>>
+}
+
+entity "APPOINTMENT" as APT {
+  * **appointment_id** : BIGSERIAL <<PK>>
+  --
+  patient_id : VARCHAR(20) <<FK>>
+  doctor_id  : VARCHAR(20) <<FK>>
+}
+
+entity "ML_MODEL" as ML {
+  * **model_id** : BIGSERIAL <<PK>>
+  --
+  * model_name    : VARCHAR(100) <<UK>>
+  * model_type    : VARCHAR(50)\n  ('wait_time','noshow','triage')
+  * framework     : VARCHAR(50)\n  ('xgboost','lightgbm','onnx')
+  * version       : VARCHAR(20)
+  * file_path     : VARCHAR(500)
+  artifacts_path  : VARCHAR(500)
+  metrics_json    : JSONB
+  * is_active     : BOOLEAN <<DEFAULT FALSE>>
+  * trained_at    : TIMESTAMP <<DEFAULT NOW()>>
+  deployed_at     : TIMESTAMP
+  created_by      : VARCHAR(100)
+  description     : TEXT
+}
+
+entity "WAIT_TIME_PREDICTION" as WTP {
+  * **prediction_id** : BIGSERIAL <<PK>>
+  --
+  queue_id          : BIGINT <<FK NULLABLE>>\n  ON DELETE SET NULL
+  patient_id        : VARCHAR(20) <<FK NULLABLE>>\n  ON DELETE SET NULL
+  doctor_id         : VARCHAR(20) <<FK NULLABLE>>\n  ON DELETE SET NULL
+  department_id     : INT <<FK NULLABLE>>\n  ON DELETE SET NULL
+  model_id          : BIGINT <<FK NULLABLE>>\n  ON DELETE SET NULL
+  * features_json   : JSONB
+  * predicted_wait_min : NUMERIC(6,2)
+  actual_wait_min     : NUMERIC(6,2)
+  * predicted_at    : TIMESTAMP <<DEFAULT NOW()>>
+  resolved_at       : TIMESTAMP
+  error_minutes     : NUMERIC(6,2) <<GENERATED>>
+  absolute_error    : NUMERIC(6,2) <<GENERATED>>
+}
+
+entity "NOSHOW_PREDICTION" as NSP {
+  * **prediction_id** : BIGSERIAL <<PK>>
+  --
+  * appointment_id    : BIGINT <<FK NOT NULL>>\n  ON DELETE CASCADE
+  patient_id         : VARCHAR(20) <<FK NULLABLE>>\n  ON DELETE SET NULL
+  doctor_id          : VARCHAR(20) <<FK NULLABLE>>\n  ON DELETE SET NULL
+  model_id           : BIGINT <<FK NULLABLE>>\n  ON DELETE SET NULL
+  * features_json    : JSONB
+  * predicted_probability : NUMERIC(4,3)
+  * risk_level       : VARCHAR(10)\n  ('LOW','MEDIUM','HIGH')
+  * threshold_used   : NUMERIC(4,3) <<DEFAULT 0.500>>
+  * predicted_noshow : BOOLEAN
+  actual_noshow      : BOOLEAN
+  * predicted_at     : TIMESTAMP <<DEFAULT NOW()>>
+  resolved_at        : TIMESTAMP
+}
+
+entity "TRIAGE_ASSESSMENT" as TA {
+  * **assessment_id** : BIGSERIAL <<PK>>
+  --
+  patient_id          : VARCHAR(20) <<FK NULLABLE>>\n  ON DELETE SET NULL
+  queue_id            : BIGINT <<FK NULLABLE>>\n  ON DELETE SET NULL
+  department_id       : INT <<FK NULLABLE>>\n  ON DELETE SET NULL
+  * symptoms_text     : TEXT
+  recommended_dept_code : VARCHAR(10)
+  * emergency_flag    : BOOLEAN <<DEFAULT FALSE>>
+  * acuity_score      : INT <<CHECK 1-5>>
+  * disposition       : VARCHAR(20)\n  ('routine','urgent','emergency')
+  recommended_tests   : JSONB
+  recommended_labs    : JSONB
+  reason              : TEXT
+  * ai_used           : BOOLEAN <<DEFAULT FALSE>>
+  model_version       : VARCHAR(50)
+  staff_acuity_score  : INT
+  staff_disposition   : VARCHAR(20)
+  staff_notes         : TEXT
+  reviewed_by         : VARCHAR(50)\n  (plain string, no FK)
+  reviewed_at         : TIMESTAMP
+  * created_at        : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+entity "QUEUE_ACUITY_LOG" as QAL {
+  * **log_id** : BIGSERIAL <<PK>>
+  --
+  * queue_id          : BIGINT <<FK NOT NULL>>\n  ON DELETE CASCADE
+  triage_id           : BIGINT <<FK NULLABLE>>\n  ON DELETE SET NULL
+  * original_priority  : INT
+  * escalated_priority : INT
+  * acuity_score       : INT
+  * disposition        : VARCHAR(20)
+  escalation_reason   : VARCHAR(100)
+  triggered_by        : VARCHAR(50)\n  ('ai','staff','system')
+  * created_at         : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+' ── Relationships (verified against V6 SQL FK constraints) ───
+ML ||--o{ WTP    : "generates"
+ML ||--o{ NSP    : "generates"
+
+Q ||--o{ WTP     : "predicted for"
+PAT ||--o{ WTP   : "tracked for"
+DOC ||--o{ WTP   : "tracked for"
+DEPT ||--o{ WTP  : "tracked for"
+
+APT ||--o{ NSP   : "predicted for"
+PAT ||--o{ NSP   : "tracked for"
+DOC ||--o{ NSP   : "tracked for"
+
+PAT ||--o{ TA    : "assessed for"
+Q ||--o{ TA      : "assessed by"
+DEPT ||--o{ TA   : "assessed for"
+
+Q ||--o{ QAL     : "escalated via"
+TA |..o{ QAL     : "triggers"
+
+@enduml
+
+
+@startuml Admin and System
+' ============================================================
+' Diagram 3 — Admin & System
+' Verified against V1, V5 migrations
+' ============================================================
+skinparam linetype ortho
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam Entity {
+  BackgroundColor #F0FFF0
+  BorderColor #508050
+  AttributeFontSize 10
+}
+
+title Hospital Smart Queue System — Admin & System\n(Verified against actual database schema)
+
+entity "STAFF" as STF {
+  * **staff_id** : VARCHAR(20) <<PK>>
+  --
+  * staff_code    : VARCHAR(10) <<UK>>
+  * name          : VARCHAR(100)
+  phone           : VARCHAR(20)
+  email           : VARCHAR(100)
+  * password_hash : VARCHAR(255)
+  * role          : VARCHAR(20) <<DEFAULT 'STAFF'>>
+  * is_active     : BOOLEAN <<DEFAULT TRUE>>
+  * created_at    : TIMESTAMP <<DEFAULT NOW()>>
+  --
+  NOTE: Standalone authentication table.\nNo FK constraints to/from other tables.\nreferenced_by fields are plain strings.
+}
+
+entity "ADMIN_USER" as ADM {
+  * **admin_id** : VARCHAR(20) <<PK>>
+  --
+  * username      : VARCHAR(50) <<UK>>
+  * name          : VARCHAR(100)
+  email           : VARCHAR(100)
+  * password_hash : VARCHAR(255)
+  * role          : VARCHAR(20) <<DEFAULT 'ADMIN'>>
+  * is_active     : BOOLEAN <<DEFAULT TRUE>>
+  * created_at    : TIMESTAMP <<DEFAULT NOW()>>
+  --
+  NOTE: Standalone authentication table.\nNo FK constraints to/from other tables.\nreferenced_by fields are plain strings.
+}
+
+entity "PATIENT_REGISTRATION_REQUEST" as PRR {
+  * **request_id** : BIGSERIAL <<PK>>
+  --
+  * name            : VARCHAR(100)
+  * phone           : VARCHAR(20)
+  * password_hash   : VARCHAR(255)
+  email             : VARCHAR(100)
+  address           : VARCHAR(255)
+  date_of_birth     : DATE
+  gender            : VARCHAR(10)
+  * status          : VARCHAR(20) <<DEFAULT 'PENDING'>>
+  * created_at      : TIMESTAMP <<DEFAULT NOW()>>
+  reviewed_at       : TIMESTAMP
+  reviewed_by       : VARCHAR(50)\n  (plain string — stores admin username, no FK)
+  rejection_reason  : TEXT
+  --
+  NOTE: reviewed_by is VARCHAR(50), not a FK.\nStores the admin's username string.\nApproved request creates a PATIENT row.
+}
+
+entity "SYSTEM_SETTING" as SS {
+  * **setting_key** : VARCHAR(100) <<PK>>
+  --
+  * setting_value : TEXT
+  description    : TEXT
+  * is_public     : BOOLEAN <<DEFAULT TRUE>>
+  * updated_at    : TIMESTAMP <<DEFAULT NOW()>>
+}
+
+entity "AUDIT_LOG" as AL {
+  * **audit_id** : BIGSERIAL <<PK>>
+  --
+  user_id     : VARCHAR(50)\n  (polymorphic string — patient_id,\n   staff_id, admin_id, or 'System Engine')
+  user_type   : VARCHAR(20)\n  ('patient','staff','admin','system')
+  * action    : VARCHAR(100)
+  entity_type : VARCHAR(50)
+  entity_id   : VARCHAR(50)
+  details     : TEXT
+  * created_at : TIMESTAMP <<DEFAULT NOW()>>
+  --
+  NOTE: Polymorphic user references.\nuser_id + user_type are plain strings,\nnot FK constraints.
+}
+
+entity "CHATBOT_CONVERSATION" as CC {
+  * **conversation_id** : BIGSERIAL <<PK>>
+  --
+  * session_id       : VARCHAR(100)
+  * user_type        : VARCHAR(20)\n  ('patient','staff','anonymous')
+  user_id           : VARCHAR(50)\n  (polymorphic — patient_id or\n   staff_id or NULL)
+  * message_role     : VARCHAR(20)\n  ('user','assistant','system')
+  * message_content  : TEXT
+  retrieved_chunks  : JSONB
+  response_time_ms  : INT
+  helpful           : BOOLEAN
+  feedback_text     : TEXT
+  * created_at       : TIMESTAMP <<DEFAULT NOW()>>
+  --
+  NOTE: Polymorphic user references.\nuser_id + user_type are plain strings,\nnot FK constraints.
+}
+
+' ── No FK relationships — all standalone tables ──────────────
+' Staff and AdminUser are intentionally separate auth entities.
+' reviewed_by fields store plain strings (usernames), not FKs.
+' audit_log and chatbot_conversation use polymorphic user refs.
+
+@enduml

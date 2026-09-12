@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-fixed": "#2f1500",
+        "on-primary": "#ffffff",
+        "tertiary-container": "#005e40",
+        "inverse-surface": "#313129",
+        "secondary-container": "#fe932c",
+        "on-secondary": "#ffffff",
+        "inverse-on-surface": "#f4f1e5",
+        "on-error": "#ffffff",
+        "primary": "#00433e",
+        "outline-variant": "#bec9c6",
+        "surface-variant": "#e5e2d7",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary-container": "#66daa8",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed": "#002114",
+        "surface-container": "#f1eee3",
+        "on-secondary-fixed-variant": "#6e3900",
+        "background": "#fdf9ee",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary-fixed-dim": "#ffb77d",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-tertiary-fixed-variant": "#005137",
+        "primary-container": "#0d5c56",
+        "error": "#ba1a1a",
+        "inverse-primary": "#8fd3cb",
+        "primary-fixed": "#abefe7",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-surface": "#1c1c15",
+        "surface-dim": "#dddacf",
+        "on-background": "#1c1c15",
+        "secondary": "#904d00",
+        "tertiary": "#00442d",
+        "surface": "#fdf9ee",
+        "outline": "#6f7977",
+        "surface-container-highest": "#e5e2d7",
+        "on-secondary-container": "#663500",
+        "on-error-container": "#93000a",
+        "surface-tint": "#216962",
+        "secondary-fixed": "#ffdcc3",
+        "surface-container-low": "#f7f4e8",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-fixed": "#85f8c4",
+        "on-primary-fixed": "#00201d",
+        "on-primary-container": "#8ed2ca"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "space-xl": "2rem",
+        "margin-desktop": "3rem",
+        "space-2xs": "0.25rem",
+        "space-4xl": "5rem",
+        "space-lg": "1.5rem",
+        "space-2xl": "2.5rem",
+        "margin-tablet": "2rem",
+        "gutter-desktop": "1.5rem",
+        "margin-mobile": "1.25rem",
+        "space-3xl": "3.5rem",
+        "space-3xs": "0.125rem",
+        "space-xs": "0.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem"
+      },
+      "fontFamily": {
+        "body-md": ["inter"],
+        "headline-md": ["plusJakartaSans"],
+        "body-lg": ["inter"],
+        "display-hero": ["plusJakartaSans"],
+        "label-md": ["inter"],
+        "display-hero-mobile": ["plusJakartaSans"],
+        "body-sm": ["inter"],
+        "headline-lg": ["plusJakartaSans"],
+        "label-sm": ["inter"],
+        "caption-caps": ["inter"],
+        "headline-lg-mobile": ["plusJakartaSans"],
+        "headline-sm": ["plusJakartaSans"],
+        "title-token": ["plusJakartaSans"]
+      },
+      "fontSize": {
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+        "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="CareFlow Myanmar Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#">Landing Hub</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#">Patient Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#">Doctor Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#">Staff Operations</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md bg-primary-container text-on-primary font-bold hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#">Admin Central</a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Administrative Hub</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">HQ Central Operations</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Online • Admin Mode</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-28 bg-surface/95 backdrop-blur-md z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="CareFlow" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital — Main Campus Administrative Terminal</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full"><div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">TW</div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-none">Dr. Thurein Win</span><span class="font-caption-caps text-caption-caps text-outline leading-none mt-space-3xs">System Admin</span></div></div></div></div><div class="h-12 px-space-xl bg-surface-container-low flex items-center overflow-x-auto border-t border-outline-variant/30"><nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="admin-dashboard" href="#">Admin Dashboard</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="doctor-management" href="#">Doctor Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="department-management" href="#">Department Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="queue-settings" href="#">Queue Settings</a><a aria-current="page" class="flex items-center h-full px-space-2xs transition-all text-primary font-bold border-b-2 border-primary" data-path="user-management" href="#">User Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="ai-duration-smart-routing" href="#">AI Duration &amp; Smart Routing</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="system-settings-audit" href="#">System Settings &amp; Audit</a></nav></div></header><main class="w-full pt-28 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full gap-space-xl">
+<!-- Page Header & Key Actions -->
+<section class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg bg-surface-container-lowest p-space-xl rounded-xl shadow-sm relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-72 h-72 bg-gradient-to-br from-primary-fixed/30 to-secondary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-xs max-w-3xl relative z-10">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-full bg-primary-fixed text-on-primary-fixed font-caption-caps text-caption-caps uppercase">
+<span class="material-symbols-outlined text-[14px]">shield_person</span>
+          Security &amp; Identity Core
+        </span>
+<span class="text-outline font-caption-caps text-caption-caps">•</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">YCSH Level-4 Clearance Terminal</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+        User Account &amp; Role Governance <span class="font-headline-md text-headline-md text-on-surface-variant font-normal">(အသုံးပြုသူအကောင့်နှင့် အခန်းကဏ္ဍစီမံခန့်ခွဲမှု)</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Manage multi-role credential authorizations, clinical security permissions, and evaluate pending citizen health registrations across the Yangon Central network.
+      </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm relative z-10">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-variant font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">file_download</span>
+        Export User Audit List
+      </button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-xl bg-primary-container text-on-primary hover:opacity-95 font-label-md text-label-md font-semibold transition-all shadow-md hover:-translate-y-0.5" onclick="document.getElementById('invite-modal').classList.remove('hidden')" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+        + Invite New Staff / Doctor
+      </button>
+</div>
+</section>
+<!-- Tactical Top KPI Cards Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Total Ecosystem Accounts</span>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold mt-space-3xs">3,482</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-primary-fixed/40 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md">
+<span class="inline-flex items-center font-label-sm text-label-sm text-tertiary font-bold bg-tertiary-fixed/30 px-space-xs py-space-3xs rounded-full">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +124
+        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">added this month</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary-fixed opacity-70"></div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Verified Patient Records</span>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold mt-space-3xs">3,120</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed/40 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Synchronized with MOH Central Registry</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-tertiary to-tertiary-fixed-dim opacity-70"></div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Clinical &amp; Staff Cadre</span>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold mt-space-3xs">318</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">stethoscope</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-semibold text-on-surface">52</span> MDs <span class="text-outline-variant">•</span>
+<span class="font-semibold text-on-surface">184</span> Nurses <span class="text-outline-variant">•</span>
+<span class="font-semibold text-on-surface">82</span> Triage/Ops
+      </div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary to-secondary-fixed-dim opacity-70"></div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption-caps text-caption-caps uppercase text-error tracking-wider font-bold">Pending Registrations</span>
+<div class="font-headline-lg text-headline-lg text-error font-bold mt-space-3xs">44</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-error-container/60 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">hourglass_top</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="animate-pulse w-1.5 h-1.5 rounded-full bg-error"></span>
+          Requires Admin Approval
+        </span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-error to-secondary-container opacity-90"></div>
+</div>
+</section>
+<!-- Pending Patient Approvals Deck -->
+<section class="flex flex-col bg-surface-container-lowest rounded-xl p-space-lg shadow-sm gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">assignment_turned_in</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Pending Citizen Registrations Requiring MOH Identity Verification</span>
+<span class="px-space-xs py-space-3xs rounded-full bg-secondary-container text-on-secondary font-caption-caps text-caption-caps font-bold">44 Awaiting</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Citizen identity cards (NRC) cross-referenced against Yangon Division Municipal records</span>
+</div>
+</div>
+<!-- Batch Action Toolbar -->
+<div class="flex items-center gap-space-sm self-end md:self-auto">
+<button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-semibold transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">select_all</span>
+          Select All (44)
+        </button>
+<button class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-lg bg-primary-container text-on-primary hover:opacity-95 font-label-sm text-label-sm font-bold shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">cloud_sync</span>
+          Batch Verify with MOH Registry API
+        </button>
+</div>
+</div>
+<!-- Applicant Cards Stack -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Applicant 1 -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow relative">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-sm">
+                KM
+              </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Daw Khin Marlar</span>
+<span class="px-space-2xs py-space-3xs bg-tertiary-fixed text-on-tertiary-fixed font-caption-caps text-caption-caps rounded font-bold">O+</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Age 42 • Female • Bahan Township</span>
+</div>
+</div>
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-secondary-fixed/70 text-on-secondary-fixed font-caption-caps text-caption-caps font-semibold">
+              25m ago
+            </span>
+</div>
+<div class="flex flex-col gap-space-2xs bg-surface-container-lowest p-space-sm rounded-lg font-body-sm text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">National ID (NRC):</span>
+<span class="font-semibold text-on-surface tracking-wide">12/LAMATA(N)048192</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">Primary Mobile:</span>
+<span class="font-medium text-on-surface">09 450 112 890</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">Registration Path:</span>
+<span class="text-tertiary font-semibold flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[14px]">smartphone</span> Self-Kiosk / Web
+              </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs">
+<button class="flex-1 inline-flex items-center justify-center gap-space-3xs py-space-xs px-space-sm rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+            Approve &amp; Issue
+          </button>
+<button class="inline-flex items-center justify-center px-space-sm py-space-xs rounded-lg bg-surface-container-high text-error hover:bg-error-container hover:text-on-error-container font-label-sm text-label-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+<button class="inline-flex items-center justify-center p-space-xs rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Applicant 2 -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow relative">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-sm">
+                TA
+              </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">U Tin Aye</span>
+<span class="px-space-2xs py-space-3xs bg-error-container text-error font-caption-caps text-caption-caps rounded font-bold">Priority</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Age 68 • Male • Dagon Myothit</span>
+</div>
+</div>
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-secondary-fixed/70 text-on-secondary-fixed font-caption-caps text-caption-caps font-semibold">
+              1h ago
+            </span>
+</div>
+<div class="flex flex-col gap-space-2xs bg-surface-container-lowest p-space-sm rounded-lg font-body-sm text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">National ID (NRC):</span>
+<span class="font-semibold text-on-surface tracking-wide">12/DAGAMA(N)019842</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">Primary Mobile:</span>
+<span class="font-medium text-on-surface">09 250 994 122</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">Flagged Chronic:</span>
+<span class="text-secondary font-semibold">Stage 2 Hypertension</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs">
+<button class="flex-1 inline-flex items-center justify-center gap-space-3xs py-space-xs px-space-sm rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+            Approve &amp; Issue
+          </button>
+<button class="inline-flex items-center justify-center px-space-sm py-space-xs rounded-lg bg-surface-container-high text-error hover:bg-error-container hover:text-on-error-container font-label-sm text-label-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+<button class="inline-flex items-center justify-center p-space-xs rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Applicant 3 -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow relative">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container text-on-tertiary flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-sm">
+                SL
+              </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Maung Sai Lu</span>
+<span class="px-space-2xs py-space-3xs bg-surface-variant text-on-surface-variant font-caption-caps text-caption-caps rounded font-bold">Standard</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Age 29 • Male • Taunggyi Origin</span>
+</div>
+</div>
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-secondary-fixed/70 text-on-secondary-fixed font-caption-caps text-caption-caps font-semibold">
+              2h ago
+            </span>
+</div>
+<div class="flex flex-col gap-space-2xs bg-surface-container-lowest p-space-sm rounded-lg font-body-sm text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">National ID (NRC):</span>
+<span class="font-semibold text-on-surface tracking-wide">13/TAHAKA(N)091234</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">Primary Mobile:</span>
+<span class="font-medium text-on-surface">09 798 123 456</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-sm text-label-sm">Doc Scan Verified:</span>
+<span class="text-tertiary font-semibold flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Smart OCR Valid
+              </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs">
+<button class="flex-1 inline-flex items-center justify-center gap-space-3xs py-space-xs px-space-sm rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+            Approve &amp; Issue
+          </button>
+<button class="inline-flex items-center justify-center px-space-sm py-space-xs rounded-lg bg-surface-container-high text-error hover:bg-error-container hover:text-on-error-container font-label-sm text-label-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+<button class="inline-flex items-center justify-center p-space-xs rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Master User Accounts & Role Governance Table -->
+<section class="flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Filter Bar & Search -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md p-space-lg bg-surface-container-low">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs" placeholder="Search by Name, NRC, MMC License, Mobile..." type="text"/>
+</div>
+<!-- Filters & Actions -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center bg-surface-container-lowest rounded-xl p-space-3xs shadow-2xs">
+<label class="font-caption-caps text-caption-caps uppercase text-outline px-space-xs" for="status-filter">Status:</label>
+<select class="bg-transparent text-on-surface font-label-sm text-label-sm font-semibold pr-space-xs py-space-3xs focus:outline-none cursor-pointer" id="status-filter">
+<option>All Statuses</option>
+<option>Active</option>
+<option>On Duty / In Clinic</option>
+<option>Suspended</option>
+<option>Pending Verification</option>
+</select>
+</div>
+<div class="flex items-center bg-surface-container-lowest rounded-xl p-space-3xs shadow-2xs">
+<label class="font-caption-caps text-caption-caps uppercase text-outline px-space-xs" for="dept-filter">Dept:</label>
+<select class="bg-transparent text-on-surface font-label-sm text-label-sm font-semibold pr-space-xs py-space-3xs focus:outline-none cursor-pointer" id="dept-filter">
+<option>All Departments</option>
+<option>Cardiology Suite</option>
+<option>Outpatient Triage</option>
+<option>Emergency Core</option>
+<option>Pediatrics Clinic</option>
+<option>Hospital Administration</option>
+</select>
+</div>
+<button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-variant font-label-sm text-label-sm transition-all shadow-2xs" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">filter_list</span>
+          Advanced Rules
+        </button>
+</div>
+</div>
+<!-- Role Filter Tabs -->
+<div class="flex items-center gap-space-xs px-space-lg pt-space-md overflow-x-auto bg-surface-container-lowest">
+<button class="px-space-md py-space-xs rounded-xl font-label-md text-label-md font-bold bg-primary-container text-on-primary transition-all whitespace-nowrap shadow-2xs" type="button">
+        All Accounts (3,482)
+      </button>
+<button class="px-space-md py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all whitespace-nowrap" type="button">
+        Registered Patients (3,120)
+      </button>
+<button class="px-space-md py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all whitespace-nowrap" type="button">
+        Specialist Doctors (52)
+      </button>
+<button class="px-space-md py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all whitespace-nowrap" type="button">
+        Staff &amp; Clinical Triage (184)
+      </button>
+<button class="px-space-md py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all whitespace-nowrap" type="button">
+        System Administrators (126)
+      </button>
+</div>
+<!-- Accounts Table -->
+<div class="overflow-x-auto mt-space-sm">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low font-caption-caps text-caption-caps uppercase text-outline">
+<th class="py-space-sm px-space-lg">User / Identifiers</th>
+<th class="py-space-sm px-space-md">Role &amp; Permissions</th>
+<th class="py-space-sm px-space-md">Department / Station</th>
+<th class="py-space-sm px-space-md">Contact &amp; National ID</th>
+<th class="py-space-sm px-space-md">Last Active</th>
+<th class="py-space-sm px-space-md">Status</th>
+<th class="py-space-sm px-space-lg text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm">
+<!-- Row 1: Doctor -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-semibold shrink-0">
+                  KZ
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Dr. Kyaw Zayar Min</span>
+<span class="font-caption-caps text-caption-caps text-primary font-bold">MMC License: MMC-94218</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">medical_services</span> Doctor / Consultant
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Cardiology Suite</span>
+<span class="text-on-surface-variant font-caption-caps text-caption-caps">Consultation Room 3B</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface">09 778 920 114</span>
+<span class="text-outline font-caption-caps text-caption-caps">12/BAHANA(N)031940</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-3xs text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
+<span>Active now</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> In-Clinic
+              </span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors" title="Modify Permissions" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-secondary transition-colors" title="Reset Credentials" type="button">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Nurse / Triage -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-semibold shrink-0">
+                  SN
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Sister Nan Kham Phyu</span>
+<span class="font-caption-caps text-caption-caps text-tertiary font-bold">Badge ID: NUR-2041</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">personal_injury</span> Staff &amp; Triage
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Emergency Fast-Track</span>
+<span class="text-on-surface-variant font-caption-caps text-caption-caps">Desk 02 Triage</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface">09 420 551 882</span>
+<span class="text-outline font-caption-caps text-caption-caps">13/LAKANA(N)044812</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="text-on-surface-variant">4 mins ago</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> On Duty
+              </span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors" title="Modify Permissions" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-secondary transition-colors" title="Reset Credentials" type="button">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Admin -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-inverse-surface text-inverse-on-surface flex items-center justify-center font-semibold shrink-0">
+                  TW
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Dr. Thurein Win</span>
+<span class="font-caption-caps text-caption-caps text-secondary font-bold">Admin Level 4 • Superuser</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full bg-inverse-surface text-inverse-on-surface font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">admin_panel_settings</span> Administrator
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">HQ Central Ops</span>
+<span class="text-on-surface-variant font-caption-caps text-caption-caps">Executive Suite / IT</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface">thurein.win@ycsh.gov.mm</span>
+<span class="text-outline font-caption-caps text-caption-caps">12/YAGANA(N)055410</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-3xs text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Active now</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
+                Verified Superuser
+              </span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors" title="Modify Permissions" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-secondary transition-colors" title="Reset Credentials" type="button">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Verified Patient -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface font-semibold flex items-center justify-center shrink-0">
+                  MS
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Ma Sandar Cho</span>
+<span class="font-caption-caps text-caption-caps text-outline">CarePass: YC-9021-44</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">person</span> Citizen Patient
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Outpatient General</span>
+<span class="text-on-surface-variant font-caption-caps text-caption-caps">Kamayut Township</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface">09 954 112 003</span>
+<span class="text-outline font-caption-caps text-caption-caps">12/KAMAYA(N)089124</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="text-on-surface-variant">Yesterday 16:45 MMT</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Active
+              </span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-primary transition-colors" title="View Patient Records" type="button">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-secondary transition-colors" title="Reset Credentials" type="button">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Suspended Account -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-error-container text-error font-semibold flex items-center justify-center shrink-0">
+                  AM
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">U Aung Myint Thein</span>
+<span class="font-caption-caps text-caption-caps text-error font-bold">Former Pharmacist • Revoked</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-sm py-space-3xs rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">block</span> Suspended
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Dispensary West</span>
+<span class="text-on-surface-variant font-caption-caps text-caption-caps">Access Terminated</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface">09 250 882 199</span>
+<span class="text-outline font-caption-caps text-caption-caps">12/MAYAKA(N)012984</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="text-on-surface-variant">14 Oct 2024</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-3xs px-space-xs py-space-3xs rounded-full bg-surface-container-highest text-error font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Deactivated
+              </span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-tertiary transition-colors" title="Reinstate Access" type="button">
+<span class="material-symbols-outlined text-[18px]">restore</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="Audit Trail" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="p-space-2xs rounded-lg hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Summary Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-lg bg-surface-container-low">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+        Showing <span class="font-semibold text-on-surface">1 to 5</span> of <span class="font-semibold text-on-surface">3,482</span> total governance accounts
+      </div>
+<div class="flex items-center gap-space-xs">
+<button class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-surface-container text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors disabled:opacity-40" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-xs" type="button">
+          1
+        </button>
+<button class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium transition-colors" type="button">
+          2
+        </button>
+<button class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium transition-colors" type="button">
+          3
+        </button>
+<span class="text-outline px-space-3xs font-label-md text-label-md">...</span>
+<button class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium transition-colors" type="button">
+          348
+        </button>
+<button class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Modal Backdrop & Dialog for Inviting New Clinical Staff / Doctor -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-space-md bg-inverse-surface/40 backdrop-blur-sm" id="invite-modal">
+<div class="w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
+<!-- Modal Header -->
+<div class="flex items-center justify-between p-space-lg bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">person_add</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Issue Staff / Doctor Authorization</h2>
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Credential Provisioning Form</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" onclick="document.getElementById('invite-modal').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<form class="p-space-lg flex flex-col gap-space-md" onsubmit="event.preventDefault(); document.getElementById('invite-modal').classList.add('hidden');">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Full Legal Name (အမည် အပြည့်အစုံ)</label>
+<input class="h-11 px-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs" placeholder="e.g. Dr. Hla Min Tun" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Role Assignment</label>
+<select class="h-11 px-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs cursor-pointer">
+<option>Specialist Physician / Consultant (ဆရာဝန်ကြီး)</option>
+<option>Medical Officer (MO)</option>
+<option>Senior Nursing Officer (SNO)</option>
+<option>Triage Reception Desk Staff</option>
+<option>Pharmacy Specialist</option>
+<option>Hospital System Administrator</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">National Registration Card (NRC)</label>
+<input class="h-11 px-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs" placeholder="e.g. 12/LAMATA(N)102934" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Myanmar Medical Council (MMC) / Badge ID</label>
+<input class="h-11 px-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs" placeholder="e.g. MMC-12049" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Official Hospital Email</label>
+<input class="h-11 px-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs" placeholder="doctor@ycsh.gov.mm" required="" type="email"/>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Primary Mobile Number</label>
+<input class="h-11 px-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs" placeholder="09 123 456 789" required="" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Departmental Placement</label>
+<select class="h-11 px-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-2xs cursor-pointer">
+<option>Cardiology Specialist Center</option>
+<option>Emergency Core &amp; Trauma Resuscitation</option>
+<option>General Internal Medicine</option>
+<option>Orthopedics &amp; Joint Clinic</option>
+<option>Pediatric Care Unit</option>
+<option>Oncology Day Care</option>
+</select>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-tertiary shrink-0 mt-0.5">verified</span>
+<div class="flex flex-col font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">Automated MOH Compliance Check</span>
+<span class="text-on-surface-variant">Issuing this invitation will instantly dispatch a secure 2FA digital credential link and verify active medical licensing with the Myanmar Medical Council registry.</span>
+</div>
+</div>
+<!-- Modal Footer Actions -->
+<div class="flex items-center justify-end gap-space-sm pt-space-sm">
+<button class="px-space-md py-space-xs rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-variant font-label-md text-label-md font-semibold transition-all" onclick="document.getElementById('invite-modal').classList.add('hidden')" type="button">
+            Cancel
+          </button>
+<button class="inline-flex items-center gap-space-2xs px-space-lg py-space-xs rounded-xl bg-primary-container text-on-primary hover:opacity-95 font-label-md text-label-md font-bold shadow-md transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">send</span>
+            Provision &amp; Dispatch Credentials
+          </button>
+</div>
+</form>
+</div>
+</div>
+</div></div></main></div></body></html>

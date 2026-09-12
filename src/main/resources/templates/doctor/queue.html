@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Queue - Doctor - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/doctor/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/doctor/dashboard}">Dashboard</a>
+            <a th:href="@{/doctor/queue}">My Queue</a>
+            <a th:href="@{/doctor/history}">History</a>
+            <a th:href="@{/doctor/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">queue</span> Queue Management</h1>
+        <span class="text-muted" th:text="${doctor.name}"></span>
+    </div>
+
+    <div class="alert alert-error" th:if="${error}"><span th:text="${error}"></span></div>
+    <div class="alert alert-success" th:if="${message}"><span th:text="${message}"></span></div>
+
+    <div class="grid grid-2 mb-3">
+        <div class="card">
+            <h3><span class="material-symbols-outlined text-success">play_circle</span> Currently Serving</h3>
+            <div th:if="${called != null}">
+                <p><strong th:text="${called.patientId}"></strong> &middot; <span th:text="${called.queueNumber}"></span></p>
+                <p><span class="badge badge-called" th:text="${called.status}"></span></p>
+                <p class="text-muted">Patient called. Start the consultation when they arrive.</p>
+                <div class="flex mt-2 wrap">
+                    <form method="post" th:action="@{/doctor/queue/start}">
+                        <button class="btn btn-success btn-sm">
+                            <span class="material-symbols-outlined" style="font-size:16px">play_arrow</span> Start Consultation
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div th:if="${serving != null}" th:classappend="${called != null ? 'mt-2' : ''}">
+                <p><strong th:text="${serving.patientId}"></strong> &middot; <span th:text="${serving.queueNumber}"></span></p>
+                <p><span class="badge badge-serving" th:text="${serving.status}"></span></p>
+                <div class="flex mt-2 wrap">
+                    <form method="post" th:action="@{/doctor/queue/complete}">
+                        <button class="btn btn-success btn-sm">
+                            <span class="material-symbols-outlined" style="font-size:16px">check</span> Complete
+                        </button>
+                    </form>
+                    <form th:if="${serving.status == 'SERVING'}" method="post" th:action="@{/doctor/queue/pause}">
+                        <button class="btn btn-warning btn-sm">
+                            <span class="material-symbols-outlined" style="font-size:16px">pause</span> Pause
+                        </button>
+                    </form>
+                    <form th:if="${serving.status == 'PAUSED'}" method="post" th:action="@{/doctor/queue/resume}">
+                        <button class="btn btn-success btn-sm">
+                            <span class="material-symbols-outlined" style="font-size:16px">play_arrow</span> Resume
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div th:if="${called == null and serving == null}">
+                <p class="text-muted">No patient being served.</p>
+                <form method="post" th:action="@{/doctor/queue/call-next}">
+                    <button class="btn" type="submit">
+                        <span class="material-symbols-outlined" style="font-size:18px">campaign</span> Call Next Patient
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <h3><span class="material-symbols-outlined text-primary">info</span> Actions</h3>
+            <p class="text-muted mb-2">The queue is served in priority order: Emergency &rarr; Appointment &rarr; Normal, then FIFO.</p>
+            <div class="flex wrap gap-sm">
+                <form method="post" th:action="@{/doctor/queue/call-next}">
+                    <button class="btn btn-sm" type="submit">
+                        <span class="material-symbols-outlined" style="font-size:16px">campaign</span> Call Next
+                    </button>
+                </form>
+                <form method="post" th:action="@{/doctor/queue/complete}">
+                    <button class="btn btn-success btn-sm">
+                        <span class="material-symbols-outlined" style="font-size:16px">check</span> Complete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3><span class="material-symbols-outlined text-warning">people</span> Waiting Queue</h3>
+        <div th:if="${waiting == null or waiting.isEmpty()}">
+            <p class="text-muted">No patients waiting.</p>
+        </div>
+        <table class="table" th:if="${waiting != null and !waiting.isEmpty()}">
+            <thead>
+            <tr><th>Position</th><th>Patient</th><th>Queue No.</th><th>Priority</th><th>Est. Wait</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="q : ${waiting}">
+                <td th:text="${q.position}"></td>
+                <td th:text="${q.patientId}"></td>
+                <td th:text="${q.queueNumber}"></td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${q.priority == 'EMERGENCY' ? 'badge-emergency' : (q.priority == 'APPOINTMENT' ? 'badge-appointment' : 'badge-normal')}"
+                          th:text="${q.priority}"></span>
+                </td>
+                <td th:text="${q.estimatedWaitingTime + ' min'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

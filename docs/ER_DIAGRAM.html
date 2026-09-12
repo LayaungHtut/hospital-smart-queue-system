@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hospital Smart Queue System - ER Diagram</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    background: white;
+    font-family: Arial, sans-serif;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .diagram-container {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    padding: 20px;
+  }
+  .mermaid {
+    transform-origin: top center;
+  }
+  @media print {
+    body { padding: 0; }
+    .diagram-container { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<h1>Hospital Smart Queue System - ER Diagram</h1>
+<div class="diagram-container">
+<pre class="mermaid">
+erDiagram
+
+    DEPARTMENT {
+        int department_id PK
+        string department_code UK
+        string department_name
+        boolean is_active
+    }
+
+    DOCTOR {
+        string doctor_id PK
+        string doctor_code UK
+        string name
+        int department_id FK
+        string specialization
+        string phone
+        string email
+        int max_queue_size
+        boolean is_available
+        boolean is_active
+    }
+
+    PATIENT {
+        string patient_id PK
+        string name
+        string phone UK
+        string password_hash
+        string email
+        string address
+        date date_of_birth
+        string gender
+        boolean is_new_patient
+    }
+
+    STAFF {
+        string staff_id PK
+        string staff_code UK
+        string name
+        string phone
+        string email
+        string role
+        boolean is_active
+    }
+
+    ADMIN_USER {
+        string admin_id PK
+        string username UK
+        string name
+        string email
+        string role
+        boolean is_active
+    }
+
+    PRIORITY {
+        int priority_id PK
+        string priority_code UK
+        string priority_name
+        int sort_order
+        decimal weight
+        boolean is_active
+    }
+
+    QUEUE {
+        bigint queue_id PK
+        string queue_number
+        string patient_id FK
+        string doctor_id FK
+        int department_id FK
+        string priority
+        string status
+        int position
+        bigint estimated_waiting_time
+        string source
+        boolean is_emergency
+        boolean emergency_confirmed
+    }
+
+    QUEUE_HISTORY {
+        bigint history_id PK
+        bigint queue_id FK
+        string queue_number
+        string patient_id
+        string doctor_id
+        string status
+        string change_reason
+    }
+
+    APPOINTMENT {
+        bigint appointment_id PK
+        string patient_id FK
+        string doctor_id FK
+        int department_id FK
+        date appointment_date
+        time appointment_time
+        string status
+        bigint queue_id FK
+        string notes
+    }
+
+    NOTIFICATION {
+        bigint notification_id PK
+        string patient_id FK
+        string message
+        boolean is_read
+    }
+
+    SYSTEM_SETTING {
+        string setting_key PK
+        string setting_value
+        string description
+        boolean is_public
+    }
+
+    AUDIT_LOG {
+        bigint audit_id PK
+        string user_id
+        string user_type
+        string action
+        string entity_type
+        string entity_id
+        string details
+    }
+
+    PATIENT_REGISTRATION_REQUEST {
+        bigint request_id PK
+        string name
+        string phone
+        string email
+        string address
+        date date_of_birth
+        string gender
+        string status
+        string reviewed_by
+    }
+
+    ML_MODEL {
+        bigint model_id PK
+        string model_name UK
+        string model_type
+        string framework
+        string version
+        string file_path
+        boolean is_active
+    }
+
+    WAIT_TIME_PREDICTION {
+        bigint prediction_id PK
+        bigint queue_id FK
+        string patient_id FK
+        string doctor_id FK
+        int department_id FK
+        bigint model_id FK
+        decimal predicted_wait_min
+        decimal actual_wait_min
+    }
+
+    NOSHOW_PREDICTION {
+        bigint prediction_id PK
+        bigint appointment_id FK
+        string patient_id FK
+        string doctor_id FK
+        bigint model_id FK
+        decimal predicted_probability
+        string risk_level
+        boolean predicted_noshow
+        boolean actual_noshow
+    }
+
+    TRIAGE_ASSESSMENT {
+        bigint assessment_id PK
+        string patient_id FK
+        bigint queue_id FK
+        int department_id FK
+        string symptoms_text
+        boolean emergency_flag
+        int acuity_score
+        string disposition
+        boolean ai_used
+    }
+
+    CHATBOT_CONVERSATION {
+        bigint conversation_id PK
+        string session_id
+        string user_type
+        string user_id
+        string message_role
+        string message_content
+        int response_time_ms
+        boolean helpful
+    }
+
+    QUEUE_ACUITY_LOG {
+        bigint log_id PK
+        bigint queue_id FK
+        bigint triage_id FK
+        int original_priority
+        int escalated_priority
+        int acuity_score
+        string disposition
+        string escalation_reason
+    }
+
+    DEPARTMENT ||--o{ DOCTOR : "employs"
+    DEPARTMENT ||--o{ QUEUE : "contains"
+    DEPARTMENT ||--o{ APPOINTMENT : "has"
+    DEPARTMENT ||--o{ TRIAGE_ASSESSMENT : "receives"
+    DEPARTMENT ||--o{ WAIT_TIME_PREDICTION : "predicts"
+
+    PATIENT ||--o{ QUEUE : "joins"
+    PATIENT ||--o{ APPOINTMENT : "books"
+    PATIENT ||--o{ NOTIFICATION : "receives"
+    PATIENT ||--o{ TRIAGE_ASSESSMENT : "undergoes"
+    PATIENT ||--o{ WAIT_TIME_PREDICTION : "has"
+    PATIENT ||--o{ NOSHOW_PREDICTION : "has"
+
+    DOCTOR ||--o{ QUEUE : "attends"
+    DOCTOR ||--o{ APPOINTMENT : "holds"
+    DOCTOR ||--o{ WAIT_TIME_PREDICTION : "predicts"
+    DOCTOR ||--o{ NOSHOW_PREDICTION : "predicts"
+
+    QUEUE ||--o{ QUEUE_HISTORY : "logged by"
+    QUEUE ||--o{ WAIT_TIME_PREDICTION : "predicted for"
+    QUEUE ||--o{ TRIAGE_ASSESSMENT : "assessed by"
+    QUEUE ||--o{ QUEUE_ACUITY_LOG : "escalated via"
+
+    APPOINTMENT ||--o{ NOSHOW_PREDICTION : "predicted for"
+    APPOINTMENT }o--|| QUEUE : "linked to"
+
+    ML_MODEL ||--o{ WAIT_TIME_PREDICTION : "generates"
+    ML_MODEL ||--o{ NOSHOW_PREDICTION : "generates"
+
+    TRIAGE_ASSESSMENT ||--o{ QUEUE_ACUITY_LOG : "triggers"
+</pre>
+</div>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    er: { useMaxWidth: false, layoutDirection: 'TB' }
+  });
+</script>
+</body>
+</html>

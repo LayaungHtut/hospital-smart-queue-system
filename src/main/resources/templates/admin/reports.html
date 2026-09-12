@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/admin/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/doctors}">Doctors</a>
+            <a th:href="@{/admin/departments}">Departments</a>
+            <a th:href="@{/admin/patients}">Patients</a>
+            <a th:href="@{/admin/reports}">Reports</a>
+            <a th:href="@{/admin/settings}">Settings</a>
+            <a th:href="@{/admin/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">assessment</span> Reports</h1>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h3><span class="material-symbols-outlined text-primary">donut_large</span> Queue Status Breakdown</h3>
+            <table class="table">
+                <thead><tr><th>Status</th><th>Count</th></tr></thead>
+                <tbody>
+                <tr th:each="row : ${statusBreakdown}">
+                    <td><span class="badge" th:classappend="'badge-' + ${row.status.toLowerCase()}" th:text="${row.status}"></span></td>
+                    <td th:text="${row.total}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3><span class="material-symbols-outlined text-primary">bar_chart</span> Queues Per Day (last 7 days)</h3>
+            <table class="table">
+                <thead><tr><th>Day</th><th>Count</th></tr></thead>
+                <tbody>
+                <tr th:each="row : ${queuesByDay}">
+                    <td th:text="${row.day}"></td>
+                    <td th:text="${row.total}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-fixed": "#2f1500",
+        "on-primary": "#ffffff",
+        "tertiary-container": "#005e40",
+        "inverse-surface": "#313129",
+        "secondary-container": "#fe932c",
+        "on-secondary": "#ffffff",
+        "inverse-on-surface": "#f4f1e5",
+        "on-error": "#ffffff",
+        "primary": "#00433e",
+        "outline-variant": "#bec9c6",
+        "surface-variant": "#e5e2d7",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary-container": "#66daa8",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed": "#002114",
+        "surface-container": "#f1eee3",
+        "on-secondary-fixed-variant": "#6e3900",
+        "background": "#fdf9ee",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary-fixed-dim": "#ffb77d",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-tertiary-fixed-variant": "#005137",
+        "primary-container": "#0d5c56",
+        "error": "#ba1a1a",
+        "inverse-primary": "#8fd3cb",
+        "primary-fixed": "#abefe7",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-surface": "#1c1c15",
+        "surface-dim": "#dddacf",
+        "on-background": "#1c1c15",
+        "secondary": "#904d00",
+        "tertiary": "#00442d",
+        "surface": "#fdf9ee",
+        "outline": "#6f7977",
+        "surface-container-highest": "#e5e2d7",
+        "on-secondary-container": "#663500",
+        "on-error-container": "#93000a",
+        "surface-tint": "#216962",
+        "secondary-fixed": "#ffdcc3",
+        "surface-container-low": "#f7f4e8",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-fixed": "#85f8c4",
+        "on-primary-fixed": "#00201d",
+        "on-primary-container": "#8ed2ca"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "space-xl": "2rem",
+        "margin-desktop": "3rem",
+        "space-2xs": "0.25rem",
+        "space-4xl": "5rem",
+        "space-lg": "1.5rem",
+        "space-2xl": "2.5rem",
+        "margin-tablet": "2rem",
+        "gutter-desktop": "1.5rem",
+        "margin-mobile": "1.25rem",
+        "space-3xl": "3.5rem",
+        "space-3xs": "0.125rem",
+        "space-xs": "0.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem"
+      },
+      "fontFamily": {
+        "body-md": ["inter"],
+        "headline-md": ["plusJakartaSans"],
+        "body-lg": ["inter"],
+        "display-hero": ["plusJakartaSans"],
+        "label-md": ["inter"],
+        "display-hero-mobile": ["plusJakartaSans"],
+        "body-sm": ["inter"],
+        "headline-lg": ["plusJakartaSans"],
+        "label-sm": ["inter"],
+        "caption-caps": ["inter"],
+        "headline-lg-mobile": ["plusJakartaSans"],
+        "headline-sm": ["plusJakartaSans"],
+        "title-token": ["plusJakartaSans"]
+      },
+      "fontSize": {
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+        "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="CareFlow Myanmar Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#">Landing Hub</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md bg-primary-container text-on-primary font-bold hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#">Patient Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#">Doctor Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#">Staff Operations</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#">Admin Central</a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Clinical Counter</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">Station A-02</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Online • Triage Active</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-28 bg-surface/95 backdrop-blur-md z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="CareFlow" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital</span><span class="font-body-sm text-body-sm text-outline">— Main Campus</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full"><div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">DW</div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-none">Daw Thida Win</span><span class="font-caption-caps text-caption-caps text-outline leading-none mt-space-3xs">Patient</span></div></div></div></div><div class="h-12 px-space-xl bg-surface-container-low flex items-center overflow-x-auto border-t border-outline-variant/30"><nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="patient-dashboard" href="#">Dashboard</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="ai-symptom-checker" href="#">AI Symptom Checker</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="my-queue" href="#">My Queue</a><a aria-current="page" class="flex items-center h-full px-space-2xs transition-all text-primary font-bold border-b-2 border-primary" data-path="my-appointments" href="#">My Appointments</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="my-profile" href="#">My Profile</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="notifications" href="#">Notifications</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="help-faq" href="#">Help &amp; FAQ</a></nav></div></header><main class="w-full pt-28 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Intro & Hero Action Panel -->
+<section class="relative w-full rounded-2xl bg-surface-container-low p-space-xl overflow-hidden shadow-sm">
+<div class="absolute -right-16 -top-24 w-96 h-96 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="absolute right-1/4 -bottom-20 w-80 h-80 rounded-full bg-secondary-fixed/15 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-space-lg">
+<div class="flex flex-col max-w-2xl">
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-tertiary-container/15 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px] mr-1 text-tertiary">verified_user</span>
+            Hospital Number: #YGN-849201
+          </span>
+<span class="text-outline font-caption-caps text-caption-caps">•</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Daw Thida Win (ဒေါ်သီတာဝင်း)</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">
+          My Scheduled Appointments (ရက်ချိန်းများ)
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-2xs">
+          Manage your booked outpatient specialty visits, reschedule upcoming consultations, and view digital check-in passes.
+        </p>
+</div>
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-space-sm self-start xl:self-auto">
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-xl bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-md text-label-md font-semibold transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download All Slips</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-xl bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md" type="button">
+<span class="material-symbols-outlined text-[20px]">calendar_add_on</span>
+<span>+ Book New Appointment (ရက်ချိန်းအသစ်ယူမည်)</span>
+</button>
+</div>
+</div>
+<!-- Quick Tactical KPI Strip -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-space-xl">
+<!-- KPI 1 -->
+<div class="relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between overflow-hidden">
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">Upcoming Visits</span>
+<div class="flex items-baseline gap-space-2xs mt-space-3xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">2</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Confirmed</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-3xs">Next: Today, 10:30 AM MMT</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">event_upcoming</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between overflow-hidden">
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-outline uppercase tracking-wider">Completed Visits</span>
+<div class="flex items-baseline gap-space-2xs mt-space-3xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">8</span>
+<span class="font-label-sm text-label-sm text-outline font-medium">Recorded</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-3xs">2024 outpatient records</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[26px]">history</span>
+</div>
+</div>
+<!-- KPI 3: Live Pass Alert -->
+<div class="relative bg-primary-container text-on-primary p-space-md rounded-xl shadow-md flex items-center justify-between overflow-hidden">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-tertiary-fixed-dim/20 rounded-full blur-xl"></div>
+<div class="relative z-10 flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-80"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-fixed"></span>
+</span>
+<span class="font-caption-caps text-caption-caps text-tertiary-fixed uppercase tracking-wider font-bold">Queue Pass Ready</span>
+</div>
+<div class="flex items-baseline gap-space-2xs mt-space-3xs">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">Token #A-108</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-primary-container mt-space-3xs">Cardiology Suite 204 • Waiting Turn</span>
+</div>
+<div class="relative z-10 w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center text-tertiary-fixed">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Active & Upcoming Appointment Cards -->
+<section class="mt-space-2xl">
+<div class="flex items-center justify-between mb-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active &amp; Upcoming Visits (လာမည့်ရက်ချိန်းများ)</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Review digital arrival tokens, clinic directions, and consultation guidelines.</p>
+</div>
+<span class="hidden sm:inline-flex items-center gap-1 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+        Live sync with Yangon Main OPD counter
+      </span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Card 1: Today's Active Appointment (High Emphasis Ticket Aesthetic) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-2xl shadow-md p-space-lg flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 w-2.5 h-full bg-tertiary-container"></div>
+<!-- Header row inside card -->
+<div>
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-space-sm pl-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-3xs rounded-full bg-tertiary-container/15 text-tertiary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+                Today's Appointment • ယနေ့ရက်ချိန်း
+              </span>
+<span class="text-caption-caps font-caption-caps text-outline uppercase">Adult OPD Wing</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono bg-surface-container px-space-xs py-space-3xs rounded-md">
+              Ref: #APT-88194
+            </span>
+</div>
+<!-- Doctor & Clinic Info Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md pl-space-xs items-center">
+<div class="md:col-span-3 flex md:flex-col items-center gap-space-sm">
+<img class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover shadow-sm" data-alt="Photorealistic portrait of Dr. Kyaw Zayar Min, senior Burmese cardiologist wearing clinical white coat with stethoscope, smiling gently against clean modern hospital clinic interior warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4cNAR8SZvQutL_vEwuWPO90oKa8r29A7gJigKxa_SHoEUY5ieFEmCrqKvSut9iY7swH5Yn61PP1LJeiHeJ3xLxJM-Fl8J1BqXZi6v3MYQTO6LppaDHPyRjdL-6OR1pMxPrU3qULydJ_wSIx22NXlKWWQumhBvZtMEJPxdNNw70ZTDS-IuFtiBGEU7of1VLQMC10Vpal1uEKO3AR6QK5ZfMSaOlPYLp0BG2t21tvXnFhpNQUbAheTW"/>
+<div class="flex flex-col md:items-center">
+<span class="font-caption-caps text-caption-caps text-tertiary font-bold uppercase tracking-wider">In Clinic</span>
+<span class="font-body-sm text-body-sm text-outline text-center">Room 204-A</span>
+</div>
+</div>
+<div class="md:col-span-9 flex flex-col">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dr. Kyaw Zayar Min</h3>
+<span class="material-symbols-outlined text-tertiary text-[20px]" title="Board Certified Specialist">verified</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant font-medium">Senior Consultant Interventional Cardiologist</p>
+<p class="font-body-sm text-body-sm text-outline mt-space-3xs">MBBS, M.Med.Sc (Int. Med), MRCP (UK), FACC</p>
+<!-- Clinic & Schedule details -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-xs mt-space-md p-space-sm bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">schedule</span>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Date &amp; Time</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Today, 24 Oct • 10:30 AM</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">apartment</span>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Location</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Cardiology OPD, 2nd Fl, Wing A</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Digital Queue Ticket Module -->
+<div class="mt-space-md pl-space-xs">
+<div class="p-space-md bg-surface-container-high/60 rounded-xl relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 bg-surface-container-lowest rounded-xl flex flex-col items-center justify-center shadow-sm">
+<span class="font-caption-caps text-caption-caps text-outline font-bold">PASS</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">A-108</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Live Queue Token Issued</span>
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2 patients ahead of you • Estimated call time ~10:45 AM</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs w-full sm:w-auto justify-end">
+<a class="px-space-md py-space-xs rounded-xl bg-tertiary-container text-on-tertiary font-label-md text-label-md font-semibold flex items-center gap-1 shadow-sm hover:opacity-95 transition-all" data-path="my-queue" href="#">
+<span class="material-symbols-outlined text-[18px]">smartphone</span>
+                  View Live Token
+                </a>
+</div>
+</div>
+</div>
+<!-- Clinical Preparation Note -->
+<div class="mt-space-sm pl-space-xs flex items-start gap-space-xs text-secondary bg-secondary-fixed/30 p-space-sm rounded-xl">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5">info</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-secondary-fixed">Patient Preparation Note:</span>
+<span class="font-body-sm text-body-sm text-on-secondary-fixed-variant">Please arrive 15 minutes before slot with previous ECG tracings, current prescription medicines, and fasting blood panel results.</span>
+</div>
+</div>
+</div>
+<!-- Action Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mt-space-lg pt-space-md pl-space-xs bg-surface-container-lowest">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md font-medium flex items-center gap-1 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+              Add to Calendar
+            </button>
+<button class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md font-medium flex items-center gap-1 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">directions_walk</span>
+              Indoor Wayfinding
+            </button>
+</div>
+<button class="px-space-sm py-space-xs rounded-lg text-secondary hover:bg-secondary-fixed/20 font-label-md text-label-md font-semibold flex items-center gap-1 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit_calendar</span>
+            Reschedule
+          </button>
+</div>
+</div>
+<!-- Card 2: Upcoming Follow-up Consult (Neurology) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-2xl shadow-md p-space-lg flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 w-2.5 h-full bg-secondary-container"></div>
+<div>
+<div class="flex items-center justify-between gap-space-xs mb-space-sm pl-space-xs">
+<span class="px-space-xs py-space-3xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Confirmed • 21 Days Ahead
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono bg-surface-container px-space-xs py-space-3xs rounded-md">
+              #APT-88219
+            </span>
+</div>
+<div class="flex items-start gap-space-md pl-space-xs">
+<img class="w-20 h-20 rounded-2xl object-cover shadow-sm" data-alt="Portrait of Dr. Daw Khin Sandar Aung, Burmese female senior consultant neurologist in professional medical clinic setting, warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqFElJkXq4famBoIb5Vs7A5zNpQ0LXL0yFpsXCBQgDxjqZF6XQt8vbBCAPNFLsJoj9JZlCaZKHPqvviSJbALHWcvIyUVMnwVrfK6AShOZAuvt469RAT9TH5Zj1Z2TG2JN7i-Ij3BRElmk5FlUj0HQyZBMI0XBRUH9Fj-km2YwwTPJpQjo-i6ZEPEThBidETFKKZx-AzR3OzgF4tF4HpFlZwWuhPYTA6UCxyxATbK-ElIZnoD-oKeO_"/>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dr. Daw Khin Sandar Aung</h3>
+<p class="font-label-md text-label-md text-on-surface-variant font-medium">Consultant Neurologist</p>
+<p class="font-body-sm text-body-sm text-outline">MBBS, M.Med.Sc (Neuro), FRCP</p>
+</div>
+</div>
+<div class="mt-space-md pl-space-xs space-y-space-xs">
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Scheduled Slot</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Thursday, 14 Nov 2024 • 09:15 AM MMT</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Hospital Location</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Neurology &amp; Stroke Center, 3rd Floor, Suite 302</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-high/40 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-outline text-[20px]">qr_code_2</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Digital Pass activates 2 hours prior to visit</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Queue Auto-Sync</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-xs mt-space-lg pt-space-md pl-space-xs">
+<button class="px-space-sm py-space-xs rounded-lg text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-medium flex items-center gap-1 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">map</span>
+            Route Guide
+          </button>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-space-xs rounded-lg text-error hover:bg-error-container/40 font-label-md text-label-md font-medium transition-all" type="button">
+              Cancel
+            </button>
+<button class="px-space-sm py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-all" type="button">
+              Modify Date
+            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Past Appointments & Consult History -->
+<section class="mt-space-2xl">
+<div class="bg-surface-container-lowest rounded-2xl shadow-sm p-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Consultation History &amp; Past Records (ဆေးမှတ်တမ်းဟောင်းများ)</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Review previous outpatient clinical summaries, prescribed medication slips, and lab referral orders.</p>
+</div>
+<!-- Filter bar -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<div class="flex items-center bg-surface-container px-space-sm py-space-3xs rounded-xl text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px] mr-1 text-outline">filter_alt</span>
+<select class="bg-transparent border-none outline-none font-label-sm text-label-sm text-on-surface cursor-pointer">
+<option>All Departments</option>
+<option>Cardiology (နှလုံးအထူးကု)</option>
+<option>General Medicine (အထွေထွေ)</option>
+<option>Orthopedics (အရိုးအကြော)</option>
+<option>Pediatrics &amp; Immunization</option>
+</select>
+</div>
+<div class="flex items-center bg-surface-container px-space-sm py-space-3xs rounded-xl text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px] mr-1 text-outline">calendar_today</span>
+<select class="bg-transparent border-none outline-none font-label-sm text-label-sm text-on-surface cursor-pointer">
+<option>Year 2024</option>
+<option>Year 2023</option>
+<option>All Past Years</option>
+</select>
+</div>
+<div class="flex items-center bg-surface-container px-space-sm py-space-3xs rounded-xl text-on-surface font-label-sm text-label-sm">
+<select class="bg-transparent border-none outline-none font-label-sm text-label-sm text-on-surface cursor-pointer">
+<option>All Statuses</option>
+<option>Completed</option>
+<option>Prescription Dispensed</option>
+<option>Cancelled / Rescheduled</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-outline font-caption-caps text-caption-caps uppercase tracking-wider">
+<th class="p-space-md rounded-l-xl">Date &amp; Slot</th>
+<th class="p-space-md">Department &amp; Station</th>
+<th class="p-space-md">Consulting Specialist</th>
+<th class="p-space-md">Reason for Visit</th>
+<th class="p-space-md">Status</th>
+<th class="p-space-md text-right rounded-r-xl">Clinical Records</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y-0">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">18 Sep 2024</span>
+<span class="font-body-sm text-body-sm text-outline">02:15 PM MMT</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Cardiology Diagnostics</span>
+<span class="font-body-sm text-body-sm text-outline">Wing B, Echo Lab 03</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">
+                    KZ
+                  </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Kyaw Zayar Min</span>
+<span class="font-caption-caps text-caption-caps text-outline">Cardiology</span>
+</div>
+</div>
+</td>
+<td class="p-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Transthoracic Echocardiogram (TTE) &amp; HTN Follow-up</span>
+</td>
+<td class="p-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-space-3xs rounded-full bg-tertiary-container/15 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                  Completed
+                </span>
+</td>
+<td class="p-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-space-xs py-space-3xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-all" type="button">
+                    Summary &amp; Rx
+                  </button>
+<button class="px-space-xs py-space-3xs rounded-lg text-primary hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-all" title="Rebook this doctor" type="button">
+                    Re-book
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">05 Aug 2024</span>
+<span class="font-body-sm text-body-sm text-outline">11:00 AM MMT</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Orthopedics OPD</span>
+<span class="font-body-sm text-body-sm text-outline">1st Floor, Room 112</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold flex items-center justify-center">
+                    TN
+                  </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Thein Naing Oo</span>
+<span class="font-caption-caps text-caption-caps text-outline">Orthopedic Surgeon</span>
+</div>
+</div>
+</td>
+<td class="p-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Bilateral Knee Osteoarthritis Pain Assessment</span>
+</td>
+<td class="p-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-space-3xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Dispensed
+                </span>
+</td>
+<td class="p-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-space-xs py-space-3xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-all" type="button">
+                    Summary &amp; Rx
+                  </button>
+<button class="px-space-xs py-space-3xs rounded-lg text-primary hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-all" title="Rebook this doctor" type="button">
+                    Re-book
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">12 Jun 2024</span>
+<span class="font-body-sm text-body-sm text-outline">08:45 AM MMT</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">General Medicine OPD</span>
+<span class="font-body-sm text-body-sm text-outline">Ground Fl, Station Triage-2</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">
+                    SM
+                  </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Su Myat Mon</span>
+<span class="font-caption-caps text-caption-caps text-outline">General Physician</span>
+</div>
+</div>
+</td>
+<td class="p-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Seasonal Viral Fever &amp; Complete Blood Count Check</span>
+</td>
+<td class="p-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-space-3xs rounded-full bg-tertiary-container/15 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                  Completed
+                </span>
+</td>
+<td class="p-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-space-xs py-space-3xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-all" type="button">
+                    Summary &amp; Rx
+                  </button>
+<button class="px-space-xs py-space-3xs rounded-lg text-primary hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-all" title="Rebook this doctor" type="button">
+                    Re-book
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">22 Mar 2024</span>
+<span class="font-body-sm text-body-sm text-outline">03:30 PM MMT</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Preventive Health &amp; Vaccine</span>
+<span class="font-body-sm text-body-sm text-outline">Wellness Pavilion, Room W-08</span>
+</div>
+</td>
+<td class="p-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold flex items-center justify-center">
+                    AY
+                  </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Aung Ye Tun</span>
+<span class="font-caption-caps text-caption-caps text-outline">Public Health Officer</span>
+</div>
+</div>
+</td>
+<td class="p-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Annual Influenza &amp; Pneumococcal Booster Immunization</span>
+</td>
+<td class="p-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-space-3xs rounded-full bg-tertiary-container/15 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                  Completed
+                </span>
+</td>
+<td class="p-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-space-xs py-space-3xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-all" type="button">
+                    Summary &amp; Rx
+                  </button>
+<button class="px-space-xs py-space-3xs rounded-lg text-primary hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-all" title="Rebook this doctor" type="button">
+                    Re-book
+                  </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / History Summary Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mt-space-md pt-space-sm text-outline font-label-sm text-label-sm">
+<span>Showing 4 of 8 past records from 2024</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-xs py-space-3xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface disabled:opacity-40" disabled="" type="button">
+            Previous
+          </button>
+<span class="px-space-xs text-on-surface font-semibold">Page 1 of 2</span>
+<button class="px-space-xs py-space-3xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface" type="button">
+            Next
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Helpful Guidance Callout & Walk-in Protocol -->
+<section class="mt-space-xl mb-space-2xl">
+<div class="rounded-2xl bg-surface-container-high p-space-lg relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">support_agent</span>
+</div>
+<div class="flex flex-col max-w-2xl">
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+            Need an urgent or same-day walk-in consultation?
+          </h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-3xs">
+            Pre-booking slots can also be supplemented with morning walk-in tokens issued directly via our AI Symptom Checker or on-premise kiosks at Counter A. If experiencing acute chest pain or neurological symptoms, proceed to the 24/7 Emergency Center immediately.
+          </p>
+<div class="flex flex-wrap items-center gap-space-md mt-space-sm font-label-md text-label-md">
+<a class="text-primary font-semibold hover:underline flex items-center gap-1" data-path="ai-symptom-checker" href="#">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+              Launch AI Symptom Triage
+            </a>
+<span class="text-outline">•</span>
+<span class="text-error font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">emergency</span>
+              Emergency Dispatch: 199 / +95 1 234 5678
+            </span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-space-sm shrink-0">
+<a class="w-full sm:w-auto text-center px-space-md py-space-xs rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-dim transition-all shadow-sm" data-path="help-faq" href="#">
+          Read Queue FAQ
+        </a>
+<button class="w-full sm:w-auto text-center px-space-md py-space-xs rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:bg-primary transition-all shadow-sm" type="button">
+          Contact Care Coordinator
+        </button>
+</div>
+</div>
+</section>
+</div></div></main></div></body></html>

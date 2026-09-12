@@ -1,0 +1,15 @@
+Hospital General Information:
+- Name: City General Hospital
+- Address: 123 Medical Center Drive, Health City, HC 12345
+- Phone: (555) 123-4567
+- Emergency: (555) 123-9111
+- Hours: 24/7 Emergency, Outpatient 8AM-8PM Mon-Sat
+- Parking: Free parking in Lot A and B, valet available at main entrance
+
+Departments and Locations:
+- Cardiology (CAR): Building A, 2nd Floor. Specializes in heart conditions, chest pain, hypertension, arrhythmia.
+- Neurology (NEU): Building A, 3rd Floor. Treats stroke, headaches, seizures, neuropathy, movement disorders.
+- Orthopedics (ORT): Building B, 1st Floor. Bone fractures, joint replacement, sports injuries, arthritis.
+- General Medicine (GEN): Building A, 1st Floor. Primary care, internal medicine, chronic disease management.
+- Pediatrics (PED): Building C, 1st Floor. Child health, vaccinations, growth monitoring, pediatric emergencies.
+- Dermatology (DER): Building B, 2nd Floor. Skin conditions, acne, eczema, psoriasis, skin cancer screening.

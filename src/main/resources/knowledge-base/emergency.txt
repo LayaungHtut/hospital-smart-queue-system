@@ -1,0 +1,6 @@
+Emergency Department:
+- Location: Building A, Ground Floor (separate entrance)
+- Triage: All patients assessed within 10 minutes of arrival
+- Levels: 1=Resuscitation, 2=Emergent, 3=Urgent, 4=Less Urgent, 5=Non-Urgent
+- Wait times: Level 1-2 seen immediately, Level 3-5 may wait 30-120 min
+- What to bring: ID, insurance, medication list, allergy info, emergency contact

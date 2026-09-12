@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/doctor/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/doctor/dashboard}">Dashboard</a>
+            <a th:href="@{/doctor/queue}">My Queue</a>
+            <a th:href="@{/doctor/history}">History</a>
+            <a th:href="@{/doctor/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">stethoscope</span> Doctor Dashboard</h1>
+        <span class="text-muted" th:text="${doctor.name}"></span>
+    </div>
+
+    <div class="grid grid-4 mb-3">
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-warning" style="font-size:24px">pending</span>
+            <div class="stat-label">Waiting</div>
+            <div class="stat-number" th:text="${waitingCount}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-success" style="font-size:24px">play_circle</span>
+            <div class="stat-label">Serving</div>
+            <div class="stat-number" th:text="${called != null or serving != null ? '1' : '0'}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-primary" style="font-size:24px">check_circle</span>
+            <div class="stat-label">Completed Today</div>
+            <div class="stat-number" th:text="${completedToday}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-error" style="font-size:24px">cancel</span>
+            <div class="stat-label">Cancelled Today</div>
+            <div class="stat-number" th:text="${cancelledToday}"></div>
+        </div>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h3><span class="material-symbols-outlined text-success">play_circle</span> Currently Serving</h3>
+            <div th:if="${called != null}">
+                <p><strong th:text="${called.patientId}"></strong></p>
+                <p class="text-muted">Queue: <span th:text="${called.queueNumber}"></span></p>
+                <p><span class="badge badge-called" th:text="${called.status}"></span></p>
+                <p class="text-muted">Patient called. Start the consultation when they arrive.</p>
+                <div class="flex mt-2 wrap">
+                    <form method="post" th:action="@{/doctor/queue/start}">
+                        <button class="btn btn-success btn-sm">
+                            <span class="material-symbols-outlined" style="font-size:16px">play_arrow</span> Start Consultation
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div th:if="${serving != null}">
+                <p><strong th:text="${serving.patientId}"></strong></p>
+                <p class="text-muted">Queue: <span th:text="${serving.queueNumber}"></span></p>
+                <p><span class="badge badge-serving" th:text="${serving.status}"></span></p>
+                <div class="flex mt-2 wrap">
+                    <form method="post" th:action="@{/doctor/queue/complete}">
+                        <button class="btn btn-success btn-sm">
+                            <span class="material-symbols-outlined" style="font-size:16px">check</span> Complete
+                        </button>
+                    </form>
+                    <form method="post" th:action="@{/doctor/queue/pause}">
+                        <button class="btn btn-warning btn-sm">
+                            <span class="material-symbols-outlined" style="font-size:16px">pause</span> Pause
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div th:if="${called == null and serving == null}">
+                <p class="text-muted">No patient currently being served.</p>
+                <a class="btn" th:href="@{/doctor/queue}">
+                    <span class="material-symbols-outlined" style="font-size:18px">queue</span> Manage Queue
+                </a>
+            </div>
+        </div>
+        <div class="card">
+            <h3><span class="material-symbols-outlined text-warning">people</span> Waiting List</h3>
+            <div th:if="${waiting == null or waiting.isEmpty()}">
+                <p class="text-muted">No patients waiting.</p>
+            </div>
+            <table class="table" th:if="${waiting != null and !waiting.isEmpty()}">
+                <thead>
+                <tr><th>#</th><th>Patient</th><th>Priority</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="q : ${waiting}">
+                    <td th:text="${q.position}"></td>
+                    <td th:text="${q.patientId}"></td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${q.priority == 'EMERGENCY' ? 'badge-emergency' : (q.priority == 'APPOINTMENT' ? 'badge-appointment' : 'badge-normal')}"
+                              th:text="${q.priority}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn mt-2" th:href="@{/doctor/queue}">
+                <span class="material-symbols-outlined" style="font-size:18px">open_in_new</span> Open Full Queue
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

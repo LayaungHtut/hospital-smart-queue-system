@@ -1,0 +1,13 @@
+Patient Registration Process:
+1. Online: Visit hospital website or mobile app, click "Register", fill form, get patient ID
+2. Walk-in: Go to Registration Desk (Building A, Ground Floor), bring ID and insurance card
+3. Required documents: Photo ID, insurance card, referral (if required), medication list
+4. New patients: Arrive 30 minutes early for paperwork
+5. Returning patients: Check-in at kiosk or front desk
+
+Appointment and Queue System:
+- Self-registration: Patients enter symptoms, AI recommends department
+- Queue types: Emergency (immediate), Appointment (scheduled time), Walk-in (FIFO)
+- Queue numbers: Format Q{DEPT}{YYYYMMDD}{SEQ} (e.g., QCAR202608240001)
+- Track queue: Mobile app, waiting room displays, SMS notifications
+- Cancellation: Free up to 2 hours before, late cancellation may incur fee

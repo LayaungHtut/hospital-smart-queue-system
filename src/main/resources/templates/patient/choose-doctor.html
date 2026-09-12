@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Doctor - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/patient/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/patient/dashboard}">Dashboard</a>
+            <a th:href="@{/patient/symptoms}">Back</a>
+            <a th:href="@{/patient/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">stethoscope</span> Choose a Doctor</h1>
+    </div>
+
+    <div th:if="${recommendedDepartment}">
+        <div class="alert alert-info">
+            <span class="material-symbols-outlined" style="font-size:20px">apartment</span>
+            <strong>Recommended department: <span th:text="${recommendedDepartment.departmentName}"></span></strong>
+            <span th:if="${aiUsed}" class="badge badge-appointment">AI recommended</span>
+            <span th:if="${aiReason}" class="text-muted" th:text="| — ${aiReason}|"></span>
+        </div>
+        <div class="alert alert-error" th:if="${emergency}">
+            <span class="material-symbols-outlined" style="font-size:20px">warning</span>
+            Your symptoms suggest a possible <strong>emergency</strong>. Please proceed immediately.
+        </div>
+    </div>
+
+    <div class="card" th:if="${recommendedDoctors != null and !recommendedDoctors.isEmpty()}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Doctor</th>
+                <th>Specialization</th>
+                <th>Availability</th>
+                <th>Estimated Wait</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="doc : ${recommendedDoctors}">
+                <td>
+                    <div class="flex items-center gap-sm">
+                        <div class="avatar teal" th:text="${#strings.substring(doc.name, 0, 2)}"></div>
+                        <span th:text="${doc.name}"></span>
+                    </div>
+                </td>
+                <td th:text="${doc.specialization ?: 'General'}"></td>
+                <td>
+                    <span class="badge" th:classappend="${doc.computedAvailable ? 'badge-serving' : 'badge-cancelled'}" th:text="${doc.computedAvailable ? 'Available' : 'Unavailable'}"></span>
+                </td>
+                <td>
+                    <span th:text="${waitingTimeMap != null && waitingTimeMap[doc.doctorId] != null ? waitingTimeMap[doc.doctorId] + ' min' : '0 min'}"></span>
+                </td>
+                <td>
+                    <form method="post" th:action="@{/patient/queue/create}">
+                        <input type="hidden" name="doctorId" th:value="${doc.doctorId}">
+                        <input type="hidden" name="departmentId" th:value="${recommendedDepartment.departmentId}">
+                        <input type="hidden" name="priority" value="NORMAL">
+                        <input type="hidden" name="emergency" th:value="${emergency ? true : false}">
+                        <th:block th:if="${symptomIds != null}">
+                            <input type="hidden" name="symptomIds" th:each="sid : ${symptomIds}" th:value="${sid}">
+                        </th:block>
+                        <button class="btn btn-sm" type="submit">
+                            <span class="material-symbols-outlined" style="font-size:16px">queue</span> Join Queue
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" th:if="${recommendedDoctors == null or recommendedDoctors.isEmpty()}">
+        <p class="text-muted">No doctors are currently available in this department. Please choose another department.</p>
+        <a class="btn mt-2" th:href="@{/patient/symptoms}">
+            <span class="material-symbols-outlined" style="font-size:18px">arrow_back</span> Back to symptom entry
+        </a>
+    </div>
+</div>
+</body>
+</html>

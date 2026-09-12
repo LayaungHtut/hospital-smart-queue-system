@@ -1,0 +1,6 @@
+Insurance and Billing:
+- Accepted: Medicare, Medicaid, Blue Cross, Aetna, Cigna, UnitedHealth, most major plans
+- Self-pay: 20% discount if paid at time of service
+- Financial assistance: Available for qualifying patients, apply at Billing Office
+- Co-pays: Due at check-in, varies by plan
+- Prior authorization: Required for some procedures, hospital handles submission

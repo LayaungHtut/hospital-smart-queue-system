@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Login - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links"><a th:href="@{/}">Home</a></div>
+    </div>
+</nav>
+
+<div class="login-page">
+    <div class="card auth-card">
+        <div class="text-center mb-2">
+            <span class="material-symbols-outlined text-primary" style="font-size:40px">person</span>
+        </div>
+        <h2 class="text-center mb-2">Patient Login</h2>
+        <p class="text-muted text-center mb-2">Demo: phone 09123456789 / password 123456</p>
+
+        <div class="alert alert-error" th:if="${error}"><span th:text="${error}"></span></div>
+        <div class="alert alert-info" th:if="${info}"><span th:text="${info}"></span></div>
+
+        <form method="post" th:action="@{/patient/login}">
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required placeholder="09xxxxxxxxx">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                        <span class="material-symbols-outlined" style="font-size:20px">visibility_off</span>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="btn w-full">Login</button>
+        </form>
+        <p class="text-center mt-2">New here? <a th:href="@{/patient/register}">Create an account</a></p>
+    </div>
+</div>
+<script th:src="@{/js/toggle-password.js}"></script>
+</body>
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-fixed": "#2f1500",
+        "on-primary": "#ffffff",
+        "tertiary-container": "#005e40",
+        "inverse-surface": "#313129",
+        "secondary-container": "#fe932c",
+        "on-secondary": "#ffffff",
+        "inverse-on-surface": "#f4f1e5",
+        "on-error": "#ffffff",
+        "primary": "#00433e",
+        "outline-variant": "#bec9c6",
+        "surface-variant": "#e5e2d7",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary-container": "#66daa8",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed": "#002114",
+        "surface-container": "#f1eee3",
+        "on-secondary-fixed-variant": "#6e3900",
+        "background": "#fdf9ee",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary-fixed-dim": "#ffb77d",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-tertiary-fixed-variant": "#005137",
+        "primary-container": "#0d5c56",
+        "error": "#ba1a1a",
+        "inverse-primary": "#8fd3cb",
+        "primary-fixed": "#abefe7",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-surface": "#1c1c15",
+        "surface-dim": "#dddacf",
+        "on-background": "#1c1c15",
+        "secondary": "#904d00",
+        "tertiary": "#00442d",
+        "surface": "#fdf9ee",
+        "outline": "#6f7977",
+        "surface-container-highest": "#e5e2d7",
+        "on-secondary-container": "#663500",
+        "on-error-container": "#93000a",
+        "surface-tint": "#216962",
+        "secondary-fixed": "#ffdcc3",
+        "surface-container-low": "#f7f4e8",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-fixed": "#85f8c4",
+        "on-primary-fixed": "#00201d",
+        "on-primary-container": "#8ed2ca"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "space-xl": "2rem",
+        "margin-desktop": "3rem",
+        "space-2xs": "0.25rem",
+        "space-4xl": "5rem",
+        "space-lg": "1.5rem",
+        "space-2xl": "2.5rem",
+        "margin-tablet": "2rem",
+        "gutter-desktop": "1.5rem",
+        "margin-mobile": "1.25rem",
+        "space-3xl": "3.5rem",
+        "space-3xs": "0.125rem",
+        "space-xs": "0.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem"
+      },
+      "fontFamily": {
+        "body-md": ["inter"],
+        "headline-md": ["plusJakartaSans"],
+        "body-lg": ["inter"],
+        "display-hero": ["plusJakartaSans"],
+        "label-md": ["inter"],
+        "display-hero-mobile": ["plusJakartaSans"],
+        "body-sm": ["inter"],
+        "headline-lg": ["plusJakartaSans"],
+        "label-sm": ["inter"],
+        "caption-caps": ["inter"],
+        "headline-lg-mobile": ["plusJakartaSans"],
+        "headline-sm": ["plusJakartaSans"],
+        "title-token": ["plusJakartaSans"]
+      },
+      "fontSize": {
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+        "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="CareFlow Myanmar Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#">Landing Hub</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#">Patient Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#">Doctor Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#">Staff Operations</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md bg-primary-container text-on-primary font-bold hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#">Admin Central</a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Administrative Hub</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">HQ Central Operations</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Online • Admin Mode</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-28 bg-surface/95 backdrop-blur-md z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="CareFlow" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital — Main Campus Administrative Terminal</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active • 18 Doctors Consulting</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full"><div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">TW</div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-none">Dr. Thurein Win</span><span class="font-caption-caps text-caption-caps text-outline leading-none mt-space-3xs">System Admin</span></div></div></div></div><div class="h-12 px-space-xl bg-surface-container-low flex items-center overflow-x-auto border-t border-outline-variant/30"><nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="admin-dashboard" href="#">Admin Dashboard</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="doctor-management" href="#">Doctor Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="department-management" href="#">Department Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="queue-settings" href="#">Queue Settings</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="user-management" href="#">User Management</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="ai-duration-smart-routing" href="#">AI Duration &amp; Smart Routing</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="system-settings-audit" href="#">System Settings &amp; Audit</a></nav></div></header><main class="w-full pt-28 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full">
+<!-- Page Header & Action Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col max-w-3xl">
+<div class="flex items-center gap-space-xs mb-space-3xs">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary font-caption-caps text-caption-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>
+          Audit Node: YGN-CLUSTER-ALPHA
+        </span>
+<span class="text-outline text-caption-caps">•</span>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">MOH Compliance Tier-3</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+        System Infrastructure Settings &amp; Security Audit Logs
+      </h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-space-3xs">
+        စနစ်ဆက်တင်များနှင့် လုံခြုံရေးမှတ်တမ်းများ — Hospital global parameters, hardware gateway configuration, bilingual localization policies, and immutable HIPAA/MOH compliance audit trails.
+      </p>
+</div>
+<!-- Global Actions -->
+<div class="flex items-center gap-space-xs self-start lg:self-center flex-shrink-0">
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-all shadow-sm" onclick="handleBackupTrigger()">
+<span class="material-symbols-outlined text-[18px] text-outline">cloud_download</span>
+<span>Backup Configuration</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-xl bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md transition-all shadow-md" onclick="handleExportLogs()">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Export Full Audit Log (CSV/JSON)</span>
+</button>
+</div>
+</div>
+<!-- Realtime System Integrity Mini-Ribbon -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md mb-space-xl">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">security</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Ledger Seal</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">SHA-256 Verified</span>
+</div>
+</div>
+<span class="inline-flex px-2 py-0.5 rounded-full bg-tertiary-fixed/30 text-tertiary font-label-sm text-label-sm font-semibold">Live</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">dns</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">HealthNet Gateway</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">MOH Tier-3 Active</span>
+</div>
+</div>
+<span class="text-caption-caps text-outline">Ping: 12ms</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">print</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Thermal Dispensers</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">4 of 4 Ready</span>
+</div>
+</div>
+<span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">lock_clock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Terminal Session</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">15m Auto-Expire</span>
+</div>
+</div>
+<span class="text-caption-caps text-tertiary font-semibold">Strict</span>
+</div>
+</div>
+<!-- SECTION 1: Hospital Global System Settings -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm mb-space-2xl">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-md border-b border-surface-container-high mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Hospital Global System Parameters</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Configure enterprise identity, temporal standards, hardware print bridges, and workstation safety thresholds.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-tertiary">verified</span>
+          Config Revision: v4.8.2-Prod
+        </span>
+</div>
+</div>
+<!-- 2-Column Split: Hospital Profile & Operational Parameters -->
+<form id="globalSettingsForm" onsubmit="event.preventDefault(); saveSettings();">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Left: Hospital Profile & Localization -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline font-bold">Facility Profile &amp; Localization</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Primary Campus Node</span>
+</div>
+<!-- Facility Name -->
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between">
+<span>Facility Name (ဆေးရုံအမည်)</span>
+<span class="text-caption-caps text-outline font-normal">Official MOH Registry</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" type="text" value="Yangon Central Specialty Hospital (ရန်ကုန်အထူးကုဆေးရုံကြီး)"/>
+<span class="material-symbols-outlined text-outline absolute right-3 top-2.5 text-[20px]">local_hospital</span>
+</div>
+</div>
+<!-- Grid: Campus Code & Network Gateway -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Campus Code</label>
+<input class="w-full h-11 px-space-sm rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm select-all cursor-not-allowed" readonly="" type="text" value="YGN-CENTRAL-01"/>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Network Gateway Node</label>
+<input class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container" type="text" value="HealthNet MOH Tier-3 (Secure-IPSEC)"/>
+</div>
+</div>
+<!-- Primary Time Zone -->
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Primary System Time Zone</label>
+<div class="relative">
+<select class="w-full h-11 px-space-sm pr-10 rounded-lg bg-surface text-on-surface font-body-md text-body-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary-container">
+<option selected="">Asia/Yangon (MMT, UTC+06:30) — Official Myanmar Time</option>
+<option>Asia/Bangkok (ICT, UTC+07:00)</option>
+<option>Asia/Singapore (SGT, UTC+08:00)</option>
+<option>UTC (Coordinated Universal Time)</option>
+</select>
+<span class="material-symbols-outlined text-outline absolute right-3 top-2.5 text-[20px] pointer-events-none">schedule</span>
+</div>
+</div>
+<!-- Date & Time Format & System Language -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Date &amp; Time Format</label>
+<select class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container">
+<option selected="">DD/MM/YYYY • 24-Hour</option>
+<option>YYYY-MM-DD • 24-Hour (ISO 8601)</option>
+<option>DD MMM YYYY • 12-Hour AM/PM</option>
+</select>
+<span class="font-caption-caps text-caption-caps text-outline mt-0.5">Sample: 24/10/2024 10:30 MMT</span>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Display Localization</label>
+<select class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container">
+<option selected="">Burmese / English Bilingual (မြန်မာ/အင်္ဂလိပ်)</option>
+<option>Burmese Only (မြန်မာတစ်ဘာသာတည်း)</option>
+<option>English (International Clinical)</option>
+</select>
+<span class="font-caption-caps text-caption-caps text-outline mt-0.5">Triage tokens show dual digits</span>
+</div>
+</div>
+</div>
+<!-- Right: Operational & Clinical Security Parameters -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline font-bold">Operational &amp; Peripheral Settings</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Triage Guard Active</span>
+</div>
+<!-- Workstation Timeout & Max Concurrency -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Workstation Timeout</label>
+<select class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container">
+<option>10 minutes of inactivity</option>
+<option selected="">15 minutes of inactivity (Recommended)</option>
+<option>30 minutes of inactivity</option>
+<option>60 minutes (Supervisor Override)</option>
+</select>
+<span class="font-caption-caps text-caption-caps text-outline mt-0.5">Automated screen-lock for HIPAA</span>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Max Concurrent Terminals</label>
+<div class="relative">
+<input class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container" max="200" min="10" type="number" value="50"/>
+<span class="material-symbols-outlined text-outline absolute right-3 top-2.5 text-[20px]">monitor_heart</span>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline mt-0.5">Currently 18 Doctors Online</span>
+</div>
+</div>
+<!-- Automated Queue Reset Time -->
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between">
+<span>Automated Nightly Queue Flush</span>
+<span class="text-caption-caps text-outline font-normal">Token counter re-indexes to A-001</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container" type="text" value="23:59 MMT"/>
+<span class="material-symbols-outlined text-outline absolute right-3 top-2.5 text-[20px]">restart_alt</span>
+</div>
+</div>
+<!-- Thermal Printer Configuration -->
+<div class="flex flex-col gap-space-3xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between">
+<span>Thermal Ticket Printer IP &amp; Port</span>
+<span class="inline-flex items-center gap-1 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> Socket Open
+              </span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-space-sm rounded-lg bg-surface text-on-surface font-body-md text-body-md font-mono text-xs focus:outline-none focus:ring-2 focus:ring-primary-container" type="text" value="ESC/POS 192.168.10.45:9100 (Epson TM-T88VI - Triage Bay 1)"/>
+<span class="material-symbols-outlined text-outline absolute right-3 top-2.5 text-[20px]">receipt_long</span>
+</div>
+</div>
+<!-- Toggles row -->
+<div class="flex items-center justify-between p-space-sm bg-surface rounded-lg mt-space-2xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">barcode_scanner</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Require RFID / Smart Badge for Rx Sign-off</span>
+<span class="font-caption-caps text-caption-caps text-outline">Mandatory dual-factor biometric or RFID token tap</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Footer for Settings -->
+<div class="flex items-center justify-between pt-space-lg mt-space-lg border-t border-surface-container-high">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-tertiary">history_edu</span>
+<span class="font-body-sm text-body-sm">Last parameter sync by <strong class="font-semibold text-on-surface">Dr. Thurein Win</strong> (Admin) on 22 Oct 2024, 18:40 MMT</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-space-xs rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-all" onclick="resetDefaultsNotification()" type="button">
+            Reset Defaults
+          </button>
+<button class="flex items-center gap-space-2xs px-space-lg py-space-xs rounded-xl bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md font-semibold transition-all shadow-md" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Global Changes</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+<!-- SECTION 2: Searchable & Filterable Immutable Audit Log -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<!-- Audit Section Header -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">fingerprint</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Immutable Security Audit Trail (အထောက်အထားမှတ်တမ်း)</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Non-repudiation event ledger adhering to Myanmar MOH e-Health Security Circular 14/2023.</p>
+</div>
+</div>
+<!-- Quick Hash Stamp Card -->
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-2xs rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-tertiary">lock</span>
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Genesis Root Hash</span>
+<span class="font-mono text-xs text-primary font-semibold">e4b7…91fa-2024-YGN</span>
+</div>
+</div>
+</div>
+<!-- Filter & Search Toolbar -->
+<div class="flex flex-col gap-space-sm mb-space-lg p-space-md bg-surface-container-low rounded-xl">
+<!-- Search Input + Date + Severity row -->
+<div class="flex flex-col lg:flex-row gap-space-sm">
+<!-- Search -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-space-sm rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container" id="auditSearchInput" oninput="filterLogs()" placeholder="Search by User ID, Staff Name, IP address, Patient HN, or Token..." type="text"/>
+</div>
+<!-- Date Range Filter -->
+<div class="flex items-center gap-space-2xs min-w-[200px]">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]">calendar_today</span>
+<select class="w-full h-11 pl-9 pr-8 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary-container" id="dateFilter" onchange="filterLogs()">
+<option selected="" value="today">Today (24 Oct 2024)</option>
+<option value="yesterday">Yesterday (23 Oct 2024)</option>
+<option value="7days">Past 7 Days</option>
+<option value="30days">October 2024 (Full Cycle)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-outline text-[16px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Severity Filter -->
+<div class="flex items-center gap-space-2xs min-w-[170px]">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]">shield</span>
+<select class="w-full h-11 pl-9 pr-8 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary-container" id="severityFilter" onchange="filterLogs()">
+<option selected="" value="all">All Severities</option>
+<option value="info">Info / Routine</option>
+<option value="warning">Warning / Override</option>
+<option value="critical">Critical Security</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-outline text-[16px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Action Type Filter Pills -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1">
+<button class="category-pill active px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all whitespace-nowrap bg-primary-container text-on-primary font-semibold" onclick="setActiveCategory(this, 'all')">
+          All Actions (312)
+        </button>
+<button class="category-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all whitespace-nowrap bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container" onclick="setActiveCategory(this, 'auth')">
+          Login / Auth (48)
+        </button>
+<button class="category-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all whitespace-nowrap bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container" onclick="setActiveCategory(this, 'override')">
+          Queue Override (24)
+        </button>
+<button class="category-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all whitespace-nowrap bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container" onclick="setActiveCategory(this, 'reassign')">
+          Patient Reassignment (18)
+        </button>
+<button class="category-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all whitespace-nowrap bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container" onclick="setActiveCategory(this, 'settings')">
+          Settings Modified (4)
+        </button>
+<button class="category-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all whitespace-nowrap bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container" onclick="setActiveCategory(this, 'ehr')">
+          EHR Access (218)
+        </button>
+</div>
+</div>
+<!-- Audit Trail Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="auditTable">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-caption-caps text-caption-caps uppercase">
+<th class="py-3 px-4 rounded-l-lg font-bold">Timestamp (MMT)</th>
+<th class="py-3 px-4 font-bold">User / Operator</th>
+<th class="py-3 px-4 font-bold">Event &amp; Action</th>
+<th class="py-3 px-4 font-bold">Target Entity</th>
+<th class="py-3 px-4 font-bold">Station / Source IP</th>
+<th class="py-3 px-4 font-bold text-center">Status</th>
+<th class="py-3 px-4 rounded-r-lg font-bold text-right">Verification</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-sm text-body-sm text-on-surface" id="auditTableBody">
+<!-- Row 1: Doctor Prescribing -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" data-category="ehr" data-severity="info" onclick="openDrawer('LOG-99281-2024')">
+<td class="py-3.5 px-4 whitespace-nowrap font-mono text-xs text-on-surface">
+              24 Oct 2024, 10:14:22
+            </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">
+                  KZ
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Kyaw Zayar Min</span>
+<span class="font-caption-caps text-caption-caps text-outline">Sr. Consultant • YGN-DOC-204</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-primary">Prescription Signed &amp; Dispensed</span>
+<span class="font-caption-caps text-caption-caps text-outline">Rx Ref #RX-894 (Cardiology)</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold">Daw Thida Win</span>
+<span class="font-caption-caps text-caption-caps text-secondary font-bold">Token A-108 • HN-849201</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-mono text-xs text-on-surface-variant">
+              192.168.4.102<br/><span class="text-outline font-sans text-caption-caps">Suite 204 Workstation</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> Success
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-primary-container hover:text-on-primary font-caption-caps text-caption-caps font-bold transition-all">
+                JSON &amp; HASH
+              </button>
+</td>
+</tr>
+<!-- Row 2: Emergency Triage Override (Critical/Warning) -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" data-category="override" data-severity="warning" onclick="openDrawer('LOG-99279-2024')">
+<td class="py-3.5 px-4 whitespace-nowrap font-mono text-xs text-on-surface">
+              24 Oct 2024, 10:11:05
+            </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold">
+                  KM
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Sr. Nurse Khin Myo</span>
+<span class="font-caption-caps text-caption-caps text-outline">Lead Triage • YGN-NUR-112</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-error">Emergency Red Fast-Track Override</span>
+<span class="font-caption-caps text-caption-caps text-outline">Bypassed General Queue (Chest Pain)</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold">U Tin Aung Moe</span>
+<span class="font-caption-caps text-caption-caps text-error font-bold">Token STAT-03 • HN-991204</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-mono text-xs text-on-surface-variant">
+              192.168.10.12<br/><span class="text-outline font-sans text-caption-caps">Triage Console A-1</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container/60 text-error font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Override
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-primary-container hover:text-on-primary font-caption-caps text-caption-caps font-bold transition-all">
+                JSON &amp; HASH
+              </button>
+</td>
+</tr>
+<!-- Row 3: Admin Dr. Thurein Win queue capacity increase -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" data-category="settings" data-severity="info" onclick="openDrawer('LOG-99275-2024')">
+<td class="py-3.5 px-4 whitespace-nowrap font-mono text-xs text-on-surface">
+              24 Oct 2024, 09:48:19
+            </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">
+                  TW
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Thurein Win</span>
+<span class="font-caption-caps text-caption-caps text-outline">System Admin • YGN-ADM-001</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-primary">Queue Capacity Scaling Applied</span>
+<span class="font-caption-caps text-caption-caps text-outline">OPD Ortho +25 Max Tokens</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold">Dept: Orthopedic OPD</span>
+<span class="font-caption-caps text-caption-caps text-outline">Floor 2 • Sub-Module OR-2</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-mono text-xs text-on-surface-variant">
+              192.168.1.5<br/><span class="text-outline font-sans text-caption-caps">Admin HQ Terminal</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> Success
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-primary-container hover:text-on-primary font-caption-caps text-caption-caps font-bold transition-all">
+                JSON &amp; HASH
+              </button>
+</td>
+</tr>
+<!-- Row 4: Doctor Auth Login via RFID -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" data-category="auth" data-severity="info" onclick="openDrawer('LOG-99268-2024')">
+<td class="py-3.5 px-4 whitespace-nowrap font-mono text-xs text-on-surface">
+              24 Oct 2024, 08:30:12
+            </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">
+                  MA
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Myint Aung</span>
+<span class="font-caption-caps text-caption-caps text-outline">ENT Specialist • YGN-DOC-118</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Terminal Login via RFID + PIN</span>
+<span class="font-caption-caps text-caption-caps text-outline">SmartBadge ID: #BADGE-99120</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold">Room 105 Consultation Terminal</span>
+<span class="font-caption-caps text-caption-caps text-outline">Session Token ID: #SES-8819</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-mono text-xs text-on-surface-variant">
+              192.168.4.15<br/><span class="text-outline font-sans text-caption-caps">ENT Clinic Room 105</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> Success
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-primary-container hover:text-on-primary font-caption-caps text-caption-caps font-bold transition-all">
+                JSON &amp; HASH
+              </button>
+</td>
+</tr>
+<!-- Row 5: Kiosk Station A-02 paper refill -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" data-category="settings" data-severity="info" onclick="openDrawer('LOG-99260-2024')">
+<td class="py-3.5 px-4 whitespace-nowrap font-mono text-xs text-on-surface">
+              24 Oct 2024, 08:12:44
+            </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-label-sm text-label-sm font-bold">
+                  SK
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Staff Soe Kyaw</span>
+<span class="font-caption-caps text-caption-caps text-outline">IT Field Support • YGN-ENG-08</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-secondary">Kiosk Hardware Service Reset</span>
+<span class="font-caption-caps text-caption-caps text-outline">Thermal Paper Roll Replaced (80mm)</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold">Lobby Self-Service Kiosk A-02</span>
+<span class="font-caption-caps text-caption-caps text-outline">Sensor Cleared &amp; Test Printed</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-mono text-xs text-on-surface-variant">
+              192.168.10.46<br/><span class="text-outline font-sans text-caption-caps">Ground Floor Atrium</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> Success
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-primary-container hover:text-on-primary font-caption-caps text-caption-caps font-bold transition-all">
+                JSON &amp; HASH
+              </button>
+</td>
+</tr>
+<!-- Row 6: Patient Reassignment -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" data-category="reassign" data-severity="warning" onclick="openDrawer('LOG-99252-2024')">
+<td class="py-3.5 px-4 whitespace-nowrap font-mono text-xs text-on-surface">
+              24 Oct 2024, 07:55:01
+            </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-label-sm text-label-sm font-bold">
+                  NL
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Nurse Nilar Win</span>
+<span class="font-caption-caps text-caption-caps text-outline">Floor Manager • YGN-NUR-045</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-secondary">Queue Rebalance: Doctor Load Split</span>
+<span class="font-caption-caps text-caption-caps text-outline">Transferred from Dr. Zaw Min to Dr. Khin Sandar</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-semibold">Batch 4 Patients (B-014 - B-017)</span>
+<span class="font-caption-caps text-caption-caps text-secondary font-bold">Tokens B-014 to B-017</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-mono text-xs text-on-surface-variant">
+              192.168.4.8<br/><span class="text-outline font-sans text-caption-caps">General Medicine Desk</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-secondary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Reassigned
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-primary-container hover:text-on-primary font-caption-caps text-caption-caps font-bold transition-all">
+                JSON &amp; HASH
+              </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination & Ledger Meta -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-md mt-space-md border-t border-surface-container-low">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lock_reset</span>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Ledger Sync: Realtime WebSocket (Block #1,842,910)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant mr-space-xs">Showing 1-6 of 312 events</span>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-high transition-all" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center font-label-sm text-label-sm text-on-surface hover:bg-surface-container-high transition-all">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center font-label-sm text-label-sm text-on-surface hover:bg-surface-container-high transition-all">3</button>
+<span class="text-outline text-body-sm">…</span>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center font-label-sm text-label-sm text-on-surface hover:bg-surface-container-high transition-all">52</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Detail Slide-Over Drawer (Toggled by clicking log rows) -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 pointer-events-none" id="logDetailDrawerBackdrop" onclick="closeDrawer()"></div>
+<aside class="fixed right-0 top-0 h-full w-full max-w-xl bg-surface-container-lowest shadow-2xl z-50 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out" id="logDetailDrawer">
+<div class="flex flex-col h-full overflow-y-auto">
+<!-- Drawer Header -->
+<div class="p-space-lg bg-surface-container-low border-b border-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+<span class="font-caption-caps text-caption-caps uppercase text-tertiary font-bold tracking-wider">MOH Compliance Audit Record</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mt-space-3xs" id="drawerLogId">#LOG-99281-2024</h3>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-all" onclick="closeDrawer()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Body -->
+<div class="p-space-lg flex flex-col gap-space-lg">
+<!-- Cryptographic Seal Banner -->
+<div class="p-space-md rounded-xl bg-surface-container-low border-l-4 border-tertiary-container flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[18px]">lock</span>
+              Cryptographic SHA-256 Audit Seal
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed text-tertiary font-caption-caps text-caption-caps font-bold">
+              VERIFIED
+            </span>
+</div>
+<span class="font-mono text-[11px] text-on-surface-variant break-all select-all bg-surface-container p-space-xs rounded">
+            9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+          </span>
+<div class="flex items-center justify-between text-caption-caps text-outline mt-1">
+<span>MOH HealthNet ID: #MOH-MM-2024-LOG-99281</span>
+<span>Nonce: 84920481</span>
+</div>
+</div>
+<!-- Event Breakdown -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline font-bold">Transactional Metadata</span>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-caption-caps text-caption-caps text-outline">Action Category</span>
+<p class="font-label-md text-label-md font-semibold text-primary" id="drawerActionType">Prescription Signed &amp; Dispensed</p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-caption-caps text-caption-caps text-outline">Client Device IP</span>
+<p class="font-mono text-xs font-semibold text-on-surface" id="drawerIP">192.168.4.102 (VLAN-12)</p>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1">
+<span class="font-caption-caps text-caption-caps text-outline">Physician / Operator Profile</span>
+<p class="font-label-md text-label-md font-semibold text-on-surface" id="drawerUser">Dr. Kyaw Zayar Min (MOH Lic: #C-49102)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cardiology Department • Consultation Suite 204</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1">
+<span class="font-caption-caps text-caption-caps text-outline">Affected Patient / HN</span>
+<p class="font-label-md text-label-md font-semibold text-on-surface" id="drawerTarget">Daw Thida Win (HN-849201)</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Queue Token A-108 • Room 204 Outpatient Flow</span>
+</div>
+</div>
+<!-- Raw Immutable Payload (JSON) -->
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase tracking-wider text-outline font-bold">Signed Cryptographic JSON Payload</span>
+<button class="font-caption-caps text-caption-caps text-primary font-semibold hover:underline flex items-center gap-1" onclick="copyRawJson()">
+<span class="material-symbols-outlined text-[14px]">content_copy</span> Copy Raw
+            </button>
+</div>
+<pre class="bg-surface-container p-space-md rounded-xl font-mono text-xs text-on-surface-variant overflow-x-auto border-none leading-relaxed select-all" id="drawerJsonPayload">{
+  "audit_version": "2.4.0",
+  "log_uuid": "99281-2024-YGN-MOH",
+  "timestamp_utc": "2024-10-24T03:44:22.108Z",
+  "timestamp_mmt": "2024-10-24 10:14:22 MMT",
+  "operator": {
+    "staff_id": "YGN-DOC-204",
+    "name_en": "Dr. Kyaw Zayar Min",
+    "role": "Senior Consultant",
+    "auth_method": "SmartBadge_RFID_PIN"
+  },
+  "action": {
+    "category": "EHR_PRESCRIPTION",
+    "event": "DISPENSE_CONFIRMATION",
+    "rx_code": "RX-894",
+    "items_count": 3
+  },
+  "patient": {
+    "hn": "YGN-849201",
+    "name": "Daw Thida Win",
+    "token": "A-108"
+  },
+  "terminal": {
+    "mac": "00:1B:44:11:3A:B7",
+    "ip": "192.168.4.102",
+    "room": "Suite 204"
+  },
+  "prev_block_hash": "2c624232cdd221771294dfbb37b9aa24f346016fae000717126192f0791d104d",
+  "signature_moh": "MEYCIQDxK81yYvjN2z+9Z…v2h93Q0IgW4X0yP891=="
+}</pre>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="p-space-lg bg-surface-container-low border-t border-surface-container flex items-center justify-between mt-auto">
+<button class="flex items-center gap-space-2xs px-space-md py-space-xs rounded-xl bg-surface-container text-primary font-label-md text-label-md font-semibold hover:bg-surface-container-high transition-all" onclick="verifyHashOnline()">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+<span>Verify with MOH Gateway</span>
+</button>
+<button class="px-space-md py-space-xs rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:bg-primary transition-all" onclick="closeDrawer()">
+          Done
+        </button>
+</div>
+</div>
+</aside>
+<!-- Interactive Feedback Toast (Hidden by default) -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-space-sm px-space-md py-space-sm bg-primary-container text-on-primary rounded-xl shadow-xl" id="systemToast">
+<span class="material-symbols-outlined text-[20px] text-on-primary-container">check_circle</span>
+<span class="font-label-md text-label-md" id="toastMessage">Settings updated successfully.</span>
+</div>
+</div>
+<script>
+  // Toast Helper
+  function showToast(msg) {
+    const toast = document.getElementById('systemToast');
+    const toastMsg = document.getElementById('toastMessage');
+    toastMsg.textContent = msg;
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    setTimeout(() => {
+      toast.classList.add('translate-y-20', 'opacity-0');
+    }, 3200);
+  }
+
+  // Drawer Control
+  const drawer = document.getElementById('logDetailDrawer');
+  const backdrop = document.getElementById('logDetailDrawerBackdrop');
+
+  function openDrawer(logId) {
+    document.getElementById('drawerLogId').textContent = '#' + logId;
+    backdrop.classList.remove('opacity-0', 'pointer-events-none');
+    drawer.classList.remove('translate-x-full');
+  }
+
+  function closeDrawer() {
+    backdrop.classList.add('opacity-0', 'pointer-events-none');
+    drawer.classList.add('translate-x-full');
+  }
+
+  function saveSettings() {
+    showToast('Global settings saved & distributed to 18 active consultation nodes.');
+  }
+
+  function resetDefaultsNotification() {
+    if (confirm('Revert all hospital parameters to factory MOH Tier-3 defaults?')) {
+      showToast('Parameters reverted to MOH baseline defaults.');
+    }
+  }
+
+  function handleBackupTrigger() {
+    showToast('Encrypted configuration bundle generated (careflow-backup-20241024.enc)');
+  }
+
+  function handleExportLogs() {
+    showToast('Audit trail ledger exported: 312 verifiable events downloaded as CSV/JSON.');
+  }
+
+  function copyRawJson() {
+    const payload = document.getElementById('drawerJsonPayload').innerText;
+    navigator.clipboard.writeText(payload).then(() => {
+      showToast('SHA-256 signed JSON payload copied to clipboard.');
+    });
+  }
+
+  function verifyHashOnline() {
+    showToast('MOH National HealthNet Validator: Signature MATCHES block 1842910.');
+  }
+
+  // Filter Table Functions
+  let currentCategory = 'all';
+
+  function setActiveCategory(btn, category) {
+    document.querySelectorAll('.category-pill').forEach(el => {
+      el.classList.remove('bg-primary-container', 'text-on-primary', 'font-semibold');
+      el.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+    });
+    btn.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+    btn.classList.add('bg-primary-container', 'text-on-primary', 'font-semibold');
+    currentCategory = category;
+    filterLogs();
+  }
+
+  function filterLogs() {
+    const searchVal = document.getElementById('auditSearchInput').value.toLowerCase();
+    const severityVal = document.getElementById('severityFilter').value;
+    const rows = document.querySelectorAll('#auditTableBody tr');
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const rowCat = row.getAttribute('data-category');
+      const rowSev = row.getAttribute('data-severity');
+
+      const matchesSearch = text.includes(searchVal);
+      const matchesCategory = (currentCategory === 'all') || (rowCat === currentCategory);
+      const matchesSeverity = (severityVal === 'all') || (rowSev === severityVal);
+
+      if (matchesSearch && matchesCategory && matchesSeverity) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+</script></div></main></div></body></html>

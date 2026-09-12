@@ -1,0 +1,7 @@
+Doctor Information:
+- Dr. Sarah Chen (D001): Cardiology, 15 years exp, Mon/Wed/Fri 8AM-12PM, Tue/Thu 1PM-5PM
+- Dr. Michael Torres (D002): Cardiology, 12 years exp, Mon-Thu 9AM-1PM
+- Dr. Emily Watson (D004): Neurology, 18 years exp, Tue/Thu 8AM-12PM, Wed 1PM-4PM
+- Dr. James Park (D006): Orthopedics, 20 years exp, Mon/Wed/Fri 8AM-12PM
+- Dr. Lisa Nguyen (D009): General Medicine, 10 years exp, Mon-Fri 8AM-11AM
+- Dr. Robert Kim (D013): Pediatrics, 14 years exp, Mon-Fri 9AM-12PM, Sat 9AM-11AM

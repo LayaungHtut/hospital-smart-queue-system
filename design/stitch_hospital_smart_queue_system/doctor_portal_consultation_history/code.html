@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-secondary-fixed": "#2f1500",
+        "on-primary": "#ffffff",
+        "tertiary-container": "#005e40",
+        "inverse-surface": "#313129",
+        "secondary-container": "#fe932c",
+        "on-secondary": "#ffffff",
+        "inverse-on-surface": "#f4f1e5",
+        "on-error": "#ffffff",
+        "primary": "#00433e",
+        "outline-variant": "#bec9c6",
+        "surface-variant": "#e5e2d7",
+        "on-primary-fixed-variant": "#00504a",
+        "surface-bright": "#fdf9ee",
+        "on-surface-variant": "#3f4947",
+        "on-tertiary-container": "#66daa8",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed": "#002114",
+        "surface-container": "#f1eee3",
+        "on-secondary-fixed-variant": "#6e3900",
+        "background": "#fdf9ee",
+        "tertiary-fixed-dim": "#68dba9",
+        "secondary-fixed-dim": "#ffb77d",
+        "primary-fixed-dim": "#8fd3cb",
+        "on-tertiary-fixed-variant": "#005137",
+        "primary-container": "#0d5c56",
+        "error": "#ba1a1a",
+        "inverse-primary": "#8fd3cb",
+        "primary-fixed": "#abefe7",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-surface": "#1c1c15",
+        "surface-dim": "#dddacf",
+        "on-background": "#1c1c15",
+        "secondary": "#904d00",
+        "tertiary": "#00442d",
+        "surface": "#fdf9ee",
+        "outline": "#6f7977",
+        "surface-container-highest": "#e5e2d7",
+        "on-secondary-container": "#663500",
+        "on-error-container": "#93000a",
+        "surface-tint": "#216962",
+        "secondary-fixed": "#ffdcc3",
+        "surface-container-low": "#f7f4e8",
+        "surface-container-high": "#ebe8dd",
+        "tertiary-fixed": "#85f8c4",
+        "on-primary-fixed": "#00201d",
+        "on-primary-container": "#8ed2ca"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "space-xl": "2rem",
+        "margin-desktop": "3rem",
+        "space-2xs": "0.25rem",
+        "space-4xl": "5rem",
+        "space-lg": "1.5rem",
+        "space-2xl": "2.5rem",
+        "margin-tablet": "2rem",
+        "gutter-desktop": "1.5rem",
+        "margin-mobile": "1.25rem",
+        "space-3xl": "3.5rem",
+        "space-3xs": "0.125rem",
+        "space-xs": "0.5rem",
+        "gutter-mobile": "1rem",
+        "space-md": "1rem"
+      },
+      "fontFamily": {
+        "body-md": ["inter"],
+        "headline-md": ["plusJakartaSans"],
+        "body-lg": ["inter"],
+        "display-hero": ["plusJakartaSans"],
+        "label-md": ["inter"],
+        "display-hero-mobile": ["plusJakartaSans"],
+        "body-sm": ["inter"],
+        "headline-lg": ["plusJakartaSans"],
+        "label-sm": ["inter"],
+        "caption-caps": ["inter"],
+        "headline-lg-mobile": ["plusJakartaSans"],
+        "headline-sm": ["plusJakartaSans"],
+        "title-token": ["plusJakartaSans"]
+      },
+      "fontSize": {
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+        "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}]
+      }
+    }
+  }
+};</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-lg flex items-center gap-space-sm"><img alt="CareFlow Myanmar Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">CareFlow</span><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider mt-space-3xs">Myanmar Queue Care</span></div></div><div class="px-space-lg pt-space-sm pb-space-xs"><span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">QUEUE MODULES</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-hub" href="#">Landing Hub</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="patient-portal" href="#">Patient Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md bg-primary-container text-on-primary font-bold hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="doctor-portal" href="#">Doctor Portal</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="staff-operations" href="#">Staff Operations</a><a class="flex items-center px-space-sm py-space-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admin-central" href="#">Admin Central</a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container shadow-[0_2px_6px_rgba(22,42,39,0.03)]"><div class="flex items-center justify-between mb-space-3xs"><span class="font-label-sm text-label-sm text-outline uppercase">Clinical Counter</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span></span></div><div class="font-label-md text-label-md text-on-surface font-semibold">Consultation Suite 04</div><div class="font-caption-caps text-caption-caps text-tertiary font-bold mt-space-3xs">Doctor On Duty • OPD Active</div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-28 bg-surface/95 backdrop-blur-md z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="CareFlow" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">CareFlow</span><div class="h-4 w-px bg-outline-variant"></div><span class="font-label-md text-label-md text-on-surface font-semibold">Yangon Central Specialty Hospital</span><span class="font-body-sm text-body-sm text-outline">— Main Campus</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full ml-space-xs"><span class="inline-flex h-2 w-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-tertiary font-medium">Queue Sync Active</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-2xs bg-error-container/40 text-error font-label-sm text-label-sm px-space-sm py-space-2xs rounded-full font-semibold"><span class="material-symbols-outlined text-[16px]">emergency</span><span>Hotline: 199 / +95 1 234 5678</span></div><div class="flex items-center rounded-full bg-surface-container p-space-3xs font-label-sm text-label-sm font-semibold"><span class="bg-surface-container-lowest text-primary px-space-xs py-space-3xs rounded-full shadow-sm">EN</span><span class="text-on-surface-variant px-space-xs py-space-3xs">MM မြန်မာ</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-3xs rounded-full"><div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold">KM</div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-none">Dr. Kyaw Zayar Min</span><span class="font-caption-caps text-caption-caps text-outline leading-none mt-space-3xs">Senior Consultant</span></div></div></div></div><div class="h-12 px-space-xl bg-surface-container-low flex items-center overflow-x-auto border-t border-outline-variant/30"><nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="doctor-dashboard" href="#">Doctor Dashboard</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="consultation-queue" href="#">Consultation Queue</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="doctor-appointments" href="#">My Appointments</a><a aria-current="page" class="flex items-center h-full px-space-2xs transition-all text-primary font-bold border-b-2 border-primary" data-path="consultation-history" href="#">Consultation History</a><a class="flex items-center h-full px-space-2xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" data-path="doctor-profile" href="#">Doctor Profile</a></nav></div></header><main class="w-full pt-28 bg-surface min-h-screen"><div class="w-full px-space-xl py-space-lg"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Banner & Clinical Telemetry -->
+<section class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-lg">
+<div class="flex flex-col max-w-3xl">
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-primary-container/20 text-primary font-caption-caps uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px] mr-1">verified_user</span>
+          MMC License #94218 • Dr. Kyaw Zayar Min
+        </span>
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Interventional Cardiology OPD-4</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+        Outpatient Consultation Archive &amp; Clinical History <span class="text-primary font-normal font-headline-md text-headline-md">(အတိတ်ကုသမှုမှတ်တမ်းများ)</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-3xs">
+        Search, audit, and review past patient encounters, SOAP clinical documentation, digital prescription records, and specialized diagnostic referrals across Yangon Central OPD units.
+      </p>
+</div>
+<!-- Quick Action / Export Hub -->
+<div class="flex items-center gap-space-sm self-start xl:self-auto">
+<button class="flex items-center gap-space-xs px-space-md py-space-sm rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-all shadow-sm" onclick="triggerExportNotice('CSV')">
+<span class="material-symbols-outlined text-[18px] text-primary">download</span>
+        Export CSV
+      </button>
+<button class="flex items-center gap-space-xs px-space-md py-space-sm rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-all shadow-sm" onclick="triggerExportNotice('PDF Report')">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+        Export Clinical Audit (PDF)
+      </button>
+</div>
+</section>
+<!-- 4 Historical Metric KPI Bento -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1: Total Volume -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Total Consultations</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-space-3xs">Current Month (Oct 2024)</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container text-primary">
+<span class="material-symbols-outlined">clinical_notes</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">218</span>
+<span class="font-label-sm text-label-sm font-semibold text-tertiary-container flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +14.8%
+        </span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-space-sm overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Card 2: Average Consultation Pace -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Average Consult Pace</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-space-3xs">Target: 10 - 15 mins/pt</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container text-secondary">
+<span class="material-symbols-outlined">pace</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">12.4</span>
+<span class="font-label-md text-label-md text-outline">mins</span>
+<span class="font-caption-caps text-caption-caps text-tertiary-container ml-auto font-semibold">Optimal Flow</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-space-sm overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 62%"></div>
+</div>
+</div>
+<!-- Card 3: ICD-10 Diagnostic Accuracy -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">ICD-10 Copilot Sync</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-space-3xs">Automated Coding Match</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container text-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">98.2%</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold flex items-center">
+<span class="material-symbols-outlined text-[16px]">done_all</span> Verified
+        </span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-space-sm overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 98%"></div>
+</div>
+</div>
+<!-- Card 4: Discharged vs Admitted -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps uppercase text-outline tracking-wider">Admitted to Ward / CCU</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-space-3xs">Critical Referrals</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container text-error">
+<span class="material-symbols-outlined">local_hospital</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-error">18</span>
+<span class="font-label-md text-label-md text-outline">Inpatients (8.2%)</span>
+<span class="font-caption-caps text-caption-caps text-error ml-auto bg-error-container/30 px-space-2xs py-space-3xs rounded-full">3 CCU Fast-Track</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-space-sm overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 25%"></div>
+</div>
+</div>
+</section>
+<!-- Filter & Tactical Search Bar -->
+<section class="rounded-xl bg-surface-container-low p-space-md shadow-sm flex flex-col lg:flex-row gap-space-md items-stretch lg:items-center justify-between">
+<!-- Search Field -->
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-all shadow-inner" id="consultationSearchInput" oninput="filterConsultations()" placeholder="Search by Patient Name, HN (e.g. #YGN-849201), NRC, or Diagnosis..." type="text"/>
+</div>
+<!-- Dynamic Filter Pill Selectors -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<!-- Date Range -->
+<div class="flex items-center gap-space-2xs px-space-sm py-2 rounded-xl bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+<span class="font-semibold">Past 30 Days</span>
+<span class="text-outline text-xs">(1 Oct - 24 Oct 2024)</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</div>
+<!-- Diagnostic Category -->
+<div class="flex items-center gap-space-2xs px-space-sm py-2 rounded-xl bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px] text-secondary">cardiology</span>
+<span>All Conditions</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</div>
+<!-- Visit Type Quick Tabs -->
+<div class="flex items-center bg-surface-container p-space-3xs rounded-xl font-label-sm text-label-sm">
+<button class="filter-tab-btn px-space-sm py-1.5 rounded-lg bg-surface-container-lowest text-primary font-semibold shadow-sm transition-all" onclick="setVisitFilter('all', this)">All (218)</button>
+<button class="filter-tab-btn px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-all" onclick="setVisitFilter('routine', this)">Follow-Up (142)</button>
+<button class="filter-tab-btn px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-all" onclick="setVisitFilter('urgent', this)">Urgent (44)</button>
+<button class="filter-tab-btn px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-all" onclick="setVisitFilter('postop', this)">Post-Op (32)</button>
+</div>
+</div>
+</section>
+<!-- Main Grid: Detailed Table & Slide-out SOAP Preview Drawer -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Historical Consultations Table (xl:col-span-8 or 12 depending on preview) -->
+<div class="xl:col-span-8 flex flex-col rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<!-- Table Header Status Bar -->
+<div class="px-space-lg py-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">history_edu</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Consultation Registry</span>
+<span class="bg-primary/10 text-primary px-space-xs py-space-3xs rounded-full font-label-sm text-label-sm font-semibold ml-space-2xs" id="patientCounterBadge">6 Encounters Shown</span>
+</div>
+<span class="font-caption-caps text-caption-caps uppercase text-outline">Live Clinical Database • Cloud Encrypted</span>
+</div>
+<!-- Data Table Body -->
+<div class="overflow-x-auto">
+<table class="w-full text-left" id="historyTable">
+<thead>
+<tr class="bg-surface-container text-outline font-caption-caps text-caption-caps uppercase tracking-wider">
+<th class="py-space-sm px-space-md font-semibold">Date &amp; Time</th>
+<th class="py-space-sm px-space-md font-semibold">Patient Information</th>
+<th class="py-space-sm px-space-md font-semibold">Token / Triage</th>
+<th class="py-space-sm px-space-md font-semibold">Primary Diagnosis (ICD-10)</th>
+<th class="py-space-sm px-space-md font-semibold">Clinical Note Summary &amp; Rx</th>
+<th class="py-space-sm px-space-md font-semibold text-center">Duration</th>
+<th class="py-space-sm px-space-md font-semibold">Status / Outcome</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-body-sm font-body-sm text-on-surface" id="consultationTableBody">
+<!-- Row 1: Daw Thida Win (Active Selected by Default) -->
+<tr class="hover:bg-surface-container-low/70 transition-colors cursor-pointer bg-surface-container-low/40 patient-row" data-visit-type="urgent" onclick="selectPatient(0)">
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="font-semibold text-on-surface">24 Oct 2024</div>
+<div class="font-caption-caps text-caption-caps text-outline">09:45 AM MMT</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs min-w-[170px]">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Warm studio medical portrait of Daw Thida Win, a 58 year old Burmese female patient wearing traditional patterned mint eingyi with calm expression in well-lit hospital ward setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5VPqcVBKt5siKvrCnpa01TK0drqKgShvBluVikaFIaaV62A--WWRdwfIKp7QhIuyDO_CpXk04CeD3jyNGNJkvf8FjPloZGypWHizOcab_HGgZcrRSkp2aCU-jkDD_0bq_piAweY8DUB3j9MF4EPwvBPmmUp3GyddQEQLaaCZYlbdroFOWUA4RZEb_siJDbumHuR8mebCqvbtpFFk71Giumdcpw9kP7eEIsaA2GFp_m5Cdtwn2ruG_"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-snug">Daw Thida Win</span>
+<span class="font-caption-caps text-caption-caps text-outline font-mono">HN: #YGN-849201</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">58 Yrs • Female</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="inline-flex flex-col bg-surface-container px-space-xs py-space-3xs rounded-md shadow-2xs border-l-4 border-secondary-container">
+<span class="font-title-token text-[18px] leading-none font-bold text-on-surface tracking-wider">A-108</span>
+<span class="font-caption-caps text-[10px] text-secondary font-bold uppercase mt-0.5">Tier 2 Urgent</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col min-w-[150px]">
+<span class="font-semibold text-on-surface leading-tight">Angina Pectoris, unspec.</span>
+<span class="inline-flex font-caption-caps text-[11px] text-primary font-mono mt-space-3xs bg-primary-container/10 px-1 rounded w-fit">ICD: I20.9</span>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-[240px]">
+<p class="truncate font-body-sm text-on-surface-variant text-[13px]" title="Substernal chest pressure on mild exertion radiating to left arm. ECG reveals T-wave inversion in V4-V6. Rx Atorvastatin 20mg, Metoprolol 50mg.">
+                  Substernal chest pressure on exertion. ECG reveals T-wave inversion in V4-V6. Rx Atorvastatin 20mg, Metoprolol...
+                </p>
+</td>
+<td class="py-space-md px-space-md text-center whitespace-nowrap font-mono text-outline">
+                14 mins
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-tertiary-container/15 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                  Echo Referral + Rx
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-primary" onclick="event.stopPropagation(); selectPatient(0);" title="View SOAP Details">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant" onclick="event.stopPropagation(); printPrescription('Daw Thida Win', 'A-108');" title="Print Rx Slip">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: U Ba Thein -->
+<tr class="hover:bg-surface-container-low/70 transition-colors cursor-pointer patient-row" data-visit-type="routine" onclick="selectPatient(1)">
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="font-semibold text-on-surface">24 Oct 2024</div>
+<div class="font-caption-caps text-caption-caps text-outline">09:15 AM MMT</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs min-w-[170px]">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Portrait of U Ba Thein, a 67 year old Myanmar elder gentleman wearing traditional cream collarless jacket and gentle warm smile, indoor outpatient hospital background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvQHnTAk_mnI3rzH6vU0Um5K4rQfig3c2wLoFuKXzjfUQGOBfSkP0wCbgSDzqqMEGkQY3wquEqxpNJp3s-Q75iu8yy1scTUykUStiXY5AIWLAP8lknNITXCnbiAu_vzv-hoW8LOTr5dv3vbHYeRzZDHB_tPn7qw-vtE3yr8Cfk1N2P19kAwPk0OGXFddQ2uGhyL9yX1hkA5n3jWQukwKhISmCabACHyd-0VdvKo-e5Ab22lqb4VvGo"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-snug">U Ba Thein</span>
+<span class="font-caption-caps text-caption-caps text-outline font-mono">HN: #YGN-719340</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">67 Yrs • Male</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="inline-flex flex-col bg-surface-container px-space-xs py-space-3xs rounded-md border-l-4 border-tertiary-container">
+<span class="font-title-token text-[18px] leading-none font-bold text-on-surface tracking-wider">A-105</span>
+<span class="font-caption-caps text-[10px] text-tertiary-container font-bold uppercase mt-0.5">Tier 3 Routine</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col min-w-[150px]">
+<span class="font-semibold text-on-surface leading-tight">Essential Hypertension</span>
+<span class="inline-flex font-caption-caps text-[11px] text-primary font-mono mt-space-3xs bg-primary-container/10 px-1 rounded w-fit">ICD: I10</span>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-[240px]">
+<p class="truncate font-body-sm text-on-surface-variant text-[13px]" title="BP monitored at 134/82. Controlled on Telmisartan 40mg. Mild ankle edema reported. Added hydrochlorothiazide 12.5mg OD. Diet counseling provided.">
+                  BP 134/82. Mild ankle edema reported. Telmisartan 40mg maintained, added HCTZ 12.5mg OD. Sodium reduction advice.
+                </p>
+</td>
+<td class="py-space-md px-space-md text-center whitespace-nowrap font-mono text-outline">
+                11 mins
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Rx Dispensed
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-primary" onclick="event.stopPropagation(); selectPatient(1);" title="View SOAP Details">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant" onclick="event.stopPropagation(); printPrescription('U Ba Thein', 'A-105');" title="Print Rx Slip">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Daw Khin Myint -->
+<tr class="hover:bg-surface-container-low/70 transition-colors cursor-pointer patient-row" data-visit-type="urgent" onclick="selectPatient(2)">
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="font-semibold text-on-surface">23 Oct 2024</div>
+<div class="font-caption-caps text-caption-caps text-outline">03:20 PM MMT</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs min-w-[170px]">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Portrait of Daw Khin Myint, middle-aged Burmese woman with hair tied back in respectful traditional style, sitting in doctor examination suite" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUHSOo5lOkUxYvr5GqgoFrlOH2--RDwcwEs7exbd0O12lGDfPzWgZL222II5NqOiJZV_wxmjjFejscbk9WKLofo9gVZic1F042z7rWX-uYI4bSMygSWD338JvwwpO6Ojw1X7JPltZ5a7WG8rrEM3NdmW0gtd5sYpYtcA-3daPpMH1ECFyiKRRJ-7K6q9i83ElevBmQOH8LeGUHQ1astsDgn4aBKlusvj3GnGA9j2LiEoV8-sRXtJy6"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-snug">Daw Khin Myint</span>
+<span class="font-caption-caps text-caption-caps text-outline font-mono">HN: #YGN-663812</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">62 Yrs • Female</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="inline-flex flex-col bg-surface-container px-space-xs py-space-3xs rounded-md border-l-4 border-error">
+<span class="font-title-token text-[18px] leading-none font-bold text-on-surface tracking-wider">A-089</span>
+<span class="font-caption-caps text-[10px] text-error font-bold uppercase mt-0.5">Tier 1 Critical</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col min-w-[150px]">
+<span class="font-semibold text-on-surface leading-tight">Acute NSTEMI</span>
+<span class="inline-flex font-caption-caps text-[11px] text-primary font-mono mt-space-3xs bg-primary-container/10 px-1 rounded w-fit">ICD: I21.4</span>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-[240px]">
+<p class="truncate font-body-sm text-on-surface-variant text-[13px]" title="Troponin-I elevated (1.82 ng/mL). Severe diaphoresis. Immediate transfer to Coronary Care Unit (CCU 2) arranged for urgent angiogram.">
+                  Troponin-I elevated (1.82 ng/mL). Severe diaphoresis. Immediate transfer to CCU Bed 2 arranged for angiogram.
+                </p>
+</td>
+<td class="py-space-md px-space-md text-center whitespace-nowrap font-mono text-outline">
+                22 mins
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-error-container/40 text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                  Ward / CCU Admitted
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-primary" onclick="event.stopPropagation(); selectPatient(2);" title="View SOAP Details">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant" onclick="event.stopPropagation(); alert('Ward Transfer Packet downloaded.');" title="Print Transfer Slip">
+<span class="material-symbols-outlined text-[18px]">output</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Ko Myo Win -->
+<tr class="hover:bg-surface-container-low/70 transition-colors cursor-pointer patient-row" data-visit-type="postop" onclick="selectPatient(3)">
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="font-semibold text-on-surface">22 Oct 2024</div>
+<div class="font-caption-caps text-caption-caps text-outline">11:10 AM MMT</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs min-w-[170px]">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Portrait of Ko Myo Win, a 46 year old Burmese man with casual polo shirt, recovering well in clinical follow-up room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6KxSwfhP7zPcbtz5kgAVRBm6Rh3jTz7tCbortV3dJJuYTgarGyDlVLTvc4Xd3fuDUtnbOKAF5cSZ-hfCQKFaIaK-HJjt2aZKhyUOyxYE3pXj5mA7oJ8CSorJ1jpEWVh2pQnPi9a6Wwj2ZrOXAs733oIZx_eVYXgcEsZe-yK2OtVV0akUKXgFumdyN9mh4CqrYCMagJf-5C4HKqDN4PVZQqrVnd0pdHWH1owvI5iCfXv2jUzObI9a7"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-snug">Ko Myo Win</span>
+<span class="font-caption-caps text-caption-caps text-outline font-mono">HN: #YGN-550918</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">46 Yrs • Male</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="inline-flex flex-col bg-surface-container px-space-xs py-space-3xs rounded-md border-l-4 border-tertiary-container">
+<span class="font-title-token text-[18px] leading-none font-bold text-on-surface tracking-wider">A-064</span>
+<span class="font-caption-caps text-[10px] text-tertiary-container font-bold uppercase mt-0.5">Post-Op Review</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col min-w-[150px]">
+<span class="font-semibold text-on-surface leading-tight">Post-PCI Stent (LAD)</span>
+<span class="inline-flex font-caption-caps text-[11px] text-primary font-mono mt-space-3xs bg-primary-container/10 px-1 rounded w-fit">ICD: Z95.5</span>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-[240px]">
+<p class="truncate font-body-sm text-on-surface-variant text-[13px]" title="Post-Percutaneous Coronary Intervention 3-month review. Radial artery puncture site healed. Dual antiplatelet therapy compliance confirmed (Clopidogrel + ASA).">
+                  Post-PCI 3-mo review. Radial site healed cleanly. DAPT compliance verified (Clopidogrel + ASA). Normal tolerance.
+                </p>
+</td>
+<td class="py-space-md px-space-md text-center whitespace-nowrap font-mono text-outline">
+                10 mins
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-tertiary-fixed/30 text-on-tertiary-fixed-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                  Follow-up 6 Mos
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-primary" onclick="event.stopPropagation(); selectPatient(3);" title="View SOAP Details">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant" onclick="event.stopPropagation(); printPrescription('Ko Myo Win', 'A-064');" title="Print Rx Slip">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Daw Tin Tin Aye -->
+<tr class="hover:bg-surface-container-low/70 transition-colors cursor-pointer patient-row" data-visit-type="routine" onclick="selectPatient(4)">
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="font-semibold text-on-surface">21 Oct 2024</div>
+<div class="font-caption-caps text-caption-caps text-outline">02:40 PM MMT</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs min-w-[170px]">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Portrait of Daw Tin Tin Aye, 52 year old female patient wearing jade earrings and burgundy attire in modern clinical consultation desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsIMrZyezRnS53w3APSfGG5JeFZUEDA5AznKTwFYi68wA26OG7Qja61UstuKDVBoU09Ls25GbVF31gOmHiLUqxbs5BCzAFrmVYn0wv6PJSjDgi0FHfZWiBoMhz73AbvRA7lVwAkjOOyQ7KqooWA3E46yZU_minFLTAe_YNkVccEpJudZykCB89R7BRmtMjX2EKr7UyP-XCODE23EMM6UbwycSwxgWmILQo9yCyPVaLdU1sf8vTE9Dl"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-snug">Daw Tin Tin Aye</span>
+<span class="font-caption-caps text-caption-caps text-outline font-mono">HN: #YGN-902144</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">52 Yrs • Female</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="inline-flex flex-col bg-surface-container px-space-xs py-space-3xs rounded-md border-l-4 border-secondary-container">
+<span class="font-title-token text-[18px] leading-none font-bold text-on-surface tracking-wider">A-051</span>
+<span class="font-caption-caps text-[10px] text-secondary font-bold uppercase mt-0.5">Tier 2 Routine</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col min-w-[150px]">
+<span class="font-semibold text-on-surface leading-tight">Paroxysmal AF</span>
+<span class="inline-flex font-caption-caps text-[11px] text-primary font-mono mt-space-3xs bg-primary-container/10 px-1 rounded w-fit">ICD: I48.0</span>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-[240px]">
+<p class="truncate font-body-sm text-on-surface-variant text-[13px]" title="Intermittent palpitations at night. Holter monitor scheduled for 48-hr logging. Apixaban 5mg BD initiated. Bisoprolol adjusted to 2.5mg.">
+                  Intermittent palpitations at night. Holter 48-hr logging ordered. Initiated Apixaban 5mg BD, Bisoprolol 2.5mg.
+                </p>
+</td>
+<td class="py-space-md px-space-md text-center whitespace-nowrap font-mono text-outline">
+                16 mins
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary-fixed/40 text-on-secondary-fixed-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Holter Test Booked
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-primary" onclick="event.stopPropagation(); selectPatient(4);" title="View SOAP Details">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant" onclick="event.stopPropagation(); printPrescription('Daw Tin Tin Aye', 'A-051');" title="Print Rx Slip">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: U Zaw Htut -->
+<tr class="hover:bg-surface-container-low/70 transition-colors cursor-pointer patient-row" data-visit-type="routine" onclick="selectPatient(5)">
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="font-semibold text-on-surface">19 Oct 2024</div>
+<div class="font-caption-caps text-caption-caps text-outline">10:05 AM MMT</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs min-w-[170px]">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Portrait of U Zaw Htut, 71 year old Burmese elderly man wearing wire-frame spectacles and light traditional jacket in bright hospital setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBop47DZa6Yv1h1ftEPD9nYV_BQ6kNqnXmSxIdsW4w289cjPb-vdcpuEPvaIq7-M_rnol3Z-XF5BXN3x2v8qVD34Zc3R4c74DQ7QVNkLSBb_UoCBftIbiuPyvNBZywOcKpOmSfcXR7fTckoDScpcrbLlxr5xThyXuuXG6pBi8bUHwzW3_S40CIlvUstgVu_ppgiV7yX0x16byb4QC0FYJhuusPayyv2xsegX-WeFLAdp3ZVn0TmUor3"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface leading-snug">U Zaw Htut</span>
+<span class="font-caption-caps text-caption-caps text-outline font-mono">HN: #YGN-401927</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">71 Yrs • Male</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="inline-flex flex-col bg-surface-container px-space-xs py-space-3xs rounded-md border-l-4 border-tertiary-container">
+<span class="font-title-token text-[18px] leading-none font-bold text-on-surface tracking-wider">A-032</span>
+<span class="font-caption-caps text-[10px] text-tertiary-container font-bold uppercase mt-0.5">Tier 3 Routine</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col min-w-[150px]">
+<span class="font-semibold text-on-surface leading-tight">Chronic Heart Failure</span>
+<span class="inline-flex font-caption-caps text-[11px] text-primary font-mono mt-space-3xs bg-primary-container/10 px-1 rounded w-fit">ICD: I50.9</span>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-[240px]">
+<p class="truncate font-body-sm text-on-surface-variant text-[13px]" title="NYHA Class II symptoms stable. LVEF 42%. Continued on Entresto 24/26mg BD, Empagliflozin 10mg OD. Serum electrolytes and creatinine normal.">
+                  NYHA Class II stable. LVEF 42%. Continued Entresto 24/26mg BD &amp; Empagliflozin 10mg. Renal function intact.
+                </p>
+</td>
+<td class="py-space-md px-space-md text-center whitespace-nowrap font-mono text-outline">
+                15 mins
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Rx Dispensed
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-primary" onclick="event.stopPropagation(); selectPatient(5);" title="View SOAP Details">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant" onclick="event.stopPropagation(); printPrescription('U Zaw Htut', 'A-032');" title="Print Rx Slip">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Audit Bar -->
+<div class="px-space-lg py-space-sm bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<span class="font-body-sm text-body-sm text-outline">Showing 1 to 6 of 218 verified outpatient encounters</span>
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm disabled:opacity-50" disabled="">Previous</button>
+<span class="px-space-sm py-1 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-bold">1</span>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm">2</button>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm">3</button>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm">Next</button>
+</div>
+</div>
+</div>
+<!-- Live Slide-out SOAP Preview & Medical Stamp Snippet (xl:col-span-4) -->
+<div class="xl:col-span-4 flex flex-col rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden sticky top-32">
+<!-- Drawer Header -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-primary text-[22px]">quick_reference_all</span>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface leading-tight font-semibold">SOAP Clinical Encounter</div>
+<div class="font-caption-caps text-caption-caps text-outline">EMR Snapshot • Audited Record</div>
+</div>
+</div>
+<span class="font-caption-caps text-caption-caps text-primary bg-primary/10 px-2 py-0.5 rounded font-bold uppercase">Locked / Signed</span>
+</div>
+<!-- Selected Patient Header Mini Card -->
+<div class="p-space-md bg-surface-container/50 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-11 h-11 rounded-full overflow-hidden shadow-sm flex-shrink-0 bg-surface-container" id="soapPatientAvatar">
+<img class="w-full h-full object-cover" data-alt="Portrait of Daw Thida Win in clinical OPD" id="soapAvatarImg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_aEW_EvX4ikYvE9iisSatYnFpyNt-ohJ4Wm2UcsmTbf7ZpP8hjIiBvelzlHMSfyxPcPGHbXN2rzICy7mp4cg8xQhONIPlCmdne_i8u60T2j4LR8Wk6khGsobM14Meve0pe_4m-2QmugYnuhEIzVT7Y_h2CSI3ToSztJ-LjYxUZzgwgIQcOQ7yRpu9g4CtkXLzuqb73Ff1a3lo2z_K3jNgFz1GPmZZuOCkocAy2nKMfCXuYEVXVhH8"/>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[16px] text-on-surface font-bold" id="soapPatientName">Daw Thida Win</span>
+<span class="font-caption-caps text-caption-caps text-outline" id="soapPatientMeta">HN: #YGN-849201 • 58 Yrs • Female</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-title-token text-[22px] font-extrabold text-primary leading-none" id="soapTokenId">A-108</div>
+<div class="font-caption-caps text-caption-caps text-outline mt-1" id="soapDateStamp">24 Oct, 09:45 AM</div>
+</div>
+</div>
+<!-- Interactive Tab Navigator for SOAP sections -->
+<div class="p-space-md flex flex-col gap-space-md max-h-[580px] overflow-y-auto">
+<!-- S: Subjective -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase text-primary font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+              S • Subjective (လူနာပြောပြချက်)
+            </span>
+<span class="font-caption-caps text-caption-caps text-outline">Chief Complaint</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="soapSubjective">
+            Patient reports dull, retrosternal chest aching recurring for 5 days, aggravated by walking uphill or climbing stairs. Relief with 5-10 minutes of resting. Denies syncope or orthopnea. Family history of coronary artery disease (father had MI at 60).
+          </p>
+</div>
+<!-- O: Objective -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase text-secondary font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              O • Objective (စမ်းသပ်စစ်ဆေးတွေ့ရှိချက်)
+            </span>
+<span class="font-caption-caps text-caption-caps text-outline">Vitals &amp; ECG</span>
+</div>
+<div class="grid grid-cols-2 gap-2 my-1">
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="font-caption-caps text-[10px] text-outline block uppercase">BP (Sitting)</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface" id="soapBp">148/92 mmHg</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="font-caption-caps text-[10px] text-outline block uppercase">Pulse / SpO2</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface" id="soapPulse">82 bpm • 98%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="soapObjective">
+            Normal S1/S2 heart sounds. No murmurs or carotid bruits. 12-lead ECG demonstrates T-wave inversions in anterolateral leads (V4-V6). Random Blood Sugar: 128 mg/dL.
+          </p>
+</div>
+<!-- A: Assessment -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase text-tertiary font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+              A • Assessment (ရောဂါသတ်မှတ်ချက်)
+            </span>
+<span class="font-caption-caps text-caption-caps text-primary font-mono" id="soapIcdBadge">ICD: I20.9</span>
+</div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface" id="soapAssessment">
+            Angina Pectoris, unspecified. High cardiovascular risk profile. Stage 1 Hypertension. Suspected CAD / chronic stable angina.
+          </p>
+</div>
+<!-- P: Plan & Prescriptions -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps uppercase text-primary font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+              P • Plan &amp; Rx (ကုသစီမံချက်နှင့်ဆေးညွှန်း)
+            </span>
+<span class="font-caption-caps text-caption-caps text-outline">Action Steps</span>
+</div>
+<ul class="font-body-sm text-body-sm text-on-surface-variant space-y-1 list-disc list-inside" id="soapPlanList">
+<li>Tab. Atorvastatin 20 mg - 1 Tab PO at night (30 Days)</li>
+<li>Tab. Metoprolol Succinate 50 mg - 1 Tab PO Morning (30 Days)</li>
+<li>Sublingual Nitroglycerin 0.5 mg PRN for acute chest pain</li>
+<li>Urgent Referral: Transthoracic Echocardiography &amp; Treadmill Stress Test</li>
+<li>Follow-up OPD visit scheduled in 14 days</li>
+</ul>
+</div>
+<!-- Digital MMC Signature & Stamp -->
+<div class="p-space-sm rounded-xl bg-surface-container flex items-center justify-between mt-space-2xs shadow-inner">
+<div class="flex flex-col">
+<span class="font-caption-caps text-[10px] text-outline uppercase">Physician Attestation</span>
+<span class="font-headline-sm text-[15px] font-bold text-primary">Dr. Kyaw Zayar Min</span>
+<span class="font-caption-caps text-caption-caps text-outline">M.B.,B.S, M.Med.Sc, MRCP (UK)</span>
+<span class="font-label-sm text-[11px] text-tertiary font-semibold">MMC Registered Specialist #94218</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary relative">
+<span class="material-symbols-outlined text-[32px]">approval_delegation</span>
+<span class="absolute text-[8px] font-mono bottom-1 font-bold text-primary uppercase">VERIFIED</span>
+</div>
+<span class="font-caption-caps text-[9px] text-outline mt-1 font-mono">HASH: 9a4f..2024</span>
+</div>
+</div>
+<!-- Drawer Action Buttons -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<button class="flex items-center justify-center gap-space-2xs py-2.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm" onclick="printCurrentSoap()">
+<span class="material-symbols-outlined text-[18px]">print</span>
+            Print SOAP
+          </button>
+<button class="flex items-center justify-center gap-space-2xs py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm" onclick="openTimelineModal()">
+<span class="material-symbols-outlined text-[18px]">timeline</span>
+            History Timeline
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Timeline Modal (Hidden by default) -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm p-space-md" id="timelineModal">
+<div class="w-full max-w-2xl rounded-2xl bg-surface-container-lowest shadow-2xl overflow-hidden flex flex-col max-h-[870px]">
+<div class="px-space-lg py-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary">clinical_notes</span>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="modalPatientTitle">Patient Longitudinal Timeline</span>
+<div class="font-caption-caps text-caption-caps text-outline">Yangon Central Hospital Archive</div>
+</div>
+</div>
+<button class="p-1 rounded-full hover:bg-surface-container text-outline" onclick="closeTimelineModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-space-lg overflow-y-auto space-y-space-md">
+<!-- Event 1 -->
+<div class="flex gap-space-md">
+<div class="flex flex-col items-center">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">1</div>
+<div class="w-0.5 h-full bg-surface-container mt-1"></div>
+</div>
+<div class="pb-space-md">
+<div class="font-label-sm text-label-sm text-outline">Today • 24 Oct 2024, 09:45 AM</div>
+<div class="font-headline-sm text-[16px] text-on-surface font-bold mt-1">Outpatient Specialist Consultation (Dr. Kyaw Zayar Min)</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Evaluation of progressive exertional chest tightness. ECG T-wave inversion. Rx Atorvastatin + Metoprolol. Diagnostic echo scheduled.</div>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="flex gap-space-md">
+<div class="flex flex-col items-center">
+<div class="w-7 h-7 rounded-full bg-surface-container text-outline flex items-center justify-center text-xs font-bold">2</div>
+<div class="w-0.5 h-full bg-surface-container mt-1"></div>
+</div>
+<div class="pb-space-md">
+<div class="font-label-sm text-label-sm text-outline">12 Sep 2024, 11:30 AM</div>
+<div class="font-headline-sm text-[16px] text-on-surface font-bold mt-1">General Medicine OPD - Routine Checkup</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Daw Thida Win evaluated for mild fatigue and fluctuating hypertension. Blood pressure was 142/88. Advised lifestyle modification.</div>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="flex gap-space-md">
+<div class="flex flex-col items-center">
+<div class="w-7 h-7 rounded-full bg-surface-container text-outline flex items-center justify-center text-xs font-bold">3</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">04 Jan 2024, 08:15 AM</div>
+<div class="font-headline-sm text-[16px] text-on-surface font-bold mt-1">Comprehensive Executive Health Screening</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Full lipid profile, HbA1c (6.1%), renal panel, and baseline chest X-Ray performed. Minimal cardiomegaly noted.</div>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-sm bg-surface-container-low flex justify-end">
+<button class="px-space-md py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-semibold" onclick="closeTimelineModal()">
+          Close Timeline
+        </button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Bar -->
+<div class="fixed bottom-6 right-6 z-50 translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-xs px-space-md py-space-sm rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl font-body-sm text-body-sm" id="actionToast">
+<span class="material-symbols-outlined text-tertiary-fixed text-[20px]" id="toastIcon">check_circle</span>
+<span id="toastMessage">Action completed successfully.</span>
+</div>
+</div>
+<!-- Client-side Micro-interactions -->
+<script>
+  // Complete clinical datasets for instantaneous SOAP preview updating
+  const patientRecords = [
+    {
+      name: "Daw Thida Win",
+      hn: "HN: #YGN-849201",
+      meta: "58 Yrs • Female",
+      token: "A-108",
+      date: "24 Oct 2024, 09:45 AM",
+      imgPrompt: "Warm studio medical portrait of Daw Thida Win, a 58 year old Burmese female patient wearing traditional patterned mint eingyi with calm expression in well-lit hospital ward setting",
+      bp: "148/92 mmHg",
+      pulse: "82 bpm • 98%",
+      icd: "ICD: I20.9",
+      subjective: "Patient reports dull, retrosternal chest aching recurring for 5 days, aggravated by walking uphill or climbing stairs. Relief with 5-10 minutes of resting. Denies syncope or orthopnea. Family history of coronary artery disease.",
+      objective: "Normal S1/S2 heart sounds. No murmurs or carotid bruits. 12-lead ECG demonstrates T-wave inversions in anterolateral leads (V4-V6). Random Blood Sugar: 128 mg/dL.",
+      assessment: "Angina Pectoris, unspecified. High cardiovascular risk profile. Stage 1 Hypertension. Suspected CAD / chronic stable angina.",
+      plans: [
+        "Tab. Atorvastatin 20 mg - 1 Tab PO at night (30 Days)",
+        "Tab. Metoprolol Succinate 50 mg - 1 Tab PO Morning (30 Days)",
+        "Sublingual Nitroglycerin 0.5 mg PRN for acute chest pain",
+        "Urgent Referral: Transthoracic Echocardiography & Treadmill Stress Test",
+        "Follow-up OPD visit scheduled in 14 days"
+      ]
+    },
+    {
+      name: "U Ba Thein",
+      hn: "HN: #YGN-719340",
+      meta: "67 Yrs • Male",
+      token: "A-105",
+      date: "24 Oct 2024, 09:15 AM",
+      imgPrompt: "Portrait of U Ba Thein, a 67 year old Myanmar elder gentleman wearing traditional cream collarless jacket and gentle warm smile, indoor outpatient hospital background",
+      bp: "134/82 mmHg",
+      pulse: "74 bpm • 99%",
+      icd: "ICD: I10",
+      subjective: "Routine hypertension follow-up. States feeling generally well without morning headaches. Notes mild bilateral ankle swelling after long periods of standing during prayer sessions.",
+      objective: "Physical exam reveals trace 1+ non-pitting ankle edema bilaterally. Clear breath sounds throughout lung fields. Heart rate regular with normal heart tones.",
+      assessment: "Essential Hypertension, well-compensated. Mild peripheral fluid retention secondary to existing calcium channel therapy.",
+      plans: [
+        "Tab. Telmisartan 40 mg - 1 Tab PO OD in morning",
+        "Tab. Hydrochlorothiazide (HCTZ) 12.5 mg - 1 Tab PO OD",
+        "Dietary restriction: Daily sodium < 2.0 grams",
+        "Repeat serum electrolytes (Na+/K+) in 3 weeks",
+        "Review in OPD-4 Cardiology in 3 months"
+      ]
+    },
+    {
+      name: "Daw Khin Myint",
+      hn: "HN: #YGN-663812",
+      meta: "62 Yrs • Female",
+      token: "A-089",
+      date: "23 Oct 2024, 03:20 PM",
+      imgPrompt: "Portrait of Daw Khin Myint, middle-aged Burmese woman with hair tied back in respectful traditional style, sitting in doctor examination suite",
+      bp: "108/68 mmHg",
+      pulse: "102 bpm • 96%",
+      icd: "ICD: I21.4",
+      subjective: "Sudden onset of severe retrosternal squeezing pain radiating to left shoulder and jaw, accompanied by cold diaphoresis and nausea for 90 minutes. Pain did not abate after sublingual nitrate.",
+      objective: "Pale, clammy patient in acute distress. ST segment depressions in lead II, III, aVF with horizontal ST depressions in V2-V4. Bedside STAT High-Sensitivity Troponin-I markedly elevated at 1.82 ng/mL.",
+      assessment: "Acute Non-ST-Segment Elevation Myocardial Infarction (NSTEMI). High-risk acute coronary syndrome requiring prompt revascularization.",
+      plans: [
+        "Immediate loading dose: Aspirin 300 mg chewable + Ticagrelor 180 mg PO stat",
+        "IV Heparin bolus administered per hospital weight-adjusted ACS protocol",
+        "Urgent catheterization laboratory activation with CCU Fast-Track Admission",
+        "Family counseling conducted in Myanmar language and informed consent secured",
+        "Admitted to CCU Bed 2 under Dr. Kyaw Zayar Min care"
+      ]
+    },
+    {
+      name: "Ko Myo Win",
+      hn: "HN: #YGN-550918",
+      meta: "46 Yrs • Male",
+      token: "A-064",
+      date: "22 Oct 2024, 11:10 AM",
+      imgPrompt: "Portrait of Ko Myo Win, a 46 year old Burmese man with casual polo shirt, recovering well in clinical follow-up room",
+      bp: "122/76 mmHg",
+      pulse: "68 bpm • 99%",
+      icd: "ICD: Z95.5",
+      subjective: "3-Month Post-PCI follow-up after Drug-Eluting Stent (DES) implantation in proximal LAD. Reports returning to normal daily activities and morning light walks without chest pain or dyspnea.",
+      objective: "Right radial artery access site cleanly healed without pseudoaneurysm or hematoma. Normal cardiovascular examination. ECG confirms sinus bradycardia with resolved ischemic changes.",
+      assessment: "Status post-percutaneous transluminal coronary angioplasty with stent. Excellent functional recovery. Strict compliance with dual antiplatelet therapy.",
+      plans: [
+        "Continue Aspirin 100 mg OD + Clopidogrel 75 mg OD for mandatory 12 months",
+        "Rosuvastatin 20 mg OD at bedtime",
+        "Maintain regular exercise routine; avoid contact sports",
+        "Next clinical evaluation in 6 months with fasting lipid panel"
+      ]
+    },
+    {
+      name: "Daw Tin Tin Aye",
+      hn: "HN: #YGN-902144",
+      meta: "52 Yrs • Female",
+      token: "A-051",
+      date: "21 Oct 2024, 02:40 PM",
+      imgPrompt: "Portrait of Daw Tin Tin Aye, 52 year old female patient wearing jade earrings and burgundy attire in modern clinical consultation desk",
+      bp: "128/84 mmHg",
+      pulse: "94 bpm (Irregular) • 98%",
+      icd: "ICD: I48.0",
+      subjective: "Frequent episodes of irregular flutter and heart thumping sensations during resting hours, lasting 15 to 45 minutes over the past month. Occasional lightheadedness without loss of consciousness.",
+      objective: "Irregularly irregular pulse rhythm. Auscultation confirms variable intensity S1 sound. In-clinic rhythm strip captures brief run of Paroxysmal Atrial Fibrillation. CHA2DS2-VASc score calculated as 2.",
+      assessment: "Paroxysmal Atrial Fibrillation with moderate stroke risk. Hypertension co-factor.",
+      plans: [
+        "Initiate oral anticoagulation: Apixaban 5 mg PO BD with meal",
+        "Rate control: Bisoprolol 2.5 mg PO OD",
+        "Booked 48-Hour Ambulatory Holter ECG Monitoring for Monday",
+        "Thyroid function tests (Free T3, T4, TSH) panel drawn today",
+        "Advised caffeine and alcohol cessation"
+      ]
+    },
+    {
+      name: "U Zaw Htut",
+      hn: "HN: #YGN-401927",
+      meta: "71 Yrs • Male",
+      token: "A-032",
+      date: "19 Oct 2024, 10:05 AM",
+      imgPrompt: "Portrait of U Zaw Htut, 71 year old Burmese elderly man wearing wire-frame spectacles and light traditional jacket in bright hospital setting",
+      bp: "116/70 mmHg",
+      pulse: "70 bpm • 97%",
+      icd: "ICD: I50.9",
+      subjective: "Heart failure follow-up. Reports sleeping comfortably on one pillow without paroxysmal nocturnal dyspnea. Stable weight at 64 kg over the past two weeks.",
+      objective: "Jugular venous pressure normal at 2 cm above sternal angle. Chest auscultation clear. Echocardiogram from last month recorded LVEF at 42% (HFmrEF). Serum creatinine 1.02 mg/dL, Potassium 4.4 mmol/L.",
+      assessment: "Chronic Heart Failure with mildly reduced ejection fraction (HFmrEF), NYHA Functional Class II, stable on GDMT.",
+      plans: [
+        "Continue Sacubitril / Valsartan (Entresto) 24/26 mg BD",
+        "Continue Empagliflozin 10 mg PO OD",
+        "Continue Spironolactone 25 mg PO OD",
+        "Continue daily self-weighing chart; contact clinic if weight gains > 2kg in 48h",
+        "Cardiology review and NT-proBNP re-test in 4 months"
+      ]
+    }
+  ];
+
+  let currentPatientIndex = 0;
+
+  function selectPatient(index) {
+    currentPatientIndex = index;
+    const data = patientRecords[index];
+    if (!data) return;
+
+    // Highlight row
+    const rows = document.querySelectorAll('.patient-row');
+    rows.forEach((row, i) => {
+      if (i === index) {
+        row.classList.add('bg-surface-container-low/70');
+      } else {
+        row.classList.remove('bg-surface-container-low/70');
+      }
+    });
+
+    // Populate Drawer
+    document.getElementById('soapPatientName').textContent = data.name;
+    document.getElementById('soapPatientMeta').textContent = `${data.hn} • ${data.meta}`;
+    document.getElementById('soapTokenId').textContent = data.token;
+    document.getElementById('soapDateStamp').textContent = data.date;
+    document.getElementById('soapSubjective').textContent = data.subjective;
+    document.getElementById('soapBp').textContent = data.bp;
+    document.getElementById('soapPulse').textContent = data.pulse;
+    document.getElementById('soapObjective').textContent = data.objective;
+    document.getElementById('soapAssessment').textContent = data.assessment;
+    document.getElementById('soapIcdBadge').textContent = data.icd;
+
+    const planList = document.getElementById('soapPlanList');
+    planList.innerHTML = '';
+    data.plans.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      planList.appendChild(li);
+    });
+
+    // Update avatar img data-alt
+    const imgEl = document.getElementById('soapAvatarImg');
+    if (imgEl) {
+      imgEl.setAttribute('data-alt', data.imgPrompt);
+    }
+  }
+
+  function filterConsultations() {
+    const query = document.getElementById('consultationSearchInput').value.toLowerCase();
+    const rows = document.querySelectorAll('.patient-row');
+    let visibleCount = 0;
+
+    rows.forEach((row, idx) => {
+      const p = patientRecords[idx];
+      const match = p.name.toLowerCase().includes(query) ||
+                    p.hn.toLowerCase().includes(query) ||
+                    p.assessment.toLowerCase().includes(query) ||
+                    p.icd.toLowerCase().includes(query);
+      if (match) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    document.getElementById('patientCounterBadge').textContent = `${visibleCount} Encounters Shown`;
+  }
+
+  function setVisitFilter(type, btn) {
+    document.querySelectorAll('.filter-tab-btn').forEach(b => {
+      b.classList.remove('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+      b.classList.add('text-on-surface-variant');
+    });
+    btn.classList.add('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+    btn.classList.remove('text-on-surface-variant');
+
+    const rows = document.querySelectorAll('.patient-row');
+    let visibleCount = 0;
+    rows.forEach(row => {
+      const rowType = row.getAttribute('data-visit-type');
+      if (type === 'all' || rowType === type) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    document.getElementById('patientCounterBadge').textContent = `${visibleCount} Encounters Shown`;
+  }
+
+  function triggerExportNotice(type) {
+    showToast(`Generating certified clinical audit export (${type}). Download will begin momentarily.`, 'download_done');
+  }
+
+  function printPrescription(patientName, token) {
+    showToast(`Prescription slip for ${patientName} (${token}) routed to OPD Dispensary Printer.`, 'local_printshop');
+  }
+
+  function printCurrentSoap() {
+    const p = patientRecords[currentPatientIndex];
+    showToast(`Printing authenticated SOAP document for ${p.name} (MMC License #94218 verified).`, 'print');
+  }
+
+  function openTimelineModal() {
+    const p = patientRecords[currentPatientIndex];
+    document.getElementById('modalPatientTitle').textContent = `Clinical Timeline: ${p.name} (${p.hn})`;
+    document.getElementById('timelineModal').classList.remove('hidden');
+  }
+
+  function closeTimelineModal() {
+    document.getElementById('timelineModal').classList.add('hidden');
+  }
+
+  function showToast(message, iconName) {
+    const toast = document.getElementById('actionToast');
+    const msg = document.getElementById('toastMessage');
+    const icn = document.getElementById('toastIcon');
+
+    msg.textContent = message;
+    icn.textContent = iconName || 'check_circle';
+
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3600);
+  }
+
+  // Initialize selected item on boot
+  selectPatient(0);
+</script></div></main></div></body></html>

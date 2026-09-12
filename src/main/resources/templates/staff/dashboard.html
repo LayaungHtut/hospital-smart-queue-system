@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/staff/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/staff/dashboard}">Dashboard</a>
+            <a th:href="@{/staff/queues}">Queue Monitor</a>
+            <a th:href="@{/staff/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">support_agent</span> Staff Dashboard</h1>
+        <span class="text-muted" th:text="${staff.name}"></span>
+    </div>
+
+    <div class="grid grid-3 mb-3">
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-warning" style="font-size:24px">pending</span>
+            <div class="stat-label">Waiting Now</div>
+            <div class="stat-number" th:text="${waitingCount}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-success" style="font-size:24px">play_circle</span>
+            <div class="stat-label">Serving Now</div>
+            <div class="stat-number" th:text="${servingCount}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-primary" style="font-size:24px">today</span>
+            <div class="stat-label">Queues Today</div>
+            <div class="stat-number" th:text="${queuesToday}"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3><span class="material-symbols-outlined text-error">emergency</span> Emergency Confirmations Pending</h3>
+        <div th:if="${pendingEmergencies == null or pendingEmergencies.isEmpty()}">
+            <p class="text-muted">No emergency confirmations pending.</p>
+        </div>
+        <table class="table" th:if="${pendingEmergencies != null and !pendingEmergencies.isEmpty()}">
+            <thead>
+            <tr><th>Queue No.</th><th>Patient</th><th>Doctor</th><th></th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="q : ${pendingEmergencies}">
+                <td th:text="${q.queueNumber}"></td>
+                <td th:text="${q.patientName ?: q.patientId}"></td>
+                <td th:text="${q.doctorName ?: q.doctorId}"></td>
+                <td>
+                    <form method="post" th:action="@{/staff/emergency/confirm}">
+                        <input type="hidden" name="queueId" th:value="${q.queueId}">
+                        <button class="btn btn-danger btn-sm" type="submit">
+                            <span class="material-symbols-outlined" style="font-size:16px">emergency</span> Confirm Emergency
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

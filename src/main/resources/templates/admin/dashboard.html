@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/admin/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/doctors}">Doctors</a>
+            <a th:href="@{/admin/departments}">Departments</a>
+            <a th:href="@{/admin/patients}">Patients</a>
+            <a th:href="@{/admin/reports}">Reports</a>
+            <a th:href="@{/admin/settings}">Settings</a>
+            <a th:href="@{/admin/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">admin_panel_settings</span> Admin Dashboard</h1>
+        <span class="text-muted" th:text="${admin.name}"></span>
+    </div>
+
+    <div class="grid grid-4 mb-3">
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-primary" style="font-size:24px">people</span>
+            <div class="stat-label">Total Patients</div>
+            <div class="stat-number" th:text="${totalPatients}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-warning" style="font-size:24px">stethoscope</span>
+            <div class="stat-label">Total Doctors</div>
+            <div class="stat-number" th:text="${totalDoctors}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-success" style="font-size:24px">today</span>
+            <div class="stat-label">Queues Today</div>
+            <div class="stat-number" th:text="${queuesToday}"></div>
+        </div>
+        <div class="stat-card">
+            <span class="material-symbols-outlined text-error" style="font-size:24px">pending</span>
+            <div class="stat-label">Waiting / Serving</div>
+            <div class="stat-number" th:text="${waitingNow + ' / ' + servingNow}"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3><span class="material-symbols-outlined text-primary">list_alt</span> Recent Queues</h3>
+        <table class="table">
+            <thead>
+            <tr><th>Queue No.</th><th>Patient</th><th>Doctor</th><th>Priority</th><th>Status</th><th>Created</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="q : ${recentQueues}">
+                <td th:text="${q.queueNumber}"></td>
+                <td th:text="${q.patientId}"></td>
+                <td th:text="${q.doctorId}"></td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${q.priority == 'EMERGENCY' ? 'badge-emergency' : (q.priority == 'APPOINTMENT' ? 'badge-appointment' : 'badge-normal')}"
+                          th:text="${q.priority}"></span>
+                </td>
+                <td><span class="badge" th:classappend="'badge-' + ${q.status.toLowerCase()}" th:text="${q.status}"></span></td>
+                <td th:text="${q.createdAt}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

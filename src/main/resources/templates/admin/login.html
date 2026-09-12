@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links"><a th:href="@{/}">Home</a></div>
+    </div>
+</nav>
+
+<div class="login-page">
+    <div class="card auth-card">
+        <div class="text-center mb-2">
+            <span class="material-symbols-outlined text-error" style="font-size:40px">admin_panel_settings</span>
+        </div>
+        <h2 class="text-center mb-2">Admin Login</h2>
+        <p class="text-muted text-center mb-2">Demo: username admin / password 123456</p>
+
+        <div class="alert alert-error" th:if="${error}"><span th:text="${error}"></span></div>
+
+        <form method="post" th:action="@{/admin/login}">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                        <span class="material-symbols-outlined" style="font-size:20px">visibility_off</span>
+                    </button>
+                </div>
+            </div>
+            <button class="btn w-full" type="submit">
+                <span class="material-symbols-outlined" style="font-size:18px">login</span> Login
+            </button>
+        </form>
+    </div>
+</div>
+<script th:src="@{/js/toggle-password.js}"></script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=inter:wght@100..900&family=plusJakartaSans:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-lowest": "#ffffff",
+          "tertiary": "#00442d",
+          "on-secondary-container": "#663500",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#00504a",
+          "background": "#fdf9ee",
+          "primary": "#00433e",
+          "on-tertiary-fixed-variant": "#005137",
+          "secondary-container": "#fe932c",
+          "surface-container-high": "#ebe8dd",
+          "on-primary-fixed": "#00201d",
+          "on-error-container": "#93000a",
+          "surface-bright": "#fdf9ee",
+          "secondary-fixed": "#ffdcc3",
+          "on-surface": "#1c1c15",
+          "primary-fixed-dim": "#8fd3cb",
+          "surface-tint": "#216962",
+          "primary-container": "#0d5c56",
+          "surface-container-highest": "#e5e2d7",
+          "surface-container-low": "#f7f4e8",
+          "on-tertiary-fixed": "#002114",
+          "tertiary-fixed-dim": "#68dba9",
+          "surface-container": "#f1eee3",
+          "inverse-primary": "#8fd3cb",
+          "on-error": "#ffffff",
+          "surface-dim": "#dddacf",
+          "on-primary": "#ffffff",
+          "inverse-on-surface": "#f4f1e5",
+          "on-secondary": "#ffffff",
+          "on-secondary-fixed-variant": "#6e3900",
+          "on-background": "#1c1c15",
+          "outline-variant": "#bec9c6",
+          "error": "#ba1a1a",
+          "surface-variant": "#e5e2d7",
+          "surface": "#fdf9ee",
+          "secondary": "#904d00",
+          "secondary-fixed-dim": "#ffb77d",
+          "on-primary-container": "#8ed2ca",
+          "outline": "#6f7977",
+          "on-surface-variant": "#3f4947",
+          "tertiary-fixed": "#85f8c4",
+          "on-secondary-fixed": "#2f1500",
+          "on-tertiary-container": "#66daa8",
+          "tertiary-container": "#005e40",
+          "primary-fixed": "#abefe7",
+          "inverse-surface": "#313129",
+          "on-tertiary": "#ffffff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-md": "1rem",
+          "margin-mobile": "1.25rem",
+          "space-3xl": "3.5rem",
+          "space-3xs": "0.125rem",
+          "margin-desktop": "3rem",
+          "space-xs": "0.5rem",
+          "gutter-mobile": "1rem",
+          "space-2xl": "2.5rem",
+          "gutter-desktop": "1.5rem",
+          "margin-tablet": "2rem",
+          "space-sm": "0.75rem",
+          "space-xl": "2rem",
+          "space-2xs": "0.25rem",
+          "space-4xl": "5rem",
+          "space-lg": "1.5rem"
+        },
+        "fontFamily": {
+          "display-hero-mobile": ["plusJakartaSans"],
+          "label-md": ["inter"],
+          "headline-lg-mobile": ["plusJakartaSans"],
+          "body-lg": ["inter"],
+          "body-md": ["inter"],
+          "headline-md": ["plusJakartaSans"],
+          "caption-caps": ["inter"],
+          "display-hero": ["plusJakartaSans"],
+          "headline-sm": ["plusJakartaSans"],
+          "title-token": ["plusJakartaSans"],
+          "label-sm": ["inter"],
+          "body-sm": ["inter"],
+          "headline-lg": ["plusJakartaSans"]
+        },
+        "fontSize": {
+          "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+          "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+          "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+          "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+          "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}],
+          "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+          "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}]
+        }
+      }
+    }
+  };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(22,42,39,0.04)]"><div class="h-20 w-full px-margin-mobile md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><img alt="Modern minimalist healthcare emblem for CareFlow Myanmar hospital queue system. An elegant geometric fusion of a caring cross, smooth organic flow lines symbolizing seamless patient journey, and a subtle heartbeat curve, in deep aegean teal (#0D5C56) and warm amber (#D97706), vector style, pristine clean background.. Design context: - Primary color: #0d5c56
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-primary tracking-tight truncate">CareFlow Myanmar</span><span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase truncate">Yangon Central Specialty Hospital</span></div></div><div class="flex items-center gap-space-lg"><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm rounded-lg"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="landing-hub" href="#">Landing Hub</a><a aria-current="page" class="transition-colors bg-primary-container text-on-primary-container font-headline-sm rounded-lg" data-path="patient-sign-in" href="#">Patient Portal</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="staff-sign-in" href="#">Clinical Staff</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="queue-tracker" href="#">Live Queue Status</a></nav><div class="hidden md:flex items-center gap-space-xs text-on-surface-variant bg-surface-container px-space-sm py-space-xs rounded-lg"><span class="material-symbols-outlined text-primary text-[18px]">call</span><div class="flex flex-col text-left"><span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">24/7 Hotline</span><span class="font-label-sm text-label-sm text-on-surface font-semibold">199 / +95 1 234 5678</span></div></div><div class="flex items-center bg-surface-container-high p-space-3xs rounded-full"><button class="px-space-xs py-space-3xs rounded-full bg-primary text-on-primary font-label-sm text-label-sm transition-all" type="button">EN</button><button class="px-space-xs py-space-3xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" type="button">MM</button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background flex-1 flex flex-col justify-center"><div class="flex flex-col w-full items-center justify-center relative py-space-xl px-margin-mobile md:px-margin-tablet">
+<!-- Subtle Ambient Glow Orbs -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute bottom-10 right-1/4 w-72 h-72 bg-secondary-container/10 rounded-full blur-2xl pointer-events-none -z-10"></div>
+<!-- Main Container -->
+<div class="w-full max-w-xl mx-auto flex flex-col items-center">
+<!-- Urgent Emergency Announcement Banner -->
+<div class="w-full mb-space-lg bg-surface-container-high/90 backdrop-blur-md rounded-xl p-space-sm flex items-center justify-between shadow-sm gap-space-sm">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0" style="font-variation-settings: 'FILL' 1;">emergency</span>
+<div class="flex flex-col min-w-0">
+<span class="font-caption-caps text-caption-caps text-secondary uppercase tracking-wider">Urgent Walk-in Triage</span>
+<p class="font-body-sm text-body-sm text-on-surface truncate">Critical condition? Proceed immediately to Ground Floor Triage ER or call hotline.</p>
+</div>
+</div>
+<a class="shrink-0 inline-flex items-center gap-space-3xs bg-secondary hover:bg-secondary/90 text-on-secondary px-space-sm py-space-3xs rounded-full font-label-sm text-label-sm shadow-sm transition-all transform active:scale-95" href="tel:199">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span>Dial 199</span>
+</a>
+</div>
+<!-- Sign-In Tactile Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(22,42,39,0.06),0_1px_3px_rgba(22,42,39,0.04)] p-space-lg md:p-space-2xl relative overflow-hidden">
+<!-- Card Top Accent Bar -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-surface-tint to-secondary-container"></div>
+<!-- Card Header: Brand & Context -->
+<div class="flex flex-col items-center text-center mb-space-xl">
+<div class="flex items-center justify-center gap-space-xs mb-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<span class="inline-flex items-center px-space-xs py-space-3xs rounded-full bg-primary-fixed/30 text-on-primary-fixed-variant font-caption-caps text-caption-caps uppercase tracking-wider">
+            Patient Care Portal
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-space-2xs">
+          Welcome Back <span class="font-headline-sm text-headline-sm text-primary font-normal block md:inline md:ml-space-2xs">/ ပြန်လည်ကြိုဆိုပါသည်</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+          Access your live queue tokens, digital prescriptions, and upcoming specialty consultations at Yangon Central.
+        </p>
+</div>
+<!-- Login Method Switcher Tabs -->
+<div class="w-full bg-surface-container-low p-space-3xs rounded-xl flex items-center mb-space-xl" id="tab-switcher">
+<button class="flex-1 py-space-xs px-space-sm rounded-lg font-label-md text-label-md flex items-center justify-center gap-space-xs transition-all bg-surface-container-lowest text-primary shadow-sm" id="tab-btn-phone" onclick="switchLoginMode('phone')" type="button">
+<span class="material-symbols-outlined text-[18px]">smartphone</span>
+<span class="truncate">Mobile / Viber <span class="text-on-surface-variant text-[12px] font-normal hidden sm:inline">(ဖုန်းနံပါတ်)</span></span>
+</button>
+<button class="flex-1 py-space-xs px-space-sm rounded-lg font-label-md text-label-md flex items-center justify-center gap-space-xs transition-all text-on-surface-variant hover:text-on-surface" id="tab-btn-nrc" onclick="switchLoginMode('nrc')" type="button">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span class="truncate">NRC Card <span class="text-on-surface-variant text-[12px] font-normal hidden sm:inline">(မှတ်ပုံတင်)</span></span>
+</button>
+</div>
+<!-- Auth Form Container -->
+<form class="flex flex-col gap-space-lg" id="patient-auth-form" onsubmit="event.preventDefault(); handleSignIn();">
+<!-- Phone Input Block (Default Mode) -->
+<div class="flex flex-col gap-space-2xs" id="phone-field-group">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-space-3xs" for="phone-input">
+<span>Mobile Phone Number</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">(မြန်မာဖုန်းနံပါတ်)</span>
+</label>
+<button class="inline-flex items-center gap-space-3xs text-tertiary-container hover:text-primary font-label-sm text-label-sm transition-colors py-space-3xs px-space-xs rounded-full bg-tertiary-fixed/20" onclick="triggerViberQuickOtp()" type="button">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span>Fast Viber OTP</span>
+</button>
+</div>
+<div class="relative flex items-center">
+<div class="absolute left-space-sm flex items-center gap-space-3xs pointer-events-none text-on-surface-variant">
+<span class="font-label-md text-label-md font-semibold text-primary">+95</span>
+<span class="w-px h-4 bg-outline-variant/60"></span>
+</div>
+<input class="w-full h-11 pl-16 pr-space-md bg-surface-container-low rounded-lg text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline" id="phone-input" inputmode="numeric" placeholder="9 123 456 789" required="" type="tel"/>
+</div>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">MPT, ATOM, Ooredoo, or MyTel registered SIMs accepted</span>
+</div>
+<!-- NRC Input Block (Hidden by Default) -->
+<div class="hidden flex-col gap-space-2xs" id="nrc-field-group">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-space-3xs">
+<span>National Registration Card (NRC)</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">(နိုင်ငံသားစိစစ်ရေးကတ်)</span>
+</label>
+<div class="grid grid-cols-4 gap-space-xs">
+<select class="h-11 bg-surface-container-low rounded-lg px-space-xs font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest">
+<option value="12">12/</option>
+<option value="1">1/</option>
+<option value="9">9/</option>
+<option value="14">14/</option>
+</select>
+<select class="h-11 col-span-1 bg-surface-container-low rounded-lg px-space-xs font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest">
+<option value="KAMAYA">KaMaYa</option>
+<option value="LATHANA">LaThaNa</option>
+<option value="DAGAMA">DaGaMa</option>
+<option value="MAYAKA">MaYaKa</option>
+</select>
+<select class="h-11 bg-surface-container-low rounded-lg px-space-xs font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest">
+<option value="N">(N)</option>
+<option value="P">(P)</option>
+<option value="E">(E)</option>
+</select>
+<input class="h-11 bg-surface-container-low rounded-lg px-space-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest" inputmode="numeric" maxlength="6" placeholder="123456" type="text"/>
+</div>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Format: 12/KaMaYa(N)123456</span>
+</div>
+<!-- Password / Medical PIN Field -->
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-space-3xs" for="pin-input">
+<span>Security PIN / Password</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">(၆ လုံး လျှို့ဝှက်နံပါတ်)</span>
+</label>
+<button class="font-label-sm text-label-sm text-primary hover:text-surface-tint font-medium transition-colors" onclick="triggerForgotPin()" type="button">
+              Forgot PIN? (မေ့နေပါသလား)
+            </button>
+</div>
+<div class="relative flex items-center">
+<input class="w-full h-11 pl-space-md pr-12 bg-surface-container-low rounded-lg text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline" id="pin-input" maxlength="12" placeholder="Enter 6-digit clinical PIN" required="" type="password"/>
+<button aria-label="Toggle PIN Visibility" class="absolute right-space-sm text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center p-space-3xs" onclick="togglePinVisibility()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="pin-visibility-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Biometric / Remember Device Checkbox -->
+<div class="flex items-center justify-between py-space-3xs">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary/30 accent-primary" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Keep this device authenticated for 30 days</span>
+</label>
+<div class="hidden sm:flex items-center gap-space-3xs text-on-surface-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">fingerprint</span>
+<span>Biometric Ready</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<!-- Primary Sign In Button -->
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-space-xs shadow-md shadow-primary-container/20 transition-all transform active:scale-[0.99]" id="btn-sign-in" type="submit">
+<span>Sign In to Patient Portal</span>
+<span class="font-normal opacity-90">(အကောင့်သို့ဝင်ရောက်မည်)</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<!-- Divider with Or -->
+<div class="flex items-center gap-space-sm my-space-2xs">
+<div class="flex-1 h-px bg-surface-container-highest"></div>
+<span class="font-caption-caps text-caption-caps text-outline uppercase">Fast Token Access</span>
+<div class="flex-1 h-px bg-surface-container-highest"></div>
+</div>
+<!-- Secondary Walk-In Token Tracking Button -->
+<button class="w-full h-11 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-xl font-label-md text-label-md flex items-center justify-center gap-space-xs transition-all" onclick="openQuickTokenLookup()" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary">confirmation_number</span>
+<span>Quick Walk-in? Track Live Token without Login</span>
+</button>
+</div>
+</form>
+<!-- Account Creation Link -->
+<div class="mt-space-xl pt-space-md bg-surface-container-low/60 -mx-space-lg md:-mx-space-2xl -mb-space-lg md:-mb-space-2xl px-space-lg md:px-space-2xl pb-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex flex-col text-center sm:text-left">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">New patient at Yangon Central?</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">ရွှေဂုံတိုင်/ရန်ကုန် အထူးကုဆေးရုံ အကောင့်အသစ်ဖွင့်မည်</span>
+</div>
+<button class="px-space-md py-space-xs bg-surface-container-lowest hover:bg-surface-container text-primary font-label-md text-label-md rounded-lg shadow-sm transition-all shrink-0" onclick="openRegistrationModal()" type="button">
+          Create Account
+        </button>
+</div>
+</div>
+<!-- Micro Live Queue Status Preview Ticker -->
+<div class="w-full mt-space-lg grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">monitor_heart</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">OPD Cardiology</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Now Calling: #C-104</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Average Wait</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate">14 Mins • Fast-Tracked</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Verified Doctors</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate">28 On Duty Today</span>
+</div>
+</div>
+</div>
+<!-- Security & Compliance Footer Tagline -->
+<div class="mt-space-lg flex flex-wrap items-center justify-center gap-x-space-md gap-y-space-2xs text-center">
+<span class="inline-flex items-center gap-space-3xs font-caption-caps text-caption-caps text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-tertiary">lock</span>
+        MOH Myanmar HealthNet Encrypted
+      </span>
+<span class="text-outline-variant hidden sm:inline">•</span>
+<span class="inline-flex items-center gap-space-3xs font-caption-caps text-caption-caps text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-tertiary">security</span>
+        256-Bit SSL Protection
+      </span>
+<span class="text-outline-variant hidden sm:inline">•</span>
+<span class="inline-flex items-center gap-space-3xs font-caption-caps text-caption-caps text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-tertiary">shield</span>
+        HIPAA / NDPR Compliant
+      </span>
+</div>
+</div>
+<!-- Interactive Modal: Quick Token Lookup (Hidden by default) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden items-center justify-center p-margin-mobile" id="quick-token-modal">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-xl p-space-lg flex flex-col gap-space-md animate-in fade-in zoom-in-95 duration-200">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">confirmation_number</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Walk-in Token Lookup</h2>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-space-3xs" onclick="closeQuickTokenLookup()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Enter the token number printed on your thermal slip received at the triage kiosk counter.
+      </p>
+<div class="flex flex-col gap-space-2xs">
+<label class="font-label-sm text-label-sm text-on-surface">Token Code (e.g. A-102, C-044)</label>
+<div class="flex gap-space-xs">
+<input class="flex-1 h-11 px-space-sm bg-surface-container-low rounded-lg font-headline-sm text-headline-sm text-primary tracking-wider uppercase focus:outline-none focus:bg-surface-container-lowest" id="token-search-input" placeholder="Token # (ဥပမာ- A-104)" type="text"/>
+<button class="px-space-md bg-primary hover:bg-surface-tint text-on-primary rounded-lg font-label-md text-label-md" onclick="searchTokenStatus()" type="button">
+            Check
+          </button>
+</div>
+</div>
+<div class="hidden p-space-sm rounded-lg bg-surface-container flex items-center justify-between" id="token-result-box">
+<div class="flex flex-col">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Estimated Wait</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">3 Patients Ahead (~9 Mins)</span>
+</div>
+<span class="px-space-xs py-space-3xs rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm">
+          Counter 04
+        </span>
+</div>
+</div>
+</div>
+<!-- Client-side Interactive Scripts -->
+<script>
+    function switchLoginMode(mode) {
+      const phoneGroup = document.getElementById('phone-field-group');
+      const nrcGroup = document.getElementById('nrc-field-group');
+      const phoneBtn = document.getElementById('tab-btn-phone');
+      const nrcBtn = document.getElementById('tab-btn-nrc');
+
+      if (mode === 'phone') {
+        phoneGroup.classList.remove('hidden');
+        phoneGroup.classList.add('flex');
+        nrcGroup.classList.add('hidden');
+        nrcGroup.classList.remove('flex');
+
+        phoneBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        phoneBtn.classList.remove('text-on-surface-variant');
+        nrcBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        nrcBtn.classList.add('text-on-surface-variant');
+      } else {
+        phoneGroup.classList.add('hidden');
+        phoneGroup.classList.remove('flex');
+        nrcGroup.classList.remove('hidden');
+        nrcGroup.classList.add('flex');
+
+        nrcBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        nrcBtn.classList.remove('text-on-surface-variant');
+        phoneBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        phoneBtn.classList.add('text-on-surface-variant');
+      }
+    }
+
+    function togglePinVisibility() {
+      const pinInput = document.getElementById('pin-input');
+      const icon = document.getElementById('pin-visibility-icon');
+      if (pinInput.type === 'password') {
+        pinInput.type = 'text';
+        icon.innerText = 'visibility_off';
+      } else {
+        pinInput.type = 'password';
+        icon.innerText = 'visibility';
+      }
+    }
+
+    function triggerViberQuickOtp() {
+      const phoneInput = document.getElementById('phone-input');
+      if (!phoneInput.value) {
+        phoneInput.value = '9 ';
+        phoneInput.focus();
+      }
+      alert('Viber OTP Service: Verification code has been dispatched to your Viber registered number.');
+    }
+
+    function triggerForgotPin() {
+      alert('PIN Reset: A 6-digit one-time code will be dispatched to your registered Myanmar mobile number or email.');
+    }
+
+    function handleSignIn() {
+      const btn = document.getElementById('btn-sign-in');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span><span>Authenticating...</span>';
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span><span>Signed In Successfully</span>';
+      }, 900);
+    }
+
+    function openQuickTokenLookup() {
+      const modal = document.getElementById('quick-token-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeQuickTokenLookup() {
+      const modal = document.getElementById('quick-token-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function searchTokenStatus() {
+      const resultBox = document.getElementById('token-result-box');
+      resultBox.classList.remove('hidden');
+    }
+
+    function openRegistrationModal() {
+      alert('New Patient Registration: You will now be redirected to the Yangon Central MRN (Medical Record Number) self-enrollment wizard.');
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(22,42,39,0.02)] py-space-lg mt-space-2xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-tertiary text-[20px]">local_hospital</span><p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Yangon Central Specialty Hospital • CareFlow Myanmar Digital Healthcare Operations</p></div><div class="flex items-center gap-space-lg"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Patient Privacy Notice</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Clinical Service Terms</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Emergency Triage Protocol</a></div></div></footer></body></html>

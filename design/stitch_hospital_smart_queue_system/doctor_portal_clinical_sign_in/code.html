@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=inter:wght@100..900&family=plusJakartaSans:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-lowest": "#ffffff",
+          "tertiary": "#00442d",
+          "on-secondary-container": "#663500",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#00504a",
+          "background": "#fdf9ee",
+          "primary": "#00433e",
+          "on-tertiary-fixed-variant": "#005137",
+          "secondary-container": "#fe932c",
+          "surface-container-high": "#ebe8dd",
+          "on-primary-fixed": "#00201d",
+          "on-error-container": "#93000a",
+          "surface-bright": "#fdf9ee",
+          "secondary-fixed": "#ffdcc3",
+          "on-surface": "#1c1c15",
+          "primary-fixed-dim": "#8fd3cb",
+          "surface-tint": "#216962",
+          "primary-container": "#0d5c56",
+          "surface-container-highest": "#e5e2d7",
+          "surface-container-low": "#f7f4e8",
+          "on-tertiary-fixed": "#002114",
+          "tertiary-fixed-dim": "#68dba9",
+          "surface-container": "#f1eee3",
+          "inverse-primary": "#8fd3cb",
+          "on-error": "#ffffff",
+          "surface-dim": "#dddacf",
+          "on-primary": "#ffffff",
+          "inverse-on-surface": "#f4f1e5",
+          "on-secondary": "#ffffff",
+          "on-secondary-fixed-variant": "#6e3900",
+          "on-background": "#1c1c15",
+          "outline-variant": "#bec9c6",
+          "error": "#ba1a1a",
+          "surface-variant": "#e5e2d7",
+          "surface": "#fdf9ee",
+          "secondary": "#904d00",
+          "secondary-fixed-dim": "#ffb77d",
+          "on-primary-container": "#8ed2ca",
+          "outline": "#6f7977",
+          "on-surface-variant": "#3f4947",
+          "tertiary-fixed": "#85f8c4",
+          "on-secondary-fixed": "#2f1500",
+          "on-tertiary-container": "#66daa8",
+          "tertiary-container": "#005e40",
+          "primary-fixed": "#abefe7",
+          "inverse-surface": "#313129",
+          "on-tertiary": "#ffffff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-md": "1rem",
+          "margin-mobile": "1.25rem",
+          "space-3xl": "3.5rem",
+          "space-3xs": "0.125rem",
+          "margin-desktop": "3rem",
+          "space-xs": "0.5rem",
+          "gutter-mobile": "1rem",
+          "space-2xl": "2.5rem",
+          "gutter-desktop": "1.5rem",
+          "margin-tablet": "2rem",
+          "space-sm": "0.75rem",
+          "space-xl": "2rem",
+          "space-2xs": "0.25rem",
+          "space-4xl": "5rem",
+          "space-lg": "1.5rem"
+        },
+        "fontFamily": {
+          "display-hero-mobile": ["plusJakartaSans"],
+          "label-md": ["inter"],
+          "headline-lg-mobile": ["plusJakartaSans"],
+          "body-lg": ["inter"],
+          "body-md": ["inter"],
+          "headline-md": ["plusJakartaSans"],
+          "caption-caps": ["inter"],
+          "display-hero": ["plusJakartaSans"],
+          "headline-sm": ["plusJakartaSans"],
+          "title-token": ["plusJakartaSans"],
+          "label-sm": ["inter"],
+          "body-sm": ["inter"],
+          "headline-lg": ["plusJakartaSans"]
+        },
+        "fontSize": {
+          "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+          "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "500"}],
+          "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+          "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "caption-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+          "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "title-token": ["40px", {"lineHeight": "44px", "letterSpacing": "0.04em", "fontWeight": "800"}],
+          "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+          "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}]
+        }
+      }
+    }
+  };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(22,42,39,0.04)]"><div class="h-20 w-full px-margin-mobile md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><img alt="Modern minimalist healthcare emblem for CareFlow Myanmar hospital queue system. An elegant geometric fusion of a caring cross, smooth organic flow lines symbolizing seamless patient journey, and a subtle heartbeat curve, in deep aegean teal (#0D5C56) and warm amber (#D97706), vector style, pristine clean background.. Design context: - Primary color: #0d5c56
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZur9nuHxYuiI8T5FcLtqA2rfm6c0cmlP0ijMyH-hl5jOsa1T7cInLQQLCzKkcFmAyxt5GBliGlc7UsYdp_SqHTgYFj8k1eHcy4ItIRAJWryziAACM1-mOctKoKH6LbeHEO9griILtk_rLSYXTPz_YmMx9QtewAnX7X-mRfSycIEHR6lEXYgI9cgQZ6Q3cuPDdJZMv6hBTpf8n6JphJG0y80j1LxLZ3BNsip4VYP1Vo-z71co2KNgQDbg"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-primary tracking-tight truncate">CareFlow Myanmar</span><span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase truncate">Yangon Central Specialty Hospital</span></div></div><div class="flex items-center gap-space-lg"><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm rounded-lg"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="landing-hub" href="#">Landing Hub</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="patient-sign-in" href="#">Patient Portal</a><a aria-current="page" class="transition-colors bg-primary-container text-on-primary-container font-headline-sm rounded-lg" data-path="staff-sign-in" href="#">Clinical Staff</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="queue-tracker" href="#">Live Queue Status</a></nav><div class="hidden md:flex items-center gap-space-xs text-on-surface-variant bg-surface-container px-space-sm py-space-xs rounded-lg"><span class="material-symbols-outlined text-primary text-[18px]">call</span><div class="flex flex-col text-left"><span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">24/7 Hotline</span><span class="font-label-sm text-label-sm text-on-surface font-semibold">199 / +95 1 234 5678</span></div></div><div class="flex items-center bg-surface-container-high p-space-3xs rounded-full"><button class="px-space-xs py-space-3xs rounded-full bg-primary text-on-primary font-label-sm text-label-sm transition-all" type="button">EN</button><button class="px-space-xs py-space-3xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" type="button">MM</button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background flex-1 flex flex-col justify-center"><div class="flex flex-col w-full py-space-xl md:py-space-2xl px-margin-mobile md:px-margin-tablet lg:px-margin-desktop items-center justify-center relative overflow-hidden">
+<!-- Ambient Therapeutic Glow Elements -->
+<div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 -right-32 w-80 h-80 rounded-full bg-secondary-fixed/25 blur-3xl pointer-events-none"></div>
+<!-- Main Container Grid: Split Presentation on Wide Screens -->
+<div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center relative z-10">
+<!-- Left Clinical Context / Visual Info Column (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col space-y-space-lg text-left">
+<!-- Duty Status Micro Pill -->
+<div class="inline-flex items-center gap-space-xs px-space-sm py-space-3xs rounded-full bg-surface-container-high w-fit">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant tracking-wider uppercase">OPD Live Telemetry • Shift AM-02</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight mb-space-xs">
+          Physician Station Access
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Secure biometric & license-verified gateway to queue automation, triage copilot, and patient records at Yangon Central Specialty Hospital.
+        </p>
+</div>
+<!-- Real-time Department Load Metrics (Tactical Cards) -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-caption-caps text-caption-caps uppercase">Outpatients In Queue</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">groups</span>
+</div>
+<div class="flex items-baseline gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">142</span>
+<span class="font-label-sm text-label-sm text-tertiary font-medium">9 Depts</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-caption-caps text-caption-caps uppercase">Avg Wait Delta</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">pace</span>
+</div>
+<div class="flex items-baseline gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">14.6</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">mins</span>
+</div>
+</div>
+</div>
+<!-- Editorial Visual: Hospital Ward Snapshot -->
+<div class="relative rounded-xl overflow-hidden shadow-sm bg-surface-container group h-44">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern high-end clinical outpatient consultation chamber in Yangon Central Specialty Hospital with clean ambient morning light, warm beige oak finishes, medical diagnostic workstation displays with ECG graphs, and an elegant serene atmosphere in aegean teal and amber tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHqNS-8DECbczPnEbWnFmQdWLikX8Hofj_Y9cB0ofbTa1OQjlMKKIsLKZbH2zRAMZTDFYytnc3qyfyEvtDJ-LvgMIYbDqeONkI79rA9M97XmFnfXMihNTWwCIx86tgjo9TRPsduTHmrIuNozDfstXDFxT6UrifNngsG17mwd4wLX9xPB2Js_WjaRj1A_xpWIsScjuAK1aMgbBvp43RTkQK11-7L2TgFXCY8AE_CdI1DvHwcNBZtihY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent flex items-end p-space-md">
+<div class="flex items-center gap-space-xs text-on-primary">
+<span class="material-symbols-outlined text-[20px] text-secondary-fixed">verified_user</span>
+<span class="font-label-sm text-label-sm tracking-wide">HIPAA & Myanmar MOH EHR Compliant</span>
+</div>
+</div>
+</div>
+<!-- Live Shift Support Tag -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-primary">support_agent</span>
+<span class="font-body-sm text-body-sm">Clinical Desk Hot-Line: <strong class="text-on-surface font-semibold">Ext. 102</strong></span>
+</div>
+<span class="font-caption-caps text-caption-caps uppercase text-secondary bg-surface-container-lowest px-space-xs py-space-3xs rounded">Active</span>
+</div>
+</div>
+<!-- Right Doctor Workstation Authentication Form (7 Cols) -->
+<div class="lg:col-span-7 w-full">
+<div class="bg-surface-container-lowest rounded-xl shadow-xl p-space-lg md:p-space-xl relative">
+<!-- Header Clinical Badge -->
+<div class="flex items-start justify-between mb-space-lg pb-space-md bg-gradient-to-b from-transparent to-surface-container-low/40 -mx-space-lg md:-mx-space-xl px-space-lg md:px-space-xl -mt-space-lg md:-mt-space-xl pt-space-lg rounded-t-xl">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">stethoscope</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Doctor Clinical Portal</h2>
+<span class="font-caption-caps text-caption-caps bg-secondary-fixed text-on-secondary-fixed px-space-2xs py-space-3xs rounded-full font-bold uppercase">Cadre A</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-space-3xs">
+                ဆရာဝန်များ အထူးဝင်ရောက်ရန်စနစ် • Chamber Console
+              </p>
+</div>
+</div>
+<span class="hidden sm:inline-flex items-center gap-space-3xs text-tertiary font-label-sm text-label-sm bg-surface-container px-space-xs py-space-3xs rounded-full">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+            256-bit TLS
+          </span>
+</div>
+<form class="space-y-space-md" onsubmit="event.preventDefault();">
+<!-- Identifier Row -->
+<div class="space-y-space-2xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="doctor-id">
+                MMC License or Physician ID
+              </label>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">e.g. MMC-94218 / YGN-DOC-204</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-sm text-on-surface-variant text-[20px] pointer-events-none">badge</span>
+<input class="w-full h-11 pl-11 pr-space-md bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="doctor-id" placeholder="MMC-XXXXX or YGN-DOC-XXX" required="" type="text"/>
+</div>
+</div>
+<!-- Password / Passkey Field -->
+<div class="space-y-space-2xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="doctor-pwd">
+                Workstation Password / Passkey
+              </label>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">
+                Reset Credential?
+              </a>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-sm text-on-surface-variant text-[20px] pointer-events-none">key</span>
+<input class="w-full h-11 pl-11 pr-11 bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="doctor-pwd" placeholder="••••••••••••" required="" type="password"/>
+<button class="absolute right-space-sm text-on-surface-variant hover:text-on-surface transition-colors p-space-3xs" onclick="const p = document.getElementById('doctor-pwd'); p.type = p.type === 'password' ? 'text' : 'password';" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Specialty & Chamber Selection Bento Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-2xs">
+<!-- Specialty / Wing -->
+<div class="space-y-space-2xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-medium flex items-center gap-space-3xs" for="specialty-select">
+<span class="material-symbols-outlined text-[16px] text-primary">local_hospital</span>
+                Active Specialty & Wing
+              </label>
+<div class="relative">
+<select class="w-full h-11 pl-space-sm pr-9 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-container appearance-none cursor-pointer" id="specialty-select">
+<option value="cardio-a">Adult Cardiology (Wing A, 2nd Fl)</option>
+<option value="opd-g">General OPD (Ground Floor, Main)</option>
+<option value="neuro-b">Neurology & Stroke Unit (Wing B, 3rd Fl)</option>
+<option value="ortho-a">Orthopedic Trauma Clinic (Wing A, 1st Fl)</option>
+<option value="ped-c">Pediatric Acute Care (Wing C, 2nd Fl)</option>
+<option value="endo-b">Endocrinology / Diabetic Care (Wing B, 1st Fl)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-3 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Consultation Suite / Room -->
+<div class="space-y-space-2xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-medium flex items-center gap-space-3xs" for="chamber-select">
+<span class="material-symbols-outlined text-[16px] text-secondary">meeting_room</span>
+                Consultation Suite / Chamber
+              </label>
+<div class="relative">
+<select class="w-full h-11 pl-space-sm pr-9 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-container appearance-none cursor-pointer" id="chamber-select">
+<option value="suite-204">Suite 204 (Chamber A - Primary)</option>
+<option value="suite-205">Suite 205 (Chamber B - Diagnostic)</option>
+<option value="suite-108">Suite 108 (Rapid Triage Bay)</option>
+<option value="suite-312">Suite 312 (Executive Consultation)</option>
+<option value="suite-tele">Tele-Clinic Station 03</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-3 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Shift Preferences & Clinical Options -->
+<div class="space-y-space-xs pt-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<!-- Shift Remember Toggle -->
+<label class="flex items-center justify-between cursor-pointer group select-none">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">schedule</span>
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary transition-colors">
+                  Remember this workstation for today's 8-hour shift
+                </span>
+</div>
+<input checked="" class="w-4 h-4 rounded accent-primary cursor-pointer" type="checkbox"/>
+</label>
+<!-- Fast-track Emergency Checkbox -->
+<label class="flex items-center justify-between cursor-pointer group select-none">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-error">emergency</span>
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary transition-colors">
+                  Emergency Fast-Track Bypass mode auto-sync
+                </span>
+</div>
+<input class="w-4 h-4 rounded accent-primary cursor-pointer" type="checkbox"/>
+</label>
+</div>
+<!-- Primary & Hardware Actions -->
+<div class="space-y-space-xs pt-space-xs">
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-label-md font-semibold rounded-lg shadow-md hover:shadow-lg flex items-center justify-center gap-space-xs transition-all active:scale-[0.99]" type="submit">
+<span>Sign In to Clinical Workstation (ကွန်ဆိုးလ်သို့ဝင်ရောက်မည်)</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<!-- Hardware Security Token / FIDO2 Key Bypass -->
+<button class="w-full h-11 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center gap-space-xs transition-all" type="button">
+<span class="material-symbols-outlined text-primary text-[20px]">contactless</span>
+<span>FIDO2 / Hardware Security Key or RFID Smart Badge Tap</span>
+</button>
+</div>
+<!-- Support & Helpdesk Row -->
+<div class="flex flex-wrap items-center justify-between text-on-surface-variant pt-space-xs gap-space-xs">
+<a class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-space-3xs" href="#">
+<span class="material-symbols-outlined text-[16px]">contact_support</span>
+              MMC Credential Support • IT Helpdesk (Ext. 102)
+            </a>
+<span class="font-caption-caps text-caption-caps bg-surface-container px-space-xs py-space-3xs rounded text-on-surface-variant">
+              Terminal: WS-YGN-042-E
+            </span>
+</div>
+</form>
+<!-- Official Statutory Notice Footer -->
+<div class="mt-space-md pt-space-sm bg-surface-container-low -mx-space-lg md:-mx-space-xl px-space-lg md:px-space-xl -mb-space-lg md:-mb-space-xl pb-space-md rounded-b-xl flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5">policy</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight">
+<strong>Restricted Clinical System:</strong> Unauthorized access or patient privacy violation is strictly prohibited and digitally audited under the <span class="text-on-surface font-medium">Myanmar MOH Electronic Health Records Act (2022)</span>.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Subtle Bottom Shift Supervisor Info -->
+<div class="mt-space-lg flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span>Clinical Queue Director On-Duty: <strong>Prof. Dr. Kyaw Zayar Min (FACC)</strong> • Central Medical Command</span>
+</div>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(22,42,39,0.02)] py-space-lg mt-space-2xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-tertiary text-[20px]">local_hospital</span><p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Yangon Central Specialty Hospital • CareFlow Myanmar Digital Healthcare Operations</p></div><div class="flex items-center gap-space-lg"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Patient Privacy Notice</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Clinical Service Terms</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Emergency Triage Protocol</a></div></div></footer></body></html>

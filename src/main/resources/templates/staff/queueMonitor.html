@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Monitor - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/staff/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/staff/dashboard}">Dashboard</a>
+            <a th:href="@{/staff/queues}">Queue Monitor</a>
+            <a th:href="@{/staff/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">monitor</span> Live Queue Monitor</h1>
+    </div>
+
+    <div class="alert alert-success" th:if="${message}"><span th:text="${message}"></span></div>
+
+    <div class="card mb-3">
+        <h3><span class="material-symbols-outlined text-primary">stethoscope</span> Doctor Availability</h3>
+        <table class="table">
+            <thead>
+            <tr><th>Doctor</th><th>Department</th><th>Waiting</th><th>Capacity</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="d : ${doctors}">
+                <td>
+                    <div class="flex items-center gap-sm">
+                        <div class="avatar teal" th:text="${#strings.substring(d.name, 0, 2)}"></div>
+                        <span th:text="${d.name}"></span>
+                    </div>
+                </td>
+                <td th:text="${d.departmentId}"></td>
+                <td th:text="${waitingCounts[d.doctorId] ?: 0}"></td>
+                <td th:text="${d.maxQueueSize}"></td>
+                <td>
+                    <span class="badge" th:classappend="${d.computedAvailable ? 'badge-serving' : 'badge-cancelled'}" th:text="${d.computedAvailable ? 'Available' : 'Unavailable'}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3><span class="material-symbols-outlined text-warning">people</span> Waiting Patients</h3>
+        <div th:if="${waiting == null or waiting.isEmpty()}">
+            <p class="text-muted">No patients are currently waiting.</p>
+        </div>
+        <table class="table" th:if="${waiting != null and !waiting.isEmpty()}">
+            <thead>
+            <tr><th>Position</th><th>Queue No.</th><th>Patient</th><th>Doctor</th><th>Priority</th><th>Reassign Doctor</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="q : ${waiting}">
+                <td th:text="${q.position}"></td>
+                <td th:text="${q.queueNumber}"></td>
+                <td th:text="${q.patientName ?: q.patientId}"></td>
+                <td th:text="${q.doctorName ?: q.doctorId}"></td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${q.priority == 'EMERGENCY' ? 'badge-emergency' : (q.priority == 'APPOINTMENT' ? 'badge-appointment' : 'badge-normal')}"
+                          th:text="${q.priority}"></span>
+                </td>
+                <td>
+                    <form method="post" th:action="@{/staff/reassign}" class="flex items-center">
+                        <input type="hidden" name="queueId" th:value="${q.queueId}">
+                        <select name="doctorId" style="width: auto; min-height: 36px;">
+                            <option th:each="d : ${doctors}" th:value="${d.doctorId}" th:text="${d.name}"></option>
+                        </select>
+                        <button class="btn btn-secondary btn-sm" type="submit">
+                            <span class="material-symbols-outlined" style="font-size:16px">swap_horiz</span> Reassign
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

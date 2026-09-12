@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; margin: 0 auto 16px; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .profile-header { text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/patient/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/patient/dashboard}">Dashboard</a>
+            <a th:href="@{/patient/symptoms}">New Visit</a>
+            <a th:href="@{/patient/queue}">My Queue</a>
+            <a th:href="@{/patient/profile}">Profile</a>
+            <a th:href="@{/patient/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary">person</span> My Profile</h1>
+    </div>
+
+    <div class="alert alert-error" th:if="${error}"><span th:text="${error}"></span></div>
+    <div class="alert alert-success" th:if="${message}"><span th:text="${message}"></span></div>
+
+    <div class="card" style="max-width:500px;margin:0 auto;">
+        <div class="profile-header">
+            <div class="profile-avatar" th:text="${#strings.substring(patient.name, 0, 1)}"></div>
+            <div class="text-muted">Patient ID: <strong th:text="${patient.patientId}"></strong></div>
+            <div class="text-muted" th:text="${patient.phone}"></div>
+        </div>
+        <form method="post" th:action="@{/patient/profile}">
+            <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" name="name" th:value="${patient.name}" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" th:value="${patient.email}">
+            </div>
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" name="dateOfBirth" th:value="${patient.dateOfBirth}">
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender">
+                    <option value="">-- Select --</option>
+                    <option value="Male" th:selected="${patient.gender == 'Male'}">Male</option>
+                    <option value="Female" th:selected="${patient.gender == 'Female'}">Female</option>
+                    <option value="Other" th:selected="${patient.gender == 'Other'}">Other</option>
+                </select>
+            </div>
+            <button class="btn w-full" type="submit">
+                <span class="material-symbols-outlined" style="font-size:18px">save</span> Update Profile
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Form - Hospital Smart Queue System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="brand" th:href="@{/admin/dashboard}">
+            <span class="material-symbols-outlined" style="font-size:28px">local_hospital</span> CareFlow
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/admin/doctors}">Back to Doctors</a>
+            <a th:href="@{/admin/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="header-bar">
+        <h1><span class="material-symbols-outlined text-primary" th:text="${doctor != null ? 'edit' : 'person_add'}"></span> <span th:text="${doctor != null ? 'Edit Doctor' : 'Add Doctor'}"></span></h1>
+    </div>
+
+    <div class="card" style="max-width:640px">
+        <form method="post" th:action="@{/admin/doctors/save}">
+            <input type="hidden" name="id" th:value="${doctor != null ? doctor.doctorId : ''}">
+            <div class="form-group">
+                <label>Doctor Code</label>
+                <input type="text" name="doctorCode" th:value="${doctor != null ? doctor.doctorCode : ''}" required>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" th:value="${doctor != null ? doctor.name : ''}" required>
+            </div>
+            <div class="form-group">
+                <label>Department</label>
+                <select name="departmentId">
+                    <option th:each="dep : ${departments}" th:value="${dep.departmentId}" th:text="${dep.departmentName}" th:selected="${doctor != null && doctor.departmentId == dep.departmentId}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Specialization</label>
+                <input type="text" name="specialization" th:value="${doctor != null ? doctor.specialization : ''}">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" name="phone" th:value="${doctor != null ? doctor.phone : ''}">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" th:value="${doctor != null ? doctor.email : ''}">
+            </div>
+            <div class="form-group" th:if="${doctor == null}">
+                <label>Password (default 123456)</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" placeholder="123456">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                        <span class="material-symbols-outlined" style="font-size:20px">visibility_off</span>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-2">
+                <div class="form-group">
+                    <label>Max Queue Size</label>
+                    <input type="number" name="maxQueueSize" th:value="${doctor != null ? doctor.maxQueueSize : 20}">
+                </div>
+                <div class="form-group">
+                    <label>Avg Consultation (min)</label>
+                    <input type="number" name="averageConsultationMinutes" th:value="${doctor != null ? doctor.averageConsultationMinutes : 15}">
+                </div>
+            </div>
+            <div class="grid grid-2">
+                <div class="form-group">
+                    <label>Queue Open Time</label>
+                    <input type="time" name="queueOpenTime" th:value="${doctor != null ? doctor.queueOpenTime : '07:00:00'}">
+                </div>
+                <div class="form-group">
+                    <label>Queue Close Time</label>
+                    <input type="time" name="queueCloseTime" th:value="${doctor != null ? doctor.queueCloseTime : '22:00:00'}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="available" value="true" style="width:auto" th:checked="${doctor == null || doctor.available}">
+                    Available to accept new patients
+                </label>
+            </div>
+            <button class="btn" type="submit">
+                <span class="material-symbols-outlined" style="font-size:18px">save</span> Save Doctor
+            </button>
+        </form>
+    </div>
+</div>
+<script th:src="@{/js/toggle-password.js}"></script>
+</body>
+</html>
