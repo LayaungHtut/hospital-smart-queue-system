@@ -2,10 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { AdminLayout } from "@/components/portal/shells";
 import { Panel, Field, inputClass } from "@/components/portal/ui-kit";
-import {
-  generateFollowUpInstructions,
-  type FollowUpResult,
-} from "@/services/api";
+import { generateFollowUpInstructions, type FollowUpResult } from "@/services/api";
 
 export const Route = createFileRoute("/admin/ai-followup")({
   head: () => ({ meta: [{ title: "AI Follow-up Instructions" }] }),
@@ -24,14 +21,21 @@ function FollowUpInstructionsPage() {
 
   async function generate() {
     setGenerating(true);
-    const payload: Record<string, string> = {};
-    if (diagnosis) payload["diagnosis"] = diagnosis;
-    if (medications) payload["medications"] = medications;
-    if (patientAge) payload["patientAge"] = patientAge;
-    if (patientGender) payload["patientGender"] = patientGender;
-    if (department) payload["department"] = department;
-    if (additionalNotes) payload["additionalNotes"] = additionalNotes;
-    const r = await generateFollowUpInstructions(payload as any);
+    const payload: {
+      diagnosis?: string;
+      medications?: string;
+      patientAge?: string;
+      patientGender?: string;
+      department?: string;
+      additionalNotes?: string;
+    } = {};
+    if (diagnosis) payload.diagnosis = diagnosis;
+    if (medications) payload.medications = medications;
+    if (patientAge) payload.patientAge = patientAge;
+    if (patientGender) payload.patientGender = patientGender;
+    if (department) payload.department = department;
+    if (additionalNotes) payload.additionalNotes = additionalNotes;
+    const r = await generateFollowUpInstructions(payload);
     setResult(r);
     setGenerating(false);
   }
@@ -66,7 +70,11 @@ function FollowUpInstructionsPage() {
               />
             </Field>
             <Field label="Patient Gender">
-              <select className={inputClass} value={patientGender} onChange={(e) => setPatientGender(e.target.value)}>
+              <select
+                className={inputClass}
+                value={patientGender}
+                onChange={(e) => setPatientGender(e.target.value)}
+              >
                 <option value="">Select</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -123,7 +131,9 @@ function FollowUpInstructionsPage() {
 
                 <div className="rounded-xl border border-border p-4">
                   <h3 className="text-sm font-semibold text-foreground">Activity Restrictions</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{result.activityRestrictions}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {result.activityRestrictions}
+                  </p>
                 </div>
 
                 <div className="rounded-xl border border-border p-4">

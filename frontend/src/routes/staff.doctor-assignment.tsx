@@ -233,8 +233,13 @@ function DoctorAssignmentPage() {
                     disabled={aiLoading}
                     className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-bold text-primary-foreground shadow hover:opacity-90 disabled:opacity-50 sm:px-4"
                   >
-                    {aiLoading ? <Bot className="size-3.5 animate-spin" /> : <Sparkles className="size-3.5" />}
-                    <span className="hidden sm:inline">Scan & Re-analyze</span><span className="sm:hidden">Scan</span>
+                    {aiLoading ? (
+                      <Bot className="size-3.5 animate-spin" />
+                    ) : (
+                      <Sparkles className="size-3.5" />
+                    )}
+                    <span className="hidden sm:inline">Scan & Re-analyze</span>
+                    <span className="sm:hidden">Scan</span>
                   </button>
                 </div>
               </div>
@@ -255,7 +260,9 @@ function DoctorAssignmentPage() {
                     </div>
                   </div>
                   <div className="rounded-lg bg-card p-3 border border-border">
-                    <div className="text-[11px] text-muted-foreground">Queue Load Balance Status</div>
+                    <div className="text-[11px] text-muted-foreground">
+                      Queue Load Balance Status
+                    </div>
                     <div className="text-sm font-bold flex items-center gap-1.5 mt-0.5">
                       {aiReport.isImbalanced ? (
                         <span className="text-amber-500 flex items-center gap-1">
@@ -292,7 +299,11 @@ function DoctorAssignmentPage() {
                     disabled={applyingAi || selectedSuggestions.length === 0}
                     className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-primary-foreground shadow hover:opacity-90 disabled:opacity-50 sm:px-5 sm:py-2.5"
                   >
-                    {applyingAi ? <Bot className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+                    {applyingAi ? (
+                      <Bot className="size-4 animate-spin" />
+                    ) : (
+                      <Sparkles className="size-4" />
+                    )}
                     Apply ({selectedSuggestions.length})
                   </button>
                 </div>
@@ -307,9 +318,7 @@ function DoctorAssignmentPage() {
                             checked={selectedSuggestions.length === aiReport.suggestions.length}
                             onChange={(e) =>
                               setSelectedSuggestions(
-                                e.target.checked
-                                  ? aiReport.suggestions.map((s) => s.queueId)
-                                  : [],
+                                e.target.checked ? aiReport.suggestions.map((s) => s.queueId) : [],
                               )
                             }
                           />
@@ -344,7 +353,9 @@ function DoctorAssignmentPage() {
                               <div className="text-foreground">{s.patientName}</div>
                             </td>
                             <td className="p-3">
-                              <div className="font-semibold text-foreground">{s.fromDoctorName}</div>
+                              <div className="font-semibold text-foreground">
+                                {s.fromDoctorName}
+                              </div>
                               <div className="text-[11px] text-muted-foreground">
                                 Queue size: {s.fromDoctorQueueSize} waiting
                               </div>

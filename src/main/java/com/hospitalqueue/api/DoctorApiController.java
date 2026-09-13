@@ -102,9 +102,10 @@ public class DoctorApiController {
         Map<String, Object> res = new LinkedHashMap<>();
         res.put("doctor", doctorInfo);
         res.put("stats", stats);
-        res.put("called", called != null ? mapQueueWithPatients(called, ptMap) : null);
-        res.put("serving", serving != null ? mapQueueWithPatients(serving, ptMap) : null);
-        res.put("waiting", waiting.stream().map(q -> mapQueueWithPatients(q, ptMap)).collect(Collectors.toList()));
+        res.put("called", called != null ? mapQueueWithPatients(called, ptMap, doctor, dept) : null);
+        res.put("serving", serving != null ? mapQueueWithPatients(serving, ptMap, doctor, dept) : null);
+        res.put("waiting",
+                waiting.stream().map(q -> mapQueueWithPatients(q, ptMap, doctor, dept)).collect(Collectors.toList()));
         res.put("todayAppointments", todayAppointments.stream().map(a -> mapAppointmentWithPatients(a, ptMap, deptName))
                 .collect(Collectors.toList()));
 
@@ -122,15 +123,36 @@ public class DoctorApiController {
         Queue serving = queueService.serving(doctorId);
         List<Queue> waiting = queueService.waitingForDoctor(doctorId);
 
+        // All entries belong to this one doctor: resolve the doctor's department
+        // once and batch-load every patient in one query, instead of the 3
+        // separate DB round trips (patient/doctor/department) mapQueue() used to
+        // make per queue row — this endpoint is polled frequently by the live
+        // queue screen.
+        Department dept = departmentRepository.findById(doctor.getDepartmentId());
+        Set<String> patientIds = new HashSet<>();
+        if (called != null)
+            patientIds.add(called.getPatientId());
+        if (serving != null)
+            patientIds.add(serving.getPatientId());
+        for (Queue q : waiting) {
+            if (q.getPatientId() != null)
+                patientIds.add(q.getPatientId());
+        }
+        Map<String, Patient> ptMap = patientIds.isEmpty()
+                ? Collections.emptyMap()
+                : patientRepository.findByIds(patientIds).stream()
+                        .collect(Collectors.toMap(Patient::getPatientId, p -> p, (a, b) -> a));
+
         Map<String, Object> res = new LinkedHashMap<>();
         res.put("doctor", Map.of(
                 "id", doctor.getDoctorId(),
                 "name", doctor.getName(),
                 "doctorCode", doctor.getDoctorCode(),
                 "available", doctor.isAvailable()));
-        res.put("called", called != null ? mapQueue(called) : null);
-        res.put("serving", serving != null ? mapQueue(serving) : null);
-        res.put("waiting", waiting.stream().map(this::mapQueue).collect(Collectors.toList()));
+        res.put("called", called != null ? mapQueueWithPatients(called, ptMap, doctor, dept) : null);
+        res.put("serving", serving != null ? mapQueueWithPatients(serving, ptMap, doctor, dept) : null);
+        res.put("waiting",
+                waiting.stream().map(q -> mapQueueWithPatients(q, ptMap, doctor, dept)).collect(Collectors.toList()));
 
         return ResponseEntity.ok(res);
     }
@@ -174,7 +196,8 @@ public class DoctorApiController {
     public ResponseEntity<?> startConsultation(@PathVariable String doctorId) {
         boolean started = queueService.startConsultation(doctorId);
         if (!started) {
-            return ResponseEntity.badRequest().body(Map.of("success", false, "error", "No called patient to start consultation with."));
+            return ResponseEntity.badRequest()
+                    .body(Map.of("success", false, "error", "No called patient to start consultation with."));
         }
         return ResponseEntity.ok(Map.of("success", true, "message", "Consultation started."));
     }
@@ -183,7 +206,8 @@ public class DoctorApiController {
     public ResponseEntity<?> completeConsultation(@PathVariable String doctorId) {
         boolean completed = queueService.completeCurrent(doctorId);
         if (!completed) {
-            return ResponseEntity.badRequest().body(Map.of("success", false, "error", "No active consultation to complete."));
+            return ResponseEntity.badRequest()
+                    .body(Map.of("success", false, "error", "No active consultation to complete."));
         }
         return ResponseEntity.ok(Map.of("success", true, "message", "Consultation completed."));
     }
@@ -209,7 +233,19 @@ public class DoctorApiController {
     @GetMapping("/{doctorId}/appointments")
     public List<Map<String, Object>> getAppointments(@PathVariable String doctorId) {
         List<Appointment> list = appointmentRepository.findByDoctor(doctorId);
-        return list.stream().map(a -> mapAppointmentWithPatients(a, null, null)).collect(Collectors.toList());
+
+        Doctor doctor = doctorRepository.findById(doctorId);
+        Department dept = doctor != null ? departmentRepository.findById(doctor.getDepartmentId()) : null;
+        String deptName = dept != null ? dept.getDepartmentName() : null;
+
+        Set<String> patientIds = list.stream().map(Appointment::getPatientId)
+                .filter(Objects::nonNull).collect(Collectors.toSet());
+        Map<String, Patient> ptMap = patientIds.isEmpty()
+                ? Collections.emptyMap()
+                : patientRepository.findByIds(patientIds).stream()
+                        .collect(Collectors.toMap(Patient::getPatientId, p -> p, (a, b) -> a));
+
+        return list.stream().map(a -> mapAppointmentWithPatients(a, ptMap, deptName)).collect(Collectors.toList());
     }
 
     @GetMapping("/{doctorId}/history")
@@ -250,11 +286,13 @@ public class DoctorApiController {
         return ResponseEntity.ok(res);
     }
 
-    private Map<String, Object> mapQueue(Queue q) {
-        Patient pt = patientRepository.findById(q.getPatientId());
-        Doctor doc = doctorRepository.findById(q.getDoctorId());
-        Department dept = doc != null ? departmentRepository.findById(doc.getDepartmentId()) : null;
-
+    /**
+     * Shared queue -> DTO mapping. All lookups (patient/doctor/department) are
+     * passed in already-resolved rather than fetched here, so callers dealing
+     * with a whole list (all for the same doctor) fetch the doctor/department
+     * once and the patients in one batch instead of per queue row.
+     */
+    private Map<String, Object> mapQueueCore(Queue q, Patient pt, Doctor doc, Department dept) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("id", q.getQueueId());
         map.put("queueNumber", q.getQueueNumber());
@@ -276,30 +314,25 @@ public class DoctorApiController {
         return map;
     }
 
-    private Map<String, Object> mapQueueWithPatients(Queue q, Map<String, Patient> ptMap) {
-        Patient pt = ptMap != null ? ptMap.get(q.getPatientId()) : patientRepository.findById(q.getPatientId());
+    /**
+     * Single-item convenience overload (e.g. mapping the one queue entry just
+     * called).
+     */
+    private Map<String, Object> mapQueue(Queue q) {
+        Patient pt = patientRepository.findById(q.getPatientId());
         Doctor doc = doctorRepository.findById(q.getDoctorId());
         Department dept = doc != null ? departmentRepository.findById(doc.getDepartmentId()) : null;
+        return mapQueueCore(q, pt, doc, dept);
+    }
 
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.put("id", q.getQueueId());
-        map.put("queueNumber", q.getQueueNumber());
-        map.put("patientId", q.getPatientId());
-        map.put("patientName", pt != null ? pt.getName() : "Patient");
-        map.put("doctorId", q.getDoctorId());
-        map.put("doctorName", doc != null ? doc.getName() : "Doctor");
-        map.put("departmentId", doc != null ? doc.getDepartmentId() : q.getDepartmentId());
-        map.put("departmentName", dept != null ? dept.getDepartmentName() : "General Medicine");
-        map.put("position", q.getPosition());
-        map.put("status", q.getStatus());
-        map.put("priority", q.getPriority());
-        map.put("type", q.isEmergency() ? "EMERGENCY"
-                : ("APPOINTMENT".equalsIgnoreCase(q.getPriority()) ? "APPOINTMENT" : "NORMAL"));
-        map.put("emergency", q.isEmergency());
-        map.put("estimatedWaitingMinutes", q.getEstimatedWaitingTime());
-        map.put("waitingMinutes", q.getEstimatedWaitingTime());
-        map.put("createdAt", q.getCreatedAt() != null ? q.getCreatedAt().toString() : "");
-        return map;
+    /**
+     * Batched overload for lists of queue entries that all belong to the same
+     * doctor (every doctor-facing endpoint here) — the doctor and department are
+     * resolved once by the caller instead of once per queue row.
+     */
+    private Map<String, Object> mapQueueWithPatients(Queue q, Map<String, Patient> ptMap, Doctor doc, Department dept) {
+        Patient pt = ptMap != null ? ptMap.get(q.getPatientId()) : null;
+        return mapQueueCore(q, pt, doc, dept);
     }
 
     private Map<String, Object> mapAppointmentWithPatients(Appointment a, Map<String, Patient> ptMap, String deptName) {

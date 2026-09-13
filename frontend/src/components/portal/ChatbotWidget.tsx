@@ -17,7 +17,8 @@ export function ChatbotWidget() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
-      content: "Hello! I'm your hospital assistant. Ask me about departments, doctors, appointments, insurance, or anything else!",
+      content:
+        "Hello! I'm your hospital assistant. Ask me about departments, doctors, appointments, insurance, or anything else!",
       timestamp: new Date(),
     },
   ]);
@@ -45,9 +46,23 @@ export function ChatbotWidget() {
 
     try {
       const data = await chatWithBot({ message: userMessage, sessionId });
-      setMessages((prev) => [...prev, { role: "assistant", content: data.response || "Sorry, I couldn't process that.", timestamp: new Date() }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: data.response || "Sorry, I couldn't process that.",
+          timestamp: new Date(),
+        },
+      ]);
     } catch (error) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "I'm having trouble connecting. Please try again.", timestamp: new Date() }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "I'm having trouble connecting. Please try again.",
+          timestamp: new Date(),
+        },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -65,7 +80,7 @@ export function ChatbotWidget() {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 size-14 rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        className="fixed bottom-6 right-6 z-50 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         aria-label={isOpen ? "Close chat" : "Open chat assistant"}
       >
         {isOpen ? <X className="size-7" /> : <MessageSquare className="size-7" />}
@@ -82,7 +97,9 @@ export function ChatbotWidget() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Hospital Assistant</p>
-                  <p className="text-xs text-muted-foreground">AI-powered help • {loading ? "Thinking..." : "Online"}</p>
+                  <p className="text-xs text-muted-foreground">
+                    AI-powered help • {loading ? "Thinking..." : "Online"}
+                  </p>
                 </div>
               </div>
               <button
@@ -94,7 +111,7 @@ export function ChatbotWidget() {
               </button>
             </div>
 
-            <ScrollArea className="h-[400px] p-4" ref={scrollAreaRef}>
+            <ScrollArea className="h-100 p-4" ref={scrollAreaRef}>
               <div className="flex flex-col gap-3">
                 {messages.map((msg, idx) => (
                   <div
@@ -109,8 +126,18 @@ export function ChatbotWidget() {
                       }`}
                     >
                       {msg.role === "user" ? (
-                        <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        <svg
+                          className="size-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                          />
                         </svg>
                       ) : (
                         <Bot className="size-4" />
@@ -124,8 +151,13 @@ export function ChatbotWidget() {
                       }`}
                     >
                       <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
-                      <p className={`text-[10px] mt-1 ${msg.role === "user" ? "text-primary-foreground/70" : "text-muted-foreground/70"}`}>
-                        {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      <p
+                        className={`text-[10px] mt-1 ${msg.role === "user" ? "text-primary-foreground/70" : "text-muted-foreground/70"}`}
+                      >
+                        {msg.timestamp.toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </p>
                     </div>
                   </div>
@@ -169,7 +201,8 @@ export function ChatbotWidget() {
                 </Button>
               </div>
               <p className="mt-2 text-center text-[10px] text-muted-foreground">
-                <HelpCircle className="size-3 inline" /> AI responses are for information only. Consult staff for medical advice.
+                <HelpCircle className="size-3 inline" /> AI responses are for information only.
+                Consult staff for medical advice.
               </p>
             </div>
           </Card>

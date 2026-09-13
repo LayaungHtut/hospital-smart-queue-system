@@ -3,10 +3,17 @@ import { useEffect, useState } from "react";
 import { getPatientNotifications, markAllNotificationsRead } from "@/services/api";
 import { PatientLayout } from "@/components/portal/shells";
 import { NotificationList } from "@/components/portal/NotificationList";
-import { Panel } from "@/components/portal/ui-kit";
+import { Alert, Panel, type AlertTone } from "@/components/portal/ui-kit";
 import { useAuth } from "@/lib/auth";
 import { SkeletonList } from "@/components/ui/loading";
 import type { NotificationItem } from "@/types";
+
+const toneFor: Record<NotificationItem["category"], AlertTone> = {
+  EMERGENCY: "error",
+  QUEUE: "info",
+  DOCTOR: "success",
+  SCHEDULE: "warning",
+};
 
 export const Route = createFileRoute("/notifications")({
   head: () => ({
@@ -51,16 +58,14 @@ function PatientNotifications() {
   return (
     <PatientLayout title="Notifications">
       {popup && (
-        <div className="mb-4 rounded-lg border border-primary/20 bg-primary/10 p-4 shadow-lg animate-in fade-in slide-in-from-top-2">
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 size-2 shrink-0 rounded-full bg-primary" />
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-foreground">{popup.title}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{popup.message}</p>
-            </div>
-            <button onClick={() => setPopup(null)} className="text-xs text-muted-foreground hover:text-foreground">&times;</button>
-          </div>
-        </div>
+        <Alert
+          tone={toneFor[popup.category]}
+          onDismiss={() => setPopup(null)}
+          className="mb-4 animate-in fade-in slide-in-from-top-2"
+        >
+          <p className="font-semibold">{popup.title}</p>
+          <p className="opacity-90">{popup.message}</p>
+        </Alert>
       )}
       <Panel>
         {loading ? (

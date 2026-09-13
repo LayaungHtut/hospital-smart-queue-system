@@ -3,6 +3,9 @@ import { Bell, Menu, Clock } from "lucide-react";
 import { useState, useEffect, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/lib/auth";
+import { getPatientNotifications } from "@/services/api";
+
+const NOTIFICATION_POLL_MS = 15_000;
 
 export interface NavItem {
   label: string;
@@ -39,9 +42,29 @@ export function PortalShell({
   const [currentTime, setCurrentTime] = useState<string>("");
   const [dynamicBrand, setDynamicBrand] = useState(brand);
   const [dynamicLogo, setDynamicLogo] = useState<string | null>(null);
+  const [unreadNotifications, setUnreadNotifications] = useState(0);
   const navigate = useNavigate();
-  const { session, signOut } = useAuth();
+  const { session, signOut, isReady } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    if (portal !== "patient" || !session?.userId) return;
+    let active = true;
+    async function poll() {
+      try {
+        const list = await getPatientNotifications(session?.userId);
+        if (active) setUnreadNotifications(list.filter((n) => !n.read).length);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    poll();
+    const interval = setInterval(poll, NOTIFICATION_POLL_MS);
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
+  }, [portal, session?.userId]);
 
   useEffect(() => {
     const savedName = localStorage.getItem("system_hospital_name");
@@ -96,10 +119,14 @@ export function PortalShell({
   const isAuthenticated = !!(session && session.role === expectedRole);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    // Wait for the auth session to be restored from localStorage first -
+    // otherwise this fires on the one render where `session` is still seeded
+    // as null (to match the server-rendered HTML) and redirects an
+    // already-logged-in user to the login page.
+    if (isReady && !isAuthenticated) {
       navigate({ to: loginPath, replace: true });
     }
-  }, [isAuthenticated, loginPath, navigate]);
+  }, [isReady, isAuthenticated, loginPath, navigate]);
 
   function handleLogout() {
     signOut();
@@ -221,6 +248,11 @@ export function PortalShell({
               title="Notifications"
             >
               <Bell className="size-5" />
+              {unreadNotifications > 0 ? (
+                <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-danger text-[10px] font-semibold text-danger-foreground">
+                  {unreadNotifications > 9 ? "9+" : unreadNotifications}
+                </span>
+              ) : null}
             </Link>
             <span className="hidden text-sm font-medium text-foreground sm:inline">{userName}</span>
           </div>

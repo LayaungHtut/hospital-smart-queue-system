@@ -1,0 +1,170 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Use Case Diagram" id="usecase1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="boundary" value="Hospital Smart Queue System" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;verticalAlign=top;fontSize=18;fontStyle=1;align=center;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="220" y="40" width="1080" height="1300" as="geometry" />
+        </mxCell>
+
+        <!-- Actors -->
+        <mxCell id="actorPatient" value="Patient" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="260" width="40" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="actorDoctor" value="Doctor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="60" y="700" width="40" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="actorStaff" value="Staff" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="220" width="40" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="actorAdmin" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="850" width="40" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Shared use cases (center column) -->
+        <mxCell id="ucLogin" value="Login / Register" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="650" y="90" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucAppointments" value="View Appointments" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="650" y="170" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucNotifications" value="View Notifications" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="650" y="250" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucPredictNoShow" value="Predict No-Show &amp; Wait Times" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="650" y="330" width="220" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Patient use cases -->
+        <mxCell id="ucProfile" value="Manage Profile" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="330" y="90" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucRecommend" value="Get AI Department Recommendation" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="330" y="170" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucJoinQueue" value="Join Queue" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="330" y="250" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucCancelQueue" value="Cancel Queue Ticket" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="330" y="330" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucQueueStatus" value="View Queue Status" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="330" y="410" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucChatAI" value="Chat with AI Assistant" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="330" y="490" width="210" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Doctor use cases -->
+        <mxCell id="ucDoctorDash" value="View Doctor Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="330" y="580" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucAvailability" value="Manage Availability" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="330" y="660" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucConsultQueue" value="Manage Consultation Queue" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="330" y="740" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucPatientHistory" value="View Patient History" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="330" y="820" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucSoapNote" value="Generate AI SOAP Note" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="330" y="900" width="210" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Staff use cases -->
+        <mxCell id="ucStaffDash" value="View Dashboard &amp; Reports" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="90" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucEmergency" value="Handle Emergency Requests" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="170" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucReassign" value="Monitor &amp; Reassign Queue" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="250" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucDoctorUnavail" value="Set Doctor Unavailability" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="330" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLoadBalance" value="View AI Load-Balancing Suggestions" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="410" width="210" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Admin use cases -->
+        <mxCell id="ucAdminDash" value="View Admin Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="580" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucApproveReg" value="Approve / Reject Registrations" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="660" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucManageDoctors" value="Manage Doctors" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="740" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucManageDept" value="Manage Departments" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="820" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucManageUsers" value="Manage Users" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="900" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucManageSchedules" value="Manage Schedules" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="980" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucAuditLogs" value="View Audit Logs" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="1060" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucConfigSettings" value="Configure System &amp; Queue Settings" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="1140" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ucReports" value="View Reports" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="1220" width="210" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Patient associations -->
+        <mxCell id="e1" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucLogin"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucProfile"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucRecommend"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucJoinQueue"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucCancelQueue"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucQueueStatus"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucChatAI"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucAppointments"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" style="endArrow=none;html=1;" edge="1" parent="1" source="actorPatient" target="ucNotifications"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Doctor associations -->
+        <mxCell id="e10" style="endArrow=none;html=1;" edge="1" parent="1" source="actorDoctor" target="ucLogin"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e11" style="endArrow=none;html=1;" edge="1" parent="1" source="actorDoctor" target="ucDoctorDash"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e12" style="endArrow=none;html=1;" edge="1" parent="1" source="actorDoctor" target="ucAvailability"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e13" style="endArrow=none;html=1;" edge="1" parent="1" source="actorDoctor" target="ucConsultQueue"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e14" style="endArrow=none;html=1;" edge="1" parent="1" source="actorDoctor" target="ucPatientHistory"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e15" style="endArrow=none;html=1;" edge="1" parent="1" source="actorDoctor" target="ucSoapNote"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e16" style="endArrow=none;html=1;" edge="1" parent="1" source="actorDoctor" target="ucAppointments"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Staff associations -->
+        <mxCell id="e17" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucLogin"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e18" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucStaffDash"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e19" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucEmergency"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e20" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucReassign"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e21" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucDoctorUnavail"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e22" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucLoadBalance"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e23" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucAppointments"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e24" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucNotifications"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e25" style="endArrow=none;html=1;" edge="1" parent="1" source="actorStaff" target="ucPredictNoShow"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Admin associations -->
+        <mxCell id="e26" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucLogin"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e27" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucAdminDash"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e28" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucApproveReg"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e29" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucManageDoctors"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e30" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucManageDept"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e31" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucManageUsers"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e32" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucManageSchedules"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e33" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucAuditLogs"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e34" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucConfigSettings"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e35" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucReports"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e36" style="endArrow=none;html=1;" edge="1" parent="1" source="actorAdmin" target="ucPredictNoShow"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

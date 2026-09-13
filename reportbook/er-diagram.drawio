@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ER Diagram" id="erdiagram1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Department -->
+        <mxCell id="Department" value="&lt;b&gt;DEPARTMENT&lt;/b&gt;&lt;br&gt;&lt;u&gt;departmentId&lt;/u&gt; (PK)&lt;br&gt;departmentCode&lt;br&gt;departmentName&lt;br&gt;active" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="260" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- Doctor -->
+        <mxCell id="Doctor" value="&lt;b&gt;DOCTOR&lt;/b&gt;&lt;br&gt;&lt;u&gt;doctorId&lt;/u&gt; (PK)&lt;br&gt;doctorCode&lt;br&gt;name&lt;br&gt;&lt;i&gt;departmentId&lt;/i&gt; (FK)&lt;br&gt;specialization&lt;br&gt;phone&lt;br&gt;email&lt;br&gt;maxQueueSize&lt;br&gt;queueOpenTime&lt;br&gt;queueCloseTime&lt;br&gt;available&lt;br&gt;active" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="40" width="280" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- DoctorSchedule -->
+        <mxCell id="DoctorSchedule" value="&lt;b&gt;DOCTOR_SCHEDULE&lt;/b&gt;&lt;br&gt;&lt;u&gt;scheduleId&lt;/u&gt; (PK)&lt;br&gt;&lt;i&gt;doctorId&lt;/i&gt; (FK)&lt;br&gt;dayOfWeek&lt;br&gt;startTime&lt;br&gt;endTime&lt;br&gt;breakStart&lt;br&gt;breakEnd&lt;br&gt;room&lt;br&gt;active" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="800" y="40" width="260" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Patient -->
+        <mxCell id="Patient" value="&lt;b&gt;PATIENT&lt;/b&gt;&lt;br&gt;&lt;u&gt;patientId&lt;/u&gt; (PK)&lt;br&gt;name&lt;br&gt;phone&lt;br&gt;email&lt;br&gt;address&lt;br&gt;dateOfBirth&lt;br&gt;gender&lt;br&gt;newPatient&lt;br&gt;registeredAt&lt;br&gt;distanceKm&lt;br&gt;insuranceType" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="420" width="260" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- Queue -->
+        <mxCell id="Queue" value="&lt;b&gt;QUEUE&lt;/b&gt;&lt;br&gt;&lt;u&gt;queueId&lt;/u&gt; (PK)&lt;br&gt;queueNumber&lt;br&gt;&lt;i&gt;patientId&lt;/i&gt; (FK)&lt;br&gt;&lt;i&gt;doctorId&lt;/i&gt; (FK)&lt;br&gt;&lt;i&gt;departmentId&lt;/i&gt; (FK)&lt;br&gt;priority&lt;br&gt;status&lt;br&gt;position&lt;br&gt;emergency&lt;br&gt;emergencyConfirmed&lt;br&gt;createdAt&lt;br&gt;completedAt" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="420" width="280" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- Appointment -->
+        <mxCell id="Appointment" value="&lt;b&gt;APPOINTMENT&lt;/b&gt;&lt;br&gt;&lt;u&gt;appointmentId&lt;/u&gt; (PK)&lt;br&gt;&lt;i&gt;patientId&lt;/i&gt; (FK)&lt;br&gt;&lt;i&gt;doctorId&lt;/i&gt; (FK)&lt;br&gt;&lt;i&gt;departmentId&lt;/i&gt; (FK)&lt;br&gt;&lt;i&gt;queueId&lt;/i&gt; (FK, nullable)&lt;br&gt;appointmentDate&lt;br&gt;appointmentTime&lt;br&gt;status&lt;br&gt;notes&lt;br&gt;followup&lt;br&gt;priority&lt;br&gt;appointmentType&lt;br&gt;confirmed" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="800" y="420" width="280" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- Notification -->
+        <mxCell id="Notification" value="&lt;b&gt;NOTIFICATION&lt;/b&gt;&lt;br&gt;&lt;u&gt;notificationId&lt;/u&gt; (PK)&lt;br&gt;&lt;i&gt;patientId&lt;/i&gt; (FK)&lt;br&gt;message&lt;br&gt;read&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="780" width="260" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- QueueHistory -->
+        <mxCell id="QueueHistory" value="&lt;b&gt;QUEUE_HISTORY&lt;/b&gt;&lt;br&gt;&lt;u&gt;historyId&lt;/u&gt; (PK)&lt;br&gt;&lt;i&gt;queueId&lt;/i&gt; (FK)&lt;br&gt;queueNumber&lt;br&gt;&lt;i&gt;patientId&lt;/i&gt; (FK)&lt;br&gt;&lt;i&gt;doctorId&lt;/i&gt; (FK)&lt;br&gt;status&lt;br&gt;changeReason&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="780" width="260" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Staff -->
+        <mxCell id="Staff" value="&lt;b&gt;STAFF&lt;/b&gt;&lt;br&gt;&lt;u&gt;staffId&lt;/u&gt; (PK)&lt;br&gt;staffCode&lt;br&gt;name&lt;br&gt;phone&lt;br&gt;email&lt;br&gt;role&lt;br&gt;active&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="800" y="780" width="260" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- AdminUser -->
+        <mxCell id="AdminUser" value="&lt;b&gt;ADMIN_USER&lt;/b&gt;&lt;br&gt;&lt;u&gt;adminId&lt;/u&gt; (PK)&lt;br&gt;username&lt;br&gt;name&lt;br&gt;email&lt;br&gt;role&lt;br&gt;active&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="780" width="260" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- PatientRegistrationRequest -->
+        <mxCell id="RegRequest" value="&lt;b&gt;PATIENT_REGISTRATION_REQUEST&lt;/b&gt;&lt;br&gt;&lt;u&gt;requestId&lt;/u&gt; (PK)&lt;br&gt;name&lt;br&gt;phone&lt;br&gt;email&lt;br&gt;address&lt;br&gt;dateOfBirth&lt;br&gt;gender&lt;br&gt;status&lt;br&gt;createdAt&lt;br&gt;reviewedAt&lt;br&gt;reviewedBy&lt;br&gt;rejectionReason" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1020" width="280" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- Relationships: solid crow's-foot for real FK relations -->
+        <mxCell id="r1" value="has" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="Department" target="Doctor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r2" value="has" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="Doctor" target="DoctorSchedule"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="r3" value="generates" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=0.5;exitY=1;entryX=0.3;entryY=0;" edge="1" parent="1" source="Department" target="Queue"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r4" value="handles" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=0.5;exitY=1;entryX=0.7;entryY=0;" edge="1" parent="1" source="Doctor" target="Queue"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r5" value="joins" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="Patient" target="Queue"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="r6" value="offers" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=0.5;exitY=0;entryX=0.5;exitDx=0;exitDy=-40;entryDx=0;entryDy=-40;entryY=0;curved=0;" edge="1" parent="1" source="Department" target="Appointment"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="190" y="380" /><mxPoint x="940" y="380" /></Array></mxGeometry></mxCell>
+        <mxCell id="r7" value="scheduled for" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=1;exitY=0.7;entryX=0.3;entryY=0;" edge="1" parent="1" source="Doctor" target="Appointment"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r8" value="books" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=0.5;exitY=0;entryX=0.5;entryY=0;exitDx=0;exitDy=-20;entryDx=0;entryDy=-20;" edge="1" parent="1" source="Patient" target="Appointment"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="190" y="400" /><mxPoint x="940" y="400" /></Array></mxGeometry></mxCell>
+        <mxCell id="r9" value="0..1" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERzeroToOne;startArrow=ERone;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="Queue" target="Appointment"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="r10" value="receives" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="Patient" target="Notification"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r11" value="logs" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="Queue" target="QueueHistory"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r12" value="appears in" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=1;exitY=0.7;entryX=0;entryY=0.3;" edge="1" parent="1" source="Patient" target="QueueHistory"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r13" value="appears in" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=ERmany;startArrow=ERone;exitX=0.7;exitY=1;entryX=1;entryY=0.3;" edge="1" parent="1" source="Doctor" target="QueueHistory"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Conceptual (dashed, not enforced FK) relationships -->
+        <mxCell id="r14" value="reviews" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;dashed=1;endArrow=open;startArrow=none;exitX=0;exitY=0.7;entryX=1;entryY=0.5;" edge="1" parent="1" source="AdminUser" target="RegRequest"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="600" y="1180" /></Array></mxGeometry></mxCell>
+        <mxCell id="r15" value="creates upon approval" style="edgeStyle=entityRelationEdgeStyle;rounded=0;html=1;fontSize=11;dashed=1;endArrow=open;startArrow=none;exitX=1;exitY=0.3;entryX=1;entryY=0.9;" edge="1" parent="1" source="RegRequest" target="Patient"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="380" y="1060" /></Array></mxGeometry></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

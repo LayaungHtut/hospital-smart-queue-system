@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Activity, CheckCircle2, Pause, Play, RotateCcw, Sparkles, Volume2 } from "lucide-react";
 import {
   doctorCallNext,
@@ -60,7 +60,7 @@ function DoctorQueueRoomPage() {
     }
   }, [session, doctorId]);
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     try {
       const res = await getDoctorDashboard(doctorId);
       setData(res);
@@ -69,13 +69,13 @@ function DoctorQueueRoomPage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [doctorId]);
 
   useEffect(() => {
     loadData();
     const timer = setInterval(loadData, 8000);
     return () => clearInterval(timer);
-  }, [doctorId]);
+  }, [loadData]);
 
   async function handleCallNext() {
     setActionLoading(true);
@@ -84,8 +84,8 @@ function DoctorQueueRoomPage() {
       setMessage(res.message);
       await loadData();
       setTimeout(() => setMessage(null), 4000);
-    } catch (err: any) {
-      setMessage(err?.message ?? "Failed to call next patient");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Failed to call next patient");
       setTimeout(() => setMessage(null), 4000);
     } finally {
       setActionLoading(false);
@@ -99,8 +99,8 @@ function DoctorQueueRoomPage() {
       setMessage(res.message);
       await loadData();
       setTimeout(() => setMessage(null), 4000);
-    } catch (err: any) {
-      setMessage(err?.message ?? "Failed to start consultation");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Failed to start consultation");
       setTimeout(() => setMessage(null), 4000);
     } finally {
       setActionLoading(false);
@@ -114,8 +114,8 @@ function DoctorQueueRoomPage() {
       setMessage(res.message);
       await loadData();
       setTimeout(() => setMessage(null), 4000);
-    } catch (err: any) {
-      setMessage(err?.message ?? "Failed to complete consultation");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Failed to complete consultation");
       setTimeout(() => setMessage(null), 4000);
     } finally {
       setActionLoading(false);
@@ -129,8 +129,8 @@ function DoctorQueueRoomPage() {
       setMessage(res.message);
       await loadData();
       setTimeout(() => setMessage(null), 4000);
-    } catch (err: any) {
-      setMessage(err?.message ?? "Failed to pause consultation");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Failed to pause consultation");
       setTimeout(() => setMessage(null), 4000);
     } finally {
       setActionLoading(false);
@@ -144,8 +144,8 @@ function DoctorQueueRoomPage() {
       setMessage(res.message);
       await loadData();
       setTimeout(() => setMessage(null), 4000);
-    } catch (err: any) {
-      setMessage(err?.message ?? "Failed to resume consultation");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Failed to resume consultation");
       setTimeout(() => setMessage(null), 4000);
     } finally {
       setActionLoading(false);
@@ -233,9 +233,7 @@ function DoctorQueueRoomPage() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <QueueTokenBadge
                     token={activePatient.queueNumber}
-                    station={
-                      isServing ? "In Consultation" : "Called · Awaiting Arrival"
-                    }
+                    station={isServing ? "In Consultation" : "Called · Awaiting Arrival"}
                     urgency={activePatient.emergency ? "critical" : "general"}
                   />
                   <div>

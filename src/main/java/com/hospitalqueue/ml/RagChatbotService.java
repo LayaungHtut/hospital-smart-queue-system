@@ -1,10 +1,9 @@
 package com.hospitalqueue.ml;
 
-import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.model.openai.OpenAiChatModel;
+import com.hospitalqueue.ai.OpenRouterClient;
+import com.hospitalqueue.config.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.hospitalqueue.config.EnvConfig;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
@@ -13,61 +12,47 @@ import jakarta.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Retrieval-augmented hospital FAQ chatbot.
+ *
+ * "Retrieval" = keyword-scored lookup over the plain-text files in
+ * {@code src/main/resources/knowledge-base/*.txt} (loaded once at startup -
+ * add/edit .txt files there and restart to update what the bot knows).
+ * "Generation" = a call to {@link OpenRouterClient}, the same free-tier
+ * OpenRouter client the rest of the AI features use, so this bot gets its
+ * circuit breaker, response cache and primary/fallback model retry for free
+ * instead of keeping a second, independently-configured LLM client around.
+ */
 @Service
 public class RagChatbotService {
 
     private static final Logger log = LoggerFactory.getLogger(RagChatbotService.class);
 
-    private final EnvConfig env;
-    private final String openRouterApiKey;
-    private final String openRouterBaseUrl;
-    private final String openRouterModel;
+    private final OpenRouterClient openRouterClient;
     private final String knowledgeBasePath;
 
-    private ChatLanguageModel chatModel;
     private List<KbChunk> chunks = new ArrayList<>();
     private boolean initialized = false;
     private final Map<String, List<String>> sessionHistory = new ConcurrentHashMap<>();
 
-    public RagChatbotService(EnvConfig env) {
-        this.env = env;
-        this.openRouterApiKey = env.getOrDefault("OPENROUTER_API_KEY", "");
-        this.openRouterBaseUrl = env.getOrDefault("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1");
-        this.openRouterModel = env.getOrDefault("OPENROUTER_MODEL", "meta-llama/llama-3.3-70b-instruct:free");
+    public RagChatbotService(OpenRouterClient openRouterClient, EnvConfig env) {
+        this.openRouterClient = openRouterClient;
         this.knowledgeBasePath = env.getOrDefault("KNOWLEDGE_BASE_PATH", "classpath:knowledge-base/*.txt");
     }
 
     @PostConstruct
     public void init() {
-        if (openRouterApiKey == null || openRouterApiKey.isBlank() || openRouterApiKey.contains("YOUR_")) {
+        if (!openRouterClient.isConfigured()) {
             log.warn("Chatbot disabled: OpenRouter API key not configured");
             return;
         }
-
-        try {
-            chatModel = OpenAiChatModel.builder()
-                    .baseUrl(openRouterBaseUrl)
-                    .apiKey(openRouterApiKey)
-                    .modelName(openRouterModel)
-                    .temperature(0.3)
-                    .maxTokens(300)
-                    .timeout(Duration.ofSeconds(15))
-                    .logRequests(false)
-                    .logResponses(false)
-                    .build();
-
-            loadKnowledgeBase();
-            initialized = true;
-            log.info("RAG chatbot initialized successfully with {} chunks", chunks.size());
-        } catch (Exception e) {
-            log.error("Failed to initialize RAG chatbot: {}", e.getMessage(), e);
-        }
+        loadKnowledgeBase();
+        initialized = true;
+        log.info("RAG chatbot initialized successfully with {} chunks", chunks.size());
     }
 
     private void loadKnowledgeBase() {
@@ -130,71 +115,64 @@ public class RagChatbotService {
     }
 
     public String chat(String userMessage) {
-        if (!initialized || chatModel == null) {
+        if (!initialized) {
             return "Chatbot is not available. Please configure the OpenRouter API key.";
         }
-        try {
-            String context = retrieveRelevantContext(userMessage);
-            String systemPrompt = """
-                    You are a helpful hospital assistant for City General Hospital.
-                    Answer questions based ONLY on the provided context.
-                    If the context doesn't contain enough information, say so politely.
-                    Keep answers concise and friendly.
-                    
-                    CONTEXT:
-                    %s
-                    """.formatted(context);
+        String context = retrieveRelevantContext(userMessage);
+        String systemPrompt = """
+                You are a helpful hospital assistant for City General Hospital.
+                Answer questions based ONLY on the provided context.
+                If the context doesn't contain enough information, say so politely.
+                Keep answers concise and friendly.
 
-            String fullPrompt = systemPrompt + "\n\nUser: " + userMessage;
-            return chatModel.generate(fullPrompt);
-        } catch (Exception e) {
-            log.error("Chatbot error: {}", e.getMessage());
-            return "I'm having trouble processing your request. Please try again.";
-        }
+                CONTEXT:
+                %s
+                """.formatted(context);
+
+        String response = openRouterClient.chat(systemPrompt, userMessage);
+        return response != null ? response : "I'm having trouble processing your request. Please try again.";
     }
 
     public String chatWithSession(String sessionId, String userMessage) {
-        if (!initialized || chatModel == null) {
+        if (!initialized) {
             return "Chatbot is not available.";
         }
-        try {
-            List<String> history = sessionHistory.computeIfAbsent(sessionId, k -> new ArrayList<>());
-            String context = retrieveRelevantContext(userMessage);
+        List<String> history = sessionHistory.computeIfAbsent(sessionId, k -> new ArrayList<>());
+        String context = retrieveRelevantContext(userMessage);
 
-            StringBuilder conversationContext = new StringBuilder();
-            int start = Math.max(0, history.size() - 6);
-            for (int i = start; i < history.size(); i++) {
-                conversationContext.append(history.get(i)).append("\n");
-            }
+        StringBuilder conversationContext = new StringBuilder();
+        int start = Math.max(0, history.size() - 6);
+        for (int i = start; i < history.size(); i++) {
+            conversationContext.append(history.get(i)).append("\n");
+        }
 
-            String systemPrompt = """
-                    You are a helpful hospital assistant for City General Hospital.
-                    Answer questions based ONLY on the provided context and conversation history.
-                    If the context doesn't contain enough information, say so politely.
-                    Keep answers concise and friendly.
-                    
-                    HOSPITAL KNOWLEDGE:
-                    %s
-                    
-                    RECENT CONVERSATION:
-                    %s
-                    """.formatted(context, conversationContext);
+        String systemPrompt = """
+                You are a helpful hospital assistant for City General Hospital.
+                Answer questions based ONLY on the provided context and conversation history.
+                If the context doesn't contain enough information, say so politely.
+                Keep answers concise and friendly.
 
-            String response = chatModel.generate(systemPrompt + "\n\nUser: " + userMessage);
-            history.add("User: " + userMessage);
-            history.add("Assistant: " + response);
-            if (history.size() > 20) {
-                history.subList(0, history.size() - 20).clear();
-            }
-            return response;
-        } catch (Exception e) {
-            log.error("Chatbot session error: {}", e.getMessage());
+                HOSPITAL KNOWLEDGE:
+                %s
+
+                RECENT CONVERSATION:
+                %s
+                """.formatted(context, conversationContext);
+
+        String response = openRouterClient.chat(systemPrompt, userMessage);
+        if (response == null) {
             return "I'm having trouble processing your request.";
         }
+        history.add("User: " + userMessage);
+        history.add("Assistant: " + response);
+        if (history.size() > 20) {
+            history.subList(0, history.size() - 20).clear();
+        }
+        return response;
     }
 
     public boolean isReady() {
-        return initialized && chatModel != null;
+        return initialized;
     }
 
     public void addDocument(String content, String metadata) {
@@ -236,8 +214,8 @@ public class RagChatbotService {
     public ChatbotStatus getStatus() {
         return new ChatbotStatus(
                 initialized,
-                openRouterModel,
-                "In-memory file RAG",
+                openRouterClient.getModel(),
+                "In-memory file RAG (" + knowledgeBasePath + ")",
                 chunks.size()
         );
     }

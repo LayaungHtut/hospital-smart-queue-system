@@ -1,0 +1,140 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Queue Flowchart" id="flowchart1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Terminators -->
+        <mxCell id="start" value="Start" style="rounded=1;arcSize=50;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="560" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="endCancel" value="End" style="rounded=1;arcSize=50;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="900" y="1380" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="endMain" value="End" style="rounded=1;arcSize=50;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="560" y="1700" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Main spine -->
+        <mxCell id="p1" value="Patient Login / Register" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="Enter Symptoms" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="200" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ai1" value="AI Department Recommendation" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="280" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="Select Doctor &amp; Department" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="360" width="220" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d1" value="Emergency Case?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="530" y="440" width="200" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Emergency branch (left) -->
+        <mxCell id="pEmg" value="Create Emergency&#10;Queue Ticket" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="140" y="560" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pNotify" value="Notify Patient:&#10;Awaiting Staff Confirmation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="140" y="640" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pStaffReview" value="Staff Reviews Emergency" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="140" y="730" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dConfirm" value="Staff Confirms&#10;Emergency?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="150" y="810" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pReorder" value="Reorder Queue /&#10;Move to Front" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="940" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pConvert" value="Convert to&#10;Normal Priority" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="270" y="940" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Non-emergency branch (right) -->
+        <mxCell id="d2" value="Within Doctor's&#10;Operating Hours?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="900" y="440" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pNormalTicket" value="Create Queue Ticket&#10;(Normal Priority)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="900" y="560" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="errShow" value="Show Error:&#10;Doctor is unavailable.&#10;Select another doctor/department&#10;or choose Emergency if applicable." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="435" width="260" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Convergence -->
+        <mxCell id="merge1" value="Queue Number Assigned" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1040" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pFinalized" value="Queue Finalized" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1120" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pWait" value="Patient Waits /&#10;Monitors Queue Status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1200" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d5" value="Patient Cancels&#10;Ticket?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="530" y="1290" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p10" value="Cancel Queue Ticket" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="900" y="1300" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p11" value="Doctor Calls Next Patient" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1410" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p12" value="Doctor Starts Consultation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1480" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p13" value="Doctor Completes Consultation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1550" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ai2" value="Generate AI SOAP Note" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1620" width="220" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Edges: main spine -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="start" target="p1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="p1" target="p2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="p2" target="ai1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ai1" target="p3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="p3" target="d1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Emergency branch edges -->
+        <mxCell id="e6" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="d1" target="pEmg"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="pEmg" target="pNotify"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="pNotify" target="pStaffReview"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="pStaffReview" target="dConfirm"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e10" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.3;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="dConfirm" target="pReorder"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e11" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.7;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="dConfirm" target="pConvert"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="pReorder" target="merge1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0;entryY=0.8;" edge="1" parent="1" source="pConvert" target="merge1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Non-emergency branch edges -->
+        <mxCell id="e14" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="d1" target="d2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e15" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="d2" target="pNormalTicket"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e16" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="d2" target="errShow"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=1;entryY=0.5;" edge="1" parent="1" source="errShow" target="p3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="pNormalTicket" target="merge1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Post-convergence -->
+        <mxCell id="e19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="merge1" target="pFinalized"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="pFinalized" target="pWait"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="pWait" target="d5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e22" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="d5" target="p10"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="p10" target="endCancel"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e24" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="d5" target="p11"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Consultation -->
+        <mxCell id="e25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="p11" target="p12"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="p12" target="p13"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="p13" target="ai2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ai2" target="endMain"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

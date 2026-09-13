@@ -31,8 +31,11 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * Optimizations over baseline:
  * - HTTP/2 for better connection reuse
- * - 15-second request timeout (down from 60s)
- * - 150 max_tokens (down from 300) for faster generation
+ * - 25-second request timeout
+ * - 500 max_tokens - free-tier "thinking" models spend a chunk of this on a
+ *   hidden reasoning pass (billed against max_tokens even when
+ *   reasoning.exclude drops it from the response), so a small budget makes
+ *   them hit the length limit before writing any visible content
  * - SHA-256 response cache with 5-minute TTL
  * - Circuit breaker: after 3 consecutive failures, skip AI for 30 seconds
  */
@@ -41,8 +44,8 @@ public class OpenRouterClient {
 
     private static final Logger log = LoggerFactory.getLogger(OpenRouterClient.class);
 
-    private static final int REQUEST_TIMEOUT_SECONDS = 15;
-    private static final int MAX_TOKENS = 150;
+    private static final int REQUEST_TIMEOUT_SECONDS = 25;
+    private static final int MAX_TOKENS = 500;
     private static final long CACHE_TTL_MS = 5 * 60 * 1000L; // 5 minutes
     private static final int CIRCUIT_BREAKER_THRESHOLD = 3;
     private static final long CIRCUIT_BREAKER_COOLDOWN_MS = 30 * 1000L; // 30 seconds
@@ -63,6 +66,14 @@ public class OpenRouterClient {
 
     public OpenRouterClient(EnvConfig env) {
         this.env = env;
+    }
+
+    /**
+     * The primary model this client currently calls (for status/diagnostics
+     * display - the actual call may fall back to OPENROUTER_FALLBACK_MODEL).
+     */
+    public String getModel() {
+        return env.getOrDefault("OPENROUTER_MODEL", "nex-agi/nex-n2.5-pro:free");
     }
 
     /**
@@ -100,9 +111,37 @@ public class OpenRouterClient {
         }
 
         String baseUrl = env.getOrDefault("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1");
-        String model = env.getOrDefault("OPENROUTER_MODEL", "qwen/qwen-2.5-7b-instruct:free");
+        String model = env.getOrDefault("OPENROUTER_MODEL", "nex-agi/nex-n2.5-pro:free");
+        String fallbackModel = env.getOrDefault("OPENROUTER_FALLBACK_MODEL", "cohere/north-mini-code:free");
         String apiKey = env.get("OPENROUTER_API_KEY");
 
+        String result = callModel(baseUrl, model, apiKey, systemPrompt, userPrompt);
+        if (result == null && fallbackModel != null && !fallbackModel.isBlank() && !fallbackModel.equals(model)) {
+            log.warn("Primary model '{}' failed, retrying with fallback '{}'", model, fallbackModel);
+            result = callModel(baseUrl, fallbackModel, apiKey, systemPrompt, userPrompt);
+        }
+
+        if (result == null) {
+            recordFailure();
+            return null;
+        }
+
+        // Cache the successful response
+        cache.put(cacheKey, new CacheEntry(result, Instant.now().plusMillis(CACHE_TTL_MS)));
+        failureCount.set(0);
+        return result;
+    }
+
+    /**
+     * Runs one chat completion call against a specific model. Returns null on
+     * any failure (non-200 response, missing/blank content) so the caller can
+     * decide whether to retry with a fallback model.
+     *
+     * {@code reasoning.exclude} is set because free-tier OpenRouter models are
+     * frequently "thinking" models that spend the whole token budget on an
+     * internal <reasoning> trace and leave "content" null/empty otherwise.
+     */
+    private String callModel(String baseUrl, String model, String apiKey, String systemPrompt, String userPrompt) {
         try {
             Map<String, Object> payload = new LinkedHashMap<>();
             payload.put("model", model);
@@ -112,6 +151,7 @@ public class OpenRouterClient {
             ));
             payload.put("temperature", 0.2);
             payload.put("max_tokens", MAX_TOKENS);
+            payload.put("reasoning", Map.of("exclude", true));
 
             String json = objectMapper.writeValueAsString(payload);
 
@@ -128,29 +168,20 @@ public class OpenRouterClient {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() != 200) {
-                log.warn("OpenRouter returned status {}: {}", response.statusCode(), response.body());
-                recordFailure();
+                log.warn("OpenRouter ({}) returned status {}: {}", model, response.statusCode(), response.body());
                 return null;
             }
 
             JsonNode root = objectMapper.readTree(response.body());
             JsonNode content = root.path("choices").path(0).path("message").path("content");
-            if (content.isMissingNode()) {
-                log.warn("Unexpected OpenRouter response: {}", response.body());
-                recordFailure();
+            String text = content.isMissingNode() || content.isNull() ? "" : content.asText().trim();
+            if (text.isEmpty()) {
+                log.warn("OpenRouter ({}) returned empty content: {}", model, response.body());
                 return null;
             }
-
-            String result = content.asText().trim();
-
-            // Cache the successful response
-            cache.put(cacheKey, new CacheEntry(result, Instant.now().plusMillis(CACHE_TTL_MS)));
-            failureCount.set(0);
-
-            return result;
+            return text;
         } catch (Exception e) {
-            log.warn("OpenRouter call failed: {}", e.getMessage());
-            recordFailure();
+            log.warn("OpenRouter call to {} failed: {}", model, e.getMessage());
             return null;
         }
     }

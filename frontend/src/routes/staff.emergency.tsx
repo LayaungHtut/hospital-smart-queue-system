@@ -141,21 +141,27 @@ function EmergencyPage() {
                 <AlertTriangle className="mt-0.5 size-4 shrink-0 text-danger" />
                 <div>
                   <p className="text-xs font-bold text-foreground">Acute chest pain / cardiac</p>
-                  <p className="text-[11px] text-muted-foreground">Route straight to on-call doctor.</p>
+                  <p className="text-[11px] text-muted-foreground">
+                    Route straight to on-call doctor.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-2 rounded-lg bg-muted/50 p-3">
                 <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" />
                 <div>
                   <p className="text-xs font-bold text-foreground">Breathing difficulty</p>
-                  <p className="text-[11px] text-muted-foreground">Fast-track ahead of the queue.</p>
+                  <p className="text-[11px] text-muted-foreground">
+                    Fast-track ahead of the queue.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-2 rounded-lg bg-muted/50 p-3">
                 <Info className="mt-0.5 size-4 shrink-0 text-info" />
                 <div>
                   <p className="text-xs font-bold text-foreground">Everything else</p>
-                  <p className="text-[11px] text-muted-foreground">Confirm case, assign standard priority.</p>
+                  <p className="text-[11px] text-muted-foreground">
+                    Confirm case, assign standard priority.
+                  </p>
                 </div>
               </div>
             </div>

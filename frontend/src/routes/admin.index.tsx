@@ -13,13 +13,11 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import type { TooltipProps } from "recharts";
 import { getAdminDashboard } from "@/services/api";
 import { AdminLayout } from "@/components/portal/shells";
 import { Panel, StatCard } from "@/components/portal/ui-kit";
-import {
-  SkeletonStatCard,
-  SkeletonPanel,
-} from "@/components/ui/loading";
+import { SkeletonStatCard, SkeletonPanel } from "@/components/ui/loading";
 import type { AdminDashboard } from "@/types";
 
 export const Route = createFileRoute("/admin/")({
@@ -37,9 +35,28 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboardPage,
 });
 
+type DepartmentSlice = { name: string; percent: number; color: string };
+
+function DepartmentTooltip({ active, payload }: TooltipProps<number, string>) {
+  if (!active || !payload?.length) return null;
+  const entry = payload[0];
+  if (!entry) return null;
+  const d = entry.payload as DepartmentSlice;
+  return (
+    <div className="rounded-lg border border-border bg-popover px-3 py-2 text-sm shadow-md">
+      <div className="flex items-center gap-2">
+        <span className="size-2.5 rounded-full" style={{ backgroundColor: d.color }} aria-hidden />
+        <span className="font-medium text-popover-foreground">{d.name}</span>
+      </div>
+      <p className="mt-0.5 text-popover-foreground/80">{d.percent}% of today's queues</p>
+    </div>
+  );
+}
+
 function AdminDashboardPage() {
   const [data, setData] = useState<AdminDashboard | null>(null);
   const [loading, setLoading] = useState(true);
+  const [activeDept, setActiveDept] = useState<string | null>(null);
 
   useEffect(() => {
     getAdminDashboard()
@@ -152,18 +169,37 @@ function AdminDashboardPage() {
                     innerRadius={45}
                     outerRadius={75}
                     paddingAngle={2}
+                    stroke="var(--color-card)"
+                    strokeWidth={2}
+                    onMouseEnter={(_, index) =>
+                      setActiveDept(data?.byDepartment[index]?.name ?? null)
+                    }
+                    onMouseLeave={() => setActiveDept(null)}
                   >
                     {(data?.byDepartment ?? []).map((d) => (
-                      <Cell key={d.name} fill={d.color} />
+                      <Cell
+                        key={d.name}
+                        fill={d.color}
+                        opacity={activeDept === null || activeDept === d.name ? 1 : 0.35}
+                        className="cursor-pointer transition-opacity"
+                      />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip content={<DepartmentTooltip />} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
             <ul className="mt-4 space-y-2">
               {(data?.byDepartment ?? []).map((d) => (
-                <li key={d.name} className="flex items-center gap-3 text-sm">
+                <li
+                  key={d.name}
+                  className="flex items-center gap-3 rounded-md px-1.5 py-1 text-sm transition-colors"
+                  style={{
+                    backgroundColor: activeDept === d.name ? "var(--color-accent)" : "transparent",
+                  }}
+                  onMouseEnter={() => setActiveDept(d.name)}
+                  onMouseLeave={() => setActiveDept(null)}
+                >
                   <span
                     className="size-3 rounded-sm"
                     style={{ backgroundColor: d.color }}

@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -40,6 +41,7 @@ public class QueueRepository {
         q.setSource(rs.getString("source"));
         q.setEmergency(rs.getBoolean("is_emergency"));
         q.setEmergencyConfirmed(rs.getBoolean("emergency_confirmed"));
+        q.setReminderSent(rs.getBoolean("reminder_sent"));
         q.setCancelReason(rs.getString("cancel_reason"));
         Timestamp t = rs.getTimestamp("created_at");
         if (t != null)
@@ -177,6 +179,23 @@ public class QueueRepository {
         jdbcTemplate.update("UPDATE queue SET estimated_waiting_time = ? WHERE queue_id = ?", waitingTime, queueId);
     }
 
+    /**
+     * Same update as {@link #updateEstimatedWaitingTime(long, long)} but for
+     * many queue rows in a single batched round trip — used when recalculating
+     * every remaining waiting patient's estimate after a call-next/complete
+     * action, instead of one UPDATE per patient.
+     */
+    public void updateEstimatedWaitingTimes(java.util.Map<Long, Long> waitingTimeByQueueId) {
+        if (waitingTimeByQueueId.isEmpty()) return;
+        List<java.util.Map.Entry<Long, Long>> entries = new ArrayList<>(waitingTimeByQueueId.entrySet());
+        jdbcTemplate.batchUpdate("UPDATE queue SET estimated_waiting_time = ? WHERE queue_id = ?",
+                entries, entries.size(),
+                (ps, entry) -> {
+                    ps.setLong(1, entry.getValue());
+                    ps.setLong(2, entry.getKey());
+                });
+    }
+
     public void callNext(long queueId) {
         jdbcTemplate.update("UPDATE queue SET status = 'CALLED', called_at = CURRENT_TIMESTAMP WHERE queue_id = ?",
                 queueId);
@@ -261,15 +280,50 @@ public class QueueRepository {
                 }, doctorId);
     }
 
+    /**
+     * Total completed count per doctor, straight from queue_history in one
+     * grouped query — used instead of calling {@link #findHistoryForDoctor}
+     * (bounded to the last 50 rows and fetching full history) once per doctor
+     * just to filter+count COMPLETED entries in Java.
+     */
+    public java.util.Map<String, Long> countCompletedAllTimeByAllDoctors() {
+        java.util.Map<String, Long> counts = new java.util.HashMap<>();
+        jdbcTemplate.query(
+                "SELECT doctor_id, COUNT(*) AS total FROM queue_history WHERE status = 'COMPLETED' GROUP BY doctor_id",
+                (org.springframework.jdbc.core.RowCallbackHandler) rs ->
+                        counts.put(rs.getString("doctor_id"), rs.getLong("total")));
+        return counts;
+    }
+
+    /**
+     * All doctors' active (CALLED/SERVING/WAITING) queue entries in one query,
+     * to be grouped by doctor_id by the caller — avoids one query per doctor
+     * when building a report/dashboard across every doctor.
+     */
+    public List<Queue> findActiveQueuesForAllDoctors() {
+        return jdbcTemplate.query(
+                "SELECT * FROM queue WHERE status IN ('CALLED', 'SERVING', 'WAITING') "
+                        + "ORDER BY CASE status WHEN 'SERVING' THEN 1 WHEN 'CALLED' THEN 2 ELSE 3 END, "
+                        + "CASE priority WHEN 'EMERGENCY' THEN 1 WHEN 'APPOINTMENT' THEN 2 ELSE 3 END, position",
+                (RowMapper<Queue>) mapper);
+    }
+
     public List<Queue> findRecent(int limit) {
         return jdbcTemplate.query(
                 "SELECT * FROM queue ORDER BY queue_id DESC LIMIT " + limit, (RowMapper<Queue>) mapper);
     }
 
     public List<Queue> findAllByStatus(String status) {
+        if (status == null) {
+            return jdbcTemplate.query("SELECT * FROM queue ORDER BY queue_id DESC", (RowMapper<Queue>) mapper);
+        }
+        // Postgres can't infer the type of a bare "?" compared with "? IS NULL" in
+        // the same statement (ERROR: could not determine data type of parameter
+        // $1) - hence the separate no-filter query above rather than one
+        // "(? IS NULL OR status = ?)" query for both cases.
         return jdbcTemplate.query(
-                "SELECT * FROM queue WHERE (? IS NULL OR status = ?) ORDER BY queue_id DESC",
-                (RowMapper<Queue>) mapper, status, status);
+                "SELECT * FROM queue WHERE status = ? ORDER BY queue_id DESC",
+                (RowMapper<Queue>) mapper, status);
     }
 
     // ---- Statistics helpers ----
@@ -468,6 +522,22 @@ public class QueueRepository {
                 (RowMapper<Queue>) mapper, java.sql.Timestamp.valueOf(cutoff));
     }
 
+    /**
+     * Waiting patients whose estimated wait has dropped to/under the given
+     * threshold and who haven't been sent the "your turn is coming up"
+     * reminder yet — polled periodically by {@code QueueExpiryScheduler}.
+     */
+    public List<Queue> findWaitingQueuesDueForReminder(long thresholdMinutes) {
+        return jdbcTemplate.query(
+                "SELECT * FROM queue WHERE status = 'WAITING' AND reminder_sent = FALSE "
+                        + "AND estimated_waiting_time <= ? ORDER BY position",
+                (RowMapper<Queue>) mapper, thresholdMinutes);
+    }
+
+    public void markReminderSent(long queueId) {
+        jdbcTemplate.update("UPDATE queue SET reminder_sent = TRUE WHERE queue_id = ?", queueId);
+    }
+
     public List<Queue> findCalledByDoctor(String doctorId) {
         return jdbcTemplate.query(
                 "SELECT * FROM queue WHERE doctor_id = ? AND status = 'CALLED' ORDER BY called_at LIMIT 1",
@@ -518,5 +588,36 @@ public class QueueRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    /**
+     * Same data as {@link #getPreviousDayAverageConsultationMinutes(String)} but
+     * for every doctor in one round trip (2 queries total instead of up to 2 per
+     * doctor) — used when computing wait times for a whole list of doctors.
+     */
+    public java.util.Map<String, Double> getPreviousDayAverageConsultationMinutesForAllDoctors() {
+        java.util.Map<String, Double> byDay = new java.util.HashMap<>();
+        jdbcTemplate.query(
+                "SELECT doctor_id, EXTRACT(EPOCH FROM AVG(completed_at - started_at))/60 AS avg_min FROM queue "
+                        + "WHERE status = 'COMPLETED' AND started_at IS NOT NULL AND completed_at IS NOT NULL "
+                        + "AND completed_at::DATE = CURRENT_DATE - INTERVAL '1 day' GROUP BY doctor_id",
+                rs -> {
+                    double avg = rs.getDouble("avg_min");
+                    if (!rs.wasNull() && avg > 0) byDay.put(rs.getString("doctor_id"), avg);
+                });
+
+        java.util.Map<String, Double> allTime = new java.util.HashMap<>();
+        jdbcTemplate.query(
+                "SELECT doctor_id, EXTRACT(EPOCH FROM AVG(completed_at - started_at))/60 AS avg_min FROM queue "
+                        + "WHERE status = 'COMPLETED' AND started_at IS NOT NULL AND completed_at IS NOT NULL GROUP BY doctor_id",
+                rs -> {
+                    double avg = rs.getDouble("avg_min");
+                    if (!rs.wasNull() && avg > 0) allTime.put(rs.getString("doctor_id"), avg);
+                });
+
+        // Previous-day figure wins where present, otherwise fall back to all-time.
+        java.util.Map<String, Double> merged = new java.util.HashMap<>(allTime);
+        merged.putAll(byDay);
+        return merged;
     }
 }

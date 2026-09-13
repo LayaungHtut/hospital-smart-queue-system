@@ -9,13 +9,29 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { getPatientAppointments, getPatientQueue } from "@/services/api";
+import { getPatientAppointments, getPatientNotifications, getPatientQueue } from "@/services/api";
 import { PatientLayout } from "@/components/portal/shells";
-import { Panel, QueueTokenBadge, StatCard, StatusBadge } from "@/components/portal/ui-kit";
+import {
+  Alert,
+  Panel,
+  QueueTokenBadge,
+  StatCard,
+  StatusBadge,
+  type AlertTone,
+} from "@/components/portal/ui-kit";
 import { useAuth } from "@/lib/auth";
 import { SkeletonCard, SkeletonStatCard, SkeletonPanel } from "@/components/ui/loading";
-import type { Appointment, QueueEntry } from "@/types";
+import type { Appointment, NotificationItem, QueueEntry } from "@/types";
 import { ChatbotWidget } from "@/components/portal/ChatbotWidget";
+
+const toneForCategory: Record<NotificationItem["category"], AlertTone> = {
+  EMERGENCY: "error",
+  QUEUE: "info",
+  DOCTOR: "success",
+  SCHEDULE: "warning",
+};
+
+const NOTIFICATION_POLL_MS = 15_000;
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -34,6 +50,8 @@ function PatientDashboard() {
   const [queues, setQueues] = useState<QueueEntry[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [dismissedIds, setDismissedIds] = useState<Set<number>>(new Set());
 
   const patientId = session?.userId;
   const patientName = session?.name || "Patient";
@@ -57,11 +75,38 @@ function PatientDashboard() {
     };
   }, [patientId]);
 
+  // Poll for new notifications (queue called, upcoming-turn reminder, etc.) so
+  // patients see them right here on the dashboard, not only on /notifications.
+  useEffect(() => {
+    let active = true;
+    async function poll() {
+      try {
+        const data = await getPatientNotifications(patientId);
+        if (active) setNotifications(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    poll();
+    const interval = setInterval(poll, NOTIFICATION_POLL_MS);
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
+  }, [patientId]);
+
   const current = queues.find((q) => q.status === "WAITING");
+  const unreadNotifications = notifications.filter((n) => !n.read && !dismissedIds.has(n.id));
+
+  function dismissNotification(id: number) {
+    setDismissedIds((prev) => new Set(prev).add(id));
+  }
 
   return (
     <PatientLayout title="Dashboard">
-      <div className="space-y-6">
+      {/* pb-24 keeps the last card/panel from staying trapped under the fixed
+          chat bubble (bottom-right) when the page is too short to scroll. */}
+      <div className="space-y-6 pb-24">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3.5">
             <div className="relative flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground shadow-sm">
@@ -83,6 +128,31 @@ function PatientDashboard() {
             </div>
           </div>
         </div>
+
+        {unreadNotifications.length > 0 ? (
+          <div className="space-y-2">
+            {unreadNotifications.slice(0, 3).map((n) => (
+              <Alert
+                key={n.id}
+                tone={toneForCategory[n.category]}
+                onDismiss={() => dismissNotification(n.id)}
+                className="animate-in fade-in slide-in-from-top-2"
+              >
+                <p className="font-semibold">{n.title}</p>
+                <p className="opacity-90">{n.message}</p>
+              </Alert>
+            ))}
+            {unreadNotifications.length > 3 ? (
+              <Link
+                to="/notifications"
+                className="block text-right text-xs font-medium text-primary hover:underline"
+              >
+                +{unreadNotifications.length - 3} more — view all notifications
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+
         <ChatbotWidget />
 
         {loading ? (
@@ -151,7 +221,9 @@ function PatientDashboard() {
               <StatCard
                 label="Your Position"
                 value={current ? `${current.position}th` : "—"}
-                caption={current ? `${Math.max(current.position - 1, 0)} patients ahead of you` : "In line"}
+                caption={
+                  current ? `${Math.max(current.position - 1, 0)} patients ahead of you` : "In line"
+                }
                 tone="success"
                 icon={<Users className="size-5 text-muted-foreground" />}
                 footer={

@@ -1,7 +1,6 @@
 package com.hospitalqueue.service;
 
 import com.hospitalqueue.model.Appointment;
-import com.hospitalqueue.model.Department;
 import com.hospitalqueue.model.Doctor;
 import com.hospitalqueue.model.Queue;
 import com.hospitalqueue.ml.WaitTimePredictionService;
@@ -30,11 +29,13 @@ import java.util.Map;
 @Service
 public class QueueService {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(QueueService.class);
 
     private final QueueRepository queueRepository;
     private final AppointmentRepository appointmentRepository;
     private final DoctorRepository doctorRepository;
+    @SuppressWarnings("unused")
     private final DepartmentRepository departmentRepository;
     private final PatientRepository patientRepository;
     private final WaitingTimeService waitingTimeService;
@@ -42,6 +43,7 @@ public class QueueService {
     private final QueueRule queueRule;
     private final EmergencyRule emergencyRule;
     private final DoctorAvailabilityRule doctorAvailabilityRule;
+    @SuppressWarnings("unused")
     private final WaitTimePredictionService waitTimePredictionService;
     private final SymptomRepository symptomRepository;
 
@@ -104,7 +106,8 @@ public class QueueService {
      * Rule 5 (department validation), Rule 8 (registration window) and
      * Rule 11 (capacity). Generates the queue number and waiting time.
      */
-    public synchronized Queue createQueue(String patientId, String doctorId, int departmentId, String priority, boolean emergency,
+    public synchronized Queue createQueue(String patientId, String doctorId, int departmentId, String priority,
+            boolean emergency,
             String source, List<Integer> symptomIds) {
         com.hospitalqueue.model.Patient patient = patientRepository.findById(patientId);
         if (patient == null) {
@@ -145,7 +148,8 @@ public class QueueService {
         // average consultation time (using historical data when available)
         long avgConsultMinutes = waitingTimeService.getDoctorAverageConsultationMinutes(doctor);
         long sessionMinutes = java.time.Duration.between(open, close).toMinutes();
-        if (sessionMinutes <= 0) sessionMinutes = 450; // 7.5 hours default
+        if (sessionMinutes <= 0)
+            sessionMinutes = 450; // 7.5 hours default
 
         // Subtract the 1-hour lunch break from effective session time
         long effectiveSessionMinutes = Math.max(60, sessionMinutes - 60);
@@ -278,9 +282,11 @@ public class QueueService {
     private void updateRemainingWaitTimes(String doctorId) {
         try {
             Doctor doctor = doctorRepository.findById(doctorId);
-            if (doctor == null) return;
+            if (doctor == null)
+                return;
             long avgConsult = waitingTimeService.getDoctorAverageConsultationMinutes(doctor);
             List<Queue> remaining = queueRepository.findWaitingQueuesByDoctor(doctorId);
+            java.util.Map<Long, Long> waitByQueueId = new java.util.LinkedHashMap<>();
             for (int i = 0; i < remaining.size(); i++) {
                 Queue q = remaining.get(i);
                 int patientsAhead = i; // patients ahead of this one (0-indexed)
@@ -292,8 +298,11 @@ public class QueueService {
                         && completion.isAfter(java.time.LocalTime.of(12, 0))) {
                     estimatedWait += 60; // lunch break
                 }
-                queueRepository.updateEstimatedWaitingTime(q.getQueueId(), Math.max(0, estimatedWait));
+                waitByQueueId.put(q.getQueueId(), Math.max(0, estimatedWait));
             }
+            // One batched round trip instead of one UPDATE per waiting patient -
+            // this runs on every call-next/complete action, so it's a hot path.
+            queueRepository.updateEstimatedWaitingTimes(waitByQueueId);
         } catch (Exception e) {
             // Non-critical: log but don't fail the call-next operation
             org.slf4j.LoggerFactory.getLogger(QueueService.class)

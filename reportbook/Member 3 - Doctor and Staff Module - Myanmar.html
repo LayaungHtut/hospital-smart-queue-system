@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<title>Member 3 - Doctor & Staff Module (Myanmar Deep Dive & Presentation Master Guide)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap');
+
+  @page {
+    size: 8.5in 11in;
+    margin: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #f4f6f4;
+    font-family: 'Noto Sans Myanmar', 'Myanmar Text', 'Inter', -apple-system, sans-serif;
+    color: #1a231f;
+    font-size: 8.6pt;
+    line-height: 1.48;
+  }
+
+  .sheet {
+    width: 8.5in;
+    height: 11in;
+    max-height: 11in;
+    overflow: hidden;
+    background: #ffffff;
+    padding: 0.36in 0.45in 0.32in 0.45in;
+    margin: 0 auto;
+    page-break-after: always;
+    page-break-inside: avoid;
+    position: relative;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  @media screen {
+    body {
+      padding: 20px 0;
+    }
+    .sheet {
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 4px;
+    }
+  }
+
+  /* Header elements */
+  .doc-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8pt;
+    font-weight: 600;
+    color: #2f7566;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .doc-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20pt;
+    font-weight: 700;
+    color: #1a231f;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .doc-title-mm {
+    font-family: 'Noto Sans Myanmar', 'Myanmar Text', sans-serif;
+    font-size: 11.2pt;
+    font-weight: 600;
+    color: #2f7566;
+    margin: 3px 0 8px 0;
+    line-height: 1.4;
+  }
+
+  .meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 8.8pt;
+    color: #56655f;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid #1a231f;
+    margin-bottom: 9px;
+  }
+
+  .meta-bar strong { color: #1a231f; }
+  .meta-bar code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: #eef1ed;
+    color: #2f7566;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .intro-box {
+    background: #f8faf8;
+    border-left: 3.5px solid #2f7566;
+    padding: 6px 10px;
+    margin-bottom: 9px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .intro-en {
+    font-size: 8.4pt;
+    color: #475569;
+    margin-bottom: 2px;
+    line-height: 1.35;
+  }
+
+  .intro-mm {
+    font-size: 8.2pt;
+    color: #1a231f;
+    line-height: 1.48;
+    font-weight: 500;
+  }
+
+  .badges-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .badge-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.8pt;
+    background: #eef1ed;
+    color: #2d4a3e;
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid #d5dfd8;
+  }
+
+  /* Section Title */
+  .sec-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13.5pt;
+    font-weight: 700;
+    color: #1a231f;
+    margin: 10px 0 5px 0;
+    border-bottom: 1px solid #dce4de;
+    padding-bottom: 3px;
+  }
+
+  .sec-header-mm {
+    font-family: 'Noto Sans Myanmar', 'Myanmar Text', sans-serif;
+    font-size: 9.8pt;
+    font-weight: 600;
+    color: #2f7566;
+  }
+
+  .sec-header-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8pt;
+    color: #8a978f;
+    font-weight: normal;
+  }
+
+  .p-block {
+    margin: 3px 0;
+    font-size: 8.3pt;
+    line-height: 1.42;
+  }
+
+  .p-mm {
+    color: #065f46;
+    font-size: 8.1pt;
+    line-height: 1.45;
+    margin-top: 2px;
+  }
+
+  /* State Machine Visual */
+  .diagram-frame {
+    background: #ffffff;
+    border: 1px solid #d2ded5;
+    border-radius: 5px;
+    padding: 10px 10px 8px 10px;
+    margin: 6px 0 8px 0;
+  }
+
+  .state-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .state-box {
+    border: 1.5px solid #2f7566;
+    border-radius: 4px;
+    padding: 4px 7px;
+    text-align: center;
+    background: #f7faf8;
+    min-width: 88px;
+  }
+
+  .state-box.serving {
+    background: #edf7f4;
+    border-color: #1b5e50;
+    box-shadow: 0 0 0 1.5px rgba(47,117,102,0.2);
+  }
+
+  .state-lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.8pt;
+    font-weight: 700;
+    color: #1a231f;
+    display: block;
+  }
+
+  .state-lbl-mm {
+    font-size: 7.2pt;
+    color: #2f7566;
+    font-weight: 600;
+    display: block;
+    margin-top: 1px;
+  }
+
+  .arrow-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 3px;
+  }
+
+  .arrow-line {
+    width: 100%;
+    height: 1px;
+    background: #8a978f;
+    position: relative;
+  }
+
+  .arrow-line::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -2.5px;
+    width: 0;
+    height: 0;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-left: 5px solid #8a978f;
+  }
+
+  .arrow-txt {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 6.8pt;
+    color: #56655f;
+    margin-bottom: 2px;
+  }
+
+  .bottom-states {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    padding-top: 7px;
+    border-top: 1px dashed #dce4de;
+  }
+
+  .sub-state {
+    border: 1px dashed #8a978f;
+    border-radius: 4px;
+    padding: 4px 6px;
+    text-align: center;
+    background: #fafbfa;
+  }
+
+  .sub-state.paused { border-color: #d97706; background: #fefce8; }
+  .sub-state.cancelled { border-color: #dc2626; background: #fef2f2; }
+  .sub-state.expired { border-color: #64748b; background: #f8fafc; }
+
+  /* Table styling */
+  table.compact-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3px 0 6px 0;
+  }
+
+  table.compact-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.2pt;
+    font-weight: 700;
+    color: #64748b;
+    text-align: left;
+    padding: 3.5px 6px;
+    border-bottom: 1.5px solid #cbd5e1;
+    background: #f8fafc;
+  }
+
+  table.compact-table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+
+  .tag-method {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 7.2pt;
+    padding: 1px 4px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .tag-get { color: #0f766e; background: #f0fdfa; border: 1px solid #99f6e4; }
+  .tag-post { color: #c2410c; background: #fff7ed; border: 1px solid #fed7aa; }
+
+  .api-path {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 7.8pt;
+    color: #0f172a;
+  }
+
+  .api-mm {
+    color: #1e293b;
+    font-size: 7.8pt;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .api-en {
+    color: #64748b;
+    font-size: 7.1pt;
+    margin-top: 1px;
+  }
+
+  /* Code Card */
+  pre.dark-code {
+    background: #111814;
+    border: 1px solid #1f2e26;
+    border-radius: 4px;
+    padding: 7px 10px;
+    margin: 5px 0 7px 0;
+    color: #dfeee7;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.2pt;
+    line-height: 1.35;
+    white-space: pre-wrap;
+  }
+
+  .dark-code-title {
+    font-size: 7.1pt;
+    color: #8da399;
+    font-weight: 700;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #1f2e26;
+    letter-spacing: 0.5px;
+    display: block;
+  }
+
+  .kw { color: #5eead4; font-weight: 600; }
+  .str { color: #fde047; }
+  .cmt { color: #869d93; font-style: italic; }
+  .num { color: #fca5a5; }
+
+  /* Callout */
+  .alert-box {
+    background: #fffbeb;
+    border: 1px solid #fef08a;
+    border-left: 3.5px solid #d97706;
+    border-radius: 3px;
+    padding: 6px 9px;
+    margin: 5px 0 7px 0;
+    color: #78350f;
+  }
+
+  .alert-title {
+    font-weight: 700;
+    font-size: 8.3pt;
+    margin-bottom: 2px;
+    color: #92400e;
+    line-height: 1.35;
+  }
+
+  .alert-body {
+    font-size: 7.7pt;
+    line-height: 1.45;
+    color: #78350f;
+  }
+
+  /* Two col cards */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 5px 0 7px 0;
+  }
+
+  .card-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 6px 9px;
+  }
+
+  .card-box.confirm { border-top: 2.5px solid #059669; }
+  .card-box.reject { border-top: 2.5px solid #dc2626; }
+  .card-box.doc-front { border-top: 2.5px solid #0284c7; }
+  .card-box.staff-front { border-top: 2.5px solid #7c3aed; }
+
+  .card-header {
+    font-weight: 700;
+    font-size: 8.3pt;
+    color: #0f172a;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+  }
+
+  .card-header code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.2pt;
+    color: #475569;
+  }
+
+  .card-desc {
+    font-size: 7.5pt;
+    color: #334155;
+    line-height: 1.4;
+  }
+
+  /* Demo List */
+  .demo-item {
+    display: flex;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 5.5px 8px;
+    margin-bottom: 4.5px;
+    align-items: flex-start;
+  }
+
+  .step-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 7.6pt;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text {
+    flex: 1;
+  }
+
+  .step-title {
+    font-weight: 700;
+    font-size: 8.2pt;
+    color: #0f172a;
+  }
+
+  .step-title-mm {
+    font-size: 7.9pt;
+    font-weight: 600;
+    color: #059669;
+  }
+
+  .step-detail {
+    font-size: 7.5pt;
+    color: #475569;
+    line-height: 1.38;
+    margin-top: 1px;
+  }
+
+  /* QA Block */
+  .qa-row {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 3px solid #2f7566;
+    border-radius: 3px;
+    padding: 5.5px 8px;
+    margin-bottom: 5px;
+  }
+
+  .qa-q {
+    font-weight: 700;
+    font-size: 8.2pt;
+    color: #0f172a;
+    margin-bottom: 2px;
+    line-height: 1.35;
+  }
+
+  .qa-a {
+    font-size: 7.6pt;
+    color: #334155;
+    line-height: 1.42;
+  }
+
+  .sheet-footer {
+    position: absolute;
+    bottom: 0.22in;
+    left: 0.45in;
+    right: 0.45in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.2pt;
+    color: #64748b;
+  }
+
+  /* Speech Guide Styles */
+  .speech-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    padding: 7px 10px;
+    margin-bottom: 7px;
+  }
+
+  .speech-step-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    background: #2f7566;
+    color: #ffffff;
+    font-size: 7.2pt;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+
+  .speech-action {
+    font-weight: 700;
+    font-size: 8.3pt;
+    color: #0f172a;
+    margin-bottom: 2px;
+  }
+
+  .speech-quote {
+    background: #f1f5f9;
+    border-left: 3px solid #0284c7;
+    padding: 5px 8px;
+    font-size: 7.8pt;
+    color: #1e293b;
+    line-height: 1.48;
+    font-style: normal;
+    border-radius: 0 3px 3px 0;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==================== SHEET 1 ==================== -->
+  <div class="sheet">
+    <div class="doc-tag">CST-6108 · HOSPITAL SMART QUEUE SYSTEM · MEMBER 3</div>
+    <div class="doc-title">Doctor & Staff Module — Deep Dive</div>
+    <div class="doc-title-mm">ဆရာဝန် နှင့် ဝန်ထမ်း မော်ဂျူး — အသေးစိတ် ရှင်းလင်းတင်ပြချက် လမ်းညွှန်</div>
+
+    <div class="meta-bar">
+      <div>Presenter: <strong>Ma Noo Noo Aung (နိုနိုအောင်)</strong></div>
+      <div>Package: <code>com.hospitalqueue.api</code></div>
+      <div>Companion to: <strong>Queue System Team Split</strong></div>
+    </div>
+
+    <div class="intro-box">
+      <div class="intro-en">
+        Everything needed to explain and defend this module: what each endpoint does, how a queue moves through its states, the exact code the doctor's "Call Next" button and staff's emergency confirm/reject buttons run, and a rehearsed demo script with anticipated questions.
+      </div>
+      <div class="intro-mm">
+        ဤ Module အား ကောင်းမွန်စွာ ရှင်းလင်းတင်ပြနိုင်ရန်နှင့် မေးခွန်းများအား အောင်မြင်စွာ ဖြေဆိုနိုင်ရန် လိုအပ်သောအချက်အလက် အားလုံးပါဝင်ပါသည် — Endpoint တစ်ခုချင်းစီ၏ အလုပ်လုပ်ပုံ၊ Queue ၏ State (အဆင့်) များ ရွေ့လျားပုံ၊ ဆရာဝန်၏ "Call Next" ခလုတ်နှင့် Staff ၏ Emergency Confirm/Reject ခလုတ်များ အလုပ်လုပ်သည့် Java Code များ၊ တိုက်ရိုက် Demo ပြသရန် အစီအစဉ်နှင့် မေးလေ့ရှိသော မေးခွန်း/အဖြေများ။
+      </div>
+    </div>
+
+    <div class="badges-wrap">
+      <span class="badge-item">api/DoctorApiController.java</span>
+      <span class="badge-item">api/StaffApiController.java</span>
+      <span class="badge-item">service/QueueService.java</span>
+      <span class="badge-item">rule/EmergencyRule.java</span>
+      <span class="badge-item">routes/doctor.queue.tsx</span>
+      <span class="badge-item">routes/staff.emergency.tsx</span>
+    </div>
+
+    <div class="sec-header">
+      <span>Where this module sits</span>
+      <span class="sec-header-mm">· ဤ Module ၏ စနစ်အတွင်း တည်နေရာနှင့် အခန်းကဏ္ဍ</span>
+    </div>
+    <div class="p-block">
+      <strong>The Smart Queue Engine (Member 2 — rule/QueueRule, DoctorAvailabilityRule, EmergencyRule)</strong> decides queue order. This module is the two portals that actually <strong>act</strong> on that order: the doctor pulling patients out of it one at a time, and staff sitting at the front desk keeping emergency cases honest before they jump the line. Neither portal touches the database directly — both call <strong>QueueService</strong>, which is the single place queue state actually changes.
+    </div>
+    <div class="p-mm">
+      <strong>[မြန်မာပြန်]</strong> Smart Queue Engine (Member 2 မှ QueueRule, DoctorAvailabilityRule, EmergencyRule) သည် လူနာများ စောင့်ဆိုင်းရမည့် အစီအစဉ် (Queue Order) ကို ဆုံးဖြတ်ပေးသည်။ ဤ Member 3 Module သည် ထိုစီထားသော Queue အပေါ် အမှန်တကယ် လက်တွေ့အသုံးချ လှုပ်ရှားပေးသည့် <strong>Portal (၂) ခု</strong> ဖြစ်သည် — (၁) ဆရာဝန်သည် Queue ထဲမှ လူနာများကို တစ်ဦးချင်းစီ ခေါ်ယူကုသပေးခြင်း (Doctor Portal)၊ (၂) ဧည့်ကြိုကောင်တာရှိ ဝန်ထမ်းများသည် အရေးပေါ်လူနာများ ကျော်တက်လာချိန်တွင် အစစ်အမှန် ဟုတ်/မဟုတ် စစ်ဆေးအတည်ပြုပေးခြင်း (Staff Portal)။ Portal နှစ်ခုစလုံးသည် Database ကို တိုက်ရိုက် Access မလုပ်ဘဲ <strong>QueueService</strong> ကိုသာ လှမ်းခေါ်ပြီး Queue ၏ State ပြောင်းလဲမှုအားလုံးကို QueueService တစ်ခုတည်းကသာ တာဝန်ယူဆောင်ရွက်ပါသည်။
+    </div>
+
+    <div class="sec-header" style="margin-top: 8px;">
+      <span>Queue state machine</span>
+      <span class="sec-header-mm">· Queue အဆင့်ဆင့် ပြောင်းလဲမှု State Machine</span>
+      <span class="sec-header-sub">Queue.java</span>
+    </div>
+    <div class="p-block" style="color: #475569;">
+      Every queue entry is a row moving left to right through these states. Doctor actions drive the top row; PAUSED lets a doctor step away without losing the patient's place; the bottom row are the ways a queue entry can end without being served.
+      <br>
+      <span style="color: #1e293b;">(လူနာမှတ်တမ်းတိုင်းသည် ဘယ်မှညာသို့ အောက်ပါ State များအတိုင်း ကူးပြောင်းသည်။ အပေါ်တန်းသည် ဆရာဝန်၏ ကုသမှုစီးဆင်းပုံဖြစ်ပြီး PAUSED သည် ခေတ္တထွက်ခွာချိန် လူနာ့အလှည့် မပျောက်စေရန် ထိန်းပေးသည်။ အောက်တန်းသည် ဆေးမကုသရသေးဘဲ စာရင်းပြီးဆုံးသွားနိုင်သည့် နည်းလမ်းများ ဖြစ်သည်။)</span>
+    </div>
+
+    <!-- State Flow Diagram -->
+    <div class="diagram-frame">
+      <div class="state-row">
+        <div class="state-box">
+          <span class="state-lbl">WAITING</span>
+          <span class="state-lbl-mm">စောင့်ဆိုင်းဆဲ</span>
+        </div>
+        <div class="arrow-item">
+          <span class="arrow-txt">call-next</span>
+          <div class="arrow-line"></div>
+        </div>
+        <div class="state-box">
+          <span class="state-lbl">CALLED</span>
+          <span class="state-lbl-mm">ခေါ်ယူလိုက်ပြီ</span>
+        </div>
+        <div class="arrow-item">
+          <span class="arrow-txt">start</span>
+          <div class="arrow-line"></div>
+        </div>
+        <div class="state-box serving">
+          <span class="state-lbl" style="color: #0f766e;">SERVING</span>
+          <span class="state-lbl-mm">ကုသပေးနေဆဲ</span>
+        </div>
+        <div class="arrow-item">
+          <span class="arrow-txt">complete</span>
+          <div class="arrow-line"></div>
+        </div>
+        <div class="state-box">
+          <span class="state-lbl" style="color: #059669;">COMPLETED</span>
+          <span class="state-lbl-mm">ကုသမှု ပြီးမြောက်</span>
+        </div>
+      </div>
+
+      <div class="bottom-states">
+        <div class="sub-state paused">
+          <span class="state-lbl" style="color: #b45309;">PAUSED (ခေတ္တဆိုင်းငံ့)</span>
+          <span style="font-size: 7pt; color: #78350f;">SERVING ⇄ PAUSED (pause / resume ခလုတ်များဖြင့် ထိန်းချုပ်)</span>
+        </div>
+        <div class="sub-state cancelled">
+          <span class="state-lbl" style="color: #b91c1c;">CANCELLED (ပယ်ဖျက်)</span>
+          <span style="font-size: 7pt; color: #7f1d1d;">လူနာမစောင့်တော့ဘဲ ပယ်ဖျက်ခြင်း သို့မဟုတ် Staff Reject</span>
+        </div>
+        <div class="sub-state expired">
+          <span class="state-lbl" style="color: #475569;">EXPIRED (သက်တမ်းလွန်)</span>
+          <span style="font-size: 7pt; color: #334155;">CALLED ဖြစ်ပြီး လူနာရောက်မလာ၍ အလှည့်လွတ်သွားခြင်း (Missed Turn)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet-footer">
+      <span>CST-6108 Hospital Smart Queue Management System</span>
+      <span>Page 1 of 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== SHEET 2 ==================== -->
+  <div class="sheet">
+    <div class="sec-header" style="margin-top: 0;">
+      <span>Doctor API</span>
+      <span class="sec-header-mm">· ဆရာဝန်ဆိုင်ရာ API များ</span>
+      <span class="sec-header-sub">7 endpoints</span>
+    </div>
+
+    <table class="compact-table">
+      <thead>
+        <tr>
+          <th style="width: 10%;">METHOD</th>
+          <th style="width: 38%;">PATH</th>
+          <th style="width: 52%;">WHAT IT DOES (လုပ်ဆောင်ချက် ရှင်းလင်းချက်)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/doctor/{id}/dashboard</span></td>
+          <td>
+            <div class="api-mm"><strong>Dashboard အချက်အလက် အပြည့်အစုံ:</strong> called, serving, waiting လူနာစာရင်းများ၊ ယနေ့ Appointment များ၊ စာရင်းအင်း Stats များကို DB query တစ်ခုတည်းဖြင့် Batch-load ဆွဲယူပေးသည်။</div>
+            <div class="api-en">Full dashboard: called/serving/waiting queues, today's appointments, stats — all patients batch-loaded in one query.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/doctor/{id}/queue</span></td>
+          <td>
+            <div class="api-mm"><strong>ပေါ့ပါးသော Live Queue Endpoint:</strong> Live queue screen မှ ၈ စက္ကန့်တစ်ကြိမ် ပုံမှန်ခေါ်ယူ (Polled every 8s) သည့် ပေါ့ပါးသော Data ပုံစံ ဖြစ်သည်။</div>
+            <div class="api-en">Lighter, polled every 8s by the live queue screen — same shape, fewer fields.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/doctor/{id}/availability</span></td>
+          <td>
+            <div class="api-mm"><strong>တာဝန်ထမ်းဆောင်နိုင်မှု သတ်မှတ်ခြင်း:</strong> ဆရာဝန် ရရှိနိုင်မှု (Available / Unavailable) ကို အဖွင့်/အပိတ် ပြုလုပ်ခြင်း (အလုပ်ဆင်းချိန် သို့မဟုတ် နားချိန်အတွက်)။</div>
+            <div class="api-en">Toggle or explicitly set available/unavailable (goes off duty / on break).</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/doctor/{id}/queue/call-next</span></td>
+          <td>
+            <div class="api-mm"><strong>နောက်လူနာ ခေါ်ယူခြင်း:</strong> ဦးစားပေးအမြင့်ဆုံး WAITING လူနာကို ရွေးထုတ်ကာ CALLED ဟု သတ်မှတ်သည်။ လက်ရှိ CALLED သို့မဟုတ် SERVING လူနာရှိနေပါက ခေါ်ခွင့် ငြင်းပယ်သည်။</div>
+            <div class="api-en">Pulls the highest-priority WAITING patient and marks them CALLED. Refuses if someone is already CALLED or SERVING.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/doctor/{id}/queue/start</span></td>
+          <td>
+            <div class="api-mm"><strong>ကုသမှု စတင်ခြင်း:</strong> လက်ရှိ CALLED ဖြစ်နေသော လူနာအား CALLED → SERVING သို့ ပြောင်းလဲပေးသည်။</div>
+            <div class="api-en">CALLED → SERVING for whoever is currently called.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/doctor/{id}/queue/complete</span></td>
+          <td>
+            <div class="api-mm"><strong>ကုသမှု ပြီးမြောက်ခြင်း:</strong> SERVING → COMPLETED သို့ ပြောင်းပြီး ကျန်ရှိနေသော လူနာအားလုံး၏ စောင့်ဆိုင်းချိန် (Wait Times) ကို အလိုအလျောက် ပြန်တွက်ပေးသည်။</div>
+            <div class="api-en">SERVING → COMPLETED, then recalculates wait times for everyone still waiting.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/doctor/{id}/queue/pause · /resume</span></td>
+          <td>
+            <div class="api-mm"><strong>ဆိုင်းငံ့ / ပြန်လည်စတင်:</strong> လူနာ့အလှည့်နေရာ မပျောက်ပျက်စေဘဲ SERVING ⇄ PAUSED အပြန်အလှန် ပြောင်းလဲပေးသည်။</div>
+            <div class="api-en">SERVING ⇄ PAUSED, without losing the patient's place.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/doctor/{id}/appointments · /history · /profile</span></td>
+          <td>
+            <div class="api-mm"><strong>ဖတ်ရှုရန် သီးသန့် (Read-only):</strong> ဤဆရာဝန်၏ Appointment စာရင်း၊ ယခင် Queue ကုသမှုမှတ်တမ်းနှင့် Profile ကတ်။</div>
+            <div class="api-en">Read-only: this doctor's appointments, past queue history, profile card.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sec-header" style="margin-top: 12px;">
+      <span>Staff API</span>
+      <span class="sec-header-mm">· ဧည့်ကြို/ဝန်ထမ်းဆိုင်ရာ API များ</span>
+      <span class="sec-header-sub">9 endpoints (Part 1)</span>
+    </div>
+
+    <table class="compact-table">
+      <thead>
+        <tr>
+          <th style="width: 10%;">METHOD</th>
+          <th style="width: 38%;">PATH</th>
+          <th style="width: 52%;">WHAT IT DOES (လုပ်ဆောင်ချက် ရှင်းလင်းချက်)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/staff/dashboard</span></td>
+          <td>
+            <div class="api-mm"><strong>ကောင်တာ စာရင်းအင်းများ:</strong> ယနေ့ စုစုပေါင်း၊ စစ်ဆေးရန်ကျန် အရေးပေါ်လူနာ အရေအတွက်၊ EMERGENCY/APPOINTMENT/NORMAL အချိုးအစား၊ တာဝန်ကျ vs အနားယူဆရာဝန်များ။</div>
+            <div class="api-en">Front-desk stats: today's totals, emergency-pending count, EMERGENCY/APPOINTMENT/NORMAL breakdown, active vs. on-break doctors.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/staff/emergencies</span></td>
+          <td>
+            <div class="api-mm"><strong>အရေးပေါ်လူနာ စာရင်း:</strong> Staff ဘက်မှ Triage စစ်ဆေးအတည်ပြုချက်ကို စောင့်ဆိုင်းနေသော Emergency-flagged လူနာစာရင်း အားလုံး။</div>
+            <div class="api-en">All emergency-flagged queues awaiting staff triage confirmation.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/staff/emergencies/{id}/confirm</span></td>
+          <td>
+            <div class="api-mm"><strong>အရေးပေါ် အတည်ပြုခြင်း:</strong> အစစ်အမှန်ဖြစ်ကြောင်း သတ်မှတ်သည် (<code>emergencyConfirmed = true</code>)၊ လူနာအား တန်းစီဇယား ရှေ့ဆုံးသို့ ရောက်ရှိကြောင်း Notification ပေးပို့သည်။</div>
+            <div class="api-en">Marks the case genuine — emergencyConfirmed = true, patient notified they've moved to the front.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/staff/emergencies/{id}/reject</span></td>
+          <td>
+            <div class="api-mm"><strong>အရေးပေါ် ပယ်ဖျက်ခြင်း:</strong> "Emergency rejected by staff" အကြောင်းပြချက်ဖြင့် Queue မှ ပယ်ဖျက် (Cancel) ပစ်သည်။</div>
+            <div class="api-en">Cancels the queue entry with reason "Emergency rejected by staff".</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/staff/queue-monitor</span></td>
+          <td>
+            <div class="api-mm"><strong>တိုက်ရိုက် စောင့်ကြည့်ဘုတ်ပြား:</strong> ဆရာဝန်တစ်ဦးချင်းစီအလိုက် ကုသနေသော Ticket နံပါတ်၊ စောင့်ဆိုင်းဦးရေ၊ ပြီးမြောက်ဦးရေ (ဌာန/ဆရာဝန်အလိုက် Filter လုပ်နိုင်သည်)။</div>
+            <div class="api-en">Live per-doctor board: now-serving ticket, waiting count, completed-today count — filterable by department/doctor.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sheet-footer">
+      <span>Doctor & Staff Module Deep Dive — Presenter: Ma Noo Noo Aung</span>
+      <span>Page 2 of 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== SHEET 3 ==================== -->
+  <div class="sheet">
+    <div class="sec-header" style="margin-top: 0;">
+      <span>Staff API</span>
+      <span class="sec-header-mm">· ဧည့်ကြို/ဝန်ထမ်းဆိုင်ရာ API များ (အဆက်)</span>
+      <span class="sec-header-sub">Part 2</span>
+    </div>
+
+    <table class="compact-table">
+      <thead>
+        <tr>
+          <th style="width: 10%;">METHOD</th>
+          <th style="width: 38%;">PATH</th>
+          <th style="width: 52%;">WHAT IT DOES (လုပ်ဆောင်ချက် ရှင်းလင်းချက်)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/staff/queues/reassignable</span></td>
+          <td>
+            <div class="api-mm"><strong>ဆရာဝန်လွှဲပြောင်းနိုင်သော လူနာများ:</strong> အခြားဆရာဝန်ထံသို့ ပြောင်းရွှေ့ပေးနိုင်သည့် WAITING Queue လူနာစာရင်းအားလုံး။</div>
+            <div class="api-en">Every WAITING queue, for moving a patient to another doctor.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/staff/queues/{id}/reassign</span></td>
+          <td>
+            <div class="api-mm"><strong>လူနာ လွှဲပြောင်းခြင်း:</strong> Queue တစ်ခုအား အခြား ဆရာဝန်တစ်ဦးထံသို့ ရွှေ့ပြောင်းပေးသည်။</div>
+            <div class="api-en">Moves one queue entry to a different doctor.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-post">POST</span></td>
+          <td><span class="api-path">/api/staff/doctors/{id}/unavailable</span></td>
+          <td>
+            <div class="api-mm"><strong>ဆရာဝန်အား တာဝန်မှ ခေတ္တနားစေခြင်း:</strong> Staff ဘက်မှ ဆရာဝန်အား တာဝန်မှ အရေးပေါ် နားစေရန် Force ပြုလုပ်ခြင်း (ဥပမာ- ခေါ်ယူခံရခြင်း)။</div>
+            <div class="api-en">Force a doctor off duty from the staff side (e.g. called away).</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tag-method tag-get">GET</span></td>
+          <td><span class="api-path">/api/staff/appointments · /reports · /profile</span></td>
+          <td>
+            <div class="api-mm"><strong>ဆေးရုံတစ်ခွင် အချက်အလက်များ:</strong> ဆေးရုံလုံးကျွတ် ရက်ချိန်းစာရင်း၊ ဌာနဆိုင်ရာ အစီရင်ခံစာများနှင့် ဝန်ထမ်း Profile ကတ်။</div>
+            <div class="api-en">Hospital-wide appointment list, department reports, staff's own profile card.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sec-header" style="margin-top: 8px;">
+      <span>Flagship flow: Call Next Patient</span>
+      <span class="sec-header-mm">· အဓိက အရေးကြီးဆုံး လုပ်ငန်းစဉ်: နောက်လူနာအား ခေါ်ယူခြင်း</span>
+    </div>
+    <div class="p-block" style="color: #475569;">
+      This is the one action most worth walking through line by line — it is where the Doctor module and the Smart Queue Engine (Member 2) actually meet.
+      <br>
+      <span style="color: #065f46; font-weight: 500;">(ဤလုပ်ငန်းစဉ်သည် တင်ပြရာတွင် တစ်ကြောင်းချင်းစီ အသေးစိတ် ရှင်းပြရန် အသင့်တော်ဆုံး Action ဖြစ်သည် — အဘယ်ကြောင့်ဆိုသော် ဆရာဝန် Module နှင့် Smart Queue Engine (Member 2) တို့ အမှန်တကယ် လက်တွေ့ဆုံဆည်း ချိတ်ဆက်သည့် နေရာဖြစ်သောကြောင့် ဖြစ်သည်။)</span>
+    </div>
+
+    <!-- Code Box 1 -->
+    <pre class="dark-code"><span class="dark-code-title">SERVICE/QUEUESERVICE.JAVA — CALLNEXT(DOCTORID)</span>
+<span class="cmt">// ၁။ လက်ရှိ လူနာအား CALLED သို့မဟုတ် SERVING ဖြစ်နေပါက နောက်လူနာ ထပ်ခေါ်ခွင့် ငြင်းပယ်သည်</span>
+<span class="kw">if</span> (currentConsultation(doctorId) != <span class="kw">null</span>)
+    <span class="kw">throw new</span> IllegalStateException(<span class="str">"Finish or start the current consultation first."</span>);
+
+<span class="cmt">// ၂။ ဤဆရာဝန်ထံ စောင့်ဆိုင်းနေသော WAITING လူနာအားလုံးကို ဆွဲထုတ်သည်</span>
+List&lt;Queue&gt; waiting = queueRepository.findWaitingQueuesByDoctor(doctorId);
+<span class="kw">if</span> (waiting.isEmpty()) <span class="kw">return null</span>;
+
+<span class="cmt">// ၃။ EmergencyRule ဖြင့် ဦးစားပေးအဆင့် အမြင့်ဆုံးလူနာကို ရှေ့ဆုံးသို့ ရွေးထုတ်သည်:</span>
+<span class="cmt">//    EMERGENCY > APPOINTMENT > NORMAL၊ ဦးစားပေးတူပါက ရောက်ရှိသည့် မူလနံပါတ်အတိုင်း (FIFO)</span>
+Queue next = emergencyRule.reorderByPriority(waiting).get(<span class="num">0</span>);
+queueRepository.callNext(next.getQueueId());   <span class="cmt">// WAITING -> CALLED</span>
+notificationService.notify(next.getPatientId(), <span class="str">"It's your turn! ..."</span>);
+
+<span class="cmt">// ၄။ နောက်တွင် ကျန်ရှိနေသော စောင့်ဆိုင်းလူနာ အားလုံးအတွက် ခန့်မှန်းစောင့်ဆိုင်းချိန်ကို Batch UPDATE ဖြင့် ပြန်တွက်သည်</span>
+updateRemainingWaitTimes(doctorId);</pre>
+
+    <!-- Code Box 2 -->
+    <pre class="dark-code"><span class="dark-code-title">RULE/EMERGENCYRULE.JAVA — THE ACTUAL SORT (အမှန်တကယ် ဦးစားပေး စီပေးပုံ)</span>
+waitingQueues.sort((q1, q2) -&gt; {
+    <span class="kw">int</span> p1 = priorityRank(q1), p2 = priorityRank(q2);   <span class="cmt">// EMERGENCY=1, APPOINTMENT=2, NORMAL=3</span>
+    <span class="kw">if</span> (p1 != p2) <span class="kw">return</span> Integer.compare(p1, p2);
+    <span class="kw">return</span> Integer.compare(q1.getPosition(), q2.getPosition()); <span class="cmt">// ဦးစားပေးတူပါက မူလရောက်သည့်အစဉ်အတိုင်း (FIFO)</span>
+});</pre>
+
+    <div class="sheet-footer">
+      <span>Doctor & Staff Module Deep Dive — Presenter: Ma Noo Noo Aung</span>
+      <span>Page 3 of 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== SHEET 4 ==================== -->
+  <div class="sheet">
+    <!-- Callout Box -->
+    <div class="alert-box" style="margin-top: 0;">
+      <div class="alert-title">
+        ★ Good question to be ready for: "Does an emergency jump the queue before staff confirms it?" — Yes.
+        <br>
+        <span style="font-family: 'Noto Sans Myanmar', sans-serif; font-size: 8.2pt; font-weight: 600;">(ကြိုတင်ပြင်ဆင်ထားရမည့် မေးခွန်း: "Staff က Confirm မလုပ်ခင်မှာ Emergency လူနာက Queue ရှေ့ဆုံးကို ကျော်တက်သွားသလား?" — ဟုတ်ကဲ့၊ ကျော်တက်သွားပါသည်။)</span>
+      </div>
+      <div class="alert-body">
+        <strong>အကြောင်းပြချက် ရှင်းလင်းချက်:</strong> <code>priorityRank()</code> သည် queue ၏ <code>priority</code> field တစ်ခုတည်းကိုသာ ကြည့်ပြီး sort စီတာ ဖြစ်သည်။ လူနာ (သို့မဟုတ် staff) က emergency ဟု သတ်မှတ်လိုက်သည်နှင့် ၎င်း၏ priority သည် "EMERGENCY" ဖြစ်သွားသည့်အတွက် <code>emergencyConfirmed</code> ဖြစ်မဖြစ် အပေါ် မမူတည်ဘဲ တန်းစီဇယား ရှေ့ဆုံးသို့ ချက်ချင်း ရောက်သွားပါသည်။ Staff confirmation သည် queue အစီအစဉ်ကို ထိန်းချုပ်တာ မဟုတ်ဘဲ၊ ကောင်တာဝန်ထမ်းက အမှုတွဲ အစစ်အမှန် ဟုတ်/မဟုတ် စစ်ဆေးပြီး မည်သူကိုင်တွယ်သည်ကို Formally Log မှတ်တမ်းတင်ပေးခြင်း ဖြစ်သည်။ လူနာ့အသက်အန္တရာယ် ဘေးကင်းရေးအတွက် စနစ်က အလိုအလျောက် Fast-track ဦးစားပေးထားပြီး ဖြစ်သည်။ အကယ်၍ "အရေးပေါ်အမှား (False Alarm)" ဖြစ်ခဲ့လျှင် မည်သို့လုပ်မည်နည်းဟု မေးပါက <strong>Reject</strong> လုပ်လိုက်ရုံဖြစ်သည် — စာရင်းကို အဆင့်နှိမ့်ချခြင်း (Demote) မျိုးမဟုတ်ဘဲ Queue မှတ်တမ်းကို လုံးဝ ပယ်ဖျက် (Cancelled Outright) ပစ်လိုက်ခြင်း ဖြစ်သည်။
+      </div>
+    </div>
+
+    <div class="sec-header" style="margin-top: 6px;">
+      <span>Emergency confirm / reject flow</span>
+      <span class="sec-header-mm">· အရေးပေါ်လူနာ အတည်ပြုခြင်းနှင့် ပယ်ဖျက်ခြင်း စီးဆင်းမှု</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card-box confirm">
+        <div class="card-header">
+          <span>Confirm (အတည်ပြုခြင်း)</span>
+          <code>emergencyConfirmed = true</code>
+        </div>
+        <div class="card-desc">
+          <code>StaffApiController.confirmEmergency</code> → <code>QueueService.confirmEmergency(queueId)</code> သည် <code>emergencyConfirmed = true</code> ဟု သတ်မှတ်ပြီး လူနာအား ရှေ့ဆုံးသို့ ရောက်ရှိနေပြီဖြစ်ကြောင်း Notification ပို့ပေးသည်။
+          <div style="color: #059669; font-weight: 600; margin-top: 3px;">
+            ✓ Log သာ မှတ်တမ်းတင်ခြင်းဖြစ်ပြီး ထပ်မံ Re-sort စီရန် မလိုပါ (ဦးစားပေးအရ ရှေ့ဆုံးသို့ ရောက်နှင့်ပြီးဖြစ်သည်)။
+          </div>
+        </div>
+      </div>
+
+      <div class="card-box reject">
+        <div class="card-header">
+          <span>Reject (ပယ်ဖျက်ခြင်း)</span>
+          <code>status = CANCELLED</code>
+        </div>
+        <div class="card-desc">
+          <code>StaffApiController.rejectEmergency</code> သည် <code>queueRepository.cancel(queueId, "Emergency rejected by staff")</code> ကို တိုက်ရိုက်ခေါ်ယူသည်။
+          <div style="color: #dc2626; font-weight: 600; margin-top: 3px;">
+            ✓ မှတ်တမ်းသည် တန်းစီဇယားမှ လုံးဝ CANCELLED ဖြစ်သွားပြီး NORMAL သို့ အဆင့်နှိမ့်ချခြင်း (Demote) မလုပ်ပါ။
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-header" style="margin-top: 6px;">
+      <span>Frontend behaviour worth knowing</span>
+      <span class="sec-header-mm">· သိထားသင့်သော Frontend UI လုပ်ဆောင်ချက်များ</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card-box doc-front">
+        <div class="card-header">
+          <span>doctor.queue.tsx</span>
+          <code>setInterval 8s</code>
+        </div>
+        <div class="card-desc">
+          <code>getDoctorDashboard</code> ကို <strong>၈ စက္ကန့်တစ်ကြိမ်</strong> အလိုအလျောက် ပုံမှန်ဆွဲယူ (Polls) သည်။
+          <div style="margin-top: 3px; color: #1e293b;">
+            <code>data.serving</code> သို့မဟုတ် <code>data.called</code> ရှိနေပါက <strong>"Call Next" ခလုတ်သည် မိမိဘာသာ Disable ဖြစ်သွားသည်</strong> — Backend တွင် ချမှတ်ထားသော "ဆရာဝန်တစ်ဦးလျှင် တက်ကြွလူနာ တစ်ဦးသာ ရှိရမည်" ဟူသော စည်းမျဉ်းကို UI တွင် တိုက်ရိုက်ရောင်ပြန်ဟပ်ထားခြင်းဖြစ်ပြီး API Reject မဖြစ်စေရန် ကြိုတင်ကာကွယ်ထားသည်။
+          </div>
+        </div>
+      </div>
+
+      <div class="card-box staff-front">
+        <div class="card-header">
+          <span>staff.emergency.tsx</span>
+          <code>Optimistic UI</code>
+        </div>
+        <div class="card-desc">
+          ရရှိလာသော စာရင်းတစ်ခုတည်းမှ <strong>Pending နှင့် Resolved Tabs</strong> အဖြစ် Client-side တွင် ခွဲခြားပြသသည်။
+          <div style="margin-top: 3px; color: #1e293b;">
+            အနီရောင် "Act Now" Banner ပြသရန် Critical vs FastTrack ဟူ၍ ခွဲခြားထားသည်။ Confirm / Reject နှိပ်သည့်အခါ စာရင်းတစ်ခုလုံးကို API မှ ပြန်မဆွဲဘဲ <strong>Local State ကို အချိန်နှင့်တပြေးညီ Optimistic Patch</strong> လုပ်ပေးသည်။
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-header" style="margin-top: 6px;">
+      <span>Live demo script</span>
+      <span class="sec-header-mm">· တိုက်ရိုက် Demo ပြသရန် အစီအစဉ်</span>
+      <span class="sec-header-sub">~4 min presentation</span>
+    </div>
+
+    <div class="demo-item">
+      <div class="step-badge">1</div>
+      <div class="step-text">
+        <div class="step-title">Open Doctor Portal → Consultation Queue</div>
+        <div class="step-title-mm">(ဆရာဝန် Portal ရှိ လူနာစောင့်ဆိုင်းခန်း မျက်နှာပြင်ကို ဖွင့်ပြပါ)</div>
+        <div class="step-detail">Point out the waiting list is already ordered — explain it's EmergencyRule, not arrival time. <br><strong>[တင်ပြရန်]</strong> စောင့်ဆိုင်းလူနာစာရင်းသည် ရောက်လာသည့် အချိန်အလိုက် မဟုတ်ဘဲ EmergencyRule ဖြင့် ဦးစားပေး စီတန်းထားပြီးဖြစ်ကြောင်း ထောက်ပြရှင်းပြပါ။</div>
+      </div>
+    </div>
+
+    <div class="demo-item">
+      <div class="step-badge">2</div>
+      <div class="step-text">
+        <div class="step-title">Click "Call Next Patient"</div>
+        <div class="step-title-mm">("Call Next Patient" ခလုတ်ကို နှိပ်ပြပါ)</div>
+        <div class="step-detail">Ticket moves to the console as CALLED; note the button is now disabled — can't call two at once. <br><strong>[တင်ပြရန်]</strong> Ticket နံပါတ်သည် Console ပေါ်သို့ CALLED အဖြစ် ရောက်ရှိလာပြီး၊ "Call Next" ခလုတ်သည် Disable ဖြစ်သွားပုံ (လူနာနှစ်ဦး ပြိုင်တူ မခေါ်နိုင်ပုံ) ကို ပြသပါ။</div>
+      </div>
+    </div>
+
+    <div class="sheet-footer">
+      <span>Doctor & Staff Module Deep Dive — Presenter: Ma Noo Noo Aung</span>
+      <span>Page 4 of 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== SHEET 5 ==================== -->
+  <div class="sheet">
+    <div class="demo-item" style="margin-top: 0;">
+      <div class="step-badge">3</div>
+      <div class="step-text">
+        <div class="step-title">Click "Start Consultation" → "Complete"</div>
+        <div class="step-title-mm">("Start Consultation" နှိပ်ပြီးနောက် "Complete" ဆက်နှိပ်ပြပါ)</div>
+        <div class="step-detail">Show the waiting list's estimated-wait minutes shift for everyone else after Complete. <br><strong>[တင်ပြရန်]</strong> Complete လုပ်လိုက်သည်နှင့် ကျန်ရှိနေသော လူနာအားလုံး၏ စောင့်ဆိုင်းချိန် (Estimated-wait minutes) များ အလိုအလျောက် လျော့ကျသွားပုံကို ပြသပါ။</div>
+      </div>
+    </div>
+
+    <div class="demo-item">
+      <div class="step-badge">4</div>
+      <div class="step-text">
+        <div class="step-title">Switch to Staff Portal → Emergency Cases</div>
+        <div class="step-title-mm">(Staff Portal ရှိ Emergency Cases စာမျက်နှာသို့ ကူးပြောင်းပြပါ)</div>
+        <div class="step-detail">Show a pending case in the "Pending" tab with the red Critical Cases counter. <br><strong>[တင်ပြရန်]</strong> "Pending" Tab တွင် စောင့်ဆိုင်းနေသော အရေးပေါ် လူနာစာရင်းနှင့် အနီရောင် Critical Cases အရေအတွက် ပြကွက်ကို ပြသပါ။</div>
+      </div>
+    </div>
+
+    <div class="demo-item">
+      <div class="step-badge">5</div>
+      <div class="step-text">
+        <div class="step-title">Click "Confirm" on a case</div>
+        <div class="step-title-mm">(အရေးပေါ် လူနာတစ်ခုပေါ်တွင် "Confirm" ခလုတ် နှိပ်ပြပါ)</div>
+        <div class="step-detail">Explain: it was already first in line by priority — confirming logs staff sign-off, it doesn't re-sort anything. <br><strong>[တင်ပြရန်]</strong> ၎င်းလူနာသည် ဦးစားပေးအဆင့်အရ ရှေ့ဆုံးသို့ ရောက်နှင့်ပြီးဖြစ်၍ Confirm ပြုလုပ်ခြင်းသည် Staff ဘက်မှ တာဝန်ခံအတည်ပြုကြောင်း လက်မှတ်ထိုးမှတ်တမ်းတင်ခြင်းသာဖြစ်ပြီး Re-sort ပြန်မစီကြောင်း ရှင်းပြပါ။</div>
+      </div>
+    </div>
+
+    <div class="sec-header" style="margin-top: 8px;">
+      <span>Likely questions</span>
+      <span class="sec-header-mm">· မေးလေ့ရှိသော မေးခွန်းများနှင့် အကောင်းဆုံး ဖြေဆိုချက်များ</span>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        ၁။ Why can't a doctor call a second patient while one is already called?
+        <br><span style="color: #2f7566; font-size: 7.6pt; font-weight: 600;">(ဆရာဝန်တစ်ဦးသည် လူနာတစ်ဦးအား Call ထားစဉ် ဒုတိယလူနာအား အဘယ်ကြောင့် ထပ်ခေါ်၍ မရသနည်း?)</span>
+      </div>
+      <div class="qa-a">
+        <code>callNext()</code> checks <code>currentConsultation()</code> first, which is CALLED-or-SERVING — one active consultation per doctor at a time, enforced server-side (not just the disabled button).
+        <br>
+        <strong>[မြန်မာလို ဖြေရန်]</strong> <code>callNext()</code> method သည် ဦးစွာ <code>currentConsultation()</code> ကို စစ်ဆေးပါသည်။ ၎င်းသည် CALLED သို့မဟုတ် SERVING အခြေအနေရှိ လူနာရှိမရှိ စစ်ဆေးခြင်းဖြစ်ပြီး၊ ဆရာဝန်တစ်ဦးလျှင် အချိန်တစ်ခုတွင် active consultation တစ်ခုသာ လက်ခံနိုင်စေရန် Backend Server-side တွင် တင်းကျပ်စွာ စစ်ဆေးထားသောကြောင့် ဖြစ်ပါသည် (UI ပေါ်ရှိ disabled ခလုတ်တစ်ခုတည်းဖြင့်သာ ကာကွယ်ထားခြင်း မဟုတ်ပါ)။
+      </div>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        ၂။ What happens to wait-time estimates when a patient completes?
+        <br><span style="color: #2f7566; font-size: 7.6pt; font-weight: 600;">(လူနာတစ်ဦး ကုသမှုပြီးမြောက် (Complete) သွားသောအခါ စောင့်ဆိုင်းချိန် ခန့်မှန်းချက်များ ဘာဖြစ်သွားသနည်း?)</span>
+      </div>
+      <div class="qa-a">
+        <code>completeCurrent()</code> calls <code>updateRemainingWaitTimes()</code>, which recomputes every remaining WAITING patient's estimate as position × avg consultation minutes (plus a lunch-break offset) and writes them all in one batched UPDATE.
+        <br>
+        <strong>[မြန်မာလို ဖြေရန်]</strong> <code>completeCurrent()</code> သည် <code>updateRemainingWaitTimes()</code> ကို လှမ်းခေါ်ပါသည်။ ၎င်းသည် ကျန်ရှိနေသော WAITING လူနာတိုင်း၏ ခန့်မှန်းချိန်ကို <code>(စောင့်ဆိုင်းအလှည့်နံပါတ် × ပျမ်းမျှ ကုသချိန်မိနစ်)</code> ဖြင့် တွက်ချက်ကာ (နေ့လယ်စာစားချိန် အနားယူချိန်များပါ ထည့်သွင်းတွက်ချက်ပြီး) တစ်ကြိမ်တည်းသော Batched UPDATE ဖြင့် Database တွင် အားလုံးကို ပြိုင်တူ အပ်ဒိတ်လုပ်ပေးပါသည်။
+      </div>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        ၃။ Can staff move a patient to a different doctor?
+        <br><span style="color: #2f7566; font-size: 7.6pt; font-weight: 600;">(Staff ဘက်မှ လူနာအား အခြားဆရာဝန်ထံသို့ ပြောင်းရွှေ့ပေးနိုင်ပါသလား?)</span>
+      </div>
+      <div class="qa-a">
+        Yes — <code>/api/staff/queues/reassignable</code> lists candidates, <code>/api/staff/queues/{id}/reassign</code> moves one queue entry to a different doctorId via <code>QueueService.reassignDoctor</code>.
+        <br>
+        <strong>[မြန်မာလို ဖြေရန်]</strong> ရပါသည် — <code>/api/staff/queues/reassignable</code> မှတစ်ဆင့် ပြောင်းရွှေ့နိုင်သော လူနာများကို ရယူနိုင်ပြီး၊ <code>/api/staff/queues/{id}/reassign</code> မှတစ်ဆင့် <code>QueueService.reassignDoctor</code> ကို အသုံးပြုကာ သက်ဆိုင်ရာ doctorId အသစ်ထံသို့ တိုက်ရိုက် လွှဲပြောင်းပေးနိုင်ပါသည်။
+      </div>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        ၄။ How does PAUSED differ from just not calling the next patient?
+        <br><span style="color: #2f7566; font-size: 7.6pt; font-weight: 600;">(PAUSED အခြေအနေသည် နောက်လူနာအား မခေါ်ဘဲ ထားခြင်းနှင့် အဘယ်သို့ ကွာခြားသနည်း?)</span>
+      </div>
+      <div class="qa-a">
+        PAUSED is specifically for a patient already SERVING — the doctor steps away mid-consultation without marking it COMPLETED. <code>resume()</code> puts them back to SERVING; the queue slot isn't given up.
+        <br>
+        <strong>[မြန်မာလို ဖြေရန်]</strong> PAUSED သည် ကုသမှု စတင်နေဆဲ (SERVING) ဖြစ်နေသော လူနာအတွက် သီးသန့်ဖြစ်ပါသည်။ ဆရာဝန်သည် ကုသမှုမပြီးသေးဘဲ ခေတ္တ အရေးပေါ် ထွက်ခွာရချိန်တွင် လူနာအား COMPLETED မလုပ်ဘဲ PAUSED လုပ်ထားခြင်း ဖြစ်သည်။ ပြန်ရောက်လာပါက <code>resume()</code> ဖြင့် SERVING သို့ ပြန်ပြောင်းနိုင်ပြီး လူနာ၏ Queue အလှည့်အကွက် မပျောက်ပျက်စေပါ။
+      </div>
+    </div>
+
+    <div class="sheet-footer">
+      <span>Companion to Queue System Team Split. Package boundaries: api.DoctorApiController, api.StaffApiController, service.QueueService, rule.EmergencyRule</span>
+      <span>Page 5 of 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== SHEET 6 ==================== -->
+  <div class="sheet">
+    <div class="doc-tag">PRESENTATION SCRIPT · REHEARSAL GUIDE · MA NOO NOO AUNG</div>
+    <div class="doc-title" style="font-size: 16pt;">Presentation နှုတ်တိုက် ရှင်းလင်းတင်ပြရန် Speech Script</div>
+    <div class="doc-title-mm" style="margin-bottom: 6px;">နိုနိုအောင် အတွက် စင်မြင့်ထက်တွင် ၄ မိနစ်အတွင်း ပြောဆိုတင်ပြရမည့် စကားပြောပုံစံ</div>
+
+    <div class="intro-box" style="margin-bottom: 7px; padding: 5px 8px;">
+      <div class="intro-mm" style="font-size: 7.9pt; line-height: 1.4;">
+        <strong>တင်ဆက်မှု လမ်းညွှန်:</strong> မိမိအလှည့်ရောက်ပါက ယုံကြည်မှုအပြည့်ဖြင့် အောက်ပါ အဆင့် ၅ ဆင့်အတိုင်း မျက်နှာပြင် (Screen) ကို ထောက်ပြရင်း ရှင်းလင်းတင်ပြပါ။ စကားပြောအသံနေအထားကို သဘာဝကျကျနှင့် တိကျပြတ်သားစွာ ပြောဆိုနိုင်စေရန် ပြင်ဆင်ထားပါသည်။
+      </div>
+    </div>
+
+    <div class="speech-card">
+      <span class="speech-step-tag">နိဒါန်းအဖွင့် (0:00 - 0:45)</span>
+      <div class="speech-action">အဖွင့်မိတ်ဆက်ခြင်းနှင့် ဤ Module ၏ အဓိကတာဝန်အား ရှင်းပြခြင်း</div>
+      <div class="speech-quote">
+        "မင်္ဂလာပါ ဆရာ/ဆရာမတို့ရှင့်။ ကျွန်မကတော့ Member 3 နိုနိုအောင် ဖြစ်ပါတယ်။ ကျွန်မ တာဝန်ယူ တင်ပြမယ့်အပိုင်းကတော့ <strong>Doctor & Staff Module</strong> ဖြစ်ပါတယ်။ ကျွန်မတို့ စနစ်မှာ Member 2 က Smart Queue Engine ကို အသုံးပြုပြီး လူနာတွေ ဘယ်သူ အရင်ကုသရမလဲဆိုတဲ့ Queue Order ကို ဆုံးဖြတ်ပေးထားပါတယ်။ ကျွန်မရဲ့ Module ကတော့ အဲဒီ Queue Order အပေါ် အမှန်တကယ် လက်တွေ့ လှုပ်ရှားဆောင်ရွက်ပေးတဲ့ Portal နှစ်ခု ဖြစ်ပါတယ်။ အဲဒါတွေကတော့ ဆရာဝန်က လူနာတွေကို တစ်ဦးချင်းစီ ခေါ်ယူကုသပေးတဲ့ <strong>Doctor Portal</strong> နဲ့၊ ဧည့်ကြိုကောင်တာမှာ အရေးပေါ်လူနာတွေကို စစ်ဆေးအတည်ပြုပေးတဲ့ <strong>Staff Portal</strong> တို့ ဖြစ်ပါတယ်။ ဒီ Portal နှစ်ခုစလုံးဟာ Database ကို တိုက်ရိုက် မထိတွေ့ဘဲ <code>QueueService</code> ကနေတစ်ဆင့်သာ စနစ်တကျ ပြောင်းလဲဆောင်ရွက်ပေးပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="speech-card">
+      <span class="speech-step-tag">အဆင့် ၁ (0:45 - 1:30)</span>
+      <div class="speech-action">Doctor Portal ဖွင့်ပြခြင်း နှင့် "Call Next" ပြသခြင်း</div>
+      <div class="speech-quote">
+        "ပထမဆုံးအနေနဲ့ ကျွန်မ <strong>Doctor Portal ရဲ့ Consultation Queue</strong> ကို ဝင်ရောက်ပြသပါမယ်။ ဒီနေရာမှာ တွေ့ရတဲ့ Waiting List ဟာ လူနာတွေ ဆေးရုံရောက်လာတဲ့ အချိန်အစဉ်အတိုင်း မဟုတ်ဘဲ၊ ကျွန်မတို့ရဲ့ <code>EmergencyRule</code> အရ Emergency ၊ Appointment နဲ့ Normal ဆိုပြီး ဦးစားပေး စီတန်းထားတာ ဖြစ်ပါတယ်။ အခု ကျွန်မ <strong>'Call Next Patient'</strong> ခလုတ်ကို နှိပ်လိုက်ပါမယ်။ နှိပ်လိုက်တာနဲ့ ဦးစားပေးအမြင့်ဆုံး လူနာလက်မှတ်ဟာ CALLED အဖြစ် ကောင်တာပေါ် ရောက်လာပြီး၊ လူနာဆီကိုလည်း Notification သွားပါတယ်။ တစ်ချိန်တည်းမှာပဲ 'Call Next' ခလုတ်ဟာ Disable ဖြစ်သွားတာကို တွေ့ရပါမယ်။ ဘာကြောင့်လဲဆိုတော့ ဆရာဝန်တစ်ဦးဟာ လူနာတစ်ဦးကို ခေါ်ထားချိန်မှာ နောက်လူနာ ထပ်မခေါ်နိုင်အောင် Backend ကော Frontend ကပါ တင်းကျပ်စွာ ထိန်းချုပ်ထားလို့ ဖြစ်ပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="speech-card">
+      <span class="speech-step-tag">အဆင့် ၂ (1:30 - 2:30)</span>
+      <div class="speech-action">Start Consultation → Complete နှင့် Wait Time ပြောင်းလဲပုံ ပြသခြင်း</div>
+      <div class="speech-quote">
+        "လူနာ အခန်းထဲရောက်လာတဲ့အခါ <strong>'Start Consultation'</strong> ကို နှိပ်ပြီး CALLED ကနေ SERVING အဖြစ် ပြောင်းပါမယ်။ အကယ်၍ ဆရာဝန်က အရေးပေါ် ခေတ္တ ထွက်ခွာရမယ်ဆိုရင် လူနာ့အလှည့် မဆုံးရှုံးစေဖို့ <strong>PAUSE / RESUME</strong> ပြုလုပ်နိုင်ပါတယ်။ ဆေးစစ်ကုသမှု ပြီးဆုံးတဲ့အခါ <strong>'Complete'</strong> ခလုတ်ကို နှိပ်လိုက်ပါမယ်။ အဲဒီအခါ SERVING ကနေ COMPLETED အဖြစ် အောင်မြင်စွာ ပြောင်းလဲသွားပြီး၊ နောက်မှာ စောင့်ဆိုင်းနေတဲ့ ကျန်လူနာအားလုံးရဲ့ ခန့်မှန်းစောင့်ဆိုင်းချိန် (Estimated Wait Time) တွေဟာ ချက်ချင်း အလိုအလျောက် လျော့ကျ အပ်ဒိတ်ဖြစ်သွားတာကို တွေ့မြင်နိုင်ပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="sheet-footer">
+      <span>Doctor & Staff Module Presentation Guide — Ma Noo Noo Aung</span>
+      <span>Page 6 of 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== SHEET 7 ==================== -->
+  <div class="sheet">
+    <div class="doc-tag">PRESENTATION SCRIPT (PART 2) & CODE ARCHITECTURE</div>
+    <div class="doc-title" style="font-size: 16pt;">Staff Portal သရုပ်ပြသမှုနှင့် Code Architecture</div>
+    <div class="doc-title-mm" style="margin-bottom: 6px;">အရေးပေါ်လူနာ ကိုင်တွယ်ပုံနှင့် Frontend-Backend ဆက်သွယ်ချက်များ</div>
+
+    <div class="speech-card" style="margin-top: 0;">
+      <span class="speech-step-tag">အဆင့် ၃ (2:30 - 3:30)</span>
+      <div class="speech-action">Staff Portal သို့ ကူးပြောင်းပြီး အရေးပေါ်လူနာ အတည်ပြုပုံ ပြသခြင်း</div>
+      <div class="speech-quote">
+        "ဆက်လက်ပြီး ဧည့်ကြိုကောင်တာဖြစ်တဲ့ <strong>Staff Portal ရဲ့ Emergency Cases</strong> စာမျက်နှာကို ပြသပါမယ်။ ဒီနေရာမှာ Pending ဖြစ်နေတဲ့ အရေးပေါ်လူနာတွေနဲ့ အနီရောင် Critical Cases Banner ကို တွေ့ရပါမယ်။ ကျွန်မ အရေးပေါ်လူနာတစ်ဦးကို <strong>'Confirm'</strong> လုပ်လိုက်ပါမယ်။ ဒီနေရာမှာ အရေးကြီးတဲ့ အချက်ကတော့ — ဒီလူနာဟာ စနစ်ထဲကို Emergency လို့ စာရင်းသွင်းလိုက်ကတည်းက Queue ရဲ့ ရှေ့ဆုံးကို ရောက်နှင့်နေပြီးသား ဖြစ်ပါတယ်။ Staff က Confirm လုပ်တာဟာ Queue ကို ထပ်ပြီး Re-sort စီတာ မဟုတ်ဘဲ၊ ကောင်တာဝန်ထမ်းက လူနာရဲ့ အရေးပေါ်အခြေအနေ အစစ်အမှန်ဖြစ်ကြောင်း အတည်ပြုပြီး ဘယ်သူကိုင်တွယ်သလဲဆိုတာ တာဝန်ခံ လက်မှတ်ထိုး Log မှတ်တမ်းတင်ပေးခြင်း ဖြစ်ပါတယ်ရှင့်။ အကယ်၍ အရေးပေါ်အမှားဖြစ်ရင်တော့ Reject လုပ်ပြီး တန်းစီဇယားကနေ လုံးဝ Cancel ဖျက်ပစ်နိုင်ပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="sec-header" style="margin-top: 7px;">
+      <span>Architecture & Frontend-Backend Contract</span>
+      <span class="sec-header-mm">· စနစ်တည်ဆောက်ပုံနှင့် ချိတ်ဆက်ပုံ အဓိကအချက်များ</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card-box" style="border-top: 2.5px solid #0f766e;">
+        <div class="card-header">
+          <span>Backend Enforcement (Java Spring Boot)</span>
+        </div>
+        <div class="card-desc">
+          <ul style="margin: 2px 0 2px 14px; padding: 0;">
+            <li><strong>Single Source of Truth:</strong> Queue ၏ အခြေအနေပြောင်းလဲမှု မှန်သမျှသည် <code>QueueService.java</code> တစ်ခုတည်းတွင်သာ ဖြစ်ပေါ်သည်။</li>
+            <li><strong>Strict Invariant:</strong> ဆရာဝန်တစ်ဦးလျှင် အချိန်တစ်ခုတွင် active consultation (CALLED သို့မဟုတ် SERVING) တစ်ဦးသာ ရှိစေရန် Controller နှင့် Service အဆင့်တွင် စစ်ဆေးသည်။</li>
+            <li><strong>Batched Performance:</strong> လူနာတစ်ဦး Complete ဖြစ်တိုင်း စောင့်ဆိုင်းလူနာအားလုံး၏ wait time ကို SQL Batch Update ဖြင့် တစ်ပြိုင်နက် သိမ်းဆည်းသည်။</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-box" style="border-top: 2.5px solid #7c3aed;">
+        <div class="card-header">
+          <span>Frontend Experience (React / Vite)</span>
+        </div>
+        <div class="card-desc">
+          <ul style="margin: 2px 0 2px 14px; padding: 0;">
+            <li><strong>Lightweight Polling:</strong> <code>doctor.queue.tsx</code> သည် ၈ စက္ကန့်တစ်ကြိမ် လိုအပ်သော data သာပါသည့် ပေါ့ပါးသော API ကို ခေါ်ယူသည်။</li>
+            <li><strong>Button State Mirroring:</strong> Active consultation ရှိနေချိန်တွင် Call Next ခလုတ်အား UI ပေါ်တွင် disable လုပ်ထားသဖြင့် API Reject မဖြစ်စေရန် ကြိုတင်ကာကွယ်သည်။</li>
+            <li><strong>Optimistic Updates:</strong> <code>staff.emergency.tsx</code> တွင် Confirm/Reject နှိပ်ပါက စာရင်းတစ်ခုလုံး အသစ်ပြန်မခေါ်ဘဲ Local State ကို ချက်ချင်း အပ်ဒိတ်လုပ်သည်။</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-header" style="margin-top: 7px;">
+      <span>Flagship Flow: Step-by-Step Execution Lifecycle</span>
+      <span class="sec-header-mm">· အဆင့် ၄ ဆင့်ဖြင့် လည်ပတ်ပုံ</span>
+    </div>
+    <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 5px 9px; font-size: 7.5pt; line-height: 1.42;">
+      <strong>၁။ Validation:</strong> <code>currentConsultation(doctorId) != null</code> စစ်ဆေးပြီး ရှိနေပါက <code>IllegalStateException</code> ထုတ်ကာ နောက်လူနာ ထပ်ခေါ်ခွင့် ငြင်းပယ်သည်။<br>
+      <strong>၂။ Fetching:</strong> သက်ဆိုင်ရာ ဆရာဝန်ထံ တန်းစီစောင့်ဆိုင်းနေသော WAITING လူနာများအားလုံးကို ဆွဲထုတ်သည်။<br>
+      <strong>၃။ Sorting & Notification:</strong> <code>emergencyRule.reorderByPriority()</code> ဖြင့် ဦးစားပေးအဆင့် (EMERGENCY=1, APPOINTMENT=2, NORMAL=3) အလိုက် စီပြီး ရှေ့ဆုံးလူနာအား CALLED အဖြစ် ပြောင်းကာ လူနာထံ Notification ပေးပို့သည်။<br>
+      <strong>၄။ Wait-Time Recomputation:</strong> ကျန်ရှိသော စောင့်ဆိုင်းလူနာအားလုံးအတွက် စောင့်ဆိုင်းချိန်အား ချက်ချင်း ပြန်လည်တွက်ချက်ကာ Database တွင် အစုလိုက် သိမ်းဆည်းသည်။
+    </div>
+
+    <div class="sheet-footer">
+      <span>Doctor & Staff Module Architecture — Ma Noo Noo Aung</span>
+      <span>Page 7 of 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== SHEET 8 ==================== -->
+  <div class="sheet">
+    <div class="doc-tag">EXAMINATION & VIVA DEFENSE MASTER STRATEGY</div>
+    <div class="doc-title" style="font-size: 16pt; line-height: 1.25;">မေးခွန်းများအား အမှတ်ပြည့်ရစေမည့် နှုတ်ဖြေနည်းဗျူဟာများ</div>
+    <div class="doc-title-mm" style="margin-top: 3px; margin-bottom: 6px; line-height: 1.4;">ဆရာ/ဆရာမများ၏ မေးခွန်းများအား အထူးယုံကြည်မှုရှိရှိ ဖြေဆိုနိုင်ရန် လမ်းညွှန်ချက်</div>
+
+    <div class="intro-box" style="margin-bottom: 6px; padding: 5px 8px;">
+      <div class="intro-mm" style="font-size: 7.9pt; line-height: 1.4;">
+        စာမေးပွဲတွင် ဆရာ/ဆရာမများသည် သင်၏ Code နှင့် Architecture ကို အမှန်တကယ် နားလည်သဘောပေါက်မှု ရှိ/မရှိ စစ်ဆေးလေ့ရှိပါသည်။ အောက်ပါ မေးခွန်းနှင့် ဖြေဆိုပုံ နည်းဗျူဟာများကို ကြိုတင်လေ့ကျင့်ထားပါ။
+      </div>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        မေးခွန်း ၁: "DoctorApiController ထဲက Dashboard Endpoint နဲ့ Queue Endpoint က ဘာကွာခြားလို့ နှစ်ခု ခွဲထားတာလဲ?"
+      </div>
+      <div class="qa-a">
+        <strong>အကောင်းဆုံး ဖြေဆိုချက်:</strong> "ဒါက Performance Optimization ကြောင့် ဖြစ်ပါတယ် ဆရာ/ဆရာမရှင့်။ <code>/dashboard</code> endpoint ကတော့ ဆရာဝန် စာမျက်နှာ စတင်ဖွင့်ချိန်မှာ appointments တွေ၊ ပြီးမြောက်ခဲ့တဲ့ stats တွေအပါအဝင် အချက်အလက် အကုန်လုံးကို အပြည့်အစုံ ဆွဲယူတာ ဖြစ်ပါတယ်။ ဒါပေမဲ့ <code>/queue</code> endpoint ကတော့ Live Queue မျက်နှာပြင်ကနေ ၈ စက္ကန့်တစ်ကြိမ် မကြာခဏ ပုံမှန်ခေါ်ယူ (Polling) လုပ်နေတဲ့အတွက် မလိုအပ်တဲ့ appointment နဲ့ stat တွေကို ဖယ်ထုတ်ပြီး လက်ရှိ တန်းစီနေတဲ့ လူနာစာရင်း သီးသန့်ကိုသာ Database round-trip အနည်းဆုံးနဲ့ ပေါ့ပေါ့ပါးပါး ပြန်ပို့ပေးနိုင်အောင် သီးခြား ခွဲထုတ်ထားတာ ဖြစ်ပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        မေးခွန်း ၂: "လူနာတစ်ဦးဟာ တန်းစီနေရင်း ဆရာဝန်ပြောင်းချင်တယ်ဆိုရင် စနစ်က ဘယ်လို ကိုင်တွယ်သလဲ?"
+      </div>
+      <div class="qa-a">
+        <strong>အကောင်းဆုံး ဖြေဆိုချက်:</strong> "Staff Portal မှာ ပါဝင်တဲ့ <code>/api/staff/queues/reassignable</code> ကနေတစ်ဆင့် လက်ရှိ WAITING ဖြစ်နေတဲ့ လူနာစာရင်းကို ရယူနိုင်ပြီး၊ <code>/api/staff/queues/{id}/reassign</code> endpoint ကို သုံးကာ <code>QueueService.reassignDoctor()</code> နဲ့ အခြားဆရာဝန်ထံသို့ တိုက်ရိုက် လွှဲပြောင်းပေးနိုင်ပါတယ်။ ဒီအခါ မူလဆရာဝန်ရဲ့ စောင့်ဆိုင်းချိန်ရော ဆရာဝန်အသစ်ရဲ့ စောင့်ဆိုင်းချိန်ပါ အလိုအလျောက် ပြန်လည်တွက်ချက် ညီညွတ်သွားစေပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        မေးခွန်း ၃: "Frontend မှာ ခလုတ်ကို Disable လုပ်ထားတာ ရှိပြီးသားကို Backend Controller မှာ ဘာလို့ ထပ်စစ်နေသေးတာလဲ?"
+      </div>
+      <div class="qa-a">
+        <strong>အကောင်းဆုံး ဖြေဆိုချက်:</strong> "Frontend က Disable လုပ်ထားတာဟာ UI/UX အရ အသုံးပြုသူ အမှားမဖြစ်အောင် ကာကွယ်ပေးတဲ့ Client-side Validation သာ ဖြစ်ပါတယ်။ ဒါပေမဲ့ တကယ့် System Security နဲ့ Data Integrity အတွက် Backend Server-side မှာ မဖြစ်မနေ ထပ်မံ စစ်ဆေးရပါမယ်။ အကယ်၍ တစ်စုံတစ်ယောက်က Postman သို့မဟုတ် cURL ကနေ API ကို တိုက်ရိုက် လှမ်းခေါ်ခဲ့ရင်တောင် Backend က 'Finish or start current consultation first' ဆိုပြီး တင်းကျပ်စွာ ငြင်းပယ်နိုင်အောင် ကာကွယ်ထားခြင်း ဖြစ်ပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="qa-row">
+      <div class="qa-q">
+        မေးခွန်း ၄: "PAUSED အခြေအနေမှာ ရှိနေတဲ့ လူနာကို ဆရာဝန်က မေ့ပြီး နောက်လူနာ ထပ်ခေါ်လို့ ရနိုင်သလား?"
+      </div>
+      <div class="qa-a">
+        <strong>အကောင်းဆုံး ဖြေဆိုချက်:</strong> "လုံးဝ မရနိုင်ပါရှင့်။ <code>callNext()</code> စစ်ဆေးတဲ့ <code>currentConsultation()</code> logic မှာ PAUSED ဖြစ်နေရင်တောင် အဆိုပါ လူနာဟာ တာဝန်ခံဆရာဝန်ထံမှာ Consultation မပြီးပြတ်သေးဘဲ ဆိုင်းငံ့ထားတာဖြစ်တဲ့အတွက် နောက်ထပ် လူနာသစ် ခေါ်ယူခွင့်ကို Backend က တားမြစ်ထားပါတယ်။ အဲဒီလူနာကို Resume လုပ်ပြီး Complete ဖြစ်အောင် ကုသပြီးမှသာ နောက်လူနာကို ခေါ်ယူနိုင်မှာ ဖြစ်ပါတယ်ရှင့်။"
+      </div>
+    </div>
+
+    <div class="sheet-footer">
+      <span>CST-6108 Hospital Smart Queue Management System · Member 3 Master Guide Completed</span>
+      <span>Page 8 of 8</span>
+    </div>
+  </div>
+
+</body>
+</html>

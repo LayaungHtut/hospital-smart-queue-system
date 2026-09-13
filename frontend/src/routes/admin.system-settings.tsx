@@ -22,9 +22,18 @@ export const Route = createFileRoute("/admin/system-settings")({
 });
 
 const PRESET_LOGOS = [
-  { name: "Medical Plus", url: "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=100&auto=format&fit=crop&q=80" },
-  { name: "Stethoscope", url: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=100&auto=format&fit=crop&q=80" },
-  { name: "Healthcare", url: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=100&auto=format&fit=crop&q=80" },
+  {
+    name: "Medical Plus",
+    url: "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=100&auto=format&fit=crop&q=80",
+  },
+  {
+    name: "Stethoscope",
+    url: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=100&auto=format&fit=crop&q=80",
+  },
+  {
+    name: "Healthcare",
+    url: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=100&auto=format&fit=crop&q=80",
+  },
 ];
 
 function SystemSettingsPage() {
@@ -119,11 +128,17 @@ function SystemSettingsPage() {
           {settings.logoUrl && (
             <div className="mt-4 flex items-center gap-3 rounded-lg border border-border bg-accent/30 p-3">
               <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-card">
-                <img src={settings.logoUrl} alt="Logo Preview" className="size-full object-contain" />
+                <img
+                  src={settings.logoUrl}
+                  alt="Logo Preview"
+                  className="size-full object-contain"
+                />
               </div>
               <div>
                 <p className="text-xs font-semibold text-foreground">Logo Preview</p>
-                <p className="text-[11px] text-muted-foreground">This logo will display in the navigation header across all portals.</p>
+                <p className="text-[11px] text-muted-foreground">
+                  This logo will display in the navigation header across all portals.
+                </p>
               </div>
             </div>
           )}

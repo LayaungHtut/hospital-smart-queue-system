@@ -7,10 +7,7 @@ import { Field, inputClass } from "./ui-kit";
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types";
 
-const roleBrand: Record<
-  UserRole,
-  { icon: typeof UserRound; blurb: string; highlight: string }
-> = {
+const roleBrand: Record<UserRole, { icon: typeof UserRound; blurb: string; highlight: string }> = {
   PATIENT: {
     icon: UserRound,
     blurb: "Join a live queue, run AI symptom triage, and track your wait in real time.",
@@ -83,8 +80,10 @@ export function LoginCard({
 
       signIn(authSession);
       navigate({ to: redirectTo, replace: true });
-    } catch (err: any) {
-      setError(err?.message || "Unable to sign in. Please check your credentials.");
+    } catch (err: unknown) {
+      setError(
+        err instanceof Error ? err.message : "Unable to sign in. Please check your credentials.",
+      );
     } finally {
       setLoading(false);
     }
@@ -102,7 +101,10 @@ export function LoginCard({
     >
       {/* Branded side panel */}
       <div className="relative hidden w-full max-w-md flex-col justify-between overflow-hidden bg-primary p-10 text-primary-foreground lg:flex">
-        <div className="absolute -right-16 -top-16 size-64 rounded-full bg-primary-foreground/10 blur-3xl" aria-hidden />
+        <div
+          className="absolute -right-16 -top-16 size-64 rounded-full bg-primary-foreground/10 blur-3xl"
+          aria-hidden
+        />
         <div className="relative">
           <div className="flex items-center gap-2">
             <div className="flex size-9 items-center justify-center rounded-lg bg-primary-foreground/15">

@@ -201,38 +201,35 @@
 <div class="section" id="s2">
 <h1>2. Project Planning and Requirement Analysis</h1>
 
-<h2 id="s2-1">2.1 Functional vs. Non-Functional Requirements</h2>
-<p>Requirement analysis for the Hospital Smart Queue System distinguishes between functional requirements, which describe what the system must do, and non-functional requirements, which describe how well the system must do it. Both are organized below by module and by quality attribute respectively.</p>
-
-<h3 id="s2-1-1">2.1.1 Functional Requirements</h3>
+<h2 id="s2-1">2.1 Functional Requirements</h2>
 <p>The functional requirements describe what the system should be able to do.</p>
 
-<h4>User Management</h4>
+<h3>User Management</h3>
 <p>The system should allow administrators to create user accounts, manage usernames and passwords, and assign user roles, covering administrator, doctor, staff, and patient accounts alike.</p>
 
-<h4>Patient Management</h4>
+<h3>Patient Management</h3>
 <p>Staff should be able to register new patients, view and update their information, search for a patient by name or other details, and associate each patient with the appointments and queues they are part of.</p>
 
-<h4>Doctor Management</h4>
+<h3>Doctor Management</h3>
 <p>Administrators or authorized staff should be able to register doctors, assign them to departments, and record their specializations, contact information, and room numbers, as well as activate or deactivate a doctor's account when needed.</p>
 
-<h4>Department Management</h4>
+<h3>Department Management</h3>
 <p>The system should maintain the hospital's departments, including Cardiology, Dental, Emergency, Neurology, Pediatrics, Dermatology, Orthopedics, and General Medicine.</p>
 
-<h4>Appointment Management</h4>
+<h3>Appointment Management</h3>
 <p>Staff should be able to create appointments, assign patients to doctors, set appointment dates and times, and view or update appointment status as a visit progresses.</p>
 
-<h4>Queue Management</h4>
+<h3>Queue Management</h3>
 <p>The system should create queue entries and generate queue numbers, associating each entry with the relevant patient and doctor. It should also let staff set queue priority and update queue status, giving emergency patients higher priority than routine cases.</p>
 
-<h4>Emergency Management</h4>
+<h3>Emergency Management</h3>
 <p>Staff should be able to record emergency cases, capturing the patient involved, the staff member handling the case, the reason for the emergency, and its current status.</p>
 
-<h4>Consultation Management</h4>
+<h3>Consultation Management</h3>
 <p>Doctors should be able to record consultation details against a queue entry, including the doctor involved, the diagnosis, and any consultation notes.</p>
 
-<h3 id="s2-1-2">2.1.2 Non-Functional Requirements</h3>
-<p>The system should also satisfy several non-functional requirements that describe the quality attributes it must exhibit.</p>
+<h2 id="s2-2">2.2 Non-Functional Requirements</h2>
+<p>The system should also satisfy several non-functional requirements.</p>
 
 <div class="card-grid">
   <div class="card"><h4>Performance</h4><p>The system should respond to normal user requests quickly and efficiently.</p></div>
@@ -245,7 +242,7 @@
   <div class="card"><h4>Scalability</h4><p>The system should be designed so that additional features, users, doctors, departments, and hospital branches can be added in the future.</p></div>
 </div>
 
-<h2 id="s2-2">2.2 Creating Use Cases and User Stories</h2>
+<h2 id="s2-3">2.3 Use Cases and User Stories</h2>
 <div class="roles-grid">
   <div class="role-card">
     <h4>Administrator</h4>
@@ -308,7 +305,7 @@
 </div>
 <p>This architecture separates different responsibilities and makes the application easier to maintain.</p>
 
-<h2 id="s3-2">3.2 Database Design: ER Diagrams</h2>
+<h2 id="s3-2">3.2 Database Design: ER Diagram</h2>
 <p>The database contains several related entities. The main tables include users, departments, doctors, staff, patients, appointments, queue, emergency, and consultation.</p>
 
 <p>The major relationships are:</p>
@@ -505,17 +502,14 @@ Queue
 </div>
 
 <h2 id="s7-2">7.2 References</h2>
-<ul class="references-list" style="line-height: 1.65; list-style-type: none; padding-left: 0;">
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[1] L. V. Green, "Queueing analysis in healthcare," in Patient Flow: Reducing Delay in Healthcare Delivery, R. W. Hall, Ed. Boston, MA: Springer, 2006, pp. 281–307.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[2] N. Gilboy, P. Tanabe, D. Travers, and A. M. Rosenau, Emergency Severity Index (ESI): A Triage Tool for Emergency Department Care, Version 4. Implementation Handbook 2012 Edition, AHRQ Pub. No. 12-0014, Rockville, MD: Agency for Healthcare Research and Quality, 2012.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[3] F. Y. Lin and H. C. Chen, "Machine learning algorithms for predicting outpatient waiting time," International Journal of Environmental Research and Public Health, vol. 17, no. 18, p. 6542, 2020.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[4] I. Mohammadi, H. Wu, A. Turkcan, T. Toscos, and B. N. Doebbeling, "Data analytics and modeling for appointment no-show in outpatient clinics," Journal of Healthcare Engineering, vol. 2018, Article ID 4187050, 2018.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[5] P. Lewis et al., "Retrieval-augmented generation for knowledge-intensive NLP tasks," in Advances in Neural Information Processing Systems (NeurIPS 2020), vol. 33, pp. 9459–9474, 2020.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[6] R. C. Martin, Clean Architecture: A Craftsman's Guide to Software Structure and Design. Boston, MA: Prentice Hall, 2017.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[7] J. Bloch, Effective Java, 3rd ed. Boston, MA: Addison-Wesley Professional, 2018.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[8] C. Walls, Spring in Action, 6th ed. Shelter Island, NY: Manning Publications, 2022.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[9] A. Silberschatz, H. F. Korth, and S. Sudarshan, Database System Concepts, 7th ed. New York: McGraw-Hill Education, 2020.</li>
-  <li style="margin-bottom: 9px; text-indent: -2.5em; padding-left: 2.5em;">[10] R. T. Fielding, "Architectural styles and the design of network-based software architectures," Ph.D. dissertation, Department of Information and Computer Science, University of California, Irvine, CA, 2000.</li>
+<ul>
+  <li>Java documentation</li>
+  <li>Spring Boot documentation</li>
+  <li>Spring Data JPA documentation</li>
+  <li>Database Management System, 3rd Edition</li>
+  <li>Modern Database Management, 11th Edition</li>
+  <li>Maven documentation</li>
+  <li>Web Development &amp; Design Foundations with HTML5</li>
 </ul>
 </div>
 

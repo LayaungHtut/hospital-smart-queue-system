@@ -19,6 +19,7 @@ import type {
   Department,
   DoctorDashboard,
   DoctorDetail,
+  DoctorHistoryEntry,
   DoctorProfile,
   EmergencyCase,
   LoginRequest,
@@ -39,7 +40,8 @@ import type {
 } from "@/types";
 
 export const API_BASE_URL =
-  (import.meta as any).env?.VITE_API_BASE_URL ?? "http://localhost:8080/api";
+  (import.meta as unknown as { env?: { VITE_API_BASE_URL?: string } }).env?.VITE_API_BASE_URL ??
+  "http://localhost:8080/api";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   try {
@@ -65,8 +67,11 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     }
 
     return (await res.json()) as T;
-  } catch (err: any) {
-    console.warn(`[API] Request to ${path} failed:`, err.message);
+  } catch (err: unknown) {
+    console.warn(
+      `[API] Request to ${path} failed:`,
+      err instanceof Error ? err.message : String(err),
+    );
     throw err;
   }
 }
@@ -102,7 +107,9 @@ function getCurrentPatientId(): string | number {
         const s = JSON.parse(raw);
         if (s?.userId) return s.userId;
       }
-    } catch {}
+    } catch {
+      // Ignored: fallback to default patient id
+    }
   }
   return "P001";
 }
@@ -132,9 +139,12 @@ export async function addPatientToQueue(payload: CreateQueueRequest): Promise<Qu
 }
 
 export async function cancelQueue(queueId: string | number): Promise<{ success: boolean }> {
-  return await request<{ success: boolean }>(`/patient/queue/${encodeURIComponent(String(queueId))}/cancel`, {
-    method: "POST",
-  });
+  return await request<{ success: boolean }>(
+    `/patient/queue/${encodeURIComponent(String(queueId))}/cancel`,
+    {
+      method: "POST",
+    },
+  );
 }
 
 export async function getPatientAppointments(patientId?: string | number): Promise<Appointment[]> {
@@ -225,10 +235,13 @@ export async function reassignQueue(
   doctorId: string | number,
   reason?: string,
 ): Promise<{ success: boolean }> {
-  return await request<{ success: boolean }>(`/staff/queues/${encodeURIComponent(String(queueId))}/reassign`, {
-    method: "POST",
-    body: JSON.stringify({ doctorId: String(doctorId), reason }),
-  });
+  return await request<{ success: boolean }>(
+    `/staff/queues/${encodeURIComponent(String(queueId))}/reassign`,
+    {
+      method: "POST",
+      body: JSON.stringify({ doctorId: String(doctorId), reason }),
+    },
+  );
 }
 
 export async function setDoctorUnavailable(
@@ -256,7 +269,9 @@ export async function markAllNotificationsRead(): Promise<{ success: boolean }> 
 }
 
 export async function getStaffReport(type: string, date: string): Promise<DailyReport> {
-  return request<DailyReport>(`/staff/reports?type=${encodeURIComponent(type)}&date=${encodeURIComponent(date)}`);
+  return request<DailyReport>(
+    `/staff/reports?type=${encodeURIComponent(type)}&date=${encodeURIComponent(date)}`,
+  );
 }
 
 /* --------------------------------- Admin --------------------------------- */
@@ -285,18 +300,24 @@ export async function updateDoctor(
         body: JSON.stringify(payload),
       },
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Surfaces the real error message from the backend/network as a
     // {success:false} result rather than throwing, since callers render
     // res.message directly. Not a mock fallback — no data is invented here.
-    return { success: false, message: err?.message || "Failed to update doctor." };
+    return {
+      success: false,
+      message: (err instanceof Error ? err.message : null) || "Failed to update doctor.",
+    };
   }
 }
 
 export async function deleteDoctor(doctorId: string | number): Promise<{ success: boolean }> {
-  return await request<{ success: boolean }>(`/admin/doctors/${encodeURIComponent(String(doctorId))}`, {
-    method: "DELETE",
-  });
+  return await request<{ success: boolean }>(
+    `/admin/doctors/${encodeURIComponent(String(doctorId))}`,
+    {
+      method: "DELETE",
+    },
+  );
 }
 
 export async function createDepartment(payload: Omit<Department, "id">): Promise<Department> {
@@ -307,10 +328,15 @@ export async function createDepartment(payload: Omit<Department, "id">): Promise
   return { ...payload, id: res.id };
 }
 
-export async function deleteDepartment(departmentId: string | number): Promise<{ success: boolean }> {
-  return await request<{ success: boolean }>(`/admin/departments/${encodeURIComponent(String(departmentId))}`, {
-    method: "DELETE",
-  });
+export async function deleteDepartment(
+  departmentId: string | number,
+): Promise<{ success: boolean }> {
+  return await request<{ success: boolean }>(
+    `/admin/departments/${encodeURIComponent(String(departmentId))}`,
+    {
+      method: "DELETE",
+    },
+  );
 }
 
 export async function getUsers(): Promise<User[]> {
@@ -339,9 +365,12 @@ export async function getSchedules(): Promise<Schedule[]> {
 }
 
 export async function deleteSchedule(scheduleId: string | number): Promise<{ success: boolean }> {
-  return await request<{ success: boolean }>(`/admin/schedules/${encodeURIComponent(String(scheduleId))}`, {
-    method: "DELETE",
-  });
+  return await request<{ success: boolean }>(
+    `/admin/schedules/${encodeURIComponent(String(scheduleId))}`,
+    {
+      method: "DELETE",
+    },
+  );
 }
 
 export async function getAuditLogs(): Promise<AuditLog[]> {
@@ -349,7 +378,9 @@ export async function getAuditLogs(): Promise<AuditLog[]> {
 }
 
 export async function getReport(type: string, date: string): Promise<DailyReport> {
-  return await request<DailyReport>(`/admin/reports?type=${encodeURIComponent(type)}&date=${encodeURIComponent(date)}`);
+  return await request<DailyReport>(
+    `/admin/reports?type=${encodeURIComponent(type)}&date=${encodeURIComponent(date)}`,
+  );
 }
 
 export async function getQueueSettings(): Promise<QueueSettings> {
@@ -416,7 +447,9 @@ function getCurrentDoctorId(passedId?: string | number): string {
         if (parsed.doctorId) return String(parsed.doctorId);
         if (parsed.userId) return String(parsed.userId);
       }
-    } catch {}
+    } catch {
+      // Ignored: fallback to default doctor id
+    }
   }
   return "D001";
 }
@@ -490,9 +523,9 @@ export async function getDoctorAppointments(doctorId?: string | number): Promise
   return await request<Appointment[]>(`/doctor/${id}/appointments`);
 }
 
-export async function getDoctorHistory(doctorId?: string | number): Promise<any[]> {
+export async function getDoctorHistory(doctorId?: string | number): Promise<DoctorHistoryEntry[]> {
   const id = getCurrentDoctorId(doctorId);
-  return await request<any[]>(`/doctor/${id}/history`);
+  return await request<DoctorHistoryEntry[]>(`/doctor/${id}/history`);
 }
 
 export async function getDoctorProfile(doctorId?: string | number): Promise<DoctorProfile> {
@@ -547,23 +580,27 @@ export interface ChatbotStatus {
 export async function predictWaitTime(
   doctorId: string,
   patientId?: number,
-  departmentId?: number
+  departmentId?: number,
 ): Promise<WaitTimePredictionResponse> {
   const params = new URLSearchParams();
   if (patientId) params.set("patientId", String(patientId));
   if (departmentId) params.set("departmentId", String(departmentId));
   const qs = params.toString();
-  return await request<WaitTimePredictionResponse>(`/ai/wait-time/${doctorId}${qs ? "?" + qs : ""}`);
+  return await request<WaitTimePredictionResponse>(
+    `/ai/wait-time/${doctorId}${qs ? "?" + qs : ""}`,
+  );
 }
 
 export async function predictWaitTimeForDepartment(
   departmentCode: string,
-  patientId?: string | number
+  patientId?: string | number,
 ): Promise<Record<string, number>> {
   const params = new URLSearchParams();
   if (patientId) params.set("patientId", String(patientId));
   const qs = params.toString();
-  const res = await request<DepartmentWaitTimeResponse>(`/ai/wait-time/department/${encodeURIComponent(departmentCode)}${qs ? "?" + qs : ""}`);
+  const res = await request<DepartmentWaitTimeResponse>(
+    `/ai/wait-time/department/${encodeURIComponent(departmentCode)}${qs ? "?" + qs : ""}`,
+  );
   return res.predictions ?? {};
 }
 
@@ -573,9 +610,13 @@ export async function predictNoShow(appointmentId: number): Promise<NoShowPredic
   });
 }
 
-export async function getHighRiskAppointments(daysAhead?: number): Promise<{ count: number; predictions: any[] }> {
+export async function getHighRiskAppointments(
+  daysAhead?: number,
+): Promise<{ count: number; predictions: NoShowPredictionResponse[] }> {
   const params = daysAhead ? `?daysAhead=${daysAhead}` : "";
-  return await request<{ count: number; predictions: any[] }>(`/ai/noshow/high-risk${params}`);
+  return await request<{ count: number; predictions: NoShowPredictionResponse[] }>(
+    `/ai/noshow/high-risk${params}`,
+  );
 }
 
 export async function chatWithBot(chatReq: ChatRequest): Promise<ChatResponse> {
@@ -650,7 +691,14 @@ export interface FinalizeTriagePayload {
 }
 
 export interface FinalizeTriageResponse {
-  department: { departmentId?: number; id?: number; name?: string; departmentName?: string; departmentCode?: string; code?: string };
+  department: {
+    departmentId?: number;
+    id?: number;
+    name?: string;
+    departmentName?: string;
+    departmentCode?: string;
+    code?: string;
+  };
   emergency: boolean;
   acuityScore: number;
   disposition: string;
@@ -661,14 +709,18 @@ export interface FinalizeTriageResponse {
   aiUsed: boolean;
 }
 
-export async function getInteractiveTriageQuestions(symptoms: string): Promise<InteractiveTriageQuestionsResponse> {
+export async function getInteractiveTriageQuestions(
+  symptoms: string,
+): Promise<InteractiveTriageQuestionsResponse> {
   return await request<InteractiveTriageQuestionsResponse>("/ai/triage/interactive/questions", {
     method: "POST",
     body: JSON.stringify({ symptoms }),
   });
 }
 
-export async function finalizeInteractiveTriage(payload: FinalizeTriagePayload): Promise<FinalizeTriageResponse> {
+export async function finalizeInteractiveTriage(
+  payload: FinalizeTriagePayload,
+): Promise<FinalizeTriageResponse> {
   return await request<FinalizeTriageResponse>("/ai/triage/interactive/finalize", {
     method: "POST",
     body: JSON.stringify(payload),
@@ -701,21 +753,23 @@ export interface LoadBalancerReport {
   suggestions: ReassignmentSuggestion[];
 }
 
-export async function getAiLoadBalancerSuggestions(department?: string): Promise<LoadBalancerReport> {
+export async function getAiLoadBalancerSuggestions(
+  department?: string,
+): Promise<LoadBalancerReport> {
   const qs = department ? `?department=${encodeURIComponent(department)}` : "";
   return await request<LoadBalancerReport>(`/ai/load-balancer/suggestions${qs}`);
 }
 
 export async function applyAiLoadBalancerPlan(
   queueIds: string[],
-  staffId?: string
+  staffId?: string,
 ): Promise<{ success: boolean; reassignedCount: number; message: string }> {
   return await request<{ success: boolean; reassignedCount: number; message: string }>(
     "/ai/load-balancer/apply",
     {
       method: "POST",
       body: JSON.stringify({ queueIds, staffId }),
-    }
+    },
   );
 }
 
@@ -746,7 +800,9 @@ export async function predictConsultationDuration(
   if (symptoms) params.set("symptoms", symptoms);
   if (appointmentType) params.set("appointmentType", appointmentType);
   const qs = params.toString() ? `?${params}` : "";
-  return await request<DurationPrediction>(`/ai/consultation-duration/${encodeURIComponent(doctorId)}${qs}`);
+  return await request<DurationPrediction>(
+    `/ai/consultation-duration/${encodeURIComponent(doctorId)}${qs}`,
+  );
 }
 
 export async function predictDurationsForDepartment(
@@ -758,7 +814,9 @@ export async function predictDurationsForDepartment(
   if (patientId) params.set("patientId", patientId);
   if (symptoms) params.set("symptoms", symptoms);
   const qs = params.toString() ? `?${params}` : "";
-  return await request<DepartmentDurationPredictions>(`/ai/consultation-duration/department/${encodeURIComponent(departmentCode)}${qs}`);
+  return await request<DepartmentDurationPredictions>(
+    `/ai/consultation-duration/department/${encodeURIComponent(departmentCode)}${qs}`,
+  );
 }
 
 /* ------------------- Smart Doctor Assignment ------------------- */
@@ -791,7 +849,9 @@ export async function getSmartDoctorAssignment(
   if (symptoms) params.set("symptoms", symptoms);
   if (patientId) params.set("patientId", patientId);
   const qs = params.toString() ? `?${params}` : "";
-  return await request<SmartAssignmentResponse>(`/ai/smart-assignment/${encodeURIComponent(departmentCode)}${qs}`);
+  return await request<SmartAssignmentResponse>(
+    `/ai/smart-assignment/${encodeURIComponent(departmentCode)}${qs}`,
+  );
 }
 
 /* ------------------- Queue Flow Prediction ------------------- */
@@ -835,8 +895,12 @@ export async function predictQueueFlow(hoursAhead: number = 3): Promise<FlowPred
   return await request<FlowPrediction>(`/ai/queue-flow/predict?hoursAhead=${hoursAhead}`);
 }
 
-export async function predictQueueFlowByDepartment(hoursAhead: number = 3): Promise<DepartmentFlowPrediction> {
-  return await request<DepartmentFlowPrediction>(`/ai/queue-flow/by-department?hoursAhead=${hoursAhead}`);
+export async function predictQueueFlowByDepartment(
+  hoursAhead: number = 3,
+): Promise<DepartmentFlowPrediction> {
+  return await request<DepartmentFlowPrediction>(
+    `/ai/queue-flow/by-department?hoursAhead=${hoursAhead}`,
+  );
 }
 
 export async function getPeakHours(dayOfWeek?: string): Promise<PeakHoursReport> {
@@ -844,7 +908,9 @@ export async function getPeakHours(dayOfWeek?: string): Promise<PeakHoursReport>
   return await request<PeakHoursReport>(`/ai/queue-flow/peak-hours${qs}`);
 }
 
-export async function getStaffingRecommendation(hoursAhead: number = 3): Promise<StaffingRecommendation> {
+export async function getStaffingRecommendation(
+  hoursAhead: number = 3,
+): Promise<StaffingRecommendation> {
   return await request<StaffingRecommendation>(`/ai/queue-flow/staffing?hoursAhead=${hoursAhead}`);
 }
 

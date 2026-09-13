@@ -5,11 +5,7 @@ import { getStaffDashboard } from "@/services/api";
 import { StaffLayout } from "@/components/portal/shells";
 import { Panel, StatCard } from "@/components/portal/ui-kit";
 import { useAuth } from "@/lib/auth";
-import {
-  SkeletonCard,
-  SkeletonStatCard,
-  SkeletonPanel,
-} from "@/components/ui/loading";
+import { SkeletonCard, SkeletonStatCard, SkeletonPanel } from "@/components/ui/loading";
 import type { StaffDashboard } from "@/types";
 
 export const Route = createFileRoute("/staff/")({
@@ -71,7 +67,14 @@ function StaffDashboardPage() {
     );
   }
 
-  const dashboard = data ?? { totalQueuesToday: 0, emergencyPending: 0, activeDoctors: 0, checkedInAppointments: 0, breakdown: [], highlights: [] };
+  const dashboard = data ?? {
+    totalQueuesToday: 0,
+    emergencyPending: 0,
+    activeDoctors: 0,
+    checkedInAppointments: 0,
+    breakdown: [],
+    highlights: [],
+  };
 
   return (
     <StaffLayout title="Dashboard">

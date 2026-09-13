@@ -95,7 +95,8 @@ function AdminDepartmentsPage() {
             onClick={() => setOpen((v) => !v)}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 sm:px-4 sm:text-sm"
           >
-            <Plus className="size-4" /> <span className="hidden sm:inline">Add Department</span><span className="sm:hidden">Add</span>
+            <Plus className="size-4" /> <span className="hidden sm:inline">Add Department</span>
+            <span className="sm:hidden">Add</span>
           </button>
         }
       >

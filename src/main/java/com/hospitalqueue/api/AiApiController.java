@@ -33,7 +33,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ai")
@@ -53,6 +52,7 @@ public class AiApiController {
     private final QueueFlowPredictionService queueFlowPredictionService;
     private final FollowUpInstructionService followUpInstructionService;
     private final MlModelRepository mlModelRepository;
+    @SuppressWarnings("unused")
     private final WaitTimePredictionRepository waitTimePredictionRepository;
     private final NoShowPredictionRepository noShowPredictionRepository;
     private final QueueRepository queueRepository;
@@ -60,28 +60,29 @@ public class AiApiController {
     private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
     private final DepartmentRepository departmentRepository;
+    @SuppressWarnings("unused")
     private final QueueService queueService;
 
     public AiApiController(AIRecommendationService aiRecommendationService,
-                           WaitTimePredictionService waitTimePredictionService,
-                           NoShowPredictionService noShowPredictionService,
-                           RagChatbotService ragChatbotService,
-                           AiSoapService aiSoapService,
-                           AiInteractiveTriageService aiInteractiveTriageService,
-                           AiQueueLoadBalancerService aiQueueLoadBalancerService,
-                           ConsultationDurationService consultationDurationService,
-                           SmartDoctorAssignmentService smartDoctorAssignmentService,
-                           QueueFlowPredictionService queueFlowPredictionService,
-                           FollowUpInstructionService followUpInstructionService,
-                           MlModelRepository mlModelRepository,
-                           WaitTimePredictionRepository waitTimePredictionRepository,
-                           NoShowPredictionRepository noShowPredictionRepository,
-                           QueueRepository queueRepository,
-                           AppointmentRepository appointmentRepository,
-                           PatientRepository patientRepository,
-                           DoctorRepository doctorRepository,
-                           DepartmentRepository departmentRepository,
-                           QueueService queueService) {
+            WaitTimePredictionService waitTimePredictionService,
+            NoShowPredictionService noShowPredictionService,
+            RagChatbotService ragChatbotService,
+            AiSoapService aiSoapService,
+            AiInteractiveTriageService aiInteractiveTriageService,
+            AiQueueLoadBalancerService aiQueueLoadBalancerService,
+            ConsultationDurationService consultationDurationService,
+            SmartDoctorAssignmentService smartDoctorAssignmentService,
+            QueueFlowPredictionService queueFlowPredictionService,
+            FollowUpInstructionService followUpInstructionService,
+            MlModelRepository mlModelRepository,
+            WaitTimePredictionRepository waitTimePredictionRepository,
+            NoShowPredictionRepository noShowPredictionRepository,
+            QueueRepository queueRepository,
+            AppointmentRepository appointmentRepository,
+            PatientRepository patientRepository,
+            DoctorRepository doctorRepository,
+            DepartmentRepository departmentRepository,
+            QueueService queueService) {
         this.aiRecommendationService = aiRecommendationService;
         this.waitTimePredictionService = waitTimePredictionService;
         this.noShowPredictionService = noShowPredictionService;
@@ -110,10 +111,12 @@ public class AiApiController {
     public ResponseEntity<?> triage(@RequestBody TriageRequest request) {
         try {
             AIRecommendationService.Recommendation rec = aiRecommendationService.recommend(request.symptoms);
-            
+
             Map<String, Object> response = new HashMap<>();
-            response.put("department", rec.getDepartment() != null ?
-                    Map.of("id", rec.getDepartment().getDepartmentId(), "code", rec.getDepartment().getDepartmentCode(), "name", rec.getDepartment().getDepartmentName()) : null);
+            response.put("department",
+                    rec.getDepartment() != null ? Map.of("id", rec.getDepartment().getDepartmentId(), "code",
+                            rec.getDepartment().getDepartmentCode(), "name", rec.getDepartment().getDepartmentName())
+                            : null);
             response.put("emergency", rec.isEmergency());
             response.put("acuityScore", rec.getAcuityScore());
             response.put("disposition", rec.getDisposition());
@@ -121,7 +124,7 @@ public class AiApiController {
             response.put("recommendedLabs", rec.getRecommendedLabs());
             response.put("reason", rec.getReason());
             response.put("aiUsed", rec.isAiUsed());
-            
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("Triage error: {}", e.getMessage());
@@ -130,16 +133,18 @@ public class AiApiController {
     }
 
     @PostMapping("/triage/{departmentCode}")
-    public ResponseEntity<?> triageForDepartment(@PathVariable String departmentCode, @RequestBody TriageRequest request) {
+    public ResponseEntity<?> triageForDepartment(@PathVariable String departmentCode,
+            @RequestBody TriageRequest request) {
         Department dept = departmentRepository.findByCode(departmentCode.toUpperCase());
         if (dept == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Invalid department code"));
         }
-        
+
         AIRecommendationService.Recommendation rec = aiRecommendationService.triageOnly(request.symptoms, dept);
-        
+
         Map<String, Object> response = new HashMap<>();
-        response.put("department", Map.of("id", dept.getDepartmentId(), "code", dept.getDepartmentCode(), "name", dept.getDepartmentName()));
+        response.put("department", Map.of("id", dept.getDepartmentId(), "code", dept.getDepartmentCode(), "name",
+                dept.getDepartmentName()));
         response.put("emergency", rec.isEmergency());
         response.put("acuityScore", rec.getAcuityScore());
         response.put("disposition", rec.getDisposition());
@@ -147,7 +152,7 @@ public class AiApiController {
         response.put("recommendedLabs", rec.getRecommendedLabs());
         response.put("reason", rec.getReason());
         response.put("aiUsed", rec.isAiUsed());
-        
+
         return ResponseEntity.ok(response);
     }
 
@@ -155,14 +160,14 @@ public class AiApiController {
 
     @GetMapping("/wait-time/{doctorId}")
     public ResponseEntity<?> predictWaitTime(@PathVariable String doctorId,
-                                             @RequestParam(required = false) String patientId,
-                                             @RequestParam(required = false) Integer departmentId) {
+            @RequestParam(required = false) String patientId,
+            @RequestParam(required = false) Integer departmentId) {
         Doctor doctor = doctorRepository.findById(doctorId);
         if (doctor == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Doctor not found"));
         }
 
-        Department department = departmentId != null ? departmentRepository.findById(departmentId) 
+        Department department = departmentId != null ? departmentRepository.findById(departmentId)
                 : departmentRepository.findById(doctor.getDepartmentId());
         if (department == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Department not found"));
@@ -191,13 +196,13 @@ public class AiApiController {
         response.put("predictedWaitMinutes", predictedWait);
         response.put("fallbackWaitMinutes", fallbackWait);
         response.put("modelUsed", waitTimePredictionService.isModelLoaded());
-        
+
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/wait-time/department/{departmentCode}")
     public ResponseEntity<?> predictWaitTimesForDepartment(@PathVariable String departmentCode,
-                                                            @RequestParam(required = false) String patientId) {
+            @RequestParam(required = false) String patientId) {
         Department department = departmentRepository.findByCode(departmentCode.toUpperCase());
         if (department == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Department not found"));
@@ -213,7 +218,8 @@ public class AiApiController {
                 department, doctors, patientAge, patientPriority, isNewPatient);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("department", Map.of("id", department.getDepartmentId(), "code", department.getDepartmentCode(), "name", department.getDepartmentName()));
+        response.put("department", Map.of("id", department.getDepartmentId(), "code", department.getDepartmentCode(),
+                "name", department.getDepartmentName()));
         response.put("predictions", predictions);
         response.put("modelUsed", waitTimePredictionService.isModelLoaded());
 
@@ -230,8 +236,8 @@ public class AiApiController {
         }
 
         Double probability = noShowPredictionService.predictNoShowProbability(appointment);
-        boolean predictedNoShow = noShowPredictionService.predictNoShow(appointment);
-        String riskLevel = noShowPredictionService.getRiskLevel(appointment);
+        boolean predictedNoShow = probability != null && probability >= noShowPredictionService.getThreshold();
+        String riskLevel = noShowPredictionService.getRiskLevel(probability);
 
         Map<String, Object> response = new HashMap<>();
         response.put("appointmentId", appointmentId);
@@ -247,15 +253,14 @@ public class AiApiController {
     public ResponseEntity<?> getHighRiskAppointments(@RequestParam(required = false) Integer daysAhead) {
         LocalDateTime from = LocalDateTime.now();
         LocalDateTime to = from.plusDays(daysAhead != null ? daysAhead : 7);
-        
-        List<com.hospitalqueue.model.NoShowPrediction> predictions = 
-                noShowPredictionRepository.findHighRiskAppointments(from, to);
+
+        List<com.hospitalqueue.model.NoShowPrediction> predictions = noShowPredictionRepository
+                .findHighRiskAppointments(from, to);
 
         return ResponseEntity.ok(Map.of(
                 "count", predictions.size(),
                 "predictions", predictions,
-                "period", Map.of("from", from, "to", to)
-        ));
+                "period", Map.of("from", from, "to", to)));
     }
 
     // ==================== CHATBOT ====================
@@ -265,19 +270,19 @@ public class AiApiController {
         if (!ragChatbotService.isReady()) {
             return ResponseEntity.status(503).body(Map.of(
                     "error", "Chatbot not available",
-                    "message", "Please configure OpenRouter API key and ChromaDB"
-            ));
+                    "message", "Please configure OpenRouter API key and ChromaDB"));
         }
 
         long start = System.currentTimeMillis();
-        String response = ragChatbotService.chat(request.message());
+        String response = request.sessionId() != null && !request.sessionId().isBlank()
+                ? ragChatbotService.chatWithSession(request.sessionId(), request.message())
+                : ragChatbotService.chat(request.message());
         int responseTime = (int) (System.currentTimeMillis() - start);
 
         return ResponseEntity.ok(Map.of(
                 "response", response,
                 "responseTimeMs", responseTime,
-                "sessionId", request.sessionId()
-        ));
+                "sessionId", request.sessionId()));
     }
 
     @GetMapping("/chat/status")
@@ -317,8 +322,7 @@ public class AiApiController {
                     request.vitals(),
                     request.observations(),
                     request.department(),
-                    request.specialization()
-            );
+                    request.specialization());
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             log.error("SOAP note generation error: {}", e.getMessage());
@@ -331,8 +335,8 @@ public class AiApiController {
     @PostMapping("/triage/interactive/questions")
     public ResponseEntity<?> getInteractiveTriageQuestions(@RequestBody TriageQuestionsRequest request) {
         try {
-            AiInteractiveTriageService.InteractiveTriageResponse response =
-                    aiInteractiveTriageService.generateQuestions(request.symptoms());
+            AiInteractiveTriageService.InteractiveTriageResponse response = aiInteractiveTriageService
+                    .generateQuestions(request.symptoms());
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("Interactive triage questions error: {}", e.getMessage());
@@ -343,8 +347,8 @@ public class AiApiController {
     @PostMapping("/triage/interactive/finalize")
     public ResponseEntity<?> finalizeInteractiveTriage(@RequestBody FinalizeTriageRequest request) {
         try {
-            AiInteractiveTriageService.FinalizedTriageResult result =
-                    aiInteractiveTriageService.finalizeTriage(request.symptoms(), request.answers());
+            AiInteractiveTriageService.FinalizedTriageResult result = aiInteractiveTriageService
+                    .finalizeTriage(request.symptoms(), request.answers());
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             log.error("Finalize interactive triage error: {}", e.getMessage());
@@ -357,8 +361,8 @@ public class AiApiController {
     @GetMapping("/load-balancer/suggestions")
     public ResponseEntity<?> getLoadBalancerSuggestions(@RequestParam(required = false) String department) {
         try {
-            AiQueueLoadBalancerService.LoadBalancerReport report =
-                    aiQueueLoadBalancerService.analyzeAndSuggest(department);
+            AiQueueLoadBalancerService.LoadBalancerReport report = aiQueueLoadBalancerService
+                    .analyzeAndSuggest(department);
             return ResponseEntity.ok(report);
         } catch (Exception e) {
             log.error("Load balancer suggestion error: {}", e.getMessage());
@@ -371,8 +375,7 @@ public class AiApiController {
         try {
             Map<String, Object> result = aiQueueLoadBalancerService.applyLoadBalancerPlan(
                     request.queueIds(),
-                    request.staffId() != null ? request.staffId() : "STAFF"
-            );
+                    request.staffId() != null ? request.staffId() : "STAFF");
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             log.error("Apply load balancer plan error: {}", e.getMessage());
@@ -384,9 +387,9 @@ public class AiApiController {
 
     @GetMapping("/consultation-duration/{doctorId}")
     public ResponseEntity<?> predictConsultationDuration(@PathVariable String doctorId,
-                                                         @RequestParam(required = false) String patientId,
-                                                         @RequestParam(required = false) String symptoms,
-                                                         @RequestParam(required = false) String appointmentType) {
+            @RequestParam(required = false) String patientId,
+            @RequestParam(required = false) String symptoms,
+            @RequestParam(required = false) String appointmentType) {
         Doctor doctor = doctorRepository.findById(doctorId);
         if (doctor == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Doctor not found"));
@@ -412,9 +415,9 @@ public class AiApiController {
 
     @GetMapping("/consultation-duration/department/{departmentCode}")
     public ResponseEntity<?> predictDurationsForDepartment(@PathVariable String departmentCode,
-                                                            @RequestParam(required = false) String patientId,
-                                                            @RequestParam(required = false) String symptoms,
-                                                            @RequestParam(required = false) String appointmentType) {
+            @RequestParam(required = false) String patientId,
+            @RequestParam(required = false) String symptoms,
+            @RequestParam(required = false) String appointmentType) {
         Department department = departmentRepository.findByCode(departmentCode.toUpperCase());
         if (department == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Department not found"));
@@ -428,7 +431,8 @@ public class AiApiController {
                 department.getDepartmentId(), patientAge, symptoms, appointmentType, isNewPatient);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("department", Map.of("id", department.getDepartmentId(), "code", department.getDepartmentCode(), "name", department.getDepartmentName()));
+        response.put("department", Map.of("id", department.getDepartmentId(), "code", department.getDepartmentCode(),
+                "name", department.getDepartmentName()));
         response.put("predictions", predictions);
 
         return ResponseEntity.ok(response);
@@ -438,15 +442,15 @@ public class AiApiController {
 
     @GetMapping("/smart-assignment/{departmentCode}")
     public ResponseEntity<?> getSmartAssignment(@PathVariable String departmentCode,
-                                                 @RequestParam(required = false) String symptoms,
-                                                 @RequestParam(required = false) String patientId) {
+            @RequestParam(required = false) String symptoms,
+            @RequestParam(required = false) String patientId) {
         Department department = departmentRepository.findByCode(departmentCode.toUpperCase());
         if (department == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Department not found"));
         }
 
-        List<SmartDoctorAssignmentService.DoctorRecommendation> recommendations =
-                smartDoctorAssignmentService.recommendDoctors(
+        List<SmartDoctorAssignmentService.DoctorRecommendation> recommendations = smartDoctorAssignmentService
+                .recommendDoctors(
                         department.getDepartmentId(), symptoms, patientId);
 
         List<Map<String, Object>> recList = recommendations.stream().map(r -> {
@@ -465,7 +469,8 @@ public class AiApiController {
         }).toList();
 
         Map<String, Object> response = new HashMap<>();
-        response.put("department", Map.of("code", department.getDepartmentCode(), "name", department.getDepartmentName()));
+        response.put("department",
+                Map.of("code", department.getDepartmentCode(), "name", department.getDepartmentName()));
         response.put("recommendations", recList);
         response.put("symptoms", symptoms);
 
@@ -477,8 +482,8 @@ public class AiApiController {
     @GetMapping("/queue-flow/predict")
     public ResponseEntity<?> predictQueueFlow(@RequestParam(defaultValue = "3") int hoursAhead) {
         try {
-            QueueFlowPredictionService.FlowPrediction prediction =
-                    queueFlowPredictionService.predictNextHours(Math.min(hoursAhead, 8));
+            QueueFlowPredictionService.FlowPrediction prediction = queueFlowPredictionService
+                    .predictNextHours(Math.min(hoursAhead, 8));
             return ResponseEntity.ok(prediction);
         } catch (Exception e) {
             log.error("Queue flow prediction error: {}", e.getMessage());
@@ -489,8 +494,8 @@ public class AiApiController {
     @GetMapping("/queue-flow/by-department")
     public ResponseEntity<?> predictQueueFlowByDepartment(@RequestParam(defaultValue = "3") int hoursAhead) {
         try {
-            QueueFlowPredictionService.DepartmentFlowPrediction prediction =
-                    queueFlowPredictionService.predictByDepartment(Math.min(hoursAhead, 8));
+            QueueFlowPredictionService.DepartmentFlowPrediction prediction = queueFlowPredictionService
+                    .predictByDepartment(Math.min(hoursAhead, 8));
             return ResponseEntity.ok(prediction);
         } catch (Exception e) {
             log.error("Queue flow by department prediction error: {}", e.getMessage());
@@ -504,8 +509,7 @@ public class AiApiController {
             java.time.DayOfWeek dow = dayOfWeek != null
                     ? java.time.DayOfWeek.valueOf(dayOfWeek.toUpperCase())
                     : java.time.DayOfWeek.from(java.time.LocalDate.now());
-            QueueFlowPredictionService.PeakHoursReport report =
-                    queueFlowPredictionService.getPeakHours(dow);
+            QueueFlowPredictionService.PeakHoursReport report = queueFlowPredictionService.getPeakHours(dow);
             return ResponseEntity.ok(report);
         } catch (Exception e) {
             log.error("Peak hours analysis error: {}", e.getMessage());
@@ -516,8 +520,8 @@ public class AiApiController {
     @GetMapping("/queue-flow/staffing")
     public ResponseEntity<?> getStaffingRecommendation(@RequestParam(defaultValue = "3") int hoursAhead) {
         try {
-            QueueFlowPredictionService.StaffingRecommendation rec =
-                    queueFlowPredictionService.getStaffingRecommendation(Math.min(hoursAhead, 8));
+            QueueFlowPredictionService.StaffingRecommendation rec = queueFlowPredictionService
+                    .getStaffingRecommendation(Math.min(hoursAhead, 8));
             return ResponseEntity.ok(rec);
         } catch (Exception e) {
             log.error("Staffing recommendation error: {}", e.getMessage());
@@ -530,14 +534,13 @@ public class AiApiController {
     @PostMapping("/follow-up/generate")
     public ResponseEntity<?> generateFollowUpInstructions(@RequestBody FollowUpRequest request) {
         try {
-            FollowUpInstructionService.FollowUpResult result =
-                    followUpInstructionService.generateInstructions(
-                            request.diagnosis(),
-                            request.medications(),
-                            request.patientAge(),
-                            request.patientGender(),
-                            request.department(),
-                            request.additionalNotes());
+            FollowUpInstructionService.FollowUpResult result = followUpInstructionService.generateInstructions(
+                    request.diagnosis(),
+                    request.medications(),
+                    request.patientAge(),
+                    request.patientGender(),
+                    request.department(),
+                    request.additionalNotes());
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             log.error("Follow-up instruction generation error: {}", e.getMessage());
@@ -547,19 +550,33 @@ public class AiApiController {
 
     // ==================== HELPER RECORDS ====================
 
-    public record TriageRequest(String symptoms) {}
-    public record ChatRequest(String message, String sessionId) {}
+    public record TriageRequest(String symptoms) {
+    }
+
+    public record ChatRequest(String message, String sessionId) {
+    }
+
     public record SoapNoteRequest(String patientName, String patientAge, String gender,
-                                  String symptoms, String vitals, String observations,
-                                  String department, String specialization) {}
-    public record TriageQuestionsRequest(String symptoms) {}
-    public record FinalizeTriageRequest(String symptoms, Map<String, String> answers) {}
-    public record ApplyLoadBalancerRequest(List<String> queueIds, String staffId) {}
+            String symptoms, String vitals, String observations,
+            String department, String specialization) {
+    }
+
+    public record TriageQuestionsRequest(String symptoms) {
+    }
+
+    public record FinalizeTriageRequest(String symptoms, Map<String, String> answers) {
+    }
+
+    public record ApplyLoadBalancerRequest(List<String> queueIds, String staffId) {
+    }
+
     public record FollowUpRequest(String diagnosis, String medications, String patientAge,
-                                   String patientGender, String department, String additionalNotes) {}
+            String patientGender, String department, String additionalNotes) {
+    }
 
     private int calculateAge(java.time.LocalDate dob) {
-        if (dob == null) return 30;
+        if (dob == null)
+            return 30;
         return (int) java.time.temporal.ChronoUnit.YEARS.between(dob, java.time.LocalDate.now());
     }
 }

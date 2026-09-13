@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { AdminLayout } from "@/components/portal/shells";
 import { Panel, StatCard, Field, TabNav, inputClass } from "@/components/portal/ui-kit";
 import { SkeletonStatCard } from "@/components/ui/loading";
@@ -40,12 +40,7 @@ function QueueFlowPredictionPage() {
     { value: "staffing", label: "Staffing" },
   ];
 
-  useEffect(() => {
-    getDepartments().then(setDepartments).catch(console.error);
-    loadAll();
-  }, []);
-
-  async function loadAll() {
+  const loadAll = useCallback(async () => {
     setLoading(true);
     try {
       const [f, df, p, s] = await Promise.all([
@@ -63,7 +58,15 @@ function QueueFlowPredictionPage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [hoursAhead, selectedDay]);
+
+  useEffect(() => {
+    getDepartments().then(setDepartments).catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    loadAll();
+  }, [loadAll]);
 
   async function refresh() {
     setPredicting(true);
@@ -72,7 +75,11 @@ function QueueFlowPredictionPage() {
   }
 
   const trendColor = (trend: string) =>
-    trend === "INCREASING" ? "text-danger" : trend === "DECREASING" ? "text-success" : "text-muted-foreground";
+    trend === "INCREASING"
+      ? "text-danger"
+      : trend === "DECREASING"
+        ? "text-success"
+        : "text-muted-foreground";
 
   return (
     <AdminLayout title="AI Queue Flow Prediction">
@@ -106,10 +113,38 @@ function QueueFlowPredictionPage() {
 
         {staffing && (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <StatCard label="Predicted Arrivals" value={flow?.totalPredictedArrivals.toFixed(1) ?? "—"} tone="primary" />
-            <StatCard label="Trend" value={flow?.trend ?? "—"} tone={flow?.trend === "INCREASING" ? "danger" : flow?.trend === "DECREASING" ? "success" : "primary"} />
-            <StatCard label="Recommended Staff" value={staffing.recommendedDoctors} tone="success" />
-            <StatCard label="Urgency" value={staffing.urgencyLevel} tone={staffing.urgencyLevel === "HIGH" ? "danger" : staffing.urgencyLevel === "MEDIUM" ? "warning" : "success"} />
+            <StatCard
+              label="Predicted Arrivals"
+              value={flow?.totalPredictedArrivals.toFixed(1) ?? "—"}
+              tone="primary"
+            />
+            <StatCard
+              label="Trend"
+              value={flow?.trend ?? "—"}
+              tone={
+                flow?.trend === "INCREASING"
+                  ? "danger"
+                  : flow?.trend === "DECREASING"
+                    ? "success"
+                    : "primary"
+              }
+            />
+            <StatCard
+              label="Recommended Staff"
+              value={staffing.recommendedDoctors}
+              tone="success"
+            />
+            <StatCard
+              label="Urgency"
+              value={staffing.urgencyLevel}
+              tone={
+                staffing.urgencyLevel === "HIGH"
+                  ? "danger"
+                  : staffing.urgencyLevel === "MEDIUM"
+                    ? "warning"
+                    : "success"
+              }
+            />
           </div>
         )}
 
@@ -130,8 +165,8 @@ function QueueFlowPredictionPage() {
                       h.confidence === "HIGH"
                         ? "bg-success-soft text-success"
                         : h.confidence === "MEDIUM"
-                        ? "bg-primary/10 text-primary"
-                        : "bg-muted text-muted-foreground"
+                          ? "bg-primary/10 text-primary"
+                          : "bg-muted text-muted-foreground"
                     }`}
                   >
                     {h.confidence}
@@ -171,8 +206,8 @@ function QueueFlowPredictionPage() {
                               h.predictedArrivals >= 2
                                 ? "bg-danger-soft text-danger"
                                 : h.predictedArrivals >= 1
-                                ? "bg-warning-soft text-warning"
-                                : "bg-success-soft text-success"
+                                  ? "bg-warning-soft text-warning"
+                                  : "bg-success-soft text-success"
                             }`}
                           >
                             {h.predictedArrivals.toFixed(1)}
@@ -194,7 +229,11 @@ function QueueFlowPredictionPage() {
               <StatCard label="Off-Peak Hour" value={peakHours.offPeakHour} tone="success" />
               <StatCard
                 label="Rush Hours"
-                value={peakHours.rushHours.length > 0 ? peakHours.rushHours.map((h) => `${h}:00`).join(", ") : "None"}
+                value={
+                  peakHours.rushHours.length > 0
+                    ? peakHours.rushHours.map((h) => `${h}:00`).join(", ")
+                    : "None"
+                }
                 tone="warning"
               />
               <Field label="Analyze Day">
@@ -206,7 +245,15 @@ function QueueFlowPredictionPage() {
                     getPeakHours(e.target.value).then(setPeakHours).catch(console.error);
                   }}
                 >
-                  {["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"].map((d) => (
+                  {[
+                    "MONDAY",
+                    "TUESDAY",
+                    "WEDNESDAY",
+                    "THURSDAY",
+                    "FRIDAY",
+                    "SATURDAY",
+                    "SUNDAY",
+                  ].map((d) => (
                     <option key={d} value={d}>
                       {d}
                     </option>
@@ -222,7 +269,7 @@ function QueueFlowPredictionPage() {
                   <div key={hour} className="flex flex-col items-center gap-1">
                     <div className="flex h-32 w-full items-end justify-center">
                       <div
-                        className={`w-full max-w-[40px] rounded-t ${
+                        className={`w-full max-w-10 rounded-t ${
                           avg >= 4 ? "bg-danger" : avg >= 2 ? "bg-warning" : "bg-primary/60"
                         }`}
                         style={{ height: `${Math.max(heightPct, 4)}%` }}
@@ -240,18 +287,39 @@ function QueueFlowPredictionPage() {
         {tab === "staffing" && staffing && (
           <Panel title="Staffing Recommendation">
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <StatCard label="Recommended Doctors" value={staffing.recommendedDoctors} tone="primary" />
-              <StatCard label="Patients/Hour" value={staffing.predictedPatientsPerHour.toFixed(1)} tone="warning" />
-              <StatCard label="Urgency Level" value={staffing.urgencyLevel} tone={staffing.urgencyLevel === "HIGH" ? "danger" : staffing.urgencyLevel === "MEDIUM" ? "warning" : "success"} />
+              <StatCard
+                label="Recommended Doctors"
+                value={staffing.recommendedDoctors}
+                tone="primary"
+              />
+              <StatCard
+                label="Patients/Hour"
+                value={staffing.predictedPatientsPerHour.toFixed(1)}
+                tone="warning"
+              />
+              <StatCard
+                label="Urgency Level"
+                value={staffing.urgencyLevel}
+                tone={
+                  staffing.urgencyLevel === "HIGH"
+                    ? "danger"
+                    : staffing.urgencyLevel === "MEDIUM"
+                      ? "warning"
+                      : "success"
+                }
+              />
               <StatCard label="Time Period" value={staffing.timePeriod} tone="primary" />
             </div>
             <div className="mt-4 rounded-xl border border-border p-4">
               <p className="text-sm text-muted-foreground">
-                Based on predicted flow of <strong>{staffing.predictedPatientsPerHour.toFixed(1)}</strong> patients/hour
-                over the next <strong>{hoursAhead}</strong> hours during the <strong>{staffing.timePeriod}</strong> period.
+                Based on predicted flow of{" "}
+                <strong>{staffing.predictedPatientsPerHour.toFixed(1)}</strong> patients/hour over
+                the next <strong>{hoursAhead}</strong> hours during the{" "}
+                <strong>{staffing.timePeriod}</strong> period.
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
-                Recommended: <strong>{staffing.recommendedDoctors}</strong> active doctors to handle the load efficiently.
+                Recommended: <strong>{staffing.recommendedDoctors}</strong> active doctors to handle
+                the load efficiently.
               </p>
             </div>
           </Panel>

@@ -369,3 +369,12 @@ export interface RegistrationRequest {
   reviewedAt?: string;
   reviewedBy?: string;
 }
+
+export interface DoctorHistoryEntry {
+  id: number;
+  queueNumber: string;
+  patientId: string | number;
+  status: string;
+  reason: string;
+  createdAt: string;
+}

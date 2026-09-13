@@ -106,10 +106,16 @@ function AdminUsersPage() {
         experienceYears: 5,
       });
       setOpen(false);
-      setMessage(`User created successfully in database table '${role === "Doctor" ? "doctor" : role === "Admin" ? "admin_user" : "staff"}'!`);
+      setMessage(
+        `User created successfully in database table '${role === "Doctor" ? "doctor" : role === "Admin" ? "admin_user" : "staff"}'!`,
+      );
       setTimeout(() => setMessage(null), 4000);
-    } catch (err: any) {
-      setError(err?.message || "Failed to create user. Ensure username, email, and phone are unique.");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to create user. Ensure username, email, and phone are unique.",
+      );
     }
   }
 
@@ -125,8 +131,8 @@ function AdminUsersPage() {
       const res = await approveRegistrationRequest(reqId);
       setRequests((prev) => prev.map((r) => (r.id === reqId ? { ...r, status: "APPROVED" } : r)));
       setMessage(res.message || "Patient registration approved and account activated!");
-    } catch (err: any) {
-      setMessage(err?.message || "Failed to approve registration.");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Failed to approve registration.");
     } finally {
       setActionLoading(null);
     }
@@ -139,8 +145,8 @@ function AdminUsersPage() {
       await rejectRegistrationRequest(reqId, "Declined by administrator");
       setRequests((prev) => prev.map((r) => (r.id === reqId ? { ...r, status: "REJECTED" } : r)));
       setMessage("Registration request rejected.");
-    } catch (err: any) {
-      setMessage(err?.message || "Failed to reject registration.");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Failed to reject registration.");
     } finally {
       setActionLoading(null);
     }
@@ -267,9 +273,7 @@ function AdminUsersPage() {
       </div>
 
       {activeTab === "requests" ? (
-        <Panel
-          title="Patient Registration Approval Requests"
-        >
+        <Panel title="Patient Registration Approval Requests">
           {loading ? (
             <SkeletonTable rows={5} columns={5} />
           ) : (
@@ -313,7 +317,9 @@ function AdminUsersPage() {
 
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Select User Role:</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                    Select User Role:
+                  </span>
                   <div className="flex rounded-lg border border-border bg-background p-1 text-xs font-semibold">
                     {(["Staff", "Doctor", "Admin"] as const).map((r) => (
                       <button
@@ -324,7 +330,9 @@ function AdminUsersPage() {
                           setError(null);
                         }}
                         className={`rounded px-3 py-1 transition ${
-                          role === r ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+                          role === r
+                            ? "bg-primary text-primary-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
                         }`}
                       >
                         {r}
@@ -333,7 +341,8 @@ function AdminUsersPage() {
                   </div>
                 </div>
                 <span className="rounded bg-primary/10 px-2 py-0.5 text-[11px] font-mono text-primary">
-                  Database Table: {role === "Doctor" ? "doctor" : role === "Admin" ? "admin_user" : "staff"}
+                  Database Table:{" "}
+                  {role === "Doctor" ? "doctor" : role === "Admin" ? "admin_user" : "staff"}
                 </span>
               </div>
 
@@ -377,7 +386,9 @@ function AdminUsersPage() {
                       min={0}
                       className={inputClass}
                       value={form.experienceYears}
-                      onChange={(e) => setForm({ ...form, experienceYears: Number(e.target.value) })}
+                      onChange={(e) =>
+                        setForm({ ...form, experienceYears: Number(e.target.value) })
+                      }
                     />
                   </Field>
                   <Field label="Phone Number (09...)">

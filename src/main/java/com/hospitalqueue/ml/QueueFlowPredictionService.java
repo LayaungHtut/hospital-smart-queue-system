@@ -2,7 +2,6 @@ package com.hospitalqueue.ml;
 
 import com.hospitalqueue.model.Department;
 import com.hospitalqueue.repository.DepartmentRepository;
-import com.hospitalqueue.repository.QueueRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,7 +11,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Queue Flow Prediction: predicts patient arrival volume for the next 1-2 hours
@@ -26,13 +24,14 @@ import java.util.stream.Collectors;
 @Service
 public class QueueFlowPredictionService {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(QueueFlowPredictionService.class);
 
     private final JdbcTemplate jdbcTemplate;
     private final DepartmentRepository departmentRepository;
 
     public QueueFlowPredictionService(JdbcTemplate jdbcTemplate,
-                                       DepartmentRepository departmentRepository) {
+            DepartmentRepository departmentRepository) {
         this.jdbcTemplate = jdbcTemplate;
         this.departmentRepository = departmentRepository;
     }
@@ -51,8 +50,7 @@ public class QueueFlowPredictionService {
                     target.getHour(),
                     target.getDayOfWeek().toString(),
                     Math.round(predicted * 10.0) / 10.0,
-                    getConfidenceLevel(predicted)
-            ));
+                    getConfidenceLevel(predicted)));
         }
 
         double total = predictions.stream().mapToDouble(HourlyPrediction::predictedArrivals).sum();
@@ -78,8 +76,7 @@ public class QueueFlowPredictionService {
                         target.getHour(),
                         target.getDayOfWeek().toString(),
                         Math.round(predicted * 10.0) / 10.0,
-                        getConfidenceLevel(predicted)
-                ));
+                        getConfidenceLevel(predicted)));
             }
             deptPredictions.put(dept.getDepartmentCode(), hourly);
         }
@@ -92,18 +89,19 @@ public class QueueFlowPredictionService {
      */
     public PeakHoursReport getPeakHours(DayOfWeek dayOfWeek) {
         String sql = """
-            SELECT EXTRACT(HOUR FROM created_at) AS hour_of_day,
-                   COUNT(*) AS total_arrivals
-            FROM queue
-            WHERE EXTRACT(DOW FROM created_at) = ?
-            GROUP BY hour_of_day
-            ORDER BY hour_of_day
-            """;
+                SELECT EXTRACT(HOUR FROM created_at) AS hour_of_day,
+                       COUNT(*) AS total_arrivals
+                FROM queue
+                WHERE EXTRACT(DOW FROM created_at) = ?
+                GROUP BY hour_of_day
+                ORDER BY hour_of_day
+                """;
 
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, dayOfWeek.getValue() - 1);
 
         Map<Integer, Double> hourlyAverages = new LinkedHashMap<>();
-        for (int h = 8; h <= 20; h++) hourlyAverages.put(h, 0.0);
+        for (int h = 8; h <= 20; h++)
+            hourlyAverages.put(h, 0.0);
 
         long totalWeeks = Math.max(1, getTotalWeeksOfData());
 
@@ -148,16 +146,24 @@ public class QueueFlowPredictionService {
         // Time period classification
         LocalTime now = LocalTime.now();
         String period;
-        if (now.isBefore(LocalTime.of(10, 0))) period = "Early Morning";
-        else if (now.isBefore(LocalTime.of(12, 0))) period = "Morning Peak";
-        else if (now.isBefore(LocalTime.of(14, 0))) period = "Lunch";
-        else if (now.isBefore(LocalTime.of(17, 0))) period = "Afternoon";
-        else period = "Late Afternoon";
+        if (now.isBefore(LocalTime.of(10, 0)))
+            period = "Early Morning";
+        else if (now.isBefore(LocalTime.of(12, 0)))
+            period = "Morning Peak";
+        else if (now.isBefore(LocalTime.of(14, 0)))
+            period = "Lunch";
+        else if (now.isBefore(LocalTime.of(17, 0)))
+            period = "Afternoon";
+        else
+            period = "Late Afternoon";
 
         String urgency;
-        if (avgPerHour > 6) urgency = "HIGH";
-        else if (avgPerHour > 3) urgency = "MEDIUM";
-        else urgency = "LOW";
+        if (avgPerHour > 6)
+            urgency = "HIGH";
+        else if (avgPerHour > 3)
+            urgency = "MEDIUM";
+        else
+            urgency = "LOW";
 
         return new StaffingRecommendation(recommendedDoctors, avgPerHour, urgency, period);
     }
@@ -168,16 +174,16 @@ public class QueueFlowPredictionService {
 
         // Get historical average for this hour + day-of-week combination
         String sql = """
-            SELECT COALESCE(AVG(cnt), 0) AS avg_arrivals
-            FROM (
-                SELECT DATE(created_at) AS d, COUNT(*) AS cnt
-                FROM queue
-                WHERE EXTRACT(DOW FROM created_at) = ?
-                  AND EXTRACT(HOUR FROM created_at) = ?
-                  AND created_at > NOW() - INTERVAL '90 days'
-                GROUP BY DATE(created_at)
-            ) sub
-            """;
+                SELECT COALESCE(AVG(cnt), 0) AS avg_arrivals
+                FROM (
+                    SELECT DATE(created_at) AS d, COUNT(*) AS cnt
+                    FROM queue
+                    WHERE EXTRACT(DOW FROM created_at) = ?
+                      AND EXTRACT(HOUR FROM created_at) = ?
+                      AND created_at > NOW() - INTERVAL '90 days'
+                    GROUP BY DATE(created_at)
+                ) sub
+                """;
 
         try {
             Double avg = jdbcTemplate.queryForObject(sql, Double.class,
@@ -193,17 +199,17 @@ public class QueueFlowPredictionService {
         int hour = target.getHour();
 
         String sql = """
-            SELECT COALESCE(AVG(cnt), 0) AS avg_arrivals
-            FROM (
-                SELECT DATE(created_at) AS d, COUNT(*) AS cnt
-                FROM queue
-                WHERE department_id = ?
-                  AND EXTRACT(DOW FROM created_at) = ?
-                  AND EXTRACT(HOUR FROM created_at) = ?
-                  AND created_at > NOW() - INTERVAL '90 days'
-                GROUP BY DATE(created_at)
-            ) sub
-            """;
+                SELECT COALESCE(AVG(cnt), 0) AS avg_arrivals
+                FROM (
+                    SELECT DATE(created_at) AS d, COUNT(*) AS cnt
+                    FROM queue
+                    WHERE department_id = ?
+                      AND EXTRACT(DOW FROM created_at) = ?
+                      AND EXTRACT(HOUR FROM created_at) = ?
+                      AND created_at > NOW() - INTERVAL '90 days'
+                    GROUP BY DATE(created_at)
+                ) sub
+                """;
 
         try {
             Double avg = jdbcTemplate.queryForObject(sql, Double.class,
@@ -216,12 +222,18 @@ public class QueueFlowPredictionService {
 
     private double getDefaultEstimate(int hour) {
         // Heuristic defaults when no historical data
-        if (hour < 9) return 1.5;
-        if (hour <= 11) return 5.0;
-        if (hour == 12) return 2.0;
-        if (hour <= 14) return 4.0;
-        if (hour <= 16) return 3.5;
-        if (hour <= 18) return 2.5;
+        if (hour < 9)
+            return 1.5;
+        if (hour <= 11)
+            return 5.0;
+        if (hour == 12)
+            return 2.0;
+        if (hour <= 14)
+            return 4.0;
+        if (hour <= 16)
+            return 3.5;
+        if (hour <= 18)
+            return 2.5;
         return 1.0;
     }
 
@@ -241,18 +253,23 @@ public class QueueFlowPredictionService {
     }
 
     private String getConfidenceLevel(double predicted) {
-        if (predicted >= 4.0) return "HIGH";
-        if (predicted >= 2.0) return "MEDIUM";
+        if (predicted >= 4.0)
+            return "HIGH";
+        if (predicted >= 2.0)
+            return "MEDIUM";
         return "LOW";
     }
 
     private String analyzeTrend(List<HourlyPrediction> predictions) {
-        if (predictions.size() < 2) return "STABLE";
+        if (predictions.size() < 2)
+            return "STABLE";
         double first = predictions.get(0).predictedArrivals();
         double last = predictions.get(predictions.size() - 1).predictedArrivals();
         double diff = last - first;
-        if (diff > 1.5) return "INCREASING";
-        if (diff < -1.5) return "DECREASING";
+        if (diff > 1.5)
+            return "INCREASING";
+        if (diff < -1.5)
+            return "DECREASING";
         return "STABLE";
     }
 
@@ -262,34 +279,34 @@ public class QueueFlowPredictionService {
             int hour,
             String dayOfWeek,
             double predictedArrivals,
-            String confidence
-    ) {}
+            String confidence) {
+    }
 
     public record FlowPrediction(
             List<HourlyPrediction> hourly,
             double totalPredictedArrivals,
             String trend,
-            LocalDateTime predictedAt
-    ) {}
+            LocalDateTime predictedAt) {
+    }
 
     public record DepartmentFlowPrediction(
             Map<String, List<HourlyPrediction>> byDepartment,
             int hoursAhead,
-            LocalDateTime predictedAt
-    ) {}
+            LocalDateTime predictedAt) {
+    }
 
     public record PeakHoursReport(
             String dayOfWeek,
             Map<Integer, Double> hourlyAverages,
             String peakHour,
             String offPeakHour,
-            List<Integer> rushHours
-    ) {}
+            List<Integer> rushHours) {
+    }
 
     public record StaffingRecommendation(
             int recommendedDoctors,
             double predictedPatientsPerHour,
             String urgencyLevel,
-            String timePeriod
-    ) {}
+            String timePeriod) {
+    }
 }

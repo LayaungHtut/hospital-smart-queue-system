@@ -129,13 +129,42 @@ public class AppointmentRepository {
 
     public Integer daysSinceLastVisit(String patientId) {
         return jdbcTemplate.queryForObject(
-                "SELECT EXTRACT(DAY FROM (CURRENT_DATE - MAX(appointment_date)))::int " +
+                "SELECT (CURRENT_DATE - MAX(appointment_date))::int " +
                 "FROM appointment WHERE patient_id = ? AND status IN ('COMPLETED', 'NOSHOW')", Integer.class, patientId);
     }
 
     public Integer averageLeadTime(String patientId) {
         return jdbcTemplate.queryForObject(
-                "SELECT AVG(EXTRACT(DAY FROM (appointment_date - CURRENT_DATE)))::int " +
+                "SELECT AVG(appointment_date - CURRENT_DATE)::int " +
                 "FROM appointment WHERE patient_id = ? AND status = 'SCHEDULED'", Integer.class, patientId);
     }
+
+    /**
+     * All patient-history aggregates used by the ML feature builders in a single
+     * round trip, instead of 5 separate queries (countByPatientId,
+     * countNoShowsByPatientId, countCancellationsByPatientId, daysSinceLastVisit,
+     * averageLeadTime).
+     */
+    public PatientHistoryStats getPatientHistoryStats(String patientId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT " +
+                "  COUNT(*) AS total, " +
+                "  COUNT(*) FILTER (WHERE status = 'NOSHOW') AS noshows, " +
+                "  COUNT(*) FILTER (WHERE status = 'CANCELLED') AS cancellations, " +
+                "  (SELECT (CURRENT_DATE - MAX(appointment_date))::int FROM appointment " +
+                "     WHERE patient_id = ? AND status IN ('COMPLETED', 'NOSHOW')) AS days_since_last, " +
+                "  (SELECT AVG(appointment_date - CURRENT_DATE)::int FROM appointment " +
+                "     WHERE patient_id = ? AND status = 'SCHEDULED') AS avg_lead_time " +
+                "FROM appointment WHERE patient_id = ?",
+                (rs, rowNum) -> new PatientHistoryStats(
+                        rs.getInt("total"),
+                        rs.getInt("noshows"),
+                        rs.getInt("cancellations"),
+                        rs.getObject("days_since_last") != null ? rs.getInt("days_since_last") : null,
+                        rs.getObject("avg_lead_time") != null ? rs.getInt("avg_lead_time") : null),
+                patientId, patientId, patientId);
+    }
+
+    public record PatientHistoryStats(int totalAppointments, int pastNoshows, int pastCancellations,
+                                       Integer daysSinceLastVisit, Integer averageLeadTime) {}
 }

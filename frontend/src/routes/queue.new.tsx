@@ -92,7 +92,9 @@ function NewQueuePage() {
 
   useEffect(() => {
     getSymptoms().then(setSymptomsList).catch(console.error);
-    getDepartments().then(setDepartments).catch((err) => setErrorMessage(err.message));
+    getDepartments()
+      .then(setDepartments)
+      .catch((err) => setErrorMessage(err.message));
   }, []);
 
   useEffect(() => {
@@ -116,7 +118,7 @@ function NewQueuePage() {
           .catch(console.error);
       }
     }
-  }, [departmentId, departments]);
+  }, [departmentId, departments, session?.userId]);
 
   async function handleAnalyzeAI(customText?: string) {
     const textToAnalyze = (customText ?? symptomText).trim();
@@ -131,8 +133,12 @@ function NewQueuePage() {
         setDepartmentId(res.department.id);
       }
       setIsEmergency(res.emergency);
-    } catch (err: any) {
-      setErrorMessage(err.message || "Failed to analyze symptoms. Please select department manually.");
+    } catch (err: unknown) {
+      setErrorMessage(
+        err instanceof Error
+          ? err.message
+          : "Failed to analyze symptoms. Please select department manually.",
+      );
     } finally {
       setAiLoading(false);
     }
@@ -207,8 +213,11 @@ function NewQueuePage() {
         emergency: isEmergency,
       });
       setCreated(entry);
-    } catch (err: any) {
-      setErrorMessage(err.message || "Could not register queue. You may already have an active queue or the clinic is closed.");
+    } catch (err: unknown) {
+      setErrorMessage(
+        (err instanceof Error ? err.message : null) ||
+          "Could not register queue. You may already have an active queue or the clinic is closed.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -320,7 +329,8 @@ function NewQueuePage() {
                         </span>
                       </h3>
                       <p className="text-xs text-muted-foreground sm:text-sm">
-                        Select multiple symptoms or describe your condition for clinical triage and live queue estimates.
+                        Select multiple symptoms or describe your condition for clinical triage and
+                        live queue estimates.
                       </p>
                     </div>
                   </div>
@@ -386,7 +396,7 @@ function NewQueuePage() {
                                   "rounded-full border px-3 py-1 text-xs font-medium transition",
                                   isSelected
                                     ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                                    : "border-border bg-card text-muted-foreground hover:border-primary hover:text-foreground"
+                                    : "border-border bg-card text-muted-foreground hover:border-primary hover:text-foreground",
                                 )}
                               >
                                 {isSelected ? "✓ " : "+ "}
@@ -492,12 +502,16 @@ function NewQueuePage() {
                     </div>
 
                     <p className="text-xs text-muted-foreground">
-                      Please answer these brief follow-up questions to help our AI assign the exact clinical acuity level:
+                      Please answer these brief follow-up questions to help our AI assign the exact
+                      clinical acuity level:
                     </p>
 
                     <div className="space-y-4">
                       {interactiveQuestions.map((q, idx) => (
-                        <div key={q.id || idx} className="rounded-lg bg-accent/30 p-3.5 border border-border">
+                        <div
+                          key={q.id || idx}
+                          className="rounded-lg bg-accent/30 p-3.5 border border-border"
+                        >
                           <label className="text-xs font-bold text-foreground flex items-center gap-2">
                             <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[11px] font-bold text-primary-foreground">
                               {idx + 1}
@@ -530,7 +544,8 @@ function NewQueuePage() {
 
                     <div className="flex items-center justify-between border-t border-border pt-3">
                       <span className="text-xs text-muted-foreground">
-                        {Object.keys(interactiveAnswers).length} of {interactiveQuestions.length} answered
+                        {Object.keys(interactiveAnswers).length} of {interactiveQuestions.length}{" "}
+                        answered
                       </span>
                       <button
                         type="button"
@@ -568,12 +583,14 @@ function NewQueuePage() {
                       <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2.5 py-0.5 text-xs font-semibold text-primary">
                         <Sparkles className="size-3" /> Comprehensive Triage Report
                       </span>
-                      <span className={cn(
-                        "rounded-full px-2.5 py-0.5 text-xs font-bold",
-                        interactiveResult.emergency
-                          ? "bg-danger text-white animate-pulse"
-                          : "bg-primary/20 text-primary"
-                      )}>
+                      <span
+                        className={cn(
+                          "rounded-full px-2.5 py-0.5 text-xs font-bold",
+                          interactiveResult.emergency
+                            ? "bg-danger text-white animate-pulse"
+                            : "bg-primary/20 text-primary",
+                        )}
+                      >
                         Acuity Score: Level {interactiveResult.acuityScore} / 5
                       </span>
                       {interactiveResult.emergency && (
@@ -595,7 +612,9 @@ function NewQueuePage() {
                     <div>
                       <p className="text-xs text-muted-foreground">Recommended Department</p>
                       <h4 className="text-lg font-bold text-primary">
-                        {interactiveResult.department?.name || interactiveResult.department?.departmentName || "General Medicine"}
+                        {interactiveResult.department?.name ||
+                          interactiveResult.department?.departmentName ||
+                          "General Medicine"}
                       </h4>
                     </div>
 
@@ -609,7 +628,8 @@ function NewQueuePage() {
 
                   <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
                     <span className="text-xs text-muted-foreground">
-                      Disposition: <strong>{interactiveResult.disposition?.toUpperCase() || "ROUTINE"}</strong>
+                      Disposition:{" "}
+                      <strong>{interactiveResult.disposition?.toUpperCase() || "ROUTINE"}</strong>
                     </span>
                     <button
                       type="button"
@@ -812,7 +832,11 @@ function NewQueuePage() {
                             </span>
                           </span>
                           <span className="block text-xs text-muted-foreground">
-                            {d.department} • <span className="font-medium text-foreground/80">{d.specialization || "General Medicine"}</span> • {d.experienceYears || 5} yrs exp
+                            {d.department} •{" "}
+                            <span className="font-medium text-foreground/80">
+                              {d.specialization || "General Medicine"}
+                            </span>{" "}
+                            • {d.experienceYears || 5} yrs exp
                           </span>
                         </span>
 
@@ -830,8 +854,8 @@ function NewQueuePage() {
                         </span>
 
                         <span className="w-32 text-center text-sm font-bold text-foreground">
-                          {waitTimePredictions[d.id] 
-                            ? `${waitTimePredictions[d.id]} min` 
+                          {waitTimePredictions[d.id]
+                            ? `${waitTimePredictions[d.id]} min`
                             : `${d.estimatedWaitingMinutes} min`}
                           {d.availabilityStatus !== "CONSULTING" && (
                             <span className="block text-[10px] font-normal text-amber-600 dark:text-amber-400">

@@ -1,6 +1,73 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { Check, ChevronLeft, ChevronRight, Search } from "lucide-react";
+import {
+  AlertTriangle,
+  Check,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Info,
+  Search,
+  X,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+
+/* -------------------------------- Alert ---------------------------------- */
+
+export type AlertTone = "info" | "success" | "warning" | "error";
+
+const alertToneClasses: Record<AlertTone, string> = {
+  info: "bg-info-soft text-info",
+  success: "bg-success-soft text-success",
+  warning: "bg-warning-soft text-warning",
+  error: "bg-danger-soft text-danger",
+};
+
+const alertToneIcon: Record<AlertTone, React.ComponentType<{ className?: string }>> = {
+  info: Info,
+  success: CheckCircle2,
+  warning: AlertTriangle,
+  error: AlertTriangle,
+};
+
+/**
+ * A daisyUI-style alert: an icon + message in a colored, rounded box.
+ * `role="alert"` so screen readers announce it as soon as it appears.
+ */
+export function Alert({
+  tone = "info",
+  children,
+  onDismiss,
+  className,
+}: {
+  tone?: AlertTone;
+  children: ReactNode;
+  onDismiss?: () => void;
+  className?: string | undefined;
+}) {
+  const Icon = alertToneIcon[tone];
+  return (
+    <div
+      role="alert"
+      className={cn(
+        "flex items-start gap-3 rounded-lg px-4 py-3 text-sm shadow-sm",
+        alertToneClasses[tone],
+        className,
+      )}
+    >
+      <Icon className="mt-0.5 size-5 shrink-0 stroke-current" />
+      <div className="min-w-0 flex-1">{children}</div>
+      {onDismiss ? (
+        <button
+          onClick={onDismiss}
+          aria-label="Dismiss"
+          className="shrink-0 rounded p-0.5 opacity-70 transition hover:opacity-100"
+        >
+          <X className="size-4" />
+        </button>
+      ) : null}
+    </div>
+  );
+}
 
 /* -------------------------------- Panel ---------------------------------- */
 
@@ -146,7 +213,7 @@ export function QueueTokenBadge({
         </span>
       </div>
       <div className="px-4 py-3.5">
-        <span className="font-sans text-[40px] font-extrabold leading-[44px] tracking-[0.04em] text-foreground">
+        <span className="font-sans text-[40px] font-extrabold leading-11 tracking-[0.04em] text-foreground">
           {token}
         </span>
       </div>
@@ -188,12 +255,20 @@ export function humanize(value: string | undefined | null) {
     .join(" ");
 }
 
-export function StatusBadge({ status, label }: { status: string | undefined | null; label?: string }) {
+export function StatusBadge({
+  status,
+  label,
+}: {
+  status: string | undefined | null;
+  label?: string;
+}) {
   return (
     <span
       className={cn(
         "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
-        status ? (badgeTones[status] ?? "bg-muted text-muted-foreground") : "bg-muted text-muted-foreground",
+        status
+          ? (badgeTones[status] ?? "bg-muted text-muted-foreground")
+          : "bg-muted text-muted-foreground",
       )}
     >
       {label ?? humanize(status)}
@@ -307,7 +382,7 @@ export function DataTable<T>({
       )}
 
       <div className="overflow-x-auto rounded-lg border border-border">
-        <table className="w-full min-w-[640px] text-sm">
+        <table className="w-full min-w-160 text-sm">
           <thead className="bg-muted/60 text-left text-muted-foreground">
             <tr>
               {numbered ? <th className="px-4 py-3 font-medium">#</th> : null}

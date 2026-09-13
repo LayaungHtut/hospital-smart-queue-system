@@ -39,10 +39,38 @@ export const Route = createFileRoute("/")({
 });
 
 const departments = [
-  { name: "Cardiology", tag: "Specialty OPD", token: "A-042", waiting: 3, wait: "~14 mins", stroke: "bg-secondary" },
-  { name: "Pediatrics", tag: "Family Care", token: "P-019", waiting: 5, wait: "~22 mins", stroke: "bg-success" },
-  { name: "Orthopedics", tag: "Bone & Joint", token: "O-088", waiting: 1, wait: "~6 mins", stroke: "bg-primary" },
-  { name: "General OPD", tag: "Fast Triage", token: "G-142", waiting: 7, wait: "~18 mins", stroke: "bg-warning" },
+  {
+    name: "Cardiology",
+    tag: "Specialty OPD",
+    token: "A-042",
+    waiting: 3,
+    wait: "~14 mins",
+    stroke: "bg-secondary",
+  },
+  {
+    name: "Pediatrics",
+    tag: "Family Care",
+    token: "P-019",
+    waiting: 5,
+    wait: "~22 mins",
+    stroke: "bg-success",
+  },
+  {
+    name: "Orthopedics",
+    tag: "Bone & Joint",
+    token: "O-088",
+    waiting: 1,
+    wait: "~6 mins",
+    stroke: "bg-primary",
+  },
+  {
+    name: "General OPD",
+    tag: "Fast Triage",
+    token: "G-142",
+    waiting: 7,
+    wait: "~18 mins",
+    stroke: "bg-warning",
+  },
 ];
 
 const portals = [
@@ -104,7 +132,8 @@ const stats = [
     icon: Bot,
     value: "24/7",
     label: "AI Symptom Triage",
-    detail: "Instant department recommendation and emergency flagging before a patient even joins the line.",
+    detail:
+      "Instant department recommendation and emergency flagging before a patient even joins the line.",
     tone: "text-success",
   },
   {
@@ -121,12 +150,13 @@ function Landing() {
     <div className="min-h-screen bg-background">
       {/* Utility bar */}
       <div className="border-b border-border bg-card/80">
-        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs text-muted-foreground sm:px-6">
+        <div className="mx-auto flex max-w-360 flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs text-muted-foreground sm:px-6">
           <div className="flex items-center gap-2 font-medium text-foreground">
             <Building2 className="size-3.5 text-primary" /> City General Hospital
             <span className="hidden h-3 w-px bg-border sm:block" />
             <span className="hidden items-center gap-1.5 text-success sm:flex">
-              <span className="size-1.5 animate-pulse rounded-full bg-success" /> Live Queue Sync Active
+              <span className="size-1.5 animate-pulse rounded-full bg-success" /> Live Queue Sync
+              Active
             </span>
           </div>
           <div className="flex items-center gap-2 rounded-full bg-danger-soft px-2.5 py-1 font-semibold text-danger">
@@ -136,7 +166,7 @@ function Landing() {
       </div>
 
       {/* Hero */}
-      <section className="mx-auto max-w-[1440px] px-4 pb-10 pt-14 sm:px-6 sm:pt-20">
+      <section className="mx-auto max-w-360 px-4 pb-10 pt-14 sm:px-6 sm:pt-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -146,8 +176,8 @@ function Landing() {
               Hassle-free, human-centered hospital care.
             </h1>
             <p className="mt-4 max-w-xl text-sm text-muted-foreground sm:text-base">
-              One unified platform for patients, doctors, staff, and administrators — replacing crowded
-              corridors and shouted names with calm, real-time queue orchestration.
+              One unified platform for patients, doctors, staff, and administrators — replacing
+              crowded corridors and shouted names with calm, real-time queue orchestration.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
@@ -206,7 +236,7 @@ function Landing() {
 
       {/* Live department ticker */}
       <section className="border-y border-border bg-muted/40 py-8">
-        <div className="mx-auto max-w-[1440px] px-4 sm:px-6">
+        <div className="mx-auto max-w-360 px-4 sm:px-6">
           <div className="mb-4 flex items-center justify-between">
             <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground">
               <Activity className="size-4 text-primary" /> Live Department Consultations
@@ -224,7 +254,9 @@ function Landing() {
                 <span className={`absolute inset-y-0 left-0 w-1 ${d.stroke}`} aria-hidden />
                 <div className="flex items-start justify-between pl-2">
                   <div>
-                    <span className="text-[10px] font-bold uppercase text-muted-foreground">{d.tag}</span>
+                    <span className="text-[10px] font-bold uppercase text-muted-foreground">
+                      {d.tag}
+                    </span>
                     <h3 className="text-base font-bold text-foreground">{d.name}</h3>
                   </div>
                   <span className="rounded-full bg-warning-soft px-2 py-0.5 text-[10px] font-bold text-warning">
@@ -233,11 +265,15 @@ function Landing() {
                 </div>
                 <div className="mt-3 flex items-center justify-between border-t border-border pl-2 pt-3">
                   <div>
-                    <span className="block text-[10px] uppercase text-muted-foreground">Now Serving</span>
+                    <span className="block text-[10px] uppercase text-muted-foreground">
+                      Now Serving
+                    </span>
                     <span className="text-lg font-extrabold text-primary">{d.token}</span>
                   </div>
                   <div className="text-right">
-                    <span className="block text-[10px] uppercase text-muted-foreground">Est. Wait</span>
+                    <span className="block text-[10px] uppercase text-muted-foreground">
+                      Est. Wait
+                    </span>
                     <span className="text-sm font-bold text-foreground">{d.wait}</span>
                   </div>
                 </div>
@@ -248,7 +284,7 @@ function Landing() {
       </section>
 
       {/* Portal entry hub */}
-      <section className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-360 px-4 py-16 sm:px-6">
         <div className="mb-8 flex flex-col justify-between gap-3 md:flex-row md:items-end">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-secondary">
@@ -259,8 +295,8 @@ function Landing() {
             </h2>
           </div>
           <p className="max-w-md text-sm text-muted-foreground">
-            Dedicated role-tailored environments for patients, doctors, front-desk staff, and hospital
-            administrators.
+            Dedicated role-tailored environments for patients, doctors, front-desk staff, and
+            hospital administrators.
           </p>
         </div>
 
@@ -291,7 +327,9 @@ function Landing() {
                   <h3 className={`text-xl font-bold ${dark ? "" : "group-hover:text-primary"}`}>
                     {portal.title}
                   </h3>
-                  <p className={`mt-2 max-w-lg text-sm ${dark ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                  <p
+                    className={`mt-2 max-w-lg text-sm ${dark ? "text-primary-foreground/80" : "text-muted-foreground"}`}
+                  >
                     {portal.description}
                   </p>
                 </div>
@@ -300,11 +338,18 @@ function Landing() {
                     dark ? "border-primary-foreground/20" : "border-border"
                   }`}
                 >
-                  <span className={dark ? "text-primary-foreground/70 font-normal" : "text-muted-foreground font-normal"}>
+                  <span
+                    className={
+                      dark
+                        ? "text-primary-foreground/70 font-normal"
+                        : "text-muted-foreground font-normal"
+                    }
+                  >
                     Continue as this role
                   </span>
                   <span className="inline-flex items-center gap-1.5">
-                    {portal.cta} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                    {portal.cta}{" "}
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
@@ -315,7 +360,7 @@ function Landing() {
 
       {/* Trust / stats */}
       <section className="border-y border-border bg-muted/40 py-16">
-        <div className="mx-auto max-w-[1440px] px-4 sm:px-6">
+        <div className="mx-auto max-w-360 px-4 sm:px-6">
           <div className="mx-auto mb-10 max-w-2xl text-center">
             <span className="text-xs font-bold uppercase tracking-widest text-primary">
               Built for Real Clinical Realities
@@ -328,11 +373,16 @@ function Landing() {
             {stats.map((s) => {
               const Icon = s.icon;
               return (
-                <div key={s.label} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+                <div
+                  key={s.label}
+                  className="rounded-2xl border border-border bg-card p-6 shadow-sm"
+                >
                   <div className="mb-4 flex size-11 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                     <Icon className="size-5" />
                   </div>
-                  <div className={`text-3xl font-extrabold tracking-tight ${s.tone}`}>{s.value}</div>
+                  <div className={`text-3xl font-extrabold tracking-tight ${s.tone}`}>
+                    {s.value}
+                  </div>
                   <h3 className="mt-1 text-base font-bold text-foreground">{s.label}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.detail}</p>
                 </div>
@@ -343,7 +393,7 @@ function Landing() {
       </section>
 
       {/* CTA banner */}
-      <section className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-360 px-4 py-16 sm:px-6">
         <div className="relative flex flex-col items-center justify-between gap-6 overflow-hidden rounded-2xl bg-primary p-8 text-primary-foreground shadow-lg md:flex-row md:p-12">
           <div className="max-w-xl">
             <span className="text-xs font-bold uppercase tracking-widest text-primary-foreground/70">
@@ -351,7 +401,8 @@ function Landing() {
             </span>
             <h3 className="mt-1 text-2xl font-bold">Ready to bring calm to your waiting room?</h3>
             <p className="mt-2 text-sm text-primary-foreground/80">
-              Sign in to your role's portal above, or reach the triage hotline for hospital-wide support.
+              Sign in to your role's portal above, or reach the triage hotline for hospital-wide
+              support.
             </p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
@@ -373,10 +424,12 @@ function Landing() {
 
       {/* Footer */}
       <footer className="border-t border-border bg-muted/40 py-6">
-        <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 px-4 text-xs text-muted-foreground sm:flex-row sm:px-6">
+        <div className="mx-auto flex max-w-360 flex-col items-center justify-between gap-3 px-4 text-xs text-muted-foreground sm:flex-row sm:px-6">
           <div className="flex items-center gap-2">
             <BadgeCheck className="size-4 text-primary" />
-            <span className="font-semibold text-foreground">City General Hospital — CareFlow Queue OS</span>
+            <span className="font-semibold text-foreground">
+              City General Hospital — CareFlow Queue OS
+            </span>
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">

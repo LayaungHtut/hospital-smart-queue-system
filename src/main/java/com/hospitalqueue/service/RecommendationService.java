@@ -64,12 +64,16 @@ public class RecommendationService {
     public List<Doctor> recommendDoctors(int departmentId) {
         List<Doctor> doctors = doctorRepository.findByDepartment(departmentId);
         Map<String, Integer> waitingCounts = queueRepository.countWaitingByAllDoctors();
-        Map<String, Long> waitingTimeByDoctorId = buildWaitingTimeMapWithCounts(doctors, waitingCounts);
+        // Fetched once and reused for both the wait-time map and the
+        // availability check below, instead of querying per doctor twice over.
+        Map<String, Double> historicalAvgByDoctorId = queueRepository.getPreviousDayAverageConsultationMinutesForAllDoctors();
+        Map<String, Long> waitingTimeByDoctorId = buildWaitingTimeMapWithCounts(doctors, waitingCounts, historicalAvgByDoctorId);
 
         LocalTime now = LocalTime.now();
         for (Doctor doctor : doctors) {
             doctor.setComputedAvailable(
-                    doctorAvailabilityRule.isAvailable(doctor, waitingCounts.getOrDefault(doctor.getDoctorId(), 0), now));
+                    doctorAvailabilityRule.isAvailable(doctor, waitingCounts.getOrDefault(doctor.getDoctorId(), 0),
+                            now, historicalAvgByDoctorId));
         }
 
         List<Doctor> available = doctors.stream().filter(d -> d.isComputedAvailable()).collect(Collectors.toList());
@@ -81,14 +85,16 @@ public class RecommendationService {
     }
 
     public Map<String, Long> buildWaitingTimeMap(List<Doctor> doctors) {
-        return buildWaitingTimeMapWithCounts(doctors, queueRepository.countWaitingByAllDoctors());
+        return buildWaitingTimeMapWithCounts(doctors, queueRepository.countWaitingByAllDoctors(),
+                queueRepository.getPreviousDayAverageConsultationMinutesForAllDoctors());
     }
 
-    private Map<String, Long> buildWaitingTimeMapWithCounts(List<Doctor> doctors, Map<String, Integer> waitingCounts) {
+    private Map<String, Long> buildWaitingTimeMapWithCounts(List<Doctor> doctors, Map<String, Integer> waitingCounts,
+            Map<String, Double> historicalAvgByDoctorId) {
         Map<String, Long> waitingTimeByDoctorId = new HashMap<>();
         for (Doctor doctor : doctors) {
             int count = waitingCounts.getOrDefault(doctor.getDoctorId(), 0);
-            long avgConsult = waitingTimeService.getDoctorAverageConsultationMinutes(doctor);
+            long avgConsult = waitingTimeService.getDoctorAverageConsultationMinutes(doctor, historicalAvgByDoctorId);
             long waitingTime = waitingTimeService.calculateWaitingTime(count, avgConsult);
             waitingTimeByDoctorId.put(doctor.getDoctorId(), waitingTime);
         }

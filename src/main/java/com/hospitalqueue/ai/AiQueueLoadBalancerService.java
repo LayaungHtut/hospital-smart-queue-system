@@ -29,6 +29,7 @@ public class AiQueueLoadBalancerService {
     private final PatientRepository patientRepository;
     private final QueueService queueService;
     private final NotificationService notificationService;
+    @SuppressWarnings("unused")
     private final OpenRouterClient openRouterClient;
 
     public AiQueueLoadBalancerService(QueueRepository queueRepository,

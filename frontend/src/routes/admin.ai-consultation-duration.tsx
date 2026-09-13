@@ -47,7 +47,8 @@ function ConsultationDurationPage() {
       setDoctors([]);
       getDoctors().then((docs) => {
         const filtered = docs.filter(
-          (d) => !selectedDept || String(d.department) === selectedDept || d.department === selectedDept
+          (d) =>
+            !selectedDept || String(d.department) === selectedDept || d.department === selectedDept,
         );
         setDoctors(filtered.length > 0 ? filtered : docs);
       });
@@ -57,7 +58,12 @@ function ConsultationDurationPage() {
   async function predictSingle() {
     if (!selectedDoctor) return;
     setPredicting(true);
-    const result = await predictConsultationDuration(selectedDoctor, undefined, symptoms, appointmentType);
+    const result = await predictConsultationDuration(
+      selectedDoctor,
+      undefined,
+      symptoms,
+      appointmentType,
+    );
     setPrediction(result);
     setPredicting(false);
   }
@@ -65,7 +71,9 @@ function ConsultationDurationPage() {
   async function predictAll() {
     if (!selectedDept) return;
     setPredicting(true);
-    const dept = departments.find((d) => d.departmentCode === selectedDept || d.name === selectedDept);
+    const dept = departments.find(
+      (d) => d.departmentCode === selectedDept || d.name === selectedDept,
+    );
     const code = dept?.departmentCode ?? selectedDept;
     const result = await predictDurationsForDepartment(code, undefined, symptoms);
     setDeptPredictions(result.predictions);
@@ -155,10 +163,22 @@ function ConsultationDurationPage() {
         {prediction && (
           <Panel title="Prediction Result">
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <StatCard label="Predicted Duration" value={`${prediction.predictedMinutes} min`} tone="primary" />
-              <StatCard label="Doctor Average" value={`${prediction.doctorAverageMinutes} min`} tone="success" />
+              <StatCard
+                label="Predicted Duration"
+                value={`${prediction.predictedMinutes} min`}
+                tone="primary"
+              />
+              <StatCard
+                label="Doctor Average"
+                value={`${prediction.doctorAverageMinutes} min`}
+                tone="success"
+              />
               <StatCard label="Patient Age" value={prediction.patientAge} tone="warning" />
-              <StatCard label="Patient Type" value={prediction.isNewPatient ? "New" : "Returning"} tone={prediction.isNewPatient ? "danger" : "success"} />
+              <StatCard
+                label="Patient Type"
+                value={prediction.isNewPatient ? "New" : "Returning"}
+                tone={prediction.isNewPatient ? "danger" : "success"}
+              />
             </div>
           </Panel>
         )}

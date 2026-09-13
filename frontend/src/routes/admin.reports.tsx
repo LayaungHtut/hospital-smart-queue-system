@@ -18,9 +18,15 @@ export const Route = createFileRoute("/admin/reports")({
   head: () => ({
     meta: [
       { title: "Reports & Analytics — Admin Portal" },
-      { name: "description", content: "Generate hospital appointment, queue, and doctor performance reports." },
+      {
+        name: "description",
+        content: "Generate hospital appointment, queue, and doctor performance reports.",
+      },
       { property: "og:title", content: "Reports & Analytics — Admin Portal" },
-      { property: "og:description", content: "Generate hospital queue reports with CSV and PDF export." },
+      {
+        property: "og:description",
+        content: "Generate hospital queue reports with CSV and PDF export.",
+      },
     ],
   }),
   component: AdminReportsPage,
@@ -66,7 +72,16 @@ function AdminReportsPage() {
     let rowsData: (string | number)[][] = [];
 
     if (type === "APPOINTMENT") {
-      headers = ["Appointment ID", "Patient ID", "Patient Name", "Doctor Name", "Department", "Date", "Time Slot", "Status"];
+      headers = [
+        "Appointment ID",
+        "Patient ID",
+        "Patient Name",
+        "Doctor Name",
+        "Department",
+        "Date",
+        "Time Slot",
+        "Status",
+      ];
       rowsData = report.rows.map((r) => [
         r.appointmentId || "",
         r.patientId || "",
@@ -78,7 +93,15 @@ function AdminReportsPage() {
         r.status || "CONFIRMED",
       ]);
     } else if (type === "QUEUE") {
-      headers = ["Queue Number", "Patient Name", "Doctor Name", "Department", "Waiting Time", "Serving Time", "Status"];
+      headers = [
+        "Queue Number",
+        "Patient Name",
+        "Doctor Name",
+        "Department",
+        "Waiting Time",
+        "Serving Time",
+        "Status",
+      ];
       rowsData = report.rows.map((r) => [
         r.queueNumber || "",
         `"${r.patientName || ""}"`,
@@ -89,7 +112,17 @@ function AdminReportsPage() {
         r.status || "WAITING",
       ]);
     } else if (type === "DOCTOR_PERFORMANCE") {
-      headers = ["Doctor Code", "Doctor Name", "Department", "Qualification", "Experience (Years)", "Total Served", "Current Waiting", "Avg Consultation (Min)", "Status"];
+      headers = [
+        "Doctor Code",
+        "Doctor Name",
+        "Department",
+        "Qualification",
+        "Experience (Years)",
+        "Total Served",
+        "Current Waiting",
+        "Avg Consultation (Min)",
+        "Status",
+      ];
       rowsData = report.rows.map((r) => [
         r.doctorCode || "",
         `"${r.doctorName || ""}"`,
@@ -102,7 +135,16 @@ function AdminReportsPage() {
         r.status || "ACTIVE",
       ]);
     } else if (type === "EMERGENCY") {
-      headers = ["Queue Number", "Patient ID", "Patient Name", "Department", "Assigned Doctor", "Registration Time", "Triage Confirmation", "Status"];
+      headers = [
+        "Queue Number",
+        "Patient ID",
+        "Patient Name",
+        "Department",
+        "Assigned Doctor",
+        "Registration Time",
+        "Triage Confirmation",
+        "Status",
+      ];
       rowsData = report.rows.map((r) => [
         r.queueNumber || "",
         r.patientId || "",
@@ -114,7 +156,14 @@ function AdminReportsPage() {
         r.status || "WAITING",
       ]);
     } else {
-      headers = ["Department", "Total Queues", "Completed", "Cancelled", "Missed", "Avg Waiting Time (Min)"];
+      headers = [
+        "Department",
+        "Total Queues",
+        "Completed",
+        "Cancelled",
+        "Missed",
+        "Avg Waiting Time (Min)",
+      ];
       rowsData = report.rows.map((r) => [
         `"${r.department || ""}"`,
         r.totalQueues ?? 0,
@@ -125,7 +174,9 @@ function AdminReportsPage() {
       ]);
     }
 
-    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rowsData.map((e) => e.join(","))].join("\n");
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rowsData.map((e) => e.join(","))].join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -140,63 +191,128 @@ function AdminReportsPage() {
   }
 
   const appointmentColumns: Column<ReportRow>[] = [
-    { header: "Appt ID", cell: (r) => <span className="font-mono text-primary font-medium">{r.appointmentId}</span> },
-    { header: "Patient ID", cell: (r) => <span className="font-mono text-muted-foreground">{r.patientId}</span> },
-    { header: "Patient Name", cell: (r) => <span className="font-semibold text-foreground">{r.patientName}</span> },
+    {
+      header: "Appt ID",
+      cell: (r) => <span className="font-mono text-primary font-medium">{r.appointmentId}</span>,
+    },
+    {
+      header: "Patient ID",
+      cell: (r) => <span className="font-mono text-muted-foreground">{r.patientId}</span>,
+    },
+    {
+      header: "Patient Name",
+      cell: (r) => <span className="font-semibold text-foreground">{r.patientName}</span>,
+    },
     { header: "Doctor", cell: (r) => r.doctorName },
     { header: "Department", cell: (r) => r.department },
     { header: "Date", cell: (r) => r.date || date },
     { header: "Time Slot", cell: (r) => <span className="font-medium">{r.timeSlot}</span> },
-    { header: "Status", cell: (r) => (
-      <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${r.status === "COMPLETED" ? "bg-success/15 text-success" : "bg-primary/15 text-primary"}`}>
-        {r.status}
-      </span>
-    )},
+    {
+      header: "Status",
+      cell: (r) => (
+        <span
+          className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${r.status === "COMPLETED" ? "bg-success/15 text-success" : "bg-primary/15 text-primary"}`}
+        >
+          {r.status}
+        </span>
+      ),
+    },
   ];
 
   const queueColumns: Column<ReportRow>[] = [
-    { header: "Queue #", cell: (r) => <span className="font-mono font-bold text-primary">{r.queueNumber}</span> },
+    {
+      header: "Queue #",
+      cell: (r) => <span className="font-mono font-bold text-primary">{r.queueNumber}</span>,
+    },
     { header: "Patient Name", cell: (r) => <span className="font-semibold">{r.patientName}</span> },
     { header: "Doctor", cell: (r) => r.doctorName },
     { header: "Department", cell: (r) => r.department },
-    { header: "Waiting Time", cell: (r) => <span className="font-medium text-amber-600 dark:text-amber-400">{r.waitingTime}</span> },
+    {
+      header: "Waiting Time",
+      cell: (r) => (
+        <span className="font-medium text-amber-600 dark:text-amber-400">{r.waitingTime}</span>
+      ),
+    },
     { header: "Serving Time", cell: (r) => r.servingTime || "15 min" },
-    { header: "Status", cell: (r) => (
-      <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${r.status === "COMPLETED" ? "bg-success/15 text-success" : r.status === "CANCELLED" ? "bg-danger/15 text-danger" : "bg-primary/15 text-primary"}`}>
-        {r.status}
-      </span>
-    )},
+    {
+      header: "Status",
+      cell: (r) => (
+        <span
+          className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${r.status === "COMPLETED" ? "bg-success/15 text-success" : r.status === "CANCELLED" ? "bg-danger/15 text-danger" : "bg-primary/15 text-primary"}`}
+        >
+          {r.status}
+        </span>
+      ),
+    },
   ];
 
   const doctorColumns: Column<ReportRow>[] = [
-    { header: "Doctor Code", cell: (r) => <span className="font-mono text-primary font-medium">{r.doctorCode}</span> },
-    { header: "Doctor Name", cell: (r) => <span className="font-semibold text-foreground">{r.doctorName}</span> },
+    {
+      header: "Doctor Code",
+      cell: (r) => <span className="font-mono text-primary font-medium">{r.doctorCode}</span>,
+    },
+    {
+      header: "Doctor Name",
+      cell: (r) => <span className="font-semibold text-foreground">{r.doctorName}</span>,
+    },
     { header: "Degree", cell: (r) => r.qualification || "MBBS, M.Med.Sc" },
     { header: "Department", cell: (r) => r.department },
     { header: "Experience", cell: (r) => `${r.experienceYears || 5} yrs` },
-    { header: "Completed Visits", cell: (r) => <span className="text-success font-bold">{r.totalServed}</span> },
+    {
+      header: "Completed Visits",
+      cell: (r) => <span className="text-success font-bold">{r.totalServed}</span>,
+    },
     { header: "Active Queue", cell: (r) => r.currentWaiting },
     { header: "Avg. Consult", cell: (r) => `${r.avgConsultationMinutes} min` },
-    { header: "Status", cell: (r) => <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold bg-success/15 text-success">{r.status}</span> },
+    {
+      header: "Status",
+      cell: (r) => (
+        <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold bg-success/15 text-success">
+          {r.status}
+        </span>
+      ),
+    },
   ];
 
   const emergencyColumns: Column<ReportRow>[] = [
-    { header: "Queue #", cell: (r) => <span className="font-bold text-danger">{r.queueNumber}</span> },
+    {
+      header: "Queue #",
+      cell: (r) => <span className="font-bold text-danger">{r.queueNumber}</span>,
+    },
     { header: "Patient ID", cell: (r) => <span className="font-mono">{r.patientId}</span> },
     { header: "Patient Name", cell: (r) => <span className="font-semibold">{r.patientName}</span> },
     { header: "Department", cell: (r) => r.department },
     { header: "Assigned Doctor", cell: (r) => r.assignedDoctor },
     { header: "Time", cell: (r) => r.time },
-    { header: "Triage Status", cell: (r) => <span className="rounded bg-danger/15 px-2 py-0.5 text-[11px] font-bold text-danger">{r.confirmed}</span> },
-    { header: "Status", cell: (r) => <span className="font-medium text-xs uppercase">{r.status}</span> },
+    {
+      header: "Triage Status",
+      cell: (r) => (
+        <span className="rounded bg-danger/15 px-2 py-0.5 text-[11px] font-bold text-danger">
+          {r.confirmed}
+        </span>
+      ),
+    },
+    {
+      header: "Status",
+      cell: (r) => <span className="font-medium text-xs uppercase">{r.status}</span>,
+    },
   ];
 
   const dailyColumns: Column<ReportRow>[] = [
     { header: "Department", cell: (r) => <span className="font-semibold">{r.department}</span> },
     { header: "Total Queues", cell: (r) => r.totalQueues },
-    { header: "Completed", cell: (r) => <span className="text-success font-medium">{r.completed}</span> },
-    { header: "Cancelled", cell: (r) => <span className="text-danger font-medium">{r.cancelled}</span> },
-    { header: "Missed", cell: (r) => <span className="text-amber-500 font-medium">{r.missed}</span> },
+    {
+      header: "Completed",
+      cell: (r) => <span className="text-success font-medium">{r.completed}</span>,
+    },
+    {
+      header: "Cancelled",
+      cell: (r) => <span className="text-danger font-medium">{r.cancelled}</span>,
+    },
+    {
+      header: "Missed",
+      cell: (r) => <span className="text-amber-500 font-medium">{r.missed}</span>,
+    },
     { header: "Avg. Waiting Time", cell: (r) => `${r.avgWaitingMinutes} min` },
   ];
 
@@ -210,12 +326,12 @@ function AdminReportsPage() {
     type === "APPOINTMENT"
       ? "Patient Appointments Report"
       : type === "QUEUE"
-      ? "Live Patient Queue Report"
-      : type === "DOCTOR_PERFORMANCE"
-      ? "Doctor Performance & Workload Report"
-      : type === "EMERGENCY"
-      ? "Emergency Triage Audit Report"
-      : "Daily Department Report";
+        ? "Live Patient Queue Report"
+        : type === "DOCTOR_PERFORMANCE"
+          ? "Doctor Performance & Workload Report"
+          : type === "EMERGENCY"
+            ? "Emergency Triage Audit Report"
+            : "Daily Department Report";
 
   return (
     <AdminLayout title="Reports & Analytics">
@@ -258,13 +374,17 @@ function AdminReportsPage() {
                 onClick={exportCSV}
                 className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 text-xs font-semibold text-foreground hover:bg-muted shadow-sm sm:flex-none sm:px-4 sm:text-sm"
               >
-                <Download className="size-4 text-primary" /> <span className="hidden sm:inline">Export Excel/CSV</span><span className="sm:hidden">Export CSV</span>
+                <Download className="size-4 text-primary" />{" "}
+                <span className="hidden sm:inline">Export Excel/CSV</span>
+                <span className="sm:hidden">Export CSV</span>
               </button>
               <button
                 onClick={exportPDF}
                 className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 text-xs font-semibold text-foreground hover:bg-muted shadow-sm sm:flex-none sm:px-4 sm:text-sm"
               >
-                <Printer className="size-4 text-primary" /> <span className="hidden sm:inline">Print / PDF</span><span className="sm:hidden">Print</span>
+                <Printer className="size-4 text-primary" />{" "}
+                <span className="hidden sm:inline">Print / PDF</span>
+                <span className="sm:hidden">Print</span>
               </button>
             </div>
           </div>

@@ -28,7 +28,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -82,19 +84,30 @@ public class AdminApiController {
         long sumCount = deptCounts.stream().mapToLong(m -> ((Number) m.get("count")).longValue()).sum();
         String[] colors = new String[] {
                 "var(--color-chart-1)", "var(--color-chart-2)", "var(--color-chart-3)",
-                "var(--color-chart-4)", "var(--color-chart-5)", "var(--color-muted-foreground)"
+                "var(--color-chart-4)", "var(--color-chart-5)", "var(--color-chart-6)"
         };
 
+        // Assign each department a color by its name (alphabetical order), not by its
+        // rank in the count-sorted list below — otherwise a department's slice color
+        // would shift every time the queue counts reorder it.
+        List<String> namesSorted = deptCounts.stream()
+                .map(dc -> (String) dc.get("name"))
+                .sorted()
+                .collect(java.util.stream.Collectors.toList());
+        Map<String, String> colorByDepartment = new LinkedHashMap<>();
+        for (int i = 0; i < namesSorted.size(); i++) {
+            colorByDepartment.put(namesSorted.get(i), colors[i % colors.length]);
+        }
+
         List<Map<String, Object>> byDepartment = new ArrayList<>();
-        int colorIdx = 0;
         for (Map<String, Object> dc : deptCounts) {
+            String name = (String) dc.get("name");
             long c = ((Number) dc.get("count")).longValue();
             int pct = sumCount > 0 ? (int) Math.round((c * 100.0) / sumCount) : (100 / Math.max(1, deptCounts.size()));
             byDepartment.add(Map.of(
-                    "name", dc.get("name"),
+                    "name", name,
                     "percent", pct,
-                    "color", colors[colorIdx % colors.length]));
-            colorIdx++;
+                    "color", colorByDepartment.get(name)));
         }
 
         long rawAvgWait = Math.round(queueRepository.getAverageWaitingTimeToday());
@@ -395,7 +408,8 @@ public class AdminApiController {
         }
 
         if (role.contains("DOCTOR")) {
-            String resolvedPhone = (phone != null && !phone.isBlank()) ? phone.trim().replaceAll("[\\s\\-()]", "") : "0911111119";
+            String resolvedPhone = (phone != null && !phone.isBlank()) ? phone.trim().replaceAll("[\\s\\-()]", "")
+                    : "0911111119";
             String resolvedPhoneError = com.hospitalqueue.util.Validator.getPhoneValidationError(resolvedPhone);
             if (resolvedPhoneError != null) {
                 return ResponseEntity.badRequest().body(Map.of("error", resolvedPhoneError));
@@ -524,7 +538,8 @@ public class AdminApiController {
     public ResponseEntity<?> deleteSchedule(@PathVariable int scheduleId) {
         boolean removed = doctorScheduleRepository.deactivate(scheduleId);
         if (!removed) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("success", false, "error", "Schedule not found."));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("success", false, "error", "Schedule not found."));
         }
         return ResponseEntity.ok(Map.of("success", true));
     }
@@ -536,17 +551,6 @@ public class AdminApiController {
         List<Queue> recent = queueRepository.findRecent(12);
         List<Map<String, Object>> logs = new ArrayList<>();
         int id = 1;
-
-        String[] roles = new String[] { "Admin", "Staff", "Doctor", "Patient" };
-        String[] actions = new String[] {
-                "Patient joined queue for general consultation",
-                "Doctor completed consultation and finalized prescription",
-                "Staff verified patient registration and assigned token",
-                "Admin updated department schedule and queue capacity",
-                "Doctor called next ticket from waiting queue",
-                "Patient checked in for confirmed appointment slot"
-        };
-
         for (Queue q : recent) {
             String timeStr = q.getCreatedAt() != null
                     ? q.getCreatedAt().format(java.time.format.DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
@@ -580,6 +584,19 @@ public class AdminApiController {
                     "Consultation session started (09:00 AM)", "ipAddress", "192.168.1.20"));
         }
         return logs;
+    }
+
+    /**
+     * Batch-loads patients for a stream of patient ids in one query instead of
+     * one findById() call per row — used by the report endpoints below, which
+     * otherwise did N patient queries for N queue/emergency rows.
+     */
+    private Map<String, Patient> batchPatients(Stream<String> patientIds) {
+        Set<String> ids = patientIds.filter(java.util.Objects::nonNull).collect(Collectors.toSet());
+        if (ids.isEmpty())
+            return Map.of();
+        return patientRepository.findByIds(ids).stream()
+                .collect(Collectors.toMap(Patient::getPatientId, p -> p, (a, b) -> a));
     }
 
     @GetMapping("/reports")
@@ -651,12 +668,13 @@ public class AdminApiController {
                     .collect(Collectors.toMap(Department::getDepartmentId, d -> d, (a, b) -> a));
             Map<String, Doctor> docMap = doctorRepository.findAll().stream()
                     .collect(Collectors.toMap(Doctor::getDoctorId, d -> d, (a, b) -> a));
+            Map<String, Patient> patMap = batchPatients(queues.stream().map(Queue::getPatientId));
 
             List<Map<String, Object>> rows = new ArrayList<>();
             for (Queue q : queues) {
                 Department dept = deptMap.get(q.getDepartmentId());
                 Doctor doc = docMap.get(q.getDoctorId());
-                Patient p = patientRepository.findById(q.getPatientId());
+                Patient p = patMap.get(q.getPatientId());
 
                 Map<String, Object> row = new LinkedHashMap<>();
                 row.put("queueNumber", q.getQueueNumber());
@@ -671,7 +689,6 @@ public class AdminApiController {
 
             long completed = queues.stream().filter(q -> "COMPLETED".equalsIgnoreCase(q.getStatus())).count();
             long cancelled = queues.stream().filter(q -> "CANCELLED".equalsIgnoreCase(q.getStatus())).count();
-            long waiting = queues.stream().filter(q -> "WAITING".equalsIgnoreCase(q.getStatus())).count();
 
             return Map.of(
                     "type", "QUEUE",
@@ -686,13 +703,19 @@ public class AdminApiController {
             List<Doctor> doctors = doctorRepository.findAll();
             Map<Integer, Department> deptMap = departmentRepository.findAll().stream()
                     .collect(Collectors.toMap(Department::getDepartmentId, d -> d, (a, b) -> a));
+            // Batched once for all doctors instead of 2 queries per doctor
+            // (findActiveQueuesForDoctor + findHistoryForDoctor, the latter
+            // pulling up to 50 full history rows just to count COMPLETED ones).
+            Map<String, List<Queue>> activeByDoctor = queueRepository.findActiveQueuesForAllDoctors().stream()
+                    .collect(Collectors.groupingBy(Queue::getDoctorId));
+            Map<String, Long> completedByDoctor = queueRepository.countCompletedAllTimeByAllDoctors();
+
             List<Map<String, Object>> rows = new ArrayList<>();
             long totalServedAll = 0;
             for (Doctor doc : doctors) {
                 Department dept = deptMap.get(doc.getDepartmentId());
-                List<Queue> doctorQueues = queueRepository.findActiveQueuesForDoctor(doc.getDoctorId());
-                long completed = queueRepository.findHistoryForDoctor(doc.getDoctorId()).stream()
-                        .filter(h -> "COMPLETED".equalsIgnoreCase(h.getStatus())).count();
+                List<Queue> doctorQueues = activeByDoctor.getOrDefault(doc.getDoctorId(), List.of());
+                long completed = completedByDoctor.getOrDefault(doc.getDoctorId(), 0L);
                 totalServedAll += completed;
                 long avgConsult = doc.getAverageConsultationMinutes() > 0 ? doc.getAverageConsultationMinutes() : 15;
 
@@ -725,12 +748,13 @@ public class AdminApiController {
                     .collect(Collectors.toMap(Department::getDepartmentId, d -> d, (a, b) -> a));
             Map<String, Doctor> docMap = doctorRepository.findAll().stream()
                     .collect(Collectors.toMap(Doctor::getDoctorId, d -> d, (a, b) -> a));
+            Map<String, Patient> patMap = batchPatients(emergencies.stream().map(Queue::getPatientId));
 
             List<Map<String, Object>> rows = new ArrayList<>();
             for (Queue q : emergencies) {
                 Department dept = deptMap.get(q.getDepartmentId());
                 Doctor doc = docMap.get(q.getDoctorId());
-                Patient p = patientRepository.findById(q.getPatientId());
+                Patient p = patMap.get(q.getPatientId());
 
                 Map<String, Object> row = new LinkedHashMap<>();
                 row.put("queueNumber", q.getQueueNumber());

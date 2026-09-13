@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hospital Smart Queue System — Presentation Roles & Engineering Designations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+  @page {
+    size: 8.5in 11in;
+    margin: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #f4f6f4;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1e293b;
+    font-size: 8.8pt;
+    line-height: 1.5;
+  }
+
+  .sheet {
+    width: 8.5in;
+    height: 11in;
+    max-height: 11in;
+    overflow: hidden;
+    background: #ffffff;
+    padding: 0.45in 0.55in 0.40in 0.55in;
+    margin: 0 auto;
+    page-break-after: always;
+    page-break-inside: avoid;
+    position: relative;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen {
+    body {
+      padding: 24px 0;
+    }
+    .sheet {
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-radius: 4px;
+    }
+  }
+
+  /* Header Styles */
+  .doc-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.2pt;
+    font-weight: 600;
+    color: #1e6b52;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .doc-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 23pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 10px 0;
+    line-height: 1.18;
+    letter-spacing: -0.3px;
+  }
+
+  .meta-bar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 8.8pt;
+    color: #475569;
+    padding-bottom: 8px;
+    border-bottom: 1.5px solid #0f172a;
+    margin-bottom: 11px;
+  }
+
+  .meta-bar strong {
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  .intro-text {
+    font-size: 8.6pt;
+    color: #334155;
+    line-height: 1.52;
+    margin: 0 0 14px 0;
+  }
+
+  .intro-text strong {
+    color: #0f172a;
+  }
+
+  .intro-text code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.2pt;
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  /* Section Title with trailing line */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px 0;
+  }
+
+  .section-heading h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13.5pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .section-heading .count {
+    font-family: 'Inter', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: #64748b;
+    white-space: nowrap;
+  }
+
+  .section-heading .rule-line {
+    flex-grow: 1;
+    height: 1px;
+    background: #cbd5e1;
+  }
+
+  /* Member Cards */
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .member-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3.5px solid #1e6b52;
+    border-radius: 3px;
+    padding: 12px 14px 11px 14px;
+    position: relative;
+    page-break-inside: avoid;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+
+  .member-name {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.2px;
+  }
+
+  .member-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.6pt;
+    font-weight: 600;
+    background: #e8f3ee;
+    color: #1e6b52;
+    border: 1px solid #c2ded3;
+    padding: 2.5px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Role pill strip */
+  .role-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+
+  .role-tag-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.2pt;
+    font-weight: 700;
+    color: #047857;
+    background: #d1fae5;
+    padding: 1px 5px;
+    border-radius: 2px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .role-tag-name {
+    font-size: 9.2pt;
+    font-weight: 700;
+    color: #064e3b;
+  }
+
+  .module-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 11.2pt;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 5px 0;
+  }
+
+  .card-desc {
+    font-size: 8.4pt;
+    color: #334155;
+    line-height: 1.45;
+    margin: 0 0 8px 0;
+  }
+
+  .badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4.5px;
+    margin-bottom: 8px;
+  }
+
+  .code-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.6pt;
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  .card-divider {
+    border: none;
+    border-top: 1px dashed #cbd5e1;
+    margin: 7px 0 7px 0;
+  }
+
+  .presents-row {
+    font-size: 8.2pt;
+    color: #334155;
+    line-height: 1.44;
+  }
+
+  .presents-row strong {
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  /* Run of show table */
+  .show-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+    font-size: 8.4pt;
+  }
+
+  .show-table tr {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .show-table tr:first-child {
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .show-table td {
+    padding: 7.5px 8px;
+    vertical-align: middle;
+  }
+
+  .show-table td.col-idx {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.2pt;
+    font-weight: 600;
+    color: #1e6b52;
+    width: 32px;
+  }
+
+  .show-table td.col-title {
+    color: #0f172a;
+    font-weight: 500;
+  }
+
+  .show-table td.col-title span.presenter {
+    color: #64748b;
+  }
+
+  .show-table td.col-role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.6pt;
+    color: #047857;
+    text-align: right;
+    padding-right: 12px;
+  }
+
+  .show-table td.col-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8pt;
+    color: #475569;
+    text-align: right;
+    width: 55px;
+    white-space: nowrap;
+  }
+
+  .show-table tr.total-row {
+    background: #f8fafc;
+    border-top: 1.5px solid #cbd5e1;
+    font-weight: 600;
+  }
+
+  .show-table tr.total-row td {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.2pt;
+    color: #0f172a;
+    padding: 8px 8px;
+  }
+
+  /* Footer Note */
+  .footer-note {
+    font-size: 8.2pt;
+    color: #64748b;
+    line-height: 1.48;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+    margin-top: auto;
+  }
+
+  .sheet-page-number {
+    position: absolute;
+    bottom: 0.25in;
+    right: 0.55in;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.5pt;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="sheet">
+    <div class="doc-tag">CST-6108 · Enterprise Applications Development Using Java</div>
+    <h1 class="doc-title">Hospital Smart Queue System — Presentation Roles</h1>
+    
+    <div class="meta-bar">
+      <div>Team of <strong>5 Members</strong></div>
+      <div>Supervisor: <strong>Dr. Daw Ei Moh Moh Aung</strong></div>
+      <div>Faculty of Computer Science, UIT</div>
+    </div>
+
+    <p class="intro-text">
+      Split along the module boundaries and system architecture of the enterprise codebase. Each member is assigned a formal engineering role alongside their presentation module ownership, matching their direct code implementation (API controllers, business logic rules, data schema, UI portals, and machine learning models).
+    </p>
+
+    <div class="section-heading">
+      <h2>Module Ownership & Engineering Roles</h2>
+      <span class="count">5 members</span>
+      <div class="rule-line"></div>
+    </div>
+
+    <div class="card-container">
+      <!-- MEMBER 1 -->
+      <div class="member-card">
+        <div class="card-top">
+          <div class="member-name">Mg La Yaung Htut</div>
+          <div class="member-badge">Member 1 · Lead System Engineer</div>
+        </div>
+        <div class="role-row">
+          <span class="role-tag-label">Engineering Role</span>
+          <span class="role-tag-name">Lead System Engineer / System Architect</span>
+        </div>
+        <div class="module-title">Patient Module & System Overview</div>
+        <div class="card-desc">
+          Core system architecture, auth/session control, appointment booking pipeline, and the patient-facing web application. Opens the presentation with the problem statement, enterprise layered architecture, and overall technical vision upon which all other modules integrate.
+        </div>
+        <div class="badges-grid">
+          <span class="code-badge">api/PatientApiController.java</span>
+          <span class="code-badge">repository/PatientRepository.java</span>
+          <span class="code-badge">config/WebConfig.java</span>
+          <span class="code-badge">routes/dashboard.tsx, appointments.tsx</span>
+          <span class="code-badge">routes/register.tsx, login.tsx</span>
+        </div>
+        <hr class="card-divider">
+        <div class="presents-row">
+          <strong>Presents:</strong> Introduction & problem statement, enterprise layered architecture diagram, followed by a live walkthrough of patient sign-up &rarr; authentication &rarr; doctor booking &rarr; queue status tracking.
+        </div>
+      </div>
+
+      <!-- MEMBER 2 -->
+      <div class="member-card">
+        <div class="card-top">
+          <div class="member-name">Ma Hsu Shoon Wutyi</div>
+          <div class="member-badge">Member 2 · Queue Engine Engineer</div>
+        </div>
+        <div class="role-row">
+          <span class="role-tag-label">Engineering Role</span>
+          <span class="role-tag-name">Algorithm & Queue Engine Engineer</span>
+        </div>
+        <div class="module-title">Smart Queue Engine</div>
+        <div class="card-desc">
+          The algorithmic backbone of the system: dynamic queue priority ranking, doctor availability detection, emergency priority escalation, and scheduled missed-ticket lifecycle management — housing the core business rules of the hospital.
+        </div>
+        <div class="badges-grid">
+          <span class="code-badge">rule/QueueRule.java</span>
+          <span class="code-badge">rule/PriorityRule.java</span>
+          <span class="code-badge">rule/DoctorAvailabilityRule.java</span>
+          <span class="code-badge">rule/EmergencyRule.java</span>
+          <span class="code-badge">service/QueueExpiryScheduler.java</span>
+        </div>
+        <hr class="card-divider">
+        <div class="presents-row">
+          <strong>Presents:</strong> Algorithmic queue ticket assignment and live priority re-ordering (EMERGENCY &gt; APPOINTMENT &gt; NORMAL), doctor capacity math, concurrency handling, and automated missed-queue expiry background jobs.
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet-page-number">Page 1 of 3</div>
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="sheet">
+    <div class="section-heading" style="margin-top: 4px;">
+      <h2>Module Ownership & Engineering Roles (Cont.)</h2>
+      <span class="count">Clinical & Data Layers</span>
+      <div class="rule-line"></div>
+    </div>
+
+    <div class="card-container" style="gap: 16px;">
+      <!-- MEMBER 3 -->
+      <div class="member-card">
+        <div class="card-top">
+          <div class="member-name">Ma Noo Noo Aung</div>
+          <div class="member-badge">Member 3 · Clinical Workflow Engineer</div>
+        </div>
+        <div class="role-row">
+          <span class="role-tag-label">Engineering Role</span>
+          <span class="role-tag-name">Clinical Workflow & Frontend Engineer</span>
+        </div>
+        <div class="module-title">Doctor & Staff Module</div>
+        <div class="card-desc">
+          The operational portals that directly interact with the live queue: clinical consultation state transitions (calling, in-consultation, pausing, completing) and staff front-desk reception, walk-in registration, doctor re-assignments, and verified emergency triage admissions.
+        </div>
+        <div class="badges-grid">
+          <span class="code-badge">api/DoctorApiController.java</span>
+          <span class="code-badge">api/StaffApiController.java</span>
+          <span class="code-badge">service/QueueService.java</span>
+          <span class="code-badge">routes/doctor.queue.tsx</span>
+          <span class="code-badge">routes/staff.emergency.tsx</span>
+        </div>
+        <hr class="card-divider">
+        <div class="presents-row">
+          <strong>Presents:</strong> Live doctor consultation lifecycle (call next patient &rarr; complete consultation), staff desk triage intake, doctor reassignments, and front-desk emergency registration dynamically jumping the line.
+        </div>
+      </div>
+
+      <!-- MEMBER 4 -->
+      <div class="member-card">
+        <div class="card-top">
+          <div class="member-name">Ma Ei Pone Chit</div>
+          <div class="member-badge">Member 4 · Database Designer & DBA</div>
+        </div>
+        <div class="role-row">
+          <span class="role-tag-label">Engineering Role</span>
+          <span class="role-tag-name">Database Designer & Administrator (DBA)</span>
+        </div>
+        <div class="module-title">Admin Module, Database & Reports</div>
+        <div class="card-desc">
+          Relational database schema modeling, Flyway migration management (V1 to V11), connection pooling, entity-relationship integrity, and administrative oversight covering hospital departments, doctor profiles, staff accounts, system settings, and analytics reporting.
+        </div>
+        <div class="badges-grid">
+          <span class="code-badge">api/AdminApiController.java</span>
+          <span class="code-badge">db/migration/V1…V11</span>
+          <span class="code-badge">config/DatabaseConfig.java</span>
+          <span class="code-badge">repository/AdminUserRepository.java</span>
+          <span class="code-badge">routes/admin.reports.tsx</span>
+        </div>
+        <hr class="card-divider">
+        <div class="presents-row">
+          <strong>Presents:</strong> Hospital ER diagram and database relational schema, Flyway migrations, admin management portal (doctors, departments, users), and generated doctor-performance & queue-flow analytical reports.
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet-page-number" style="bottom: 0.35in;">Page 2 of 3</div>
+  </div>
+
+  <!-- ==================== PAGE 3 ==================== -->
+  <div class="sheet">
+    <div class="card-container" style="margin-bottom: 16px;">
+      <!-- MEMBER 5 -->
+      <div class="member-card">
+        <div class="card-top">
+          <div class="member-name">Ma Phoo Thet Ngone</div>
+          <div class="member-badge">Member 5 · AI & Machine Learning</div>
+        </div>
+        <div class="role-row">
+          <span class="role-tag-label">Engineering Role</span>
+          <span class="role-tag-name">AI / Machine Learning Engineer</span>
+        </div>
+        <div class="module-title">AI Features & Conclusion</div>
+        <div class="card-desc">
+          The machine learning and intelligence layer built atop the enterprise database: predictive patient wait-time estimation, appointment no-show probability scoring, symptom-to-specialty triage classifier, and a hospital knowledge-base RAG chatbot.
+        </div>
+        <div class="badges-grid">
+          <span class="code-badge">api/AiApiController.java</span>
+          <span class="code-badge">ml/NoShowPredictionService.java</span>
+          <span class="code-badge">ml/WaitTimePredictionService.java</span>
+          <span class="code-badge">ml/RagChatbotService.java</span>
+        </div>
+        <hr class="card-divider">
+        <div class="presents-row">
+          <strong>Presents:</strong> Live AI symptom assessment recommending specialist departments, real-time wait-time and no-show predictions, the interactive RAG hospital assistant, followed by project challenges, lessons learned, and future enhancements.
+        </div>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <h2>Suggested Run of Show</h2>
+      <span class="count">~20 min presentation</span>
+      <div class="rule-line"></div>
+    </div>
+
+    <table class="show-table">
+      <tr>
+        <td class="col-idx">01</td>
+        <td class="col-title">Introduction & Problem Statement <span class="presenter">— Mg La Yaung Htut</span></td>
+        <td class="col-role">Lead System Engineer</td>
+        <td class="col-time">2 min</td>
+      </tr>
+      <tr>
+        <td class="col-idx">02</td>
+        <td class="col-title">Architecture Overview & Patient Module Demo <span class="presenter">— Mg La Yaung Htut</span></td>
+        <td class="col-role">System Architect</td>
+        <td class="col-time">3 min</td>
+      </tr>
+      <tr>
+        <td class="col-idx">03</td>
+        <td class="col-title">Smart Queue Engine Walkthrough & Logic <span class="presenter">— Ma Hsu Shoon Wutyi</span></td>
+        <td class="col-role">Queue Engine Engineer</td>
+        <td class="col-time">4 min</td>
+      </tr>
+      <tr>
+        <td class="col-idx">04</td>
+        <td class="col-title">Doctor & Staff Portals Live Demo <span class="presenter">— Ma Noo Noo Aung</span></td>
+        <td class="col-role">Clinical Workflow Eng.</td>
+        <td class="col-time">4 min</td>
+      </tr>
+      <tr>
+        <td class="col-idx">05</td>
+        <td class="col-title">Database Schema, ERD & Admin Reports <span class="presenter">— Ma Ei Pone Chit</span></td>
+        <td class="col-role">Database Designer & DBA</td>
+        <td class="col-time">4 min</td>
+      </tr>
+      <tr>
+        <td class="col-idx">06</td>
+        <td class="col-title">AI Symptoms, Wait-Time & RAG Chatbot Demo <span class="presenter">— Ma Phoo Thet Ngone</span></td>
+        <td class="col-role">AI / ML Engineer</td>
+        <td class="col-time">3 min</td>
+      </tr>
+      <tr>
+        <td class="col-idx">07</td>
+        <td class="col-title">Project Evaluation, Lessons Learned & Q&A <span class="presenter">— All Members (Led by Phoo Thet Ngone)</span></td>
+        <td class="col-role">All Team Members</td>
+        <td class="col-time">3–5 min</td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="2">7 Segments Total</td>
+        <td style="text-align: right; color: #1e6b52;">Full Team Demo</td>
+        <td class="col-time">&asymp; 20–23 min</td>
+      </tr>
+    </table>
+
+    <div class="footer-note">
+      <strong>Engineering Split & Presentation Guide:</strong> Ownership follows the Java enterprise package and React modular architecture established in the repository (<code>api</code>, <code>rule</code>, <code>service</code>, <code>repository</code>, <code>ml</code>, and <code>routes</code>). Each presenter can authoritatively explain and field examiner questions on the source code and architectural patterns within their engineering domain.
+    </div>
+
+    <div class="sheet-page-number">Page 3 of 3</div>
+  </div>
+
+</body>
+</html>

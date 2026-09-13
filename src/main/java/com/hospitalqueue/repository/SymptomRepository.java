@@ -7,7 +7,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -48,7 +47,8 @@ public class SymptomRepository {
     }
 
     public List<Symptom> findByIds(List<Integer> ids) {
-        if (ids == null || ids.isEmpty()) return List.of();
+        if (ids == null || ids.isEmpty())
+            return List.of();
         String inSql = String.join(",", ids.stream().map(String::valueOf).toList());
         return jdbcTemplate.query(
                 "SELECT * FROM symptom WHERE symptom_id IN (" + inSql + ") AND is_active = TRUE ORDER BY symptom_name",
@@ -56,7 +56,8 @@ public class SymptomRepository {
     }
 
     public void linkQueueSymptoms(long queueId, List<Integer> symptomIds) {
-        if (symptomIds == null || symptomIds.isEmpty()) return;
+        if (symptomIds == null || symptomIds.isEmpty())
+            return;
         for (Integer symptomId : symptomIds) {
             jdbcTemplate.update(
                     "INSERT INTO queue_symptom (queue_id, symptom_id) VALUES (?, ?) ON CONFLICT DO NOTHING",
@@ -74,7 +75,8 @@ public class SymptomRepository {
         List<Symptom> symptoms = findByQueueId(queueId);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < symptoms.size(); i++) {
-            if (i > 0) sb.append(", ");
+            if (i > 0)
+                sb.append(", ");
             sb.append(symptoms.get(i).getSymptomName());
         }
         return sb.toString();

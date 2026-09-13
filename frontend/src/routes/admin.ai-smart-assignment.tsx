@@ -83,96 +83,114 @@ function SmartDoctorAssignmentPage() {
           </div>
         </Panel>
 
-        {recommendations.length > 0 && (() => {
-          const top = recommendations[0]!;
-          return (
-          <>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <StatCard
-                label="Top Recommendation"
-                value={top.doctorName}
-                tone="success"
-              />
-              <StatCard
-                label="Best Score"
-                value={`${top.score.toFixed(1)}%`}
-                tone="primary"
-              />
-              <StatCard
-                label="Estimated Wait"
-                value={`${top.estimatedWaitMinutes} min`}
-                tone={top.estimatedWaitMinutes <= 15 ? "success" : "warning"}
-              />
-              <StatCard
-                label="Doctors Ranked"
-                value={recommendations.length}
-                tone="primary"
-              />
-            </div>
+        {recommendations.length > 0 &&
+          (() => {
+            const top = recommendations[0]!;
+            return (
+              <>
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  <StatCard label="Top Recommendation" value={top.doctorName} tone="success" />
+                  <StatCard label="Best Score" value={`${top.score.toFixed(1)}%`} tone="primary" />
+                  <StatCard
+                    label="Estimated Wait"
+                    value={`${top.estimatedWaitMinutes} min`}
+                    tone={top.estimatedWaitMinutes <= 15 ? "success" : "warning"}
+                  />
+                  <StatCard label="Doctors Ranked" value={recommendations.length} tone="primary" />
+                </div>
 
-            <Panel title="Ranked Recommendations">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-border text-left text-muted-foreground">
-                      <th className="pb-3 font-medium">Rank</th>
-                      <th className="pb-3 font-medium">Doctor</th>
-                      <th className="pb-3 font-medium">Score</th>
-                      <th className="pb-3 font-medium">Specialization</th>
-                      <th className="pb-3 font-medium">Queue Load</th>
-                      <th className="pb-3 font-medium">Availability</th>
-                      <th className="pb-3 font-medium">Wait Time</th>
-                      <th className="pb-3 font-medium">Reason</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recommendations.map((rec) => (
-                      <tr key={rec.doctorId} className="border-b border-border/50 hover:bg-accent/50">
-                        <td className="py-3">
-                          <span
-                            className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
-                              rec.rank === 1
-                                ? "bg-success text-success-foreground"
-                                : rec.rank === 2
-                                ? "bg-primary text-primary-foreground"
-                                : "bg-muted text-muted-foreground"
-                            }`}
+                <Panel title="Ranked Recommendations">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border text-left text-muted-foreground">
+                          <th className="pb-3 font-medium">Rank</th>
+                          <th className="pb-3 font-medium">Doctor</th>
+                          <th className="pb-3 font-medium">Score</th>
+                          <th className="pb-3 font-medium">Specialization</th>
+                          <th className="pb-3 font-medium">Queue Load</th>
+                          <th className="pb-3 font-medium">Availability</th>
+                          <th className="pb-3 font-medium">Wait Time</th>
+                          <th className="pb-3 font-medium">Reason</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {recommendations.map((rec) => (
+                          <tr
+                            key={rec.doctorId}
+                            className="border-b border-border/50 hover:bg-accent/50"
                           >
-                            {rec.rank}
-                          </span>
-                        </td>
-                        <td className="py-3 font-medium">{rec.doctorName}</td>
-                        <td className="py-3">
-                          <div className="flex items-center gap-2">
-                            <div className="h-2 w-24 rounded-full bg-muted">
-                              <div
-                                className="h-full rounded-full bg-primary"
-                                style={{ width: `${rec.score}%` }}
+                            <td className="py-3">
+                              <span
+                                className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
+                                  rec.rank === 1
+                                    ? "bg-success text-success-foreground"
+                                    : rec.rank === 2
+                                      ? "bg-primary text-primary-foreground"
+                                      : "bg-muted text-muted-foreground"
+                                }`}
+                              >
+                                {rec.rank}
+                              </span>
+                            </td>
+                            <td className="py-3 font-medium">{rec.doctorName}</td>
+                            <td className="py-3">
+                              <div className="flex items-center gap-2">
+                                <div className="h-2 w-24 rounded-full bg-muted">
+                                  <div
+                                    className="h-full rounded-full bg-primary"
+                                    style={{ width: `${rec.score}%` }}
+                                  />
+                                </div>
+                                <span className="text-xs">{rec.score.toFixed(1)}</span>
+                              </div>
+                            </td>
+                            <td className="py-3">
+                              <StatusBadge
+                                status={
+                                  rec.specializationScore >= 80
+                                    ? "HIGH"
+                                    : rec.specializationScore >= 50
+                                      ? "MEDIUM"
+                                      : "LOW"
+                                }
                               />
-                            </div>
-                            <span className="text-xs">{rec.score.toFixed(1)}</span>
-                          </div>
-                        </td>
-                        <td className="py-3">
-                          <StatusBadge status={rec.specializationScore >= 80 ? "HIGH" : rec.specializationScore >= 50 ? "MEDIUM" : "LOW"} />
-                        </td>
-                        <td className="py-3">
-                          <StatusBadge status={rec.queueLoadScore >= 70 ? "COMPLETED" : rec.queueLoadScore >= 40 ? "WAITING" : "CANCELLED"} />
-                        </td>
-                        <td className="py-3">
-                          <StatusBadge status={rec.availabilityScore >= 90 ? "ACTIVE" : rec.availabilityScore >= 50 ? "WAITING" : "INACTIVE"} />
-                        </td>
-                        <td className="py-3">{rec.estimatedWaitMinutes} min</td>
-                        <td className="max-w-xs truncate text-xs text-muted-foreground">{rec.reason}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Panel>
-          </>
-          );
-        })()}
+                            </td>
+                            <td className="py-3">
+                              <StatusBadge
+                                status={
+                                  rec.queueLoadScore >= 70
+                                    ? "COMPLETED"
+                                    : rec.queueLoadScore >= 40
+                                      ? "WAITING"
+                                      : "CANCELLED"
+                                }
+                              />
+                            </td>
+                            <td className="py-3">
+                              <StatusBadge
+                                status={
+                                  rec.availabilityScore >= 90
+                                    ? "ACTIVE"
+                                    : rec.availabilityScore >= 50
+                                      ? "WAITING"
+                                      : "INACTIVE"
+                                }
+                              />
+                            </td>
+                            <td className="py-3">{rec.estimatedWaitMinutes} min</td>
+                            <td className="max-w-xs truncate text-xs text-muted-foreground">
+                              {rec.reason}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </Panel>
+              </>
+            );
+          })()}
 
         {loading && (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

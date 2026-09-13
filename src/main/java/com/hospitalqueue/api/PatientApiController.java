@@ -224,11 +224,30 @@ public class PatientApiController {
             map.put("message", n.getMessage());
             map.put("time", n.getCreatedAt() != null ? n.getCreatedAt().toString() : "Just now");
             map.put("read", n.isRead());
-            map.put("important", n.getMessage().toLowerCase().contains("emergency")
-                    || n.getMessage().toLowerCase().contains("turn"));
-            map.put("category", n.getMessage().toLowerCase().contains("emergency") ? "EMERGENCY" : "QUEUE");
+            String lower = n.getMessage().toLowerCase();
+            map.put("important", lower.contains("emergency") || lower.contains("turn"));
+            map.put("category", categorize(lower));
             return map;
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * Buckets a notification message into the tone the frontend renders it
+     * with: EMERGENCY (red), DOCTOR (green - it's your turn / consultation
+     * started), SCHEDULE (amber - upcoming-turn reminder), otherwise QUEUE
+     * (blue - registration/cancellation/general updates).
+     */
+    private String categorize(String lowerCaseMessage) {
+        if (lowerCaseMessage.contains("emergency")) {
+            return "EMERGENCY";
+        }
+        if (lowerCaseMessage.contains("coming up")) {
+            return "SCHEDULE";
+        }
+        if (lowerCaseMessage.contains("your turn") || lowerCaseMessage.contains("consultation")) {
+            return "DOCTOR";
+        }
+        return "QUEUE";
     }
 
     @PostMapping("/{patientId}/notifications/read-all")

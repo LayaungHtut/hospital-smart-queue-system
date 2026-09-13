@@ -1,7 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Plus, Edit2 } from "lucide-react";
-import { createDoctor, updateDoctor, deleteDoctor, getDepartments, getDoctors } from "@/services/api";
+import {
+  createDoctor,
+  updateDoctor,
+  deleteDoctor,
+  getDepartments,
+  getDoctors,
+} from "@/services/api";
 import { AdminLayout } from "@/components/portal/shells";
 import {
   DataTable,
@@ -50,7 +56,9 @@ function AdminDoctorsPage() {
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    getDepartments().then(setDepartments).catch((err) => setError(err.message));
+    getDepartments()
+      .then(setDepartments)
+      .catch((err) => setError(err.message));
     getDoctors()
       .then((data) => {
         setDoctors(data);
@@ -90,8 +98,12 @@ function AdminDoctorsPage() {
       setForm(emptyForm);
       setOpen(false);
       showToast("Doctor profile added successfully!");
-    } catch (err: any) {
-      setError(err?.message || "Failed to add doctor. Please ensure phone number is unique.");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to add doctor. Please ensure phone number is unique.",
+      );
     }
   }
 
@@ -190,7 +202,8 @@ function AdminDoctorsPage() {
             }}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 shadow-sm sm:px-4 sm:text-sm"
           >
-            <Plus className="size-4" /> <span className="hidden sm:inline">Add Doctor</span><span className="sm:hidden">Add</span>
+            <Plus className="size-4" /> <span className="hidden sm:inline">Add Doctor</span>
+            <span className="sm:hidden">Add</span>
           </button>
         }
       >

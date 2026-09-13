@@ -83,6 +83,35 @@ public class WaitingTimeService {
     }
 
     /**
+     * One batched round trip (2 queries) for every doctor's historical average
+     * consultation time, for callers that need to evaluate many doctors without
+     * querying per doctor (see {@link #getDoctorAverageConsultationMinutes(Doctor, java.util.Map)}).
+     */
+    public java.util.Map<String, Double> loadHistoricalAverageConsultationMinutes() {
+        return queueRepository.getPreviousDayAverageConsultationMinutesForAllDoctors();
+    }
+
+    /**
+     * Same as {@link #getDoctorAverageConsultationMinutes(Doctor)} but reads the
+     * historical average from a preloaded map (see
+     * {@link QueueRepository#getPreviousDayAverageConsultationMinutesForAllDoctors()})
+     * instead of querying per doctor — use this when computing wait times for a
+     * whole list of doctors to avoid an N+1 round trip per doctor.
+     */
+    public long getDoctorAverageConsultationMinutes(Doctor doctor, java.util.Map<String, Double> historicalAvgByDoctorId) {
+        if (doctor == null) return DEFAULT_CONSULTATION_MINUTES;
+
+        Double historicalAvg = historicalAvgByDoctorId.get(doctor.getDoctorId());
+        if (historicalAvg != null && historicalAvg > 0) {
+            return Math.max(MIN_CONSULTATION_MINUTES, Math.round(historicalAvg));
+        }
+        if (doctor.getAverageConsultationMinutes() > 0) {
+            return doctor.getAverageConsultationMinutes();
+        }
+        return DEFAULT_CONSULTATION_MINUTES;
+    }
+
+    /**
      * Calculate waiting time for a specific doctor including break offset.
      */
     public long calculateWaitingTimeForDoctor(String doctorId, long averageConsultationMinutes) {
@@ -185,7 +214,15 @@ public class WaitingTimeService {
         return DEFAULT_CONSULTATION_MINUTES;
     }
 
+    /**
+     * Historical (non-ML) average wait for a doctor, used as an input feature by
+     * {@link WaitTimePredictionService}. This must NOT go through
+     * {@link #getPredictedWaitTime(String)} / the ML model: that method calls
+     * back into WaitTimePredictionService.predictWaitTime(), which calls this
+     * method again to build its features — an infinite recursion that ends in a
+     * StackOverflowError as soon as a wait-time model is loaded.
+     */
     public long getDoctorAverageWait(String doctorId) {
-        return getPredictedWaitTime(doctorId);
+        return calculateWaitingTimeForDoctor(doctorId, 0);
     }
 }

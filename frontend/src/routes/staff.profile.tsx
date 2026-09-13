@@ -29,7 +29,10 @@ function StaffProfilePage() {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string>("");
   const [customPhotoInput, setCustomPhotoInput] = useState("");
-  const [feedbackMsg, setFeedbackMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [feedbackMsg, setFeedbackMsg] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -92,7 +95,10 @@ function StaffProfilePage() {
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
-      setFeedbackMsg({ type: "success", text: "Password changed successfully! Please use your new password next time you sign in." });
+      setFeedbackMsg({
+        type: "success",
+        text: "Password changed successfully! Please use your new password next time you sign in.",
+      });
       setTimeout(() => setFeedbackMsg(null), 4000);
     }, 600);
   }
@@ -113,7 +119,9 @@ function StaffProfilePage() {
       {feedbackMsg && (
         <div
           className={`mb-4 rounded-lg p-3 text-center text-sm font-semibold ${
-            feedbackMsg.type === "success" ? "bg-success/15 text-success" : "bg-danger/15 text-danger"
+            feedbackMsg.type === "success"
+              ? "bg-success/15 text-success"
+              : "bg-danger/15 text-danger"
           }`}
         >
           {feedbackMsg.type === "success" ? "✓ " : "⚠ "}
@@ -136,7 +144,9 @@ function StaffProfilePage() {
             {profile?.name ?? session?.name ?? "Loading..."}
           </p>
           <p className="text-sm text-muted-foreground">{profile?.role ?? "Front Desk Staff"}</p>
-          <p className="mt-1 text-xs font-semibold text-primary">{profile?.department ?? "Outpatient Department"}</p>
+          <p className="mt-1 text-xs font-semibold text-primary">
+            {profile?.department ?? "Outpatient Department"}
+          </p>
           <button
             onClick={() => setShowPhotoModal(true)}
             className="mt-4 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 shadow-sm"
@@ -247,7 +257,9 @@ function StaffProfilePage() {
 
             <form onSubmit={handlePasswordSubmit} className="mt-4 space-y-3">
               <div>
-                <label className="block text-xs font-medium text-foreground">Current Password</label>
+                <label className="block text-xs font-medium text-foreground">
+                  Current Password
+                </label>
                 <div className="relative">
                   <input
                     type={showCurrentPassword ? "text" : "password"}
@@ -289,7 +301,9 @@ function StaffProfilePage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-foreground">Confirm New Password</label>
+                <label className="block text-xs font-medium text-foreground">
+                  Confirm New Password
+                </label>
                 <div className="relative">
                   <input
                     type={showConfirmPassword ? "text" : "password"}

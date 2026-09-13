@@ -1,28 +1,13 @@
 import { useState } from "react";
-import {
-  AlertTriangle,
-  Bell,
-  CalendarClock,
-  CheckCheck,
-  CircleCheck,
-  ListOrdered,
-} from "lucide-react";
-import { TabNav } from "./ui-kit";
-import { cn } from "@/lib/utils";
+import { Bell, CheckCheck } from "lucide-react";
+import { Alert, TabNav, type AlertTone } from "./ui-kit";
 import type { NotificationItem } from "@/types";
 
-const iconFor: Record<NotificationItem["category"], React.ComponentType<{ className?: string }>> = {
-  EMERGENCY: AlertTriangle,
-  QUEUE: ListOrdered,
-  DOCTOR: CircleCheck,
-  SCHEDULE: CalendarClock,
-};
-
-const toneFor: Record<NotificationItem["category"], string> = {
-  EMERGENCY: "bg-danger-soft text-danger",
-  QUEUE: "bg-info-soft text-info",
-  DOCTOR: "bg-success-soft text-success",
-  SCHEDULE: "bg-warning-soft text-warning",
+const toneFor: Record<NotificationItem["category"], AlertTone> = {
+  EMERGENCY: "error",
+  QUEUE: "info",
+  DOCTOR: "success",
+  SCHEDULE: "warning",
 };
 
 export function NotificationList({
@@ -67,31 +52,26 @@ export function NotificationList({
           Nothing here yet.
         </p>
       ) : (
-        <ul className="divide-y divide-border">
-          {filtered.map((n) => {
-            const Icon = iconFor[n.category];
-            return (
-              <li key={n.id} className="flex items-start gap-4 py-4">
-                <span
-                  className={cn(
-                    "flex size-9 shrink-0 items-center justify-center rounded-full",
-                    toneFor[n.category],
-                  )}
-                >
-                  <Icon className="size-4" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-foreground">{n.title}</p>
-                  <p className="text-sm text-muted-foreground">{n.message}</p>
+        <div className="space-y-3">
+          {filtered.map((n) => (
+            <Alert
+              key={n.id}
+              tone={toneFor[n.category]}
+              className={!n.read ? "ring-1 ring-current/30" : ""}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-semibold">{n.title}</p>
+                  <p className="opacity-90">{n.message}</p>
                 </div>
-                <div className="flex shrink-0 items-center gap-2 text-xs text-muted-foreground">
+                <div className="flex shrink-0 items-center gap-2 text-xs opacity-80">
                   {n.time}
-                  {!n.read ? <span className="size-2 rounded-full bg-danger" /> : null}
+                  {!n.read ? <span className="size-2 rounded-full bg-current" /> : null}
                 </div>
-              </li>
-            );
-          })}
-        </ul>
+              </div>
+            </Alert>
+          ))}
+        </div>
       )}
     </div>
   );

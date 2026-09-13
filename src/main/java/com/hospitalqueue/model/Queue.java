@@ -34,6 +34,7 @@ public class Queue {
     private String source;
     private boolean emergency;
     private boolean emergencyConfirmed;
+    private boolean reminderSent;
     private LocalDateTime calledAt;
     private LocalDateTime startedAt;
     private LocalDateTime pausedAt;
@@ -174,6 +175,14 @@ public class Queue {
 
     public void setEmergencyConfirmed(boolean emergencyConfirmed) {
         this.emergencyConfirmed = emergencyConfirmed;
+    }
+
+    public boolean isReminderSent() {
+        return reminderSent;
+    }
+
+    public void setReminderSent(boolean reminderSent) {
+        this.reminderSent = reminderSent;
     }
 
     public LocalDateTime getCalledAt() {

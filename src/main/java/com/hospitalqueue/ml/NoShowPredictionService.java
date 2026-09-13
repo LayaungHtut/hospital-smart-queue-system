@@ -4,9 +4,7 @@ import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OrtEnvironment;
 import ai.onnxruntime.OrtException;
 import ai.onnxruntime.OrtSession;
-import com.hospitalqueue.config.EnvConfig;
 import com.hospitalqueue.model.Appointment;
-import com.hospitalqueue.model.Doctor;
 import com.hospitalqueue.model.Patient;
 import com.hospitalqueue.repository.AppointmentRepository;
 import com.hospitalqueue.repository.PatientRepository;
@@ -21,14 +19,11 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -69,8 +64,8 @@ public class NoShowPredictionService {
     private String artifactsPath;
 
     public NoShowPredictionService(ResourceLoader resourceLoader,
-                                   AppointmentRepository appointmentRepository,
-                                   PatientRepository patientRepository) {
+            AppointmentRepository appointmentRepository,
+            PatientRepository patientRepository) {
         this.resourceLoader = resourceLoader;
         this.appointmentRepository = appointmentRepository;
         this.patientRepository = patientRepository;
@@ -108,10 +103,10 @@ public class NoShowPredictionService {
         try (InputStream is = resource.getInputStream()) {
             Files.copy(is, tempFile, StandardCopyOption.REPLACE_EXISTING);
         }
-        
+
         ortEnvironment = OrtEnvironment.getEnvironment();
         session = ortEnvironment.createSession(tempFile.toString(), new OrtSession.SessionOptions());
-        
+
         tempFile.toFile().deleteOnExit();
     }
 
@@ -157,10 +152,10 @@ public class NoShowPredictionService {
             if (thStart > 0) {
                 int colon = json.indexOf(':', thStart);
                 int end = Math.min(
-                    json.indexOf(',', colon),
-                    json.indexOf('}', colon)
-                );
-                if (end < 0) end = json.length();
+                        json.indexOf(',', colon),
+                        json.indexOf('}', colon));
+                if (end < 0)
+                    end = json.length();
                 threshold = Double.parseDouble(json.substring(colon + 1, end).trim());
             }
 
@@ -179,7 +174,8 @@ public class NoShowPredictionService {
             String[] classes = arrStr.split(",");
             for (int i = 0; i < classes.length; i++) {
                 String cls = classes[i].replaceAll("[\"]", "").trim();
-                if (!cls.isEmpty()) map.put(cls, i);
+                if (!cls.isEmpty())
+                    map.put(cls, i);
             }
         }
     }
@@ -201,21 +197,21 @@ public class NoShowPredictionService {
 
     private void setDefaultArtifacts() {
         featureColumns = List.of(
-            "department_encoded", "doctor_encoded",
-            "days_ahead", "hour_sin", "hour_cos", "day_sin", "day_cos", "month_sin", "month_cos",
-            "is_weekend",
-            "patient_age", "gender_encoded", "distance_log", "insurance_encoded",
-            "total_past_appointments", "past_noshows", "past_cancellations", "noshow_rate",
-            "days_since_log", "lead_time_log",
-            "is_followup", "priority", "appt_type_encoded",
-            "temperature", "precipitation", "is_bad_weather",
-            "received_reminder", "reminder_encoded", "confirmed_appointment",
-            "noshow_rate_x_appointments", "reminder_x_confirm"
-        );
+                "department_encoded", "doctor_encoded",
+                "days_ahead", "hour_sin", "hour_cos", "day_sin", "day_cos", "month_sin", "month_cos",
+                "is_weekend",
+                "patient_age", "gender_encoded", "distance_log", "insurance_encoded",
+                "total_past_appointments", "past_noshows", "past_cancellations", "noshow_rate",
+                "days_since_log", "lead_time_log",
+                "is_followup", "priority", "appt_type_encoded",
+                "temperature", "precipitation", "is_bad_weather",
+                "received_reminder", "reminder_encoded", "confirmed_appointment",
+                "noshow_rate_x_appointments", "reminder_x_confirm");
 
         departmentEncoding = Map.of("CAR", 0, "NEU", 1, "ORT", 2, "GEN", 3, "PED", 4, "DER", 5);
         doctorEncoding = new ConcurrentHashMap<>();
-        for (int i = 1; i <= 16; i++) doctorEncoding.put(String.format("D%03d", i), i - 1);
+        for (int i = 1; i <= 16; i++)
+            doctorEncoding.put(String.format("D%03d", i), i - 1);
         genderEncoding = Map.of("M", 0, "F", 1);
         insuranceEncoding = Map.of("public", 0, "private", 1, "self_pay", 2);
         reminderEncoding = Map.of("sms", 0, "email", 1, "call", 2, "none", 3);
@@ -238,23 +234,23 @@ public class NoShowPredictionService {
         try {
             float[] features = buildFeatures(appointment);
             float[] scaled = scaleFeatures(features);
-            
-            long[] shape = new long[]{1, scaled.length};
+
+            long[] shape = new long[] { 1, scaled.length };
             FloatBuffer buffer = FloatBuffer.wrap(scaled);
             OnnxTensor inputTensor = OnnxTensor.createTensor(ortEnvironment, buffer, shape);
-            
+
             Map<String, OnnxTensor> inputs = new HashMap<>();
             String inputName = session.getInputInfo().keySet().iterator().next();
             inputs.put(inputName, inputTensor);
-            
+
             OrtSession.Result result = session.run(inputs);
             float[][] output = (float[][]) result.get(0).getValue();
-            
+
             // For binary classification, output is probability of class 1 (no-show)
             double probability = output[0].length > 1 ? output[0][1] : output[0][0];
-            
+
             return Math.max(0, Math.min(1, probability));
-            
+
         } catch (Exception e) {
             log.warn("No-show prediction failed: {}", e.getMessage());
             return fallbackPrediction(appointment);
@@ -273,43 +269,52 @@ public class NoShowPredictionService {
      * Get risk level: LOW (<30%), MEDIUM (30-60%), HIGH (>60%)
      */
     public String getRiskLevel(Appointment appointment) {
-        Double prob = predictNoShowProbability(appointment);
-        if (prob == null) return "UNKNOWN";
-        if (prob < 0.3) return "LOW";
-        if (prob < 0.6) return "MEDIUM";
+        return getRiskLevel(predictNoShowProbability(appointment));
+    }
+
+    /**
+     * Same as {@link #getRiskLevel(Appointment)} but reuses an already-computed
+     * probability instead of re-running feature extraction + inference.
+     */
+    public String getRiskLevel(Double probability) {
+        if (probability == null)
+            return "UNKNOWN";
+        if (probability < 0.3)
+            return "LOW";
+        if (probability < 0.6)
+            return "MEDIUM";
         return "HIGH";
     }
 
     private float[] buildFeatures(Appointment appointment) {
         Patient patient = patientRepository.findById(appointment.getPatientId());
         String doctorId = appointment.getDoctorId();
-        
+
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime apptDateTime = appointment.getAppointmentDate().atTime(appointment.getAppointmentTime());
-        
+
         long daysAhead = ChronoUnit.DAYS.between(now.toLocalDate(), apptDateTime.toLocalDate());
         int hour = apptDateTime.getHour();
         int dayOfWeek = apptDateTime.getDayOfWeek().getValue() - 1;
         int month = apptDateTime.getMonthValue();
         boolean isWeekend = dayOfWeek >= 5;
-        
+
         // Patient features
         int patientAge = patient != null ? calculateAge(patient.getDateOfBirth()) : 30;
         String gender = patient != null ? patient.getGender() : "M";
         double distance = (patient != null && patient.getDistanceKm() != null) ? patient.getDistanceKm() : 15.0;
         String insurance = patient != null ? patient.getInsuranceType() : "public";
-        
-        // History
-        int totalAppts = (int) appointmentRepository.countByPatientId(appointment.getPatientId());
-        int pastNoshows = (int) appointmentRepository.countNoShowsByPatientId(appointment.getPatientId());
-        int pastCancels = (int) appointmentRepository.countCancellationsByPatientId(appointment.getPatientId());
+
+        // History (single round trip instead of 5 separate queries)
+        var history = appointmentRepository.getPatientHistoryStats(appointment.getPatientId());
+        int totalAppts = history.totalAppointments();
+        int pastNoshows = history.pastNoshows();
+        int pastCancels = history.pastCancellations();
         double noshowRate = totalAppts > 0 ? (double) pastNoshows / totalAppts : 0;
-        
-        int daysSinceLast = appointmentRepository.daysSinceLastVisit(appointment.getPatientId()) != null ? 
-                appointmentRepository.daysSinceLastVisit(appointment.getPatientId()) : 365;
-        int avgLeadTime = appointmentRepository.averageLeadTime(appointment.getPatientId()) != null ? 
-                appointmentRepository.averageLeadTime(appointment.getPatientId()) : 14;
-        
+
+        int daysSinceLast = history.daysSinceLastVisit() != null ? history.daysSinceLastVisit() : 365;
+        int avgLeadTime = history.averageLeadTime() != null ? history.averageLeadTime() : 14;
+
         // Appointment features
         boolean isFollowup = appointment.isFollowup();
         int priority = 3;
@@ -319,20 +324,20 @@ public class NoShowPredictionService {
             priority = 3;
         }
         String apptType = appointment.getAppointmentType() != null ? appointment.getAppointmentType() : "consultation";
-        
+
         // Weather (simplified - in production integrate weather API)
         double temperature = 22.0;
         double precipitation = 0.0;
         boolean isBadWeather = false;
-        
+
         // Communication
         boolean receivedReminder = appointment.isReminderSent();
         String reminderChannel = appointment.getReminderChannel() != null ? appointment.getReminderChannel() : "sms";
         boolean confirmed = appointment.isConfirmed();
-        
+
         float[] features = new float[featureColumns.size()];
         int idx = 0;
-        
+
         features[idx++] = departmentEncoding.getOrDefault(appointment.getDepartmentCode(), 0);
         features[idx++] = doctorEncoding.getOrDefault(doctorId, 0);
         features[idx++] = (float) daysAhead;
@@ -364,7 +369,7 @@ public class NoShowPredictionService {
         features[idx++] = confirmed ? 1.0f : 0.0f;
         features[idx++] = (float) (noshowRate * Math.log1p(totalAppts));
         features[idx++] = (receivedReminder && confirmed) ? 1.0f : 0.0f;
-        
+
         return features;
     }
 
@@ -383,17 +388,21 @@ public class NoShowPredictionService {
     private double fallbackPrediction(Appointment appointment) {
         // Simple heuristic fallback
         Patient patient = patientRepository.findById(appointment.getPatientId());
-        if (patient == null) return 0.15;
-        
-        int totalAppts = (int) appointmentRepository.countByPatientId(appointment.getPatientId());
-        int pastNoshows = (int) appointmentRepository.countNoShowsByPatientId(appointment.getPatientId());
-        
-        if (totalAppts == 0) return 0.15; // Base rate for new patients
+        if (patient == null)
+            return 0.15;
+
+        var history = appointmentRepository.getPatientHistoryStats(appointment.getPatientId());
+        int totalAppts = history.totalAppointments();
+        int pastNoshows = history.pastNoshows();
+
+        if (totalAppts == 0)
+            return 0.15; // Base rate for new patients
         return Math.min(0.8, (double) pastNoshows / totalAppts + 0.05);
     }
 
     private int calculateAge(java.time.LocalDate dob) {
-        if (dob == null) return 30;
+        if (dob == null)
+            return 30;
         return (int) ChronoUnit.YEARS.between(dob, java.time.LocalDate.now());
     }
 
@@ -408,8 +417,10 @@ public class NoShowPredictionService {
     @PreDestroy
     public void cleanup() {
         try {
-            if (session != null) session.close();
-            if (ortEnvironment != null) ortEnvironment.close();
+            if (session != null)
+                session.close();
+            if (ortEnvironment != null)
+                ortEnvironment.close();
         } catch (Exception e) {
             log.warn("Error closing ONNX session: {}", e.getMessage());
         }
