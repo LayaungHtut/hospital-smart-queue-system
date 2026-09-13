@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.concurrent.CompletableFuture;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -72,14 +73,32 @@ public class AdminApiController {
         this.doctorScheduleRepository = doctorScheduleRepository;
     }
 
+    private volatile Map<String, Object> cachedDashboard = null;
+    private volatile long dashboardExpiresAt = 0;
+
     @GetMapping("/dashboard")
     public Map<String, Object> getDashboard() {
-        long totalPatients = patientRepository.count();
-        long totalQueues = queueRepository.countQueuesToday();
-        long doctorsOnDuty = doctorRepository.findAll().stream().filter(Doctor::isAvailable).count();
+        long now = System.currentTimeMillis();
+        Map<String, Object> cached = cachedDashboard;
+        if (cached != null && now < dashboardExpiresAt) {
+            return cached;
+        }
 
-        List<Map<String, Object>> weekly = queueRepository.getWeeklyQueueStatistics();
-        List<Map<String, Object>> deptCounts = queueRepository.getDepartmentDistribution();
+        CompletableFuture<Long> totalPatientsFuture = CompletableFuture.supplyAsync(() -> (long) patientRepository.count());
+        CompletableFuture<Long> totalQueuesFuture = CompletableFuture.supplyAsync(() -> (long) queueRepository.countQueuesToday());
+        CompletableFuture<Long> doctorsOnDutyFuture = CompletableFuture.supplyAsync(() ->
+                doctorRepository.findAll().stream().filter(Doctor::isAvailable).count());
+        CompletableFuture<List<Map<String, Object>>> weeklyFuture = CompletableFuture.supplyAsync(queueRepository::getWeeklyQueueStatistics);
+        CompletableFuture<List<Map<String, Object>>> deptCountsFuture = CompletableFuture.supplyAsync(queueRepository::getDepartmentDistribution);
+        CompletableFuture<Double> avgWaitFuture = CompletableFuture.supplyAsync(queueRepository::getAverageWaitingTimeToday);
+
+        CompletableFuture.allOf(totalPatientsFuture, totalQueuesFuture, doctorsOnDutyFuture, weeklyFuture, deptCountsFuture, avgWaitFuture).join();
+
+        long totalPatients = totalPatientsFuture.join();
+        long totalQueues = totalQueuesFuture.join();
+        long doctorsOnDuty = doctorsOnDutyFuture.join();
+        List<Map<String, Object>> weekly = weeklyFuture.join();
+        List<Map<String, Object>> deptCounts = deptCountsFuture.join();
 
         long sumCount = deptCounts.stream().mapToLong(m -> ((Number) m.get("count")).longValue()).sum();
         String[] colors = new String[] {
@@ -110,7 +129,7 @@ public class AdminApiController {
                     "color", colorByDepartment.get(name)));
         }
 
-        long rawAvgWait = Math.round(queueRepository.getAverageWaitingTimeToday());
+        long rawAvgWait = Math.round(avgWaitFuture.join());
         // If 0 active queues today, show hospital nominal standard wait (18 min)
         // instead of 0
         long displayAvgWait = rawAvgWait > 0 ? rawAvgWait : (totalQueues > 0 ? 15 : 18);
@@ -122,6 +141,9 @@ public class AdminApiController {
         data.put("doctorsOnDuty", doctorsOnDuty);
         data.put("weekly", weekly);
         data.put("byDepartment", byDepartment);
+
+        cachedDashboard = data;
+        dashboardExpiresAt = now + 5000; // 5 seconds TTL
 
         return data;
     }

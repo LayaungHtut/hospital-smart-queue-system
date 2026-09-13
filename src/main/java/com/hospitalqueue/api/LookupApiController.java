@@ -42,10 +42,25 @@ public class LookupApiController {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    private volatile List<Map<String, Object>> cachedDepartments = null;
+    private volatile long departmentsExpiresAt = 0;
+
+    private volatile Map<String, Object> cachedSettings = null;
+    private volatile long settingsExpiresAt = 0;
+
+    private volatile List<Map<String, Object>> cachedSymptoms = null;
+    private volatile long symptomsExpiresAt = 0;
+
     @GetMapping("/departments")
     public List<Map<String, Object>> getDepartments() {
+        long now = System.currentTimeMillis();
+        List<Map<String, Object>> cached = cachedDepartments;
+        if (cached != null && now < departmentsExpiresAt) {
+            return cached;
+        }
+
         List<Department> list = departmentRepository.findAll();
-        return list.stream().map(d -> {
+        List<Map<String, Object>> result = list.stream().map(d -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("id", d.getDepartmentId());
             map.put("departmentCode", d.getDepartmentCode());
@@ -55,6 +70,10 @@ public class LookupApiController {
             map.put("status", d.isActive() ? "ACTIVE" : "INACTIVE");
             return map;
         }).collect(Collectors.toList());
+
+        cachedDepartments = result;
+        departmentsExpiresAt = now + 60000;
+        return result;
     }
 
     @GetMapping("/doctors")
@@ -93,9 +112,12 @@ public class LookupApiController {
 
     @GetMapping("/system/settings")
     public Map<String, Object> getPublicSystemSettings() {
-        // Same system_setting table the admin "System Settings" page reads/writes
-        // (AdminApiController#getSystemSettings/saveSystemSettings) — public callers
-        // see whatever the admin has actually configured, not invented values.
+        long now = System.currentTimeMillis();
+        Map<String, Object> cached = cachedSettings;
+        if (cached != null && now < settingsExpiresAt) {
+            return cached;
+        }
+
         Map<String, String> dbSettings = new HashMap<>();
         jdbcTemplate.query(
                 "SELECT setting_key, setting_value FROM system_setting WHERE setting_key IN "
@@ -109,13 +131,22 @@ public class LookupApiController {
         settings.put("contactEmail", dbSettings.getOrDefault("contact_email", ""));
         settings.put("operatingHours", dbSettings.getOrDefault("operating_hours", ""));
         settings.put("timeZone", dbSettings.getOrDefault("timezone", "(GMT+06:30) Yangon"));
+
+        cachedSettings = settings;
+        settingsExpiresAt = now + 60000;
         return settings;
     }
 
     @GetMapping("/symptoms")
     public List<Map<String, Object>> getSymptoms() {
+        long now = System.currentTimeMillis();
+        List<Map<String, Object>> cached = cachedSymptoms;
+        if (cached != null && now < symptomsExpiresAt) {
+            return cached;
+        }
+
         List<Symptom> symptoms = symptomRepository.findAll();
-        return symptoms.stream().map(s -> {
+        List<Map<String, Object>> result = symptoms.stream().map(s -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("id", s.getSymptomId());
             map.put("name", s.getSymptomName());
@@ -123,6 +154,10 @@ public class LookupApiController {
             map.put("category", s.getCategory());
             return map;
         }).collect(Collectors.toList());
+
+        cachedSymptoms = result;
+        symptomsExpiresAt = now + 120000;
+        return result;
     }
 
     public static class RecommendRequest {

@@ -9,6 +9,7 @@ import {
   getPeakHours,
   getStaffingRecommendation,
   getDepartments,
+  invalidateApiCache,
   type FlowPrediction,
   type DepartmentFlowPrediction,
   type PeakHoursReport,
@@ -32,6 +33,7 @@ function QueueFlowPredictionPage() {
   const [staffing, setStaffing] = useState<StaffingRecommendation | null>(null);
   const [loading, setLoading] = useState(true);
   const [predicting, setPredicting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const tabs = [
     { value: "forecast", label: "Arrival Forecast" },
@@ -42,6 +44,7 @@ function QueueFlowPredictionPage() {
 
   const loadAll = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const [f, df, p, s] = await Promise.all([
         predictQueueFlow(hoursAhead),
@@ -54,7 +57,8 @@ function QueueFlowPredictionPage() {
       setPeakHours(p);
       setStaffing(s);
     } catch (err) {
-      console.error(err);
+      console.error("Failed to load queue flow predictions:", err);
+      setError("Unable to connect to the backend server. Please verify the Spring Boot service is running.");
     } finally {
       setLoading(false);
     }
@@ -70,6 +74,7 @@ function QueueFlowPredictionPage() {
 
   async function refresh() {
     setPredicting(true);
+    invalidateApiCache("/ai/queue-flow");
     await loadAll();
     setPredicting(false);
   }
@@ -84,6 +89,21 @@ function QueueFlowPredictionPage() {
   return (
     <AdminLayout title="AI Queue Flow Prediction">
       <div className="space-y-6">
+        {error && (
+          <div className="flex items-center justify-between rounded-xl border border-danger/30 bg-danger/10 p-4 text-danger">
+            <p className="text-sm font-medium">{error}</p>
+            <button
+              onClick={() => {
+                loadAll();
+                getDepartments().then(setDepartments).catch(console.error);
+              }}
+              className="rounded-lg bg-danger px-3 py-1.5 text-xs font-semibold text-white hover:opacity-90"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
         <Panel title="Controls">
           <div className="flex flex-wrap items-end gap-4">
             <Field label="Hours Ahead">
@@ -115,7 +135,7 @@ function QueueFlowPredictionPage() {
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <StatCard
               label="Predicted Arrivals"
-              value={flow?.totalPredictedArrivals.toFixed(1) ?? "—"}
+              value={flow?.totalPredictedArrivals != null ? flow.totalPredictedArrivals.toFixed(1) : "—"}
               tone="primary"
             />
             <StatCard

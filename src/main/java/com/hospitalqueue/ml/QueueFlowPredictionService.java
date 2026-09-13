@@ -30,6 +30,24 @@ public class QueueFlowPredictionService {
     private final JdbcTemplate jdbcTemplate;
     private final DepartmentRepository departmentRepository;
 
+    private static class CacheEntry<T> {
+        final T data;
+        final long expiresAt;
+
+        CacheEntry(T data, long ttlMs) {
+            this.data = data;
+            this.expiresAt = System.currentTimeMillis() + ttlMs;
+        }
+
+        boolean isValid() {
+            return System.currentTimeMillis() < expiresAt;
+        }
+    }
+
+    private final Map<Integer, CacheEntry<FlowPrediction>> flowCache = new java.util.concurrent.ConcurrentHashMap<>();
+    private final Map<Integer, CacheEntry<DepartmentFlowPrediction>> deptFlowCache = new java.util.concurrent.ConcurrentHashMap<>();
+    private final Map<DayOfWeek, CacheEntry<PeakHoursReport>> peakHoursCache = new java.util.concurrent.ConcurrentHashMap<>();
+
     public QueueFlowPredictionService(JdbcTemplate jdbcTemplate,
             DepartmentRepository departmentRepository) {
         this.jdbcTemplate = jdbcTemplate;
@@ -40,12 +58,47 @@ public class QueueFlowPredictionService {
      * Predict arrival count for the next N hours, overall.
      */
     public FlowPrediction predictNextHours(int hoursAhead) {
+        CacheEntry<FlowPrediction> cached = flowCache.get(hoursAhead);
+        if (cached != null && cached.isValid()) {
+            return cached.data;
+        }
         LocalDateTime now = LocalDateTime.now();
         List<HourlyPrediction> predictions = new ArrayList<>();
 
+        Map<String, Double> historicalMap = new HashMap<>();
+        try {
+            String sql = """
+                    SELECT CAST(EXTRACT(DOW FROM created_at) AS INTEGER) AS dow,
+                           CAST(EXTRACT(HOUR FROM created_at) AS INTEGER) AS hr,
+                           COALESCE(AVG(cnt), 0) AS avg_arrivals
+                    FROM (
+                        SELECT DATE(created_at) AS d,
+                               EXTRACT(DOW FROM created_at) AS dow,
+                               EXTRACT(HOUR FROM created_at) AS hr,
+                               COUNT(*) AS cnt
+                        FROM queue
+                        WHERE created_at > NOW() - INTERVAL '90 days'
+                        GROUP BY DATE(created_at), EXTRACT(DOW FROM created_at), EXTRACT(HOUR FROM created_at)
+                    ) sub
+                    GROUP BY dow, hr
+                    """;
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+            for (Map<String, Object> row : rows) {
+                int dow = ((Number) row.get("dow")).intValue();
+                int hr = ((Number) row.get("hr")).intValue();
+                double avg = ((Number) row.get("avg_arrivals")).doubleValue();
+                historicalMap.put(dow + ":" + hr, avg);
+            }
+        } catch (Exception e) {
+            // Fall back to heuristics if query fails
+        }
+
         for (int h = 0; h < hoursAhead; h++) {
             LocalDateTime target = now.plusHours(h);
-            double predicted = predictArrivalsAt(target);
+            int dow = toPostgresDow(target.getDayOfWeek());
+            int hr = target.getHour();
+            Double hist = historicalMap.get(dow + ":" + hr);
+            double predicted = (hist != null && hist > 0) ? hist : getDefaultEstimate(hr);
             predictions.add(new HourlyPrediction(
                     target.getHour(),
                     target.getDayOfWeek().toString(),
@@ -56,22 +109,64 @@ public class QueueFlowPredictionService {
         double total = predictions.stream().mapToDouble(HourlyPrediction::predictedArrivals).sum();
         String trend = analyzeTrend(predictions);
 
-        return new FlowPrediction(predictions, Math.round(total * 10.0) / 10.0, trend, now);
+        FlowPrediction result = new FlowPrediction(predictions, Math.round(total * 10.0) / 10.0, trend, now);
+        flowCache.put(hoursAhead, new CacheEntry<>(result, 60000));
+        return result;
     }
 
     /**
      * Predict arrivals per department for the next N hours.
+     * Uses a single aggregated batch query instead of N+1 sequential DB roundtrips.
      */
     public DepartmentFlowPrediction predictByDepartment(int hoursAhead) {
+        CacheEntry<DepartmentFlowPrediction> cached = deptFlowCache.get(hoursAhead);
+        if (cached != null && cached.isValid()) {
+            return cached.data;
+        }
+
         List<Department> departments = departmentRepository.findAll();
         LocalDateTime now = LocalDateTime.now();
         Map<String, List<HourlyPrediction>> deptPredictions = new LinkedHashMap<>();
+
+        Map<String, Double> historicalMap = new HashMap<>();
+        try {
+            String sql = """
+                    SELECT department_id,
+                           CAST(EXTRACT(DOW FROM created_at) AS INTEGER) AS dow,
+                           CAST(EXTRACT(HOUR FROM created_at) AS INTEGER) AS hr,
+                           COALESCE(AVG(cnt), 0) AS avg_arrivals
+                    FROM (
+                        SELECT department_id,
+                               DATE(created_at) AS d,
+                               EXTRACT(DOW FROM created_at) AS dow,
+                               EXTRACT(HOUR FROM created_at) AS hr,
+                               COUNT(*) AS cnt
+                        FROM queue
+                        WHERE created_at > NOW() - INTERVAL '90 days'
+                        GROUP BY department_id, DATE(created_at), EXTRACT(DOW FROM created_at), EXTRACT(HOUR FROM created_at)
+                    ) sub
+                    GROUP BY department_id, dow, hr
+                    """;
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+            for (Map<String, Object> row : rows) {
+                int deptId = ((Number) row.get("department_id")).intValue();
+                int dow = ((Number) row.get("dow")).intValue();
+                int hr = ((Number) row.get("hr")).intValue();
+                double avg = ((Number) row.get("avg_arrivals")).doubleValue();
+                historicalMap.put(deptId + ":" + dow + ":" + hr, avg);
+            }
+        } catch (Exception e) {
+            // Fall back to heuristics if query fails
+        }
 
         for (Department dept : departments) {
             List<HourlyPrediction> hourly = new ArrayList<>();
             for (int h = 0; h < hoursAhead; h++) {
                 LocalDateTime target = now.plusHours(h);
-                double predicted = predictDepartmentArrivalsAt(dept.getDepartmentId(), target);
+                int dow = toPostgresDow(target.getDayOfWeek());
+                int hr = target.getHour();
+                Double hist = historicalMap.get(dept.getDepartmentId() + ":" + dow + ":" + hr);
+                double predicted = (hist != null && hist > 0) ? hist : getDefaultDeptEstimate(hr);
                 hourly.add(new HourlyPrediction(
                         target.getHour(),
                         target.getDayOfWeek().toString(),
@@ -81,13 +176,20 @@ public class QueueFlowPredictionService {
             deptPredictions.put(dept.getDepartmentCode(), hourly);
         }
 
-        return new DepartmentFlowPrediction(deptPredictions, hoursAhead, now);
+        DepartmentFlowPrediction result = new DepartmentFlowPrediction(deptPredictions, hoursAhead, now);
+        deptFlowCache.put(hoursAhead, new CacheEntry<>(result, 60000));
+        return result;
     }
 
     /**
      * Get peak hours analysis for a given day.
      */
     public PeakHoursReport getPeakHours(DayOfWeek dayOfWeek) {
+        CacheEntry<PeakHoursReport> cached = peakHoursCache.get(dayOfWeek);
+        if (cached != null && cached.isValid()) {
+            return cached.data;
+        }
+
         String sql = """
                 SELECT EXTRACT(HOUR FROM created_at) AS hour_of_day,
                        COUNT(*) AS total_arrivals
@@ -97,7 +199,7 @@ public class QueueFlowPredictionService {
                 ORDER BY hour_of_day
                 """;
 
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, dayOfWeek.getValue() - 1);
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, toPostgresDow(dayOfWeek));
 
         Map<Integer, Double> hourlyAverages = new LinkedHashMap<>();
         for (int h = 8; h <= 20; h++)
@@ -129,7 +231,9 @@ public class QueueFlowPredictionService {
                 .sorted()
                 .toList();
 
-        return new PeakHoursReport(dayOfWeek.toString(), hourlyAverages, peakHour, offPeakHour, rushHours);
+        PeakHoursReport result = new PeakHoursReport(dayOfWeek.toString(), hourlyAverages, peakHour, offPeakHour, rushHours);
+        peakHoursCache.put(dayOfWeek, new CacheEntry<>(result, 120000));
+        return result;
     }
 
     /**
@@ -218,6 +322,10 @@ public class QueueFlowPredictionService {
         } catch (Exception e) {
             return getDefaultDeptEstimate(hour);
         }
+    }
+
+    private int toPostgresDow(DayOfWeek dayOfWeek) {
+        return dayOfWeek == DayOfWeek.SUNDAY ? 0 : dayOfWeek.getValue();
     }
 
     private double getDefaultEstimate(int hour) {

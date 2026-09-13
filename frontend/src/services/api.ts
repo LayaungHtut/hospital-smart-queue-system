@@ -43,37 +43,119 @@ export const API_BASE_URL =
   (import.meta as unknown as { env?: { VITE_API_BASE_URL?: string } }).env?.VITE_API_BASE_URL ??
   "/api";
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  try {
-    const res = await fetch(`${API_BASE_URL}${path}`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...(init?.headers ?? {}),
-      },
-      credentials: "include",
-      ...init,
-    });
+export interface RequestOptions extends RequestInit {
+  skipCache?: boolean;
+  ttl?: number;
+}
 
-    if (!res.ok) {
-      let errorMsg = `${res.status} ${res.statusText}`;
-      try {
-        const errorJson = await res.json();
-        if (errorJson.error) errorMsg = errorJson.error;
-        else if (errorJson.message) errorMsg = errorJson.message;
-      } catch {
-        // Ignored
-      }
-      throw new Error(errorMsg);
+interface CacheItem {
+  data: unknown;
+  expiresAt: number;
+}
+
+const apiCache = new Map<string, CacheItem>();
+const inFlightRequests = new Map<string, Promise<unknown>>();
+
+/**
+ * Invalidate in-memory cache entries. If no pattern is provided, clears all.
+ */
+export function invalidateApiCache(pattern?: string | RegExp) {
+  if (!pattern) {
+    apiCache.clear();
+    return;
+  }
+  for (const key of apiCache.keys()) {
+    if (typeof pattern === "string" ? key.includes(pattern) : pattern.test(key)) {
+      apiCache.delete(key);
+    }
+  }
+}
+
+async function request<T>(path: string, init?: RequestOptions): Promise<T> {
+  const method = (init?.method ?? "GET").toUpperCase();
+  const isGet = method === "GET";
+
+  // Mutating requests invalidate read caches
+  if (!isGet) {
+    apiCache.clear();
+  }
+
+  const now = Date.now();
+  const cacheKey = `${method}:${path}`;
+
+  // Check cache for GET requests
+  if (isGet && !init?.skipCache) {
+    const cached = apiCache.get(cacheKey);
+    if (cached && cached.expiresAt > now) {
+      return cached.data as T;
     }
 
-    return (await res.json()) as T;
-  } catch (err: unknown) {
-    console.warn(
-      `[API] Request to ${path} failed:`,
-      err instanceof Error ? err.message : String(err),
-    );
-    throw err;
+    // Return in-flight promise if an identical request is already running
+    const inFlight = inFlightRequests.get(cacheKey);
+    if (inFlight) {
+      return inFlight as Promise<T>;
+    }
   }
+
+  const fetchPromise = (async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}${path}`, {
+        headers: {
+          "Content-Type": "application/json",
+          ...(init?.headers ?? {}),
+        },
+        credentials: "include",
+        ...init,
+      });
+
+      if (!res.ok) {
+        let errorMsg = `${res.status} ${res.statusText}`;
+        try {
+          const errorJson = await res.json();
+          if (errorJson.error) errorMsg = errorJson.error;
+          else if (errorJson.message) errorMsg = errorJson.message;
+        } catch {
+          // Ignored
+        }
+        throw new Error(errorMsg);
+      }
+
+      const data = (await res.json()) as T;
+
+      if (isGet && !init?.skipCache) {
+        // Longer TTL for static reference data (departments, symptoms, settings)
+        const isStaticLookup =
+          path.startsWith("/departments") ||
+          path.startsWith("/symptoms") ||
+          path.startsWith("/system/settings");
+        const defaultTtl = isStaticLookup ? 60_000 : 15_000;
+        const ttl = init?.ttl ?? defaultTtl;
+
+        apiCache.set(cacheKey, {
+          data,
+          expiresAt: Date.now() + ttl,
+        });
+      }
+
+      return data;
+    } catch (err: unknown) {
+      console.warn(
+        `[API] Request to ${path} failed:`,
+        err instanceof Error ? err.message : String(err),
+      );
+      throw err;
+    } finally {
+      if (isGet) {
+        inFlightRequests.delete(cacheKey);
+      }
+    }
+  })();
+
+  if (isGet && !init?.skipCache) {
+    inFlightRequests.set(cacheKey, fetchPromise);
+  }
+
+  return fetchPromise;
 }
 
 /* ---------------------------------- Auth --------------------------------- */

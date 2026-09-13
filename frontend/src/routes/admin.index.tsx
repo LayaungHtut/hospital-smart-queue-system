@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   Bar,
   BarChart,
@@ -56,9 +56,12 @@ function DepartmentTooltip({ active, payload }: TooltipProps<number, string>) {
 function AdminDashboardPage() {
   const [data, setData] = useState<AdminDashboard | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [activeDept, setActiveDept] = useState<string | null>(null);
 
-  useEffect(() => {
+  const loadData = useCallback(() => {
+    setLoading(true);
+    setError(null);
     getAdminDashboard()
       .then((d) => {
         setData(d);
@@ -66,9 +69,14 @@ function AdminDashboardPage() {
       })
       .catch((err) => {
         console.error(err);
+        setError(err instanceof Error ? err.message : "Failed to load dashboard data");
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   if (loading && !data) {
     return (
@@ -92,6 +100,22 @@ function AdminDashboardPage() {
   return (
     <AdminLayout title="Dashboard">
       <div className="space-y-6">
+        {error && (
+          <div className="flex items-center justify-between gap-4 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive">
+            <div>
+              <p className="text-sm font-semibold">Unable to connect to backend service</p>
+              <p className="text-xs opacity-80 mt-0.5">{error}</p>
+            </div>
+            <button
+              onClick={loadData}
+              type="button"
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-destructive text-destructive-foreground hover:bg-destructive/90 transition shadow-xs shrink-0 cursor-pointer"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-secondary">
             Executive Overview
