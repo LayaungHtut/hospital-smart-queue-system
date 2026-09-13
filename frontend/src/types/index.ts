@@ -316,6 +316,8 @@ export interface AdminDashboard {
 export interface QueueSettings {
   registrationStartTime: string;
   registrationEndTime: string;
+  breakStartTime: string;
+  breakEndTime: string;
   maxWaitingMinutes: number;
   notifyBeforeTurns: number;
   autoCancelAfterMissedTurn: boolean;

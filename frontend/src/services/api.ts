@@ -41,7 +41,7 @@ import type {
 
 export const API_BASE_URL =
   (import.meta as unknown as { env?: { VITE_API_BASE_URL?: string } }).env?.VITE_API_BASE_URL ??
-  "http://localhost:8080/api";
+  "/api";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   try {
@@ -159,6 +159,15 @@ export async function getPatientNotifications(
   return await request<NotificationItem[]>(`/patient/${targetId}/notifications`);
 }
 
+export async function markAllPatientNotificationsRead(
+  patientId?: string | number,
+): Promise<{ success: boolean }> {
+  const targetId = patientId ?? getCurrentPatientId();
+  return await request<{ success: boolean }>(`/patient/${targetId}/notifications/read-all`, {
+    method: "POST",
+  });
+}
+
 /* ------------------------------ Shared lookup ----------------------------- */
 
 export async function getSymptoms(): Promise<Symptom[]> {
@@ -262,7 +271,7 @@ export async function getStaffNotifications(): Promise<NotificationItem[]> {
   return await request<NotificationItem[]>("/staff/notifications");
 }
 
-export async function markAllNotificationsRead(): Promise<{ success: boolean }> {
+export async function markAllStaffNotificationsRead(): Promise<{ success: boolean }> {
   return await request<{ success: boolean }>("/staff/notifications/read-all", {
     method: "POST",
   });

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { getStaffNotifications, markAllNotificationsRead } from "@/services/api";
+import { getStaffNotifications, markAllStaffNotificationsRead } from "@/services/api";
 import { StaffLayout } from "@/components/portal/shells";
 import { NotificationList } from "@/components/portal/NotificationList";
 import { Panel } from "@/components/portal/ui-kit";
@@ -39,7 +39,7 @@ function StaffNotificationsPage() {
   }, []);
 
   async function markAll() {
-    await markAllNotificationsRead();
+    await markAllStaffNotificationsRead();
     setItems((prev) => prev.map((n) => ({ ...n, read: true })));
   }
 

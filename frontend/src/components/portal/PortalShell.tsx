@@ -60,9 +60,14 @@ export function PortalShell({
     }
     poll();
     const interval = setInterval(poll, NOTIFICATION_POLL_MS);
+    // Refetch immediately when another part of the app (e.g. the
+    // notifications page's "Mark all as read") changes read state, instead
+    // of waiting for the next poll tick.
+    window.addEventListener("patient_notifications_updated", poll);
     return () => {
       active = false;
       clearInterval(interval);
+      window.removeEventListener("patient_notifications_updated", poll);
     };
   }, [portal, session?.userId]);
 

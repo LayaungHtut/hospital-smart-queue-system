@@ -803,13 +803,15 @@ public class AdminApiController {
     public Map<String, Object> getQueueSettings() {
         Map<String, String> dbSettings = new java.util.HashMap<>();
         jdbcTemplate.query(
-                "SELECT setting_key, setting_value FROM system_setting WHERE setting_key IN ('registration_start_time', 'registration_end_time', 'max_waiting_minutes', 'notify_before_turns', 'auto_cancel_missed')",
+                "SELECT setting_key, setting_value FROM system_setting WHERE setting_key IN ('registration_start_time', 'registration_end_time', 'break_start_time', 'break_end_time', 'max_waiting_minutes', 'notify_before_turns', 'auto_cancel_missed')",
                 (org.springframework.jdbc.core.RowCallbackHandler) rs -> dbSettings.put(rs.getString("setting_key"),
                         rs.getString("setting_value")));
 
         Map<String, Object> settings = new LinkedHashMap<>();
         settings.put("registrationStartTime", dbSettings.getOrDefault("registration_start_time", "09:00"));
         settings.put("registrationEndTime", dbSettings.getOrDefault("registration_end_time", "16:30"));
+        settings.put("breakStartTime", dbSettings.getOrDefault("break_start_time", "12:00"));
+        settings.put("breakEndTime", dbSettings.getOrDefault("break_end_time", "13:00"));
         settings.put("maxWaitingMinutes", Integer.parseInt(dbSettings.getOrDefault("max_waiting_minutes", "120")));
         settings.put("notifyBeforeTurns", Integer.parseInt(dbSettings.getOrDefault("notify_before_turns", "3")));
         settings.put("autoCancelAfterMissedTurn",
@@ -827,6 +829,10 @@ public class AdminApiController {
             jdbcTemplate.update(upsert, "registration_start_time", payload.get("registrationStartTime").toString());
         if (payload.containsKey("registrationEndTime"))
             jdbcTemplate.update(upsert, "registration_end_time", payload.get("registrationEndTime").toString());
+        if (payload.containsKey("breakStartTime"))
+            jdbcTemplate.update(upsert, "break_start_time", payload.get("breakStartTime").toString());
+        if (payload.containsKey("breakEndTime"))
+            jdbcTemplate.update(upsert, "break_end_time", payload.get("breakEndTime").toString());
         if (payload.containsKey("maxWaitingMinutes"))
             jdbcTemplate.update(upsert, "max_waiting_minutes", payload.get("maxWaitingMinutes").toString());
         if (payload.containsKey("notifyBeforeTurns"))

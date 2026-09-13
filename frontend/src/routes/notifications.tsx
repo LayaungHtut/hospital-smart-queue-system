@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { getPatientNotifications, markAllNotificationsRead } from "@/services/api";
+import { getPatientNotifications, markAllPatientNotificationsRead } from "@/services/api";
 import { PatientLayout } from "@/components/portal/shells";
 import { NotificationList } from "@/components/portal/NotificationList";
 import { Alert, Panel, type AlertTone } from "@/components/portal/ui-kit";
@@ -51,8 +51,9 @@ function PatientNotifications() {
   }, [session?.userId]);
 
   async function markAll() {
-    await markAllNotificationsRead();
+    await markAllPatientNotificationsRead(session?.userId);
     setItems((prev) => prev.map((n) => ({ ...n, read: true })));
+    window.dispatchEvent(new Event("patient_notifications_updated"));
   }
 
   return (

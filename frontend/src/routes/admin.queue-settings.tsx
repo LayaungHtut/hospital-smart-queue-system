@@ -48,6 +48,10 @@ function QueueSettingsPage() {
     <AdminLayout title="Queue Settings">
       <form onSubmit={save} className="space-y-6">
         <Panel title="Registration Window">
+          <p className="mb-4 text-sm text-muted-foreground">
+            New queues (online or walk-in) are only accepted between these times, and never during
+            the break window below. Emergency cases always bypass both.
+          </p>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Registration Start Time">
               <input
@@ -65,6 +69,22 @@ function QueueSettingsPage() {
                 className={inputClass}
                 value={settings.registrationEndTime}
                 onChange={(e) => setSettings({ ...settings, registrationEndTime: e.target.value })}
+              />
+            </Field>
+            <Field label="Break Start Time">
+              <input
+                type="time"
+                className={inputClass}
+                value={settings.breakStartTime}
+                onChange={(e) => setSettings({ ...settings, breakStartTime: e.target.value })}
+              />
+            </Field>
+            <Field label="Break End Time">
+              <input
+                type="time"
+                className={inputClass}
+                value={settings.breakEndTime}
+                onChange={(e) => setSettings({ ...settings, breakEndTime: e.target.value })}
               />
             </Field>
           </div>

@@ -16,6 +16,7 @@ import com.hospitalqueue.rule.QueueRule;
 import com.hospitalqueue.util.QueueNumberGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -46,6 +47,7 @@ public class QueueService {
     @SuppressWarnings("unused")
     private final WaitTimePredictionService waitTimePredictionService;
     private final SymptomRepository symptomRepository;
+    private final JdbcTemplate jdbcTemplate;
 
     public QueueService(QueueRepository queueRepository,
             AppointmentRepository appointmentRepository,
@@ -58,7 +60,8 @@ public class QueueService {
             EmergencyRule emergencyRule,
             DoctorAvailabilityRule doctorAvailabilityRule,
             WaitTimePredictionService waitTimePredictionService,
-            SymptomRepository symptomRepository) {
+            SymptomRepository symptomRepository,
+            JdbcTemplate jdbcTemplate) {
         this.queueRepository = queueRepository;
         this.appointmentRepository = appointmentRepository;
         this.doctorRepository = doctorRepository;
@@ -71,6 +74,22 @@ public class QueueService {
         this.doctorAvailabilityRule = doctorAvailabilityRule;
         this.waitTimePredictionService = waitTimePredictionService;
         this.symptomRepository = symptomRepository;
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    /**
+     * Reads a HH:mm time setting from {@code system_setting}, falling back when
+     * the row is missing/blank or unparsable - used for the hospital-wide
+     * registration window and break window (Admin > Queue Settings).
+     */
+    private LocalTime readSettingTime(String key, LocalTime fallback) {
+        try {
+            String value = jdbcTemplate.queryForObject(
+                    "SELECT setting_value FROM system_setting WHERE setting_key = ?", String.class, key);
+            return value == null || value.isBlank() ? fallback : LocalTime.parse(value.trim());
+        } catch (Exception e) {
+            return fallback;
+        }
     }
 
     /**
@@ -136,11 +155,27 @@ public class QueueService {
         LocalTime close = doctor.getQueueCloseTime() != null ? doctor.getQueueCloseTime() : LocalTime.of(16, 30);
         LocalTime now = LocalTime.now();
 
-        // Enforce hospital operating hours (09:00 AM - 4:30 PM) for non-emergencies
+        // Enforce hospital operating hours for non-emergencies: the hospital-wide
+        // registration window (Admin > Queue Settings, default 09:00-16:30)
+        // intersected with the doctor's own working hours, and never during the
+        // configured break window (default 12:00-13:00).
         if (!emergency) {
-            if (now.isBefore(open) || now.isAfter(close)) {
-                throw new IllegalStateException("Hospital queues are accepted between " + open + " and " + close
+            LocalTime registrationStart = readSettingTime("registration_start_time", LocalTime.of(9, 0));
+            LocalTime registrationEnd = readSettingTime("registration_end_time", LocalTime.of(16, 30));
+            LocalTime effectiveOpen = open.isAfter(registrationStart) ? open : registrationStart;
+            LocalTime effectiveClose = close.isBefore(registrationEnd) ? close : registrationEnd;
+
+            if (now.isBefore(effectiveOpen) || now.isAfter(effectiveClose)) {
+                throw new IllegalStateException("Rule 8: hospital queues are accepted between " + effectiveOpen
+                        + " and " + effectiveClose
                         + ". Please register during operating hours or select Emergency if urgent.");
+            }
+
+            LocalTime breakStart = readSettingTime("break_start_time", LocalTime.of(12, 0));
+            LocalTime breakEnd = readSettingTime("break_end_time", LocalTime.of(13, 0));
+            if (!now.isBefore(breakStart) && now.isBefore(breakEnd)) {
+                throw new IllegalStateException("Rule 8: queue registration is paused during the break (" + breakStart
+                        + " - " + breakEnd + "). Please try again after the break, or select Emergency if urgent.");
             }
         }
 
