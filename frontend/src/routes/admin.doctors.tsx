@@ -43,6 +43,8 @@ const emptyForm = {
   experienceYears: 5,
   estimatedWaitingMinutes: 15,
   phone: "",
+  username: "",
+  password: "",
 };
 
 function AdminDoctorsPage() {
@@ -84,12 +86,22 @@ function AdminDoctorsPage() {
       setError("Doctor phone number must start with 09 and contain 9 to 11 digits.");
       return;
     }
+    if (!form.username.trim()) {
+      setError("Please provide a login username for the doctor.");
+      return;
+    }
+    if (!form.password.trim() || form.password.trim().length < 6) {
+      setError("Please provide a login password (at least 6 characters).");
+      return;
+    }
 
     try {
+      const { username, password, ...rest } = form;
       const created = await createDoctor({
-        ...form,
+        ...rest,
         phone: cleanPhone,
-        doctorCode: `D-${Math.floor(Math.random() * 900 + 100)}`,
+        doctorCode: username.trim().toUpperCase(),
+        password: password.trim(),
         currentPatientId: 0,
         status: "ACTIVE",
         availabilityStatus: "CONSULTING",
@@ -97,7 +109,9 @@ function AdminDoctorsPage() {
       setDoctors((prev) => [...prev, created]);
       setForm(emptyForm);
       setOpen(false);
-      showToast("Doctor profile added successfully!");
+      showToast(
+        `Doctor account created! Login username: ${username.trim().toUpperCase()} — share the password with the doctor.`,
+      );
     } catch (err) {
       setError(
         err instanceof Error
@@ -274,6 +288,25 @@ function AdminDoctorsPage() {
                 placeholder="e.g. 09123456789"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              />
+            </Field>
+            <Field label="Login Username">
+              <input
+                required
+                className={inputClass}
+                placeholder="e.g. DR-ZAWMIN"
+                value={form.username}
+                onChange={(e) => setForm({ ...form, username: e.target.value })}
+              />
+            </Field>
+            <Field label="Login Password">
+              <input
+                required
+                type="text"
+                className={inputClass}
+                placeholder="At least 6 characters"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </Field>
             <div className="sm:col-span-2 flex justify-end gap-2">

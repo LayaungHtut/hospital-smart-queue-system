@@ -119,11 +119,22 @@
   --chart-4: oklch(0.55 0.18 300);
   --chart-5: oklch(0.55 0.2 25);
   --chart-6: oklch(0.6 0.16 230);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-card: var(--card);
+  --color-border: var(--border);
 
   /* Status Colors */
   --status-emergency: oklch(0.55 0.2 25);
   --status-appointment: oklch(0.38 0.08 175);
   --status-normal: oklch(0.55 0.14 155);
+  --color-status-emergency: var(--status-emergency);
+  --color-status-appointment: var(--status-appointment);
+  --color-status-normal: var(--status-normal);
 
   /* Semantic: Success — Mint Sage */
   --success: oklch(0.55 0.14 155);
@@ -197,6 +208,14 @@
   --chart-4: oklch(0.6 0.18 300);
   --chart-5: oklch(0.65 0.2 25);
   --chart-6: oklch(0.7 0.16 230);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-card: var(--card);
+  --color-border: var(--border);
   --sidebar: oklch(0.18 0.03 175);
   --sidebar-foreground: oklch(0.95 0.01 90);
   --sidebar-primary: oklch(0.55 0.12 175);

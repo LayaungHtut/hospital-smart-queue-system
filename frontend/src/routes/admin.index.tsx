@@ -37,6 +37,48 @@ export const Route = createFileRoute("/admin/")({
 
 type DepartmentSlice = { name: string; percent: number; color: string };
 
+const DEPARTMENT_COLORS: Record<string, string> = {
+  cardiology: "#E11D48",        // Rose Red (Heart)
+  neurology: "#8B5CF6",         // Royal Purple (Brain)
+  orthopedics: "#0EA5E9",       // Sky Blue (Bones)
+  "general medicine": "#10B981",// Emerald Green (Primary care)
+  general: "#10B981",
+  pediatrics: "#F59E0B",        // Amber Gold (Children)
+  dermatology: "#EC4899",       // Fuchsia Pink (Skin)
+  emergency: "#EF4444",         // Red (Emergency)
+  ophthalmology: "#06B6D4",     // Cyan (Eyes)
+  ent: "#84CC16",               // Lime (Ear/Nose/Throat)
+  oncology: "#A855F7",          // Violet (Oncology)
+  radiology: "#6366F1",         // Indigo (Imaging)
+  dental: "#14B8A6",            // Teal (Oral)
+};
+
+const VIBRANT_PALETTE = [
+  "#E11D48", // Rose Red
+  "#8B5CF6", // Purple
+  "#0EA5E9", // Sky Blue
+  "#10B981", // Emerald
+  "#F59E0B", // Amber
+  "#EC4899", // Pink
+  "#06B6D4", // Cyan
+  "#6366F1", // Indigo
+  "#F97316", // Orange
+  "#14B8A6", // Teal
+  "#84CC16", // Lime
+  "#A855F7", // Violet
+];
+
+function resolveDepartmentColor(name: string, index: number, apiColor?: string): string {
+  if (apiColor && !apiColor.startsWith("var(") && apiColor.startsWith("#")) {
+    return apiColor;
+  }
+  const lower = (name || "").toLowerCase().trim();
+  for (const [key, color] of Object.entries(DEPARTMENT_COLORS)) {
+    if (lower.includes(key)) return color;
+  }
+  return VIBRANT_PALETTE[index % VIBRANT_PALETTE.length] ?? "#0EA5E9";
+}
+
 function DepartmentTooltip({ active, payload }: TooltipProps<number, string>) {
   if (!active || !payload?.length) return null;
   const entry = payload[0];
@@ -46,6 +88,7 @@ function DepartmentTooltip({ active, payload }: TooltipProps<number, string>) {
     <div className="rounded-lg border border-border bg-popover px-3 py-2 text-sm shadow-md">
       <div className="flex items-center gap-2">
         <span className="size-2.5 rounded-full" style={{ backgroundColor: d.color }} aria-hidden />
+        <span className="size-2.5 rounded-full shrink-0" style={{ backgroundColor: d.color }} aria-hidden />
         <span className="font-medium text-popover-foreground">{d.name}</span>
       </div>
       <p className="mt-0.5 text-popover-foreground/80">{d.percent}% of today's queues</p>
@@ -58,6 +101,12 @@ function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeDept, setActiveDept] = useState<string | null>(null);
+
+  const departmentData: DepartmentSlice[] = (data?.byDepartment ?? []).map((d, index) => ({
+    name: d.name,
+    percent: d.percent,
+    color: resolveDepartmentColor(d.name, index, d.color),
+  }));
 
   const loadData = useCallback(() => {
     setLoading(true);
@@ -188,19 +237,23 @@ function AdminDashboardPage() {
                 <PieChart>
                   <Pie
                     data={data?.byDepartment ?? []}
+                    data={departmentData}
                     dataKey="percent"
                     nameKey="name"
                     innerRadius={45}
                     outerRadius={75}
                     paddingAngle={2}
                     stroke="var(--color-card)"
+                    stroke="var(--color-card, #ffffff)"
                     strokeWidth={2}
                     onMouseEnter={(_, index) =>
                       setActiveDept(data?.byDepartment[index]?.name ?? null)
+                      setActiveDept(departmentData[index]?.name ?? null)
                     }
                     onMouseLeave={() => setActiveDept(null)}
                   >
                     {(data?.byDepartment ?? []).map((d) => (
+                    {departmentData.map((d) => (
                       <Cell
                         key={d.name}
                         fill={d.color}
@@ -215,9 +268,11 @@ function AdminDashboardPage() {
             </div>
             <ul className="mt-4 space-y-2">
               {(data?.byDepartment ?? []).map((d) => (
+              {departmentData.map((d) => (
                 <li
                   key={d.name}
                   className="flex items-center gap-3 rounded-md px-1.5 py-1 text-sm transition-colors"
+                  className="flex items-center gap-3 rounded-md px-2 py-1.5 text-sm transition-colors cursor-pointer"
                   style={{
                     backgroundColor: activeDept === d.name ? "var(--color-accent)" : "transparent",
                   }}
@@ -226,11 +281,14 @@ function AdminDashboardPage() {
                 >
                   <span
                     className="size-3 rounded-sm"
+                    className="size-3 rounded-sm shrink-0 shadow-xs"
                     style={{ backgroundColor: d.color }}
                     aria-hidden
                   />
                   <span className="flex-1 text-foreground">{d.name}</span>
                   <span className="font-medium text-foreground">{d.percent}%</span>
+                  <span className="flex-1 text-foreground font-medium">{d.name}</span>
+                  <span className="font-semibold text-foreground">{d.percent}%</span>
                 </li>
               ))}
             </ul>

@@ -73,18 +73,21 @@ public class StaffApiController {
         emergItem.put("value", emergCount);
         emergItem.put("percent", (int) Math.round((emergCount * 100.0) / sum));
         emergItem.put("color", "var(--color-status-emergency)");
+        emergItem.put("color", "#EF4444");
 
         Map<String, Object> apptItem = new LinkedHashMap<>();
         apptItem.put("label", "Appointment");
         apptItem.put("value", apptCount);
         apptItem.put("percent", (int) Math.round((apptCount * 100.0) / sum));
         apptItem.put("color", "var(--color-status-appointment)");
+        apptItem.put("color", "#0EA5E9");
 
         Map<String, Object> normItem = new LinkedHashMap<>();
         normItem.put("label", "Normal");
         normItem.put("value", normCount);
         normItem.put("percent", (int) Math.round((normCount * 100.0) / sum));
         normItem.put("color", "var(--color-status-normal)");
+        normItem.put("color", "#10B981");
 
         Map<String, Object> h1 = new LinkedHashMap<>();
         h1.put("label", "Queues Completed");

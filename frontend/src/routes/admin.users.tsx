@@ -5,6 +5,7 @@ import {
   createUser,
   deleteUser,
   getUsers,
+  getDepartments,
   getRegistrationRequests,
   approveRegistrationRequest,
   rejectRegistrationRequest,
@@ -19,7 +20,7 @@ import {
   type Column,
 } from "@/components/portal/ui-kit";
 import { SkeletonTable } from "@/components/ui/loading";
-import type { User, RegistrationRequest } from "@/types";
+import type { User, RegistrationRequest, Department } from "@/types";
 
 export const Route = createFileRoute("/admin/users")({
   head: () => ({
@@ -39,6 +40,7 @@ export const Route = createFileRoute("/admin/users")({
 function AdminUsersPage() {
   const [activeTab, setActiveTab] = useState<"users" | "requests">("requests");
   const [rows, setRows] = useState<User[]>([]);
+  const [departments, setDepartments] = useState<Department[]>([]);
   const [requests, setRequests] = useState<RegistrationRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<number | null>(null);
@@ -47,6 +49,7 @@ function AdminUsersPage() {
   const [form, setForm] = useState({
     name: "",
     username: "",
+    password: "",
     phone: "",
     email: "",
     department: "General Medicine",
@@ -57,6 +60,9 @@ function AdminUsersPage() {
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    getDepartments()
+      .then(setDepartments)
+      .catch(() => {});
     Promise.all([getUsers(), getRegistrationRequests()])
       .then(([userData, reqData]) => {
         setRows(userData);
@@ -82,12 +88,23 @@ function AdminUsersPage() {
       setError("Please enter a valid email address.");
       return;
     }
+    if (role === "Doctor" || role === "Admin") {
+      if (!form.username.trim()) {
+        setError("Please provide a login username.");
+        return;
+      }
+      if (!form.password.trim() || form.password.trim().length < 6) {
+        setError("Please provide a login password (at least 6 characters).");
+        return;
+      }
+    }
 
     try {
       const created = await createUser({
         role: role,
         name: form.name.trim() || (role === "Admin" ? form.username.trim() : "New User"),
-        userCode: role === "Admin" ? form.username.trim() : undefined,
+        userCode: role !== "Staff" ? form.username.trim() : undefined,
+        password: role !== "Staff" ? form.password.trim() : undefined,
         phone: cleanPhone,
         email: form.email.trim(),
         contact: cleanPhone || form.email.trim(),
@@ -99,6 +116,7 @@ function AdminUsersPage() {
       setForm({
         name: "",
         username: "",
+        password: "",
         phone: "",
         email: "",
         department: "General Medicine",
@@ -107,7 +125,9 @@ function AdminUsersPage() {
       });
       setOpen(false);
       setMessage(
-        `User created successfully in database table '${role === "Doctor" ? "doctor" : role === "Admin" ? "admin_user" : "staff"}'!`,
+        role !== "Staff"
+          ? `${role} account created! Login username: ${form.username.trim()} — share the password with them.`
+          : `User created successfully in database table 'staff'!`,
       );
       setTimeout(() => setMessage(null), 4000);
     } catch (err) {
@@ -363,12 +383,9 @@ function AdminUsersPage() {
                       value={form.department}
                       onChange={(e) => setForm({ ...form, department: e.target.value })}
                     >
-                      <option>Cardiology</option>
-                      <option>Neurology</option>
-                      <option>Orthopedics</option>
-                      <option>General Medicine</option>
-                      <option>Pediatrics</option>
-                      <option>Dermatology</option>
+                      {departments.map((d) => (
+                        <option key={d.id}>{d.name}</option>
+                      ))}
                     </select>
                   </Field>
                   <Field label="Degree / Qualification">
@@ -409,6 +426,25 @@ function AdminUsersPage() {
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                     />
                   </Field>
+                  <Field label="Login Username">
+                    <input
+                      required
+                      className={inputClass}
+                      placeholder="e.g. DR-HLAINGMYINT"
+                      value={form.username}
+                      onChange={(e) => setForm({ ...form, username: e.target.value })}
+                    />
+                  </Field>
+                  <Field label="Login Password">
+                    <input
+                      required
+                      type="text"
+                      className={inputClass}
+                      placeholder="At least 6 characters"
+                      value={form.password}
+                      onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    />
+                  </Field>
                 </div>
               ) : role === "Admin" ? (
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -446,6 +482,16 @@ function AdminUsersPage() {
                       placeholder="e.g. 09123456789"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    />
+                  </Field>
+                  <Field label="Login Password">
+                    <input
+                      required
+                      type="text"
+                      className={inputClass}
+                      placeholder="At least 6 characters"
+                      value={form.password}
+                      onChange={(e) => setForm({ ...form, password: e.target.value })}
                     />
                   </Field>
                 </div>

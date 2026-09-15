@@ -49,6 +49,29 @@ public class AdminApiController {
     private final JdbcTemplate jdbcTemplate;
     private final DoctorScheduleRepository doctorScheduleRepository;
 
+    private static final Map<String, String> DEPARTMENT_HEX_COLORS = Map.ofEntries(
+            Map.entry("cardiology", "#E11D48"),         // Vibrant Crimson (Heart)
+            Map.entry("neurology", "#8B5CF6"),          // Royal Purple (Brain)
+            Map.entry("orthopedics", "#0EA5E9"),        // Sky Blue (Bones)
+            Map.entry("general medicine", "#10B981"),   // Emerald Green (Primary Care)
+            Map.entry("pediatrics", "#F59E0B"),         // Amber Gold (Children)
+            Map.entry("dermatology", "#EC4899"),        // Fuchsia Pink (Skin)
+            Map.entry("intensive care", "#F43F5E"),     // Rose Coral (ICU)
+            Map.entry("mental health", "#6366F1"),      // Indigo (Mental Health)
+            Map.entry("emergency", "#EF4444"),          // Red (Emergency)
+            Map.entry("ophthalmology", "#06B6D4"),      // Cyan (Eyes)
+            Map.entry("ent", "#84CC16"),                // Lime (Ear/Nose/Throat)
+            Map.entry("oncology", "#A855F7"),           // Violet (Oncology)
+            Map.entry("radiology", "#3B82F6"),          // Sapphire Blue (Radiology)
+            Map.entry("dental", "#14B8A6")              // Teal (Dental)
+    );
+
+    private static final String[] FALLBACK_PALETTE = new String[] {
+            "#E11D48", "#8B5CF6", "#0EA5E9", "#10B981", "#F59E0B",
+            "#EC4899", "#06B6D4", "#6366F1", "#F97316", "#14B8A6",
+            "#84CC16", "#A855F7"
+    };
+
     public AdminApiController(DoctorRepository doctorRepository,
             DepartmentRepository departmentRepository,
             PatientRepository patientRepository,
@@ -115,6 +138,8 @@ public class AdminApiController {
         // Assign each department a color by its name (alphabetical order), not by its
         // rank in the count-sorted list below — otherwise a department's slice color
         // would shift every time the queue counts reorder it.
+        // Assign each department a distinct, vibrant medical color by name
+        Map<String, String> colorByDepartment = new LinkedHashMap<>();
         List<String> namesSorted = deptCounts.stream()
                 .map(dc -> (String) dc.get("name"))
                 .sorted()
@@ -122,6 +147,21 @@ public class AdminApiController {
         Map<String, String> colorByDepartment = new LinkedHashMap<>();
         for (int i = 0; i < namesSorted.size(); i++) {
             colorByDepartment.put(namesSorted.get(i), colors[i % colors.length]);
+            String name = namesSorted.get(i);
+            String matched = null;
+            if (name != null) {
+                String lower = name.toLowerCase().trim();
+                for (Map.Entry<String, String> entry : DEPARTMENT_HEX_COLORS.entrySet()) {
+                    if (lower.contains(entry.getKey())) {
+                        matched = entry.getValue();
+                        break;
+                    }
+                }
+            }
+            if (matched == null) {
+                matched = FALLBACK_PALETTE[i % FALLBACK_PALETTE.length];
+            }
+            colorByDepartment.put(name, matched);
         }
 
         List<Map<String, Object>> byDepartment = new ArrayList<>();
@@ -213,6 +253,7 @@ public class AdminApiController {
     public ResponseEntity<?> createDoctor(@RequestBody Map<String, Object> req) {
         String name = (String) req.get("name");
         String doctorCode = (String) req.get("doctorCode");
+        String password = (String) req.get("password");
         String deptName = (String) req.get("department");
         String phone = (String) req.get("phone");
         String email = (String) req.get("email");
@@ -233,6 +274,12 @@ public class AdminApiController {
             }
         }
 
+        if (doctorCode != null && !doctorCode.isBlank()
+                && doctorRepository.findByCode(doctorCode.trim()) != null) {
+            return ResponseEntity.badRequest().body(
+                    Map.of("error", "A doctor with username '" + doctorCode.trim() + "' already exists."));
+        }
+
         Department dept = null;
         if (deptName != null && !deptName.isBlank()) {
             dept = departmentRepository.findByName(deptName);
@@ -244,6 +291,8 @@ public class AdminApiController {
         doctor.setDoctorId(IDGenerator.generateDoctorId(doctorRepository.findAll().size()));
         doctor.setDoctorCode(
                 doctorCode != null && !doctorCode.isBlank() ? doctorCode : "D" + (100 + new Random().nextInt(899)));
+                doctorCode != null && !doctorCode.isBlank() ? doctorCode.trim().toUpperCase()
+                        : "D" + (100 + new Random().nextInt(899)));
         doctor.setName(name != null ? name : "Dr. Specialist");
         doctor.setDepartmentId(departmentId);
         doctor.setQualification(
@@ -253,6 +302,7 @@ public class AdminApiController {
         doctor.setEmail(email != null && !email.isBlank() ? email.trim()
                 : (doctor.getDoctorCode().toLowerCase() + "@hospital.com"));
         doctor.setPasswordHash(passwordEncoder.encode("123456"));
+        doctor.setPasswordHash(passwordEncoder.encode(password != null && !password.isBlank() ? password : "123456"));
         doctor.setQueueOpenTime(java.time.LocalTime.of(9, 0));
         doctor.setQueueCloseTime(java.time.LocalTime.of(16, 30));
         doctor.setActive(true);
@@ -446,15 +496,23 @@ public class AdminApiController {
                 return ResponseEntity.badRequest()
                         .body(Map.of("error", "A doctor with phone number '" + resolvedPhone + "' already exists."));
             }
+            String resolvedCode = !userCode.isBlank() ? userCode.trim().toUpperCase()
+                    : "D" + (100 + new Random().nextInt(899));
+            if (doctorRepository.findByCode(resolvedCode) != null) {
+                return ResponseEntity.badRequest()
+                        .body(Map.of("error", "A doctor with username '" + resolvedCode + "' already exists."));
+            }
             String deptName = (String) req.get("department");
             Department dept = deptName != null ? departmentRepository.findByName(deptName) : null;
             int deptId = dept != null ? dept.getDepartmentId() : 1;
             String qual = (String) req.get("qualification");
             int exp = req.get("experienceYears") != null ? Integer.parseInt(req.get("experienceYears").toString()) : 5;
+            String password = req.get("password") != null ? req.get("password").toString() : "";
 
             Doctor doc = new Doctor();
             doc.setDoctorId(IDGenerator.generateDoctorId(doctorRepository.findAll().size()));
             doc.setDoctorCode(!userCode.isBlank() ? userCode : "D" + (100 + new Random().nextInt(899)));
+            doc.setDoctorCode(resolvedCode);
             doc.setName(name);
             doc.setDepartmentId(deptId);
             doc.setQualification(qual != null && !qual.isBlank() ? qual : "MBBS, M.Med.Sc");
@@ -462,6 +520,7 @@ public class AdminApiController {
             doc.setPhone(resolvedPhone);
             doc.setEmail(email.isBlank() ? doc.getDoctorCode().toLowerCase() + "@hospital.com" : email);
             doc.setPasswordHash(passwordEncoder.encode("123456"));
+            doc.setPasswordHash(passwordEncoder.encode(!password.isBlank() ? password : "123456"));
             doc.setQueueOpenTime(java.time.LocalTime.of(9, 0));
             doc.setQueueCloseTime(java.time.LocalTime.of(16, 30));
             doc.setActive(true);
@@ -479,6 +538,8 @@ public class AdminApiController {
             admin.setName(name);
             admin.setEmail(email.isBlank() ? "admin" + (System.currentTimeMillis() % 1000) + "@hospital.com" : email);
             admin.setPasswordHash(passwordEncoder.encode("123456"));
+            String adminPassword = req.get("password") != null ? req.get("password").toString() : "";
+            admin.setPasswordHash(passwordEncoder.encode(!adminPassword.isBlank() ? adminPassword : "123456"));
             admin.setRole("ADMIN");
             admin.setActive(true);
 

@@ -183,6 +183,7 @@ export interface User {
   qualification?: string;
   experienceYears?: number;
   department?: string;
+  password?: string | undefined;
   status: ActiveStatus;
 }
 

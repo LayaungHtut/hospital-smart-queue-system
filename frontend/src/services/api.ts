@@ -386,12 +386,15 @@ export async function getAdminDashboard(): Promise<AdminDashboard> {
   return await request<AdminDashboard>("/admin/dashboard");
 }
 
-export async function createDoctor(payload: Omit<DoctorDetail, "id">): Promise<DoctorDetail> {
+export async function createDoctor(
+  payload: Omit<DoctorDetail, "id"> & { password: string },
+): Promise<DoctorDetail> {
   const res = await request<{ id: string | number; success: boolean }>("/admin/doctors", {
     method: "POST",
     body: JSON.stringify(payload),
   });
-  return { ...payload, id: res.id };
+  const { password: _password, ...rest } = payload;
+  return { ...rest, id: res.id };
 }
 
 export async function updateDoctor(

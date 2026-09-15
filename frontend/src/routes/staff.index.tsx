@@ -23,6 +23,19 @@ export const Route = createFileRoute("/staff/")({
   component: StaffDashboardPage,
 });
 
+const STATUS_COLORS: Record<string, string> = {
+  Emergency: "#EF4444",
+  Appointment: "#0EA5E9",
+  Normal: "#10B981",
+};
+
+function resolveStatusColor(label: string, apiColor?: string): string {
+  if (apiColor && !apiColor.startsWith("var(") && apiColor.startsWith("#")) {
+    return apiColor;
+  }
+  return STATUS_COLORS[label] || "#0EA5E9";
+}
+
 function StaffDashboardPage() {
   const { session } = useAuth();
   const [data, setData] = useState<StaffDashboard | null>(null);
@@ -44,6 +57,7 @@ function StaffDashboardPage() {
     weekday: "long",
     year: "numeric",
     month: "short",
+    month: "long",
     day: "numeric",
   });
 
@@ -75,6 +89,11 @@ function StaffDashboardPage() {
     breakdown: [],
     highlights: [],
   };
+
+  const breakdownData = dashboard.breakdown.map((b) => ({
+    ...b,
+    color: resolveStatusColor(b.label, b.color),
+  }));
 
   return (
     <StaffLayout title="Dashboard">
@@ -139,6 +158,8 @@ function StaffDashboardPage() {
                 View details
               </Link>
             }
+            caption="Scheduled arrivals"
+            tone="primary"
           />
         </div>
 
@@ -150,13 +171,17 @@ function StaffDashboardPage() {
                   <PieChart>
                     <Pie
                       data={dashboard.breakdown}
+                      data={breakdownData}
                       dataKey="value"
                       nameKey="label"
                       innerRadius={50}
                       outerRadius={80}
                       paddingAngle={2}
+                      stroke="var(--color-card, #ffffff)"
+                      strokeWidth={2}
                     >
                       {dashboard.breakdown.map((entry) => (
+                      {breakdownData.map((entry) => (
                         <Cell key={entry.label} fill={entry.color} />
                       ))}
                     </Pie>
@@ -166,9 +191,11 @@ function StaffDashboardPage() {
               </div>
               <ul className="w-full space-y-3">
                 {dashboard.breakdown.map((b) => (
+                {breakdownData.map((b) => (
                   <li key={b.label} className="flex items-center gap-3 text-sm">
                     <span
                       className="size-3 rounded-sm"
+                      className="size-3 rounded-sm shrink-0 shadow-xs"
                       style={{ backgroundColor: b.color }}
                       aria-hidden
                     />
