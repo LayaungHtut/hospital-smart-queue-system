@@ -125,7 +125,14 @@ export function StatCard({
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
         {icon}
       </div>
-      <p className={cn("mt-3 text-3xl font-bold tracking-tight", toneClass)}>{value}</p>
+      <p
+        className={cn(
+          "mt-3 break-all text-3xl font-bold tracking-tight",
+          toneClass,
+        )}
+      >
+        {value}
+      </p>
       {caption ? <p className="mt-1 text-sm text-muted-foreground">{caption}</p> : null}
       {footer ? <div className="mt-3 text-sm">{footer}</div> : null}
     </div>
@@ -213,7 +220,7 @@ export function QueueTokenBadge({
         </span>
       </div>
       <div className="px-4 py-3.5">
-        <span className="font-sans text-[40px] font-extrabold leading-11 tracking-[0.04em] text-foreground">
+        <span className="block break-all font-sans text-2xl font-extrabold leading-tight tracking-[0.04em] text-foreground sm:text-3xl">
           {token}
         </span>
       </div>

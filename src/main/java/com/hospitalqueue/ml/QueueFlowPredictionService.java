@@ -231,7 +231,8 @@ public class QueueFlowPredictionService {
                 .sorted()
                 .toList();
 
-        PeakHoursReport result = new PeakHoursReport(dayOfWeek.toString(), hourlyAverages, peakHour, offPeakHour, rushHours);
+        PeakHoursReport result = new PeakHoursReport(dayOfWeek.toString(), hourlyAverages, peakHour, offPeakHour,
+                rushHours);
         peakHoursCache.put(dayOfWeek, new CacheEntry<>(result, 120000));
         return result;
     }

@@ -290,11 +290,12 @@ function PatientDashboard() {
                 {current ? (
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                     <QueueTokenBadge
+                      className="min-w-0 sm:max-w-55"
                       token={current.queueNumber}
                       station={current.departmentName}
                       urgency={current.type === "EMERGENCY" ? "critical" : "general"}
                     />
-                    <div className="grid flex-1 grid-cols-2 gap-4">
+                    <div className="grid min-w-0 flex-1 grid-cols-2 gap-4">
                       <Info label="Doctor" value={current.doctorName} />
                       <Info label="Position" value={`${current.position}th`} highlight />
                     </div>

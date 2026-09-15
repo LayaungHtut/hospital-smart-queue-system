@@ -101,6 +101,7 @@ export interface QueueEntry {
   type: QueueType;
   emergency?: boolean;
   createdAt: string;
+  calledAt?: string | null;
 }
 
 export interface CreateQueueRequest {
@@ -286,6 +287,7 @@ export interface DoctorDashboard {
   serving: QueueEntry | null;
   waiting: QueueEntry[];
   todayAppointments: Appointment[];
+  calledExpiryMinutes?: number;
 }
 
 export interface DoctorProfile {
@@ -320,6 +322,7 @@ export interface QueueSettings {
   breakEndTime: string;
   maxWaitingMinutes: number;
   notifyBeforeTurns: number;
+  calledExpiryMinutes: number;
   autoCancelAfterMissedTurn: boolean;
   allowFutureBooking: boolean;
 }
@@ -333,6 +336,55 @@ export interface SystemSettings {
   contactPhone?: string | undefined;
   contactEmail?: string | undefined;
   operatingHours?: string | undefined;
+  emergencyHotline?: string | undefined;
+  heroTitle?: string | undefined;
+  heroSubtitle?: string | undefined;
+  stat1Value?: string | undefined;
+  stat1Label?: string | undefined;
+  stat1Detail?: string | undefined;
+  stat2Value?: string | undefined;
+  stat2Label?: string | undefined;
+  stat2Detail?: string | undefined;
+  stat3Value?: string | undefined;
+  stat3Label?: string | undefined;
+  stat3Detail?: string | undefined;
+}
+
+export interface PublicLandingStat {
+  value: string;
+  label: string;
+  detail: string;
+}
+
+export interface PublicSiteSettings {
+  hospitalName: string;
+  logoUrl: string;
+  contactPhone: string;
+  contactEmail: string;
+  operatingHours: string;
+  timeZone: string;
+  emergencyHotline: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  stats: PublicLandingStat[];
+}
+
+export interface LiveDepartmentStatus {
+  id: number;
+  name: string;
+  tag: string;
+  nowServing: string | null;
+  waiting: number;
+  estimatedWaitMinutes: number;
+}
+
+export interface NowServingHighlight {
+  active: boolean;
+  doctorName?: string;
+  departmentName?: string;
+  queueNumber?: string;
+  status?: string;
+  elapsedMinutes?: number;
 }
 
 export interface LoginRequest {

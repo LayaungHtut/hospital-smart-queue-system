@@ -563,6 +563,37 @@ public class QueueRepository {
         return map;
     }
 
+    public java.util.Map<Integer, Queue> findServingByAllDepartments() {
+        java.util.Map<Integer, Queue> map = new java.util.HashMap<>();
+        List<Queue> list = jdbcTemplate.query(
+                "SELECT * FROM queue WHERE status IN ('SERVING', 'CALLED') ORDER BY queue_id ASC",
+                (RowMapper<Queue>) mapper);
+        for (Queue q : list) {
+            map.putIfAbsent(q.getDepartmentId(), q);
+        }
+        return map;
+    }
+
+    public Queue findLatestServing() {
+        List<Queue> list = jdbcTemplate.query(
+                "SELECT * FROM queue WHERE status = 'SERVING' ORDER BY started_at DESC LIMIT 1",
+                (RowMapper<Queue>) mapper);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        list = jdbcTemplate.query(
+                "SELECT * FROM queue WHERE status = 'CALLED' ORDER BY called_at DESC LIMIT 1",
+                (RowMapper<Queue>) mapper);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public double getAverageEstimatedWaitByDepartment(int departmentId) {
+        Double avg = jdbcTemplate.queryForObject(
+                "SELECT AVG(estimated_waiting_time) FROM queue WHERE department_id = ? AND status = 'WAITING'",
+                Double.class, departmentId);
+        return avg == null ? 0 : avg;
+    }
+
     public java.util.Map<String, Long> countCompletedTodayByAllDoctors() {
         java.util.Map<String, Long> counts = new java.util.HashMap<>();
         jdbcTemplate.query(

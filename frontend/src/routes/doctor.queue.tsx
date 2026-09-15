@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, useCallback } from "react";
-import { Activity, CheckCircle2, Pause, Play, RotateCcw, Sparkles, Volume2 } from "lucide-react";
+import { Activity, CheckCircle2, Pause, Play, RotateCcw, Sparkles, Timer, Volume2 } from "lucide-react";
 import {
   doctorCallNext,
   doctorCompleteConsultation,
@@ -43,6 +43,13 @@ function DoctorQueueRoomPage() {
   const [doctorId, setDoctorId] = useState<string | number>(
     session?.doctorId ?? session?.userId ?? "D001",
   );
+  const [now, setNow] = useState(() => Date.now());
+
+  // Tick every second so the "call expires in" countdown stays live.
+  useEffect(() => {
+    const tick = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(tick);
+  }, []);
 
   // Sync doctorId from session
   useEffect(() => {
@@ -180,6 +187,13 @@ function DoctorQueueRoomPage() {
   const isServing = !!data?.serving;
   const isCalled = !!data?.called && !data?.serving;
 
+  const calledExpiryMinutes = data?.calledExpiryMinutes ?? 5;
+  const calledDeadline =
+    isCalled && data?.called?.calledAt
+      ? new Date(data.called.calledAt).getTime() + calledExpiryMinutes * 60_000
+      : null;
+  const remainingMs = calledDeadline !== null ? calledDeadline - now : null;
+
   if (loading && !data) {
     return (
       <DoctorLayout title="Consultation Queue">
@@ -248,6 +262,22 @@ function DoctorQueueRoomPage() {
                         </span>
                       )}
                       <span>Waiting: {activePatient.estimatedWaitingMinutes ?? 15} min</span>
+                      {isCalled && remainingMs !== null && (
+                        <span
+                          className={`flex items-center gap-1 rounded px-2 py-0.5 font-bold ${
+                            remainingMs <= 0
+                              ? "bg-danger/20 text-danger"
+                              : remainingMs <= 60_000
+                                ? "bg-warning/20 text-warning"
+                                : "bg-primary/10 text-primary"
+                          }`}
+                        >
+                          <Timer className="size-3.5" />
+                          {remainingMs <= 0
+                            ? "Call expired — will auto-cancel shortly"
+                            : `Auto-expires in ${formatCountdown(remainingMs)}`}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -323,4 +353,12 @@ function DoctorQueueRoomPage() {
       </div>
     </DoctorLayout>
   );
+}
+
+/** Formats a millisecond duration as "m:ss" for the call-expiry countdown. */
+function formatCountdown(ms: number): string {
+  const totalSeconds = Math.max(0, Math.round(ms / 1000));
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }

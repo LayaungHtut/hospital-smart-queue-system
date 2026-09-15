@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Component
 public class QueueExpiryScheduler {
 
-    private static final long DEFAULT_QUEUE_EXPIRY_MINUTES = 15;
+    private static final long DEFAULT_QUEUE_EXPIRY_MINUTES = 5;
     private static final long DEFAULT_WAITING_EXPIRY_MINUTES = 120;
 
     /** Notify a waiting patient once their estimated wait drops to this many minutes or less. */

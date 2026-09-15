@@ -84,15 +84,21 @@ public class AdminApiController {
             return cached;
         }
 
-        CompletableFuture<Long> totalPatientsFuture = CompletableFuture.supplyAsync(() -> (long) patientRepository.count());
-        CompletableFuture<Long> totalQueuesFuture = CompletableFuture.supplyAsync(() -> (long) queueRepository.countQueuesToday());
-        CompletableFuture<Long> doctorsOnDutyFuture = CompletableFuture.supplyAsync(() ->
-                doctorRepository.findAll().stream().filter(Doctor::isAvailable).count());
-        CompletableFuture<List<Map<String, Object>>> weeklyFuture = CompletableFuture.supplyAsync(queueRepository::getWeeklyQueueStatistics);
-        CompletableFuture<List<Map<String, Object>>> deptCountsFuture = CompletableFuture.supplyAsync(queueRepository::getDepartmentDistribution);
-        CompletableFuture<Double> avgWaitFuture = CompletableFuture.supplyAsync(queueRepository::getAverageWaitingTimeToday);
+        CompletableFuture<Long> totalPatientsFuture = CompletableFuture
+                .supplyAsync(() -> (long) patientRepository.count());
+        CompletableFuture<Long> totalQueuesFuture = CompletableFuture
+                .supplyAsync(() -> (long) queueRepository.countQueuesToday());
+        CompletableFuture<Long> doctorsOnDutyFuture = CompletableFuture
+                .supplyAsync(() -> doctorRepository.findAll().stream().filter(Doctor::isAvailable).count());
+        CompletableFuture<List<Map<String, Object>>> weeklyFuture = CompletableFuture
+                .supplyAsync(queueRepository::getWeeklyQueueStatistics);
+        CompletableFuture<List<Map<String, Object>>> deptCountsFuture = CompletableFuture
+                .supplyAsync(queueRepository::getDepartmentDistribution);
+        CompletableFuture<Double> avgWaitFuture = CompletableFuture
+                .supplyAsync(queueRepository::getAverageWaitingTimeToday);
 
-        CompletableFuture.allOf(totalPatientsFuture, totalQueuesFuture, doctorsOnDutyFuture, weeklyFuture, deptCountsFuture, avgWaitFuture).join();
+        CompletableFuture.allOf(totalPatientsFuture, totalQueuesFuture, doctorsOnDutyFuture, weeklyFuture,
+                deptCountsFuture, avgWaitFuture).join();
 
         long totalPatients = totalPatientsFuture.join();
         long totalQueues = totalQueuesFuture.join();
@@ -825,7 +831,7 @@ public class AdminApiController {
     public Map<String, Object> getQueueSettings() {
         Map<String, String> dbSettings = new java.util.HashMap<>();
         jdbcTemplate.query(
-                "SELECT setting_key, setting_value FROM system_setting WHERE setting_key IN ('registration_start_time', 'registration_end_time', 'break_start_time', 'break_end_time', 'max_waiting_minutes', 'notify_before_turns', 'auto_cancel_missed')",
+                "SELECT setting_key, setting_value FROM system_setting WHERE setting_key IN ('registration_start_time', 'registration_end_time', 'break_start_time', 'break_end_time', 'max_waiting_minutes', 'notify_before_turns', 'auto_cancel_missed', 'queue_expiry_minutes')",
                 (org.springframework.jdbc.core.RowCallbackHandler) rs -> dbSettings.put(rs.getString("setting_key"),
                         rs.getString("setting_value")));
 
@@ -836,6 +842,7 @@ public class AdminApiController {
         settings.put("breakEndTime", dbSettings.getOrDefault("break_end_time", "13:00"));
         settings.put("maxWaitingMinutes", Integer.parseInt(dbSettings.getOrDefault("max_waiting_minutes", "120")));
         settings.put("notifyBeforeTurns", Integer.parseInt(dbSettings.getOrDefault("notify_before_turns", "3")));
+        settings.put("calledExpiryMinutes", Integer.parseInt(dbSettings.getOrDefault("queue_expiry_minutes", "5")));
         settings.put("autoCancelAfterMissedTurn",
                 Boolean.parseBoolean(dbSettings.getOrDefault("auto_cancel_missed", "true")));
         settings.put("allowFutureBooking", false);
@@ -859,6 +866,8 @@ public class AdminApiController {
             jdbcTemplate.update(upsert, "max_waiting_minutes", payload.get("maxWaitingMinutes").toString());
         if (payload.containsKey("notifyBeforeTurns"))
             jdbcTemplate.update(upsert, "notify_before_turns", payload.get("notifyBeforeTurns").toString());
+        if (payload.containsKey("calledExpiryMinutes"))
+            jdbcTemplate.update(upsert, "queue_expiry_minutes", payload.get("calledExpiryMinutes").toString());
         if (payload.containsKey("autoCancelAfterMissedTurn"))
             jdbcTemplate.update(upsert, "auto_cancel_missed", payload.get("autoCancelAfterMissedTurn").toString());
 
@@ -870,7 +879,11 @@ public class AdminApiController {
         Map<String, String> dbSettings = new java.util.HashMap<>();
         jdbcTemplate.query(
                 "SELECT setting_key, setting_value FROM system_setting WHERE setting_key IN "
-                        + "('hospital_name', 'logo_url', 'timezone', 'date_format', 'time_format', 'contact_phone', 'contact_email', 'operating_hours')",
+                        + "('hospital_name', 'logo_url', 'timezone', 'date_format', 'time_format', 'contact_phone', 'contact_email', 'operating_hours', "
+                        + "'emergency_hotline', 'landing_hero_title', 'landing_hero_subtitle', "
+                        + "'landing_stat1_value', 'landing_stat1_label', 'landing_stat1_detail', "
+                        + "'landing_stat2_value', 'landing_stat2_label', 'landing_stat2_detail', "
+                        + "'landing_stat3_value', 'landing_stat3_label', 'landing_stat3_detail')",
                 (org.springframework.jdbc.core.RowCallbackHandler) rs -> dbSettings.put(rs.getString("setting_key"),
                         rs.getString("setting_value")));
 
@@ -883,6 +896,23 @@ public class AdminApiController {
         settings.put("contactPhone", dbSettings.getOrDefault("contact_phone", ""));
         settings.put("contactEmail", dbSettings.getOrDefault("contact_email", ""));
         settings.put("operatingHours", dbSettings.getOrDefault("operating_hours", ""));
+        settings.put("emergencyHotline", dbSettings.getOrDefault("emergency_hotline", "199"));
+        settings.put("heroTitle",
+                dbSettings.getOrDefault("landing_hero_title", "Hassle-free, human-centered hospital care."));
+        settings.put("heroSubtitle", dbSettings.getOrDefault("landing_hero_subtitle",
+                "One unified platform for patients, doctors, staff, and administrators — replacing crowded corridors and shouted names with calm, real-time queue orchestration."));
+        settings.put("stat1Value", dbSettings.getOrDefault("landing_stat1_value", "94%"));
+        settings.put("stat1Label", dbSettings.getOrDefault("landing_stat1_label", "Wait Time Reduction"));
+        settings.put("stat1Detail", dbSettings.getOrDefault("landing_stat1_detail",
+                "Dynamic triage and live queueing cut average idle time from ~95 to ~18 minutes."));
+        settings.put("stat2Value", dbSettings.getOrDefault("landing_stat2_value", "24/7"));
+        settings.put("stat2Label", dbSettings.getOrDefault("landing_stat2_label", "AI Symptom Triage"));
+        settings.put("stat2Detail", dbSettings.getOrDefault("landing_stat2_detail",
+                "Instant department recommendation and emergency flagging before a patient even joins the line."));
+        settings.put("stat3Value", dbSettings.getOrDefault("landing_stat3_value", "100%"));
+        settings.put("stat3Label", dbSettings.getOrDefault("landing_stat3_label", "Live Sync"));
+        settings.put("stat3Detail", dbSettings.getOrDefault("landing_stat3_detail",
+                "Every counter, doctor console and TV display updates in real time as the queue moves."));
         return settings;
     }
 
@@ -908,6 +938,25 @@ public class AdminApiController {
         jdbcTemplate.update(upsert, "contact_phone", contactPhone);
         jdbcTemplate.update(upsert, "contact_email", contactEmail);
         jdbcTemplate.update(upsert, "operating_hours", operatingHours);
+
+        java.util.Map<String, String> landingKeys = new LinkedHashMap<>();
+        landingKeys.put("emergencyHotline", "emergency_hotline");
+        landingKeys.put("heroTitle", "landing_hero_title");
+        landingKeys.put("heroSubtitle", "landing_hero_subtitle");
+        landingKeys.put("stat1Value", "landing_stat1_value");
+        landingKeys.put("stat1Label", "landing_stat1_label");
+        landingKeys.put("stat1Detail", "landing_stat1_detail");
+        landingKeys.put("stat2Value", "landing_stat2_value");
+        landingKeys.put("stat2Label", "landing_stat2_label");
+        landingKeys.put("stat2Detail", "landing_stat2_detail");
+        landingKeys.put("stat3Value", "landing_stat3_value");
+        landingKeys.put("stat3Label", "landing_stat3_label");
+        landingKeys.put("stat3Detail", "landing_stat3_detail");
+        for (Map.Entry<String, String> entry : landingKeys.entrySet()) {
+            if (payload.containsKey(entry.getKey()) && payload.get(entry.getKey()) != null) {
+                jdbcTemplate.update(upsert, entry.getValue(), payload.get(entry.getKey()).toString());
+            }
+        }
 
         return ResponseEntity.ok(Map.of("success", true, "message", "System settings saved successfully."));
     }

@@ -1,6 +1,7 @@
 package com.hospitalqueue.service;
 
 import com.hospitalqueue.model.Appointment;
+import com.hospitalqueue.model.Department;
 import com.hospitalqueue.model.Doctor;
 import com.hospitalqueue.model.Queue;
 import com.hospitalqueue.ml.WaitTimePredictionService;
@@ -417,6 +418,48 @@ public class QueueService {
 
     public List<Queue> waitingForDoctor(String doctorId) {
         return emergencyRule.reorderByPriority(queueRepository.findWaitingQueuesByDoctor(doctorId));
+    }
+
+    public java.util.Map<Integer, Queue> findServingByAllDepartments() {
+        return queueRepository.findServingByAllDepartments();
+    }
+
+    public int countWaitingByDepartment(int departmentId) {
+        return queueRepository.countWaitingByDepartment(departmentId);
+    }
+
+    public double getAverageEstimatedWaitByDepartment(int departmentId) {
+        return queueRepository.getAverageEstimatedWaitByDepartment(departmentId);
+    }
+
+    /**
+     * A single "now consulting" highlight for public-facing displays (e.g. the
+     * landing page), built from whichever queue entry is currently being
+     * served — or, if none, the most recently called one.
+     */
+    public Map<String, Object> findLatestServingHighlight() {
+        Queue q = queueRepository.findLatestServing();
+        Map<String, Object> map = new java.util.LinkedHashMap<>();
+        if (q == null) {
+            map.put("active", false);
+            return map;
+        }
+
+        LocalDateTime reference = q.getStartedAt() != null ? q.getStartedAt() : q.getCalledAt();
+        long elapsedMinutes = reference != null
+                ? Math.max(0, java.time.Duration.between(reference, LocalDateTime.now()).toMinutes())
+                : 0;
+
+        Doctor doctor = doctorRepository.findById(q.getDoctorId());
+        Department department = departmentRepository.findById(q.getDepartmentId());
+
+        map.put("active", true);
+        map.put("doctorName", doctor != null ? doctor.getName() : "Doctor");
+        map.put("departmentName", department != null ? department.getDepartmentName() : "General");
+        map.put("queueNumber", q.getQueueNumber());
+        map.put("status", q.getStatus());
+        map.put("elapsedMinutes", elapsedMinutes);
+        return map;
     }
 
     public void confirmEmergency(long queueId) {

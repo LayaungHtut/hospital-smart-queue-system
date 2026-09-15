@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   Activity,
   ArrowRight,
@@ -18,6 +19,8 @@ import {
   Users,
   Wifi,
 } from "lucide-react";
+import { getLiveDepartments, getNowServingHighlight, getPublicSiteSettings } from "@/services/api";
+import type { LiveDepartmentStatus, NowServingHighlight, PublicSiteSettings } from "@/types";
 
 export const Route = createFileRoute("/")({
   head: () => ({

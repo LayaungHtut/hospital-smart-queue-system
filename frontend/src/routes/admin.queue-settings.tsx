@@ -114,6 +114,21 @@ function QueueSettingsPage() {
                 }
               />
             </Field>
+            <Field label="Called Patient Response Time (minutes)">
+              <input
+                type="number"
+                min={1}
+                className={inputClass}
+                value={settings.calledExpiryMinutes}
+                onChange={(e) =>
+                  setSettings({ ...settings, calledExpiryMinutes: Number(e.target.value) })
+                }
+              />
+              <p className="mt-1 text-xs text-muted-foreground">
+                How long a patient has to show up after the doctor calls them before the queue
+                entry auto-expires.
+              </p>
+            </Field>
           </div>
           <div className="mt-4 space-y-3">
             <Toggle

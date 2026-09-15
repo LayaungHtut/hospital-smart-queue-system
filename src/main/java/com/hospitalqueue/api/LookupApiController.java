@@ -51,6 +51,9 @@ public class LookupApiController {
     private volatile List<Map<String, Object>> cachedSymptoms = null;
     private volatile long symptomsExpiresAt = 0;
 
+    private volatile List<Map<String, Object>> cachedLiveDepartments = null;
+    private volatile long liveDepartmentsExpiresAt = 0;
+
     @GetMapping("/departments")
     public List<Map<String, Object>> getDepartments() {
         long now = System.currentTimeMillis();
@@ -121,7 +124,11 @@ public class LookupApiController {
         Map<String, String> dbSettings = new HashMap<>();
         jdbcTemplate.query(
                 "SELECT setting_key, setting_value FROM system_setting WHERE setting_key IN "
-                        + "('hospital_name', 'logo_url', 'timezone', 'contact_phone', 'contact_email', 'operating_hours')",
+                        + "('hospital_name', 'logo_url', 'timezone', 'contact_phone', 'contact_email', 'operating_hours', "
+                        + "'emergency_hotline', 'landing_hero_title', 'landing_hero_subtitle', "
+                        + "'landing_stat1_value', 'landing_stat1_label', 'landing_stat1_detail', "
+                        + "'landing_stat2_value', 'landing_stat2_label', 'landing_stat2_detail', "
+                        + "'landing_stat3_value', 'landing_stat3_label', 'landing_stat3_detail')",
                 (RowCallbackHandler) rs -> dbSettings.put(rs.getString("setting_key"), rs.getString("setting_value")));
 
         Map<String, Object> settings = new LinkedHashMap<>();
@@ -131,10 +138,69 @@ public class LookupApiController {
         settings.put("contactEmail", dbSettings.getOrDefault("contact_email", ""));
         settings.put("operatingHours", dbSettings.getOrDefault("operating_hours", ""));
         settings.put("timeZone", dbSettings.getOrDefault("timezone", "(GMT+06:30) Yangon"));
+        settings.put("emergencyHotline", dbSettings.getOrDefault("emergency_hotline", "199"));
+        settings.put("heroTitle",
+                dbSettings.getOrDefault("landing_hero_title", "Hassle-free, human-centered hospital care."));
+        settings.put("heroSubtitle", dbSettings.getOrDefault("landing_hero_subtitle",
+                "One unified platform for patients, doctors, staff, and administrators — replacing crowded corridors and shouted names with calm, real-time queue orchestration."));
+        settings.put("stats", List.of(
+                Map.of(
+                        "value", dbSettings.getOrDefault("landing_stat1_value", "94%"),
+                        "label", dbSettings.getOrDefault("landing_stat1_label", "Wait Time Reduction"),
+                        "detail", dbSettings.getOrDefault("landing_stat1_detail",
+                                "Dynamic triage and live queueing cut average idle time from ~95 to ~18 minutes.")),
+                Map.of(
+                        "value", dbSettings.getOrDefault("landing_stat2_value", "24/7"),
+                        "label", dbSettings.getOrDefault("landing_stat2_label", "AI Symptom Triage"),
+                        "detail", dbSettings.getOrDefault("landing_stat2_detail",
+                                "Instant department recommendation and emergency flagging before a patient even joins the line.")),
+                Map.of(
+                        "value", dbSettings.getOrDefault("landing_stat3_value", "100%"),
+                        "label", dbSettings.getOrDefault("landing_stat3_label", "Live Sync"),
+                        "detail", dbSettings.getOrDefault("landing_stat3_detail",
+                                "Every counter, doctor console and TV display updates in real time as the queue moves."))));
 
         cachedSettings = settings;
-        settingsExpiresAt = now + 60000;
+        settingsExpiresAt = now + 30000;
         return settings;
+    }
+
+    @GetMapping("/departments/live")
+    public List<Map<String, Object>> getLiveDepartments() {
+        long now = System.currentTimeMillis();
+        List<Map<String, Object>> cached = cachedLiveDepartments;
+        if (cached != null && now < liveDepartmentsExpiresAt) {
+            return cached;
+        }
+
+        List<Department> depts = departmentRepository.findAll().stream()
+                .filter(Department::isActive)
+                .collect(Collectors.toList());
+        Map<Integer, com.hospitalqueue.model.Queue> servingMap = queueService.findServingByAllDepartments();
+
+        List<Map<String, Object>> result = depts.stream().map(d -> {
+            int waiting = queueService.countWaitingByDepartment(d.getDepartmentId());
+            com.hospitalqueue.model.Queue serving = servingMap.get(d.getDepartmentId());
+            double avgWait = queueService.getAverageEstimatedWaitByDepartment(d.getDepartmentId());
+
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("id", d.getDepartmentId());
+            map.put("name", d.getDepartmentName());
+            map.put("tag", d.getDepartmentCode());
+            map.put("nowServing", serving != null ? serving.getQueueNumber() : null);
+            map.put("waiting", waiting);
+            map.put("estimatedWaitMinutes", avgWait > 0 ? Math.round(avgWait) : Math.max(waiting * 6, 0));
+            return map;
+        }).collect(Collectors.toList());
+
+        cachedLiveDepartments = result;
+        liveDepartmentsExpiresAt = now + 15000;
+        return result;
+    }
+
+    @GetMapping("/queue/now-serving-highlight")
+    public Map<String, Object> getNowServingHighlight() {
+        return queueService.findLatestServingHighlight();
     }
 
     @GetMapping("/symptoms")

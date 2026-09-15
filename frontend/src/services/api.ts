@@ -22,9 +22,12 @@ import type {
   DoctorHistoryEntry,
   DoctorProfile,
   EmergencyCase,
+  LiveDepartmentStatus,
   LoginRequest,
   NotificationItem,
+  NowServingHighlight,
   PatientProfile,
+  PublicSiteSettings,
   QueueEntry,
   QueueMonitorRow,
   QueueSettings,
@@ -258,6 +261,18 @@ export async function getSymptoms(): Promise<Symptom[]> {
 
 export async function getDepartments(): Promise<Department[]> {
   return await request<Department[]>("/departments");
+}
+
+export async function getLiveDepartments(): Promise<LiveDepartmentStatus[]> {
+  return await request<LiveDepartmentStatus[]>("/departments/live", { ttl: 15_000 });
+}
+
+export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
+  return await request<PublicSiteSettings>("/system/settings");
+}
+
+export async function getNowServingHighlight(): Promise<NowServingHighlight> {
+  return await request<NowServingHighlight>("/queue/now-serving-highlight", { ttl: 15_000 });
 }
 
 export async function getDoctors(): Promise<DoctorDetail[]> {

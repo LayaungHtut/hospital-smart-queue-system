@@ -11,6 +11,7 @@ import com.hospitalqueue.repository.DoctorRepository;
 import com.hospitalqueue.repository.PatientRepository;
 import com.hospitalqueue.repository.QueueRepository;
 import com.hospitalqueue.service.QueueService;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +29,40 @@ public class DoctorApiController {
     private final PatientRepository patientRepository;
     private final DepartmentRepository departmentRepository;
     private final AppointmentRepository appointmentRepository;
+    private final JdbcTemplate jdbcTemplate;
+
+    private static final long DEFAULT_CALLED_EXPIRY_MINUTES = 5;
 
     public DoctorApiController(QueueService queueService,
             QueueRepository queueRepository,
             DoctorRepository doctorRepository,
             PatientRepository patientRepository,
             DepartmentRepository departmentRepository,
-            AppointmentRepository appointmentRepository) {
+            AppointmentRepository appointmentRepository,
+            JdbcTemplate jdbcTemplate) {
         this.queueService = queueService;
         this.queueRepository = queueRepository;
         this.doctorRepository = doctorRepository;
         this.patientRepository = patientRepository;
         this.departmentRepository = departmentRepository;
         this.appointmentRepository = appointmentRepository;
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    /**
+     * Minutes a called patient has to show up before the queue auto-expires
+     * (admin-editable via Admin > Queue Settings, {@code queue_expiry_minutes}).
+     * Exposed to the doctor UI so it can show a live countdown.
+     */
+    private long getCalledExpiryMinutes() {
+        try {
+            String value = jdbcTemplate.queryForObject(
+                    "SELECT setting_value FROM system_setting WHERE setting_key = 'queue_expiry_minutes'",
+                    String.class);
+            return value == null || value.isBlank() ? DEFAULT_CALLED_EXPIRY_MINUTES : Long.parseLong(value.trim());
+        } catch (Exception e) {
+            return DEFAULT_CALLED_EXPIRY_MINUTES;
+        }
     }
 
     @GetMapping("/{doctorId}/dashboard")
@@ -102,6 +124,7 @@ public class DoctorApiController {
         Map<String, Object> res = new LinkedHashMap<>();
         res.put("doctor", doctorInfo);
         res.put("stats", stats);
+        res.put("calledExpiryMinutes", getCalledExpiryMinutes());
         res.put("called", called != null ? mapQueueWithPatients(called, ptMap, doctor, dept) : null);
         res.put("serving", serving != null ? mapQueueWithPatients(serving, ptMap, doctor, dept) : null);
         res.put("waiting",
@@ -311,6 +334,7 @@ public class DoctorApiController {
         map.put("estimatedWaitingMinutes", q.getEstimatedWaitingTime());
         map.put("waitingMinutes", q.getEstimatedWaitingTime());
         map.put("createdAt", q.getCreatedAt() != null ? q.getCreatedAt().toString() : "");
+        map.put("calledAt", q.getCalledAt() != null ? q.getCalledAt().toString() : null);
         return map;
     }
 
